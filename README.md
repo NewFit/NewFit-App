@@ -1,19 +1,16 @@
-# NewFit App
+# new_fit
 
-Flutter 기반 뉴핏 모바일 앱
+A new Flutter project.
 
-## Setting up
+## Getting Started
 
-1. Flutter 설치
-2. vscode 설치
-3. 윈도우 사용자의 경우 Git bash 설치
-   - https://git-scm.com/downloads
-4. vscode 터미널 열기
-5. flutter 의존성 설치
-   ```
-   flutter pub get
-   ```
-6. 앱 실행
-   ```
-   flutter run <TODO>
-   ```
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
