@@ -1,0 +1,32 @@
+include: package:commitlint_cli/commitlint.yaml
+
+rules:
+  # https://hyiso.github.io/commitlint/#/references-rules?id=header-max-length
+  header-max-length:
+    - 2
+    - always
+    - 50
+
+  # https://hyiso.github.io/commitlint/#/references-rules?id=scope-empty
+  scope-empty:
+    - 0
+    - always
+
+  # https://hyiso.github.io/commitlint/#/references-rules?id=type-enum
+  type-enum:
+    - 2
+    - always
+    - ["feat", "fix", "ci", "refactor", "test", "docs", "chore"]
+
+  # https://hyiso.github.io/commitlint/#/references-rules?id=type-case
+  type-case:
+    - 2
+    - always
+    - "lower-case"
+
+  # https://hyiso.github.io/commitlint/#/references-rules?id=type-empty
+  type-empty:
+    - 2
+    - never
+
+defaultIgnores: true
