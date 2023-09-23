@@ -10,7 +10,7 @@ part './app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.MAIN;
   static const TEST_PAGE = Routes.TEST_PAGE;
 
   static final pages = [
