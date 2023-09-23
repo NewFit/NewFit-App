@@ -1,76 +1,152 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:new_fit/app/view/theme/app_string.dart';
-import 'package:new_fit/app/view/theme/app_text_theme.dart';
+import 'package:get/get.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
 
-class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
-  NewfitAppBar({super.key});
+class NewfitAppBarWithButton extends StatelessWidget
+    implements PreferredSizeWidget {
+  NewfitAppBarWithButton({
+    super.key,
+    required this.scrollController,
+  });
+
+  ScrollController scrollController;
+  Rx<double> scrollPosition = 0.0.obs;
+  late Widget one = SizedBox();
+  late Widget two = SizedBox();
+  double appBarHeight = 183.h;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(16),
-            bottomRight: Radius.circular(16),
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              spreadRadius: 0,
-              blurRadius: 25,
-              offset: Offset(0, 0),
+    scrollController.addListener(_scrollListener);
+
+    return Obx(() {
+      if (scrollPosition.value > 0.0) {
+        appBarHeight = 105.h + MediaQuery.of(context).padding.top;
+        one = SizedBox();
+        two = SizedBox();
+      } else {
+        appBarHeight = 170.h + MediaQuery.of(context).padding.top;
+        one = Column(
+          children: [
+            SizedBox(height: 13.h),
+            Row(children: [
+              Text(
+                "전체 크레딧",
+                style: TextStyle(fontSize: 12.sp),
+              ),
+              Text(
+                "10000",
+                style: TextStyle(fontSize: 12.sp),
+              ),
+            ]),
+            SizedBox(height: 7.h),
+            Row(children: [
+              Text(
+                "전체 크레딧",
+                style: TextStyle(fontSize: 12.sp),
+              ),
+              Text(
+                "10000",
+                style: TextStyle(fontSize: 12.sp),
+              ),
+            ]),
+            SizedBox(height: 15.h),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: 320.w,
+                child: const LinearProgressIndicator(
+                  backgroundColor: Colors.black38,
+                  value: 0.5,
+                ),
+              ),
             ),
           ],
-          color: Colors.white,
-        ),
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(30, 0, 0, 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(children: [
-                  CircleAvatar(),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("고라니 님"),
-                  Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.settings),
-                  )
-                ]),
-                Row(children: [
-                  Text("전체 크레딧"),
-                  Text("10000"),
-                ]),
-                Row(children: [
-                  Text("일일 크레딧"),
-                  Text("75/100"),
-                ]),
-                Container(
-                  width: 300.w,
-                  child: LinearProgressIndicator(
-                    backgroundColor: Colors.black38,
-                    value: 0.1,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("button"),
-                  ),
-                )
-              ],
+        );
+      }
+      return AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          height: appBarHeight,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(16.r),
+              bottomRight: Radius.circular(16.r),
             ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 0,
+                blurRadius: 25.r,
+                offset: const Offset(0, 0),
+              ),
+            ],
+            color: Colors.white,
           ),
-        ));
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(children: [
+                    CircleAvatar(
+                      radius: 15.h,
+                    ),
+                    SizedBox(
+                      width: 10.w,
+                    ),
+                    Text("고라니 님"),
+                    const Spacer(),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.settings),
+                      iconSize: 24.w,
+                    )
+                  ]),
+                  one,
+                  SizedBox(height: 15.h),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                      child: SizedBox(
+                        width: 320.w,
+                        height: 40.h,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
+                            ),
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.black),
+                            elevation: MaterialStateProperty.all(0.0),
+                          ),
+                          child: Text("hello"),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ));
+    });
+  }
+
+  _scrollListener() {
+    scrollPosition.value = scrollController.offset;
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(183);
+  Size get preferredSize => Size.fromHeight(appBarHeight);
 }
