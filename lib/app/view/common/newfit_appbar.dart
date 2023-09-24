@@ -14,8 +14,7 @@ class NewfitAppBarWithButton extends StatelessWidget
 
   ScrollController scrollController;
   Rx<double> scrollPosition = 0.0.obs;
-  late Widget one = SizedBox();
-  late Widget two = SizedBox();
+  late Widget creditInfo = creditInfoColumn();
   double appBarHeight = 183.h;
 
   @override
@@ -25,50 +24,12 @@ class NewfitAppBarWithButton extends StatelessWidget
     return Obx(() {
       if (scrollPosition.value > 0.0) {
         appBarHeight = 105.h + MediaQuery.of(context).padding.top;
-        one = SizedBox();
-        two = SizedBox();
+        creditInfo = const SizedBox();
       } else {
-        appBarHeight = 170.h + MediaQuery.of(context).padding.top;
-        one = Column(
-          children: [
-            SizedBox(height: 13.h),
-            Row(children: [
-              Text(
-                "전체 크레딧",
-                style: TextStyle(fontSize: 12.sp),
-              ),
-              Text(
-                "10000",
-                style: TextStyle(fontSize: 12.sp),
-              ),
-            ]),
-            SizedBox(height: 7.h),
-            Row(children: [
-              Text(
-                "전체 크레딧",
-                style: TextStyle(fontSize: 12.sp),
-              ),
-              Text(
-                "10000",
-                style: TextStyle(fontSize: 12.sp),
-              ),
-            ]),
-            SizedBox(height: 15.h),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: 320.w,
-                child: const LinearProgressIndicator(
-                  backgroundColor: Colors.black38,
-                  value: 0.5,
-                ),
-              ),
-            ),
-          ],
-        );
+        appBarHeight = 175.h + MediaQuery.of(context).padding.top;
+        creditInfo = creditInfoColumn();
       }
-      return AnimatedContainer(
-          duration: Duration(milliseconds: 200),
+      return Container(
           height: appBarHeight,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -91,56 +52,108 @@ class NewfitAppBarWithButton extends StatelessWidget
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(children: [
-                    CircleAvatar(
-                      radius: 15.h,
-                    ),
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Text("고라니 님"),
-                    const Spacer(),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.settings),
-                      iconSize: 24.w,
-                    )
-                  ]),
-                  one,
+                  userInfoAppBar(),
+                  creditInfo,
                   SizedBox(height: 15.h),
                   Align(
                     alignment: Alignment.center,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: SizedBox(
-                        width: 320.w,
-                        height: 40.h,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                            ),
-                            overlayColor:
-                                MaterialStateProperty.all(Colors.transparent),
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.black),
-                            elevation: MaterialStateProperty.all(0.0),
-                          ),
-                          child: Text("hello"),
-                        ),
-                      ),
-                    ),
+                    child: routineButton(),
                   )
                 ],
               ),
             ),
           ));
     });
+  }
+
+  Widget userInfoAppBar() {
+    return Row(children: [
+      CircleAvatar(
+        radius: 15.h,
+      ),
+      SizedBox(
+        width: 10.w,
+      ),
+      Text("고라니 님"),
+      const Spacer(),
+      IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.settings),
+        iconSize: 24.w,
+      )
+    ]);
+  }
+
+  Widget creditInfoColumn() {
+    return Column(
+      children: [
+        SizedBox(height: 13.h),
+        Row(children: [
+          Text(
+            "전체 크레딧",
+            style: TextStyle(fontSize: 12.sp),
+          ),
+          Text(
+            "10000",
+            style: TextStyle(fontSize: 12.sp),
+          ),
+        ]),
+        SizedBox(height: 7.h),
+        Row(
+          children: [
+            Text(
+              "전체 크레딧",
+              style: TextStyle(fontSize: 12.sp),
+            ),
+            Text(
+              "10000",
+              style: TextStyle(fontSize: 12.sp),
+            ),
+          ],
+        ),
+        SizedBox(height: 15.h),
+        Align(
+          alignment: Alignment.center,
+          child: creditProgressBar(),
+        ),
+      ],
+    );
+  }
+
+  Widget creditProgressBar() {
+    return SizedBox(
+      width: 320.w,
+      child: const LinearProgressIndicator(
+        backgroundColor: Colors.black38,
+        value: 0.5,
+      ),
+    );
+  }
+
+  Widget routineButton() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.0),
+      ),
+      child: SizedBox(
+        width: 320.w,
+        height: 40.h,
+        child: ElevatedButton(
+          onPressed: () {},
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+            backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
+            elevation: MaterialStateProperty.all(0.0),
+          ),
+          child: Text("루틴으로 예약하기"),
+        ),
+      ),
+    );
   }
 
   _scrollListener() {
