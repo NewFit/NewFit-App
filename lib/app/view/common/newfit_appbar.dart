@@ -147,7 +147,7 @@ class NewfitAppBarWithButton extends StatelessWidget
               ),
             ),
             overlayColor: MaterialStateProperty.all(Colors.transparent),
-            backgroundColor: MaterialStateProperty.all(AppColors.primaryColor),
+            backgroundColor: MaterialStateProperty.all(AppColors.main),
             elevation: MaterialStateProperty.all(0.0),
           ),
           child: Text("루틴으로 예약하기"),
