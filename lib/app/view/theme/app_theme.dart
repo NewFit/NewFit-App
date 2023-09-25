@@ -5,7 +5,7 @@ import 'app_colors.dart';
 final ThemeData appThemeData = ThemeData(
   primaryColor: AppColors.main,
   highlightColor: Colors.transparent,
-  fontFamily: 'SUITE',
+  fontFamily: 'Pretendard',
   splashColor: Colors.transparent,
   hoverColor: Colors.transparent,
   textTheme: const TextTheme(
