@@ -4,8 +4,14 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
 class NewfitFAB extends StatelessWidget {
-  const NewfitFAB({super.key});
+  const NewfitFAB({
+    required this.fabTitleText,
+    required this.onPressedFunction,
+    super.key,
+  });
 
+  final String fabTitleText;
+  final void Function()? onPressedFunction;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +26,7 @@ class NewfitFAB extends StatelessWidget {
         ],
       ),
       child: FloatingActionButton.extended(
-        onPressed: () {},
+        onPressed: onPressedFunction,
         backgroundColor: Colors.white,
         elevation: 0,
         highlightElevation: 0.2,
@@ -33,7 +39,7 @@ class NewfitFAB extends StatelessWidget {
               weight: 900,
             ),
             Text(
-              '루틴 추가',
+              fabTitleText,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: AppFontWeights.bold,
