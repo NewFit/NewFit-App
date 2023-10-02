@@ -62,80 +62,17 @@ class NewfitRoutineCard extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 10.w, 0),
-                  child: SizedBox(
-                    height: 50.w,
-                    width: 50.w,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: SizedBox.fromSize(
-                          size: Size.fromRadius(50.h), // Image radius
-                          child: const Image(
-                            image: AssetImage('images/gorani.png'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: newfitImage(),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 10.w, 0),
-                  child: SizedBox(
-                    height: 50.w,
-                    width: 50.w,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: SizedBox.fromSize(
-                          size: Size.fromRadius(50.h), // Image radius
-                          child: const Image(
-                            image: AssetImage('images/gorani.png'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: newfitImage(),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 10.w, 0),
-                  child: SizedBox(
-                    height: 50.w,
-                    width: 50.w,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: SizedBox.fromSize(
-                          size: Size.fromRadius(50.h), // Image radius
-                          child: const Image(
-                            image: AssetImage('images/gorani.png'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  child: newfitImage(),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  child: SizedBox(
-                    height: 50.w,
-                    width: 50.w,
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.r),
-                        child: SizedBox.fromSize(
-                          size: Size.fromRadius(50.h), // Image radius
-                          child: const Image(
-                            image: AssetImage('images/gorani.png'),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                newfitMore(),
               ],
             ),
           ),
@@ -145,26 +82,60 @@ class NewfitRoutineCard extends StatelessWidget {
   }
 
   Widget newfitImage() {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.black,
-          width: 1.0.w,
-          strokeAlign: BorderSide.strokeAlignOutside,
-        ),
-        borderRadius: BorderRadius.circular(8.r),
-        color: Colors.black,
-      ),
-      height: 50.w,
+    return SizedBox(
       width: 50.w,
-      child: FittedBox(
-        fit: BoxFit.contain,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(8.r),
-          child: const Image(
-            image: AssetImage('images/gorani.png'),
+      height: 50.w,
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(8.r)),
+            child: Image(
+              image: const AssetImage('images/gorani.png'),
+            ),
           ),
-        ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.main,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.r),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget newfitMore() {
+    return SizedBox(
+      width: 50.w,
+      height: 50.w,
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: const Text(
+              '2+',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: AppFontWeights.bold,
+                color: AppColors.main,
+              ),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: AppColors.main,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(8.r),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
