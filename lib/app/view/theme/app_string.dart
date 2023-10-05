@@ -17,4 +17,8 @@ abstract class AppString {
   static const roomName = "roomName";
 
   // Local 이미지 소스
+  static const home = "images/icon_home.svg";
+  static const reserve = "images/icon_reserve.svg";
+  static const qr = "images/icon_qr.svg";
+  static const mypage = "images/icon_mypage.svg";
 }
