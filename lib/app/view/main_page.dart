@@ -3,6 +3,16 @@ import 'package:get/get.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:new_fit/app/controller/main/main_controller.dart';
+import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/enum/menu_code.dart';
+import 'package:new_fit/app/view/common/newfit_appbar.dart';
+import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
+
 import 'package:new_fit/app/view/theme/app_values.dart';
 
 class MainPage extends BaseView<MainController> {
@@ -14,71 +24,36 @@ class MainPage extends BaseView<MainController> {
 
   @override
   Widget body(BuildContext context) {
-    return _BasePage(
-      scrollController: scrollController,
-      widgetList: [
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-        Text("hello"),
-      ],
+    return Container(
+      key: UniqueKey(),
+      child: Obx(() => getPageOnSelectedMenu(controller.selectedMenuCode)),
     );
+  }
+
+  @override
+  Widget? bottomNavigationBar() {
+    return NewfitBottomNavigationBar(
+      onNewMenuSelected: controller.onMenuSelected,
+    );
+  }
+
+  Widget getPageOnSelectedMenu(MenuCode menuCode) {
+    switch (menuCode) {
+      case MenuCode.HOME:
+        // return homeView;
+        return Container();
+      case MenuCode.RESERVE:
+        // return goalView;
+        return Container();
+      case MenuCode.QR:
+        return Container();
+      case MenuCode.MYPAGE:
+        // return goalView;
+        return Container();
+      default:
+        // return LoginPage();
+        return Container();
+    }
   }
 }
 
