@@ -135,6 +135,64 @@ class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => Size.fromHeight(50.h);
 }
 
+class NewfitAppBarWithSchedule extends StatelessWidget
+    implements PreferredSizeWidget {
+  NewfitAppBarWithSchedule({
+    super.key,
+  });
+
+  double appBarHeight = 183.h;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: appBarHeight,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(16.r),
+          bottomRight: Radius.circular(16.r),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 0,
+            blurRadius: 25.r,
+            offset: const Offset(0, 0),
+          ),
+        ],
+        color: Colors.white,
+      ),
+      child: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 13.h),
+              _UserInfoAppBar(
+                userName: "고라니",
+                onPressedFucntion: () {},
+              ),
+              SizedBox(height: 13.h),
+              SizedBox(height: 15.h),
+              Align(
+                alignment: Alignment.center,
+                child: NewfitButton(
+                    buttonText: "루틴으로 예약하기",
+                    buttonColor: AppColors.main,
+                    onPressFuntion: () {}),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(appBarHeight);
+}
+
 class _UserInfoAppBar extends StatelessWidget {
   const _UserInfoAppBar({
     required this.userName,
