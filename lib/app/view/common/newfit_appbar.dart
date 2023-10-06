@@ -93,8 +93,9 @@ class NewfitAppBarWithButton extends StatelessWidget
   Size get preferredSize => Size.fromHeight(appBarHeight);
 }
 
-class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
-  const NewfitAppBarFlat({
+class NewfitAppBarElevated extends StatelessWidget
+    implements PreferredSizeWidget {
+  const NewfitAppBarElevated({
     super.key,
     required this.appBarTitleText,
   });
@@ -119,6 +120,40 @@ class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
           ),
         ],
         color: Colors.white,
+      ),
+      child: SafeArea(
+        child: Center(
+          child: NewfitTextBoldXl(
+            text: appBarTitleText,
+            textColor: AppColors.black,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(50.h);
+}
+
+class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
+  const NewfitAppBarFlat({
+    super.key,
+    required this.appBarTitleText,
+  });
+
+  final String appBarTitleText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50.h + MediaQuery.of(context).padding.top,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(16.r),
+          bottomRight: Radius.circular(16.r),
+        ),
+        color: Colors.transparent,
       ),
       child: SafeArea(
         child: Center(
