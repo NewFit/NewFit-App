@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
@@ -13,12 +11,17 @@ class NewfitAppBarWithButton extends StatelessWidget
   NewfitAppBarWithButton({
     super.key,
     required this.scrollController,
+    required this.totalCredit,
+    required this.todayCredit,
   });
 
   ScrollController scrollController;
   Rx<double> scrollPosition = 0.0.obs;
+  int totalCredit;
+  int todayCredit;
+
   late Widget creditInfo =
-      _UserCreditInfo(totalCredit: 10000, todayCredit: 100);
+      _UserCreditInfo(totalCredit: totalCredit, todayCredit: todayCredit);
   double appBarHeight = 183.h;
 
   @override
@@ -31,7 +34,8 @@ class NewfitAppBarWithButton extends StatelessWidget
         creditInfo = const SizedBox();
       } else {
         appBarHeight = 175.h + MediaQuery.of(context).padding.top;
-        creditInfo = _UserCreditInfo(totalCredit: 10000, todayCredit: 100);
+        creditInfo =
+            _UserCreditInfo(totalCredit: totalCredit, todayCredit: todayCredit);
       }
       return Container(
           height: appBarHeight,
@@ -56,13 +60,15 @@ class NewfitAppBarWithButton extends StatelessWidget
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 13.h),
                   _UserInfoAppBar(
                     userName: "고라니",
                     onPressedFucntion: () {},
                   ),
+                  SizedBox(height: 13.h),
                   _UserCreditInfo(
-                    totalCredit: 10000,
-                    todayCredit: 100,
+                    totalCredit: totalCredit,
+                    todayCredit: todayCredit,
                   ),
                   SizedBox(height: 15.h),
                   Align(
@@ -98,23 +104,25 @@ class _UserInfoAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
-      CircleAvatar(
-        radius: 15.h,
-        backgroundImage: AssetImage('images/gorani.png'),
+    return Container(
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 15.h,
+            backgroundImage: AssetImage('images/gorani.png'),
+          ),
+          SizedBox(width: 10.w),
+          NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
+          const Spacer(),
+          GestureDetector(
+            onTap: onPressedFucntion,
+            child: const Icon(
+              Icons.settings,
+            ),
+          )
+        ],
       ),
-      SizedBox(width: 10.w),
-      Text(
-        "$userName님",
-        style: AppTextTheme.bold_lg,
-      ),
-      const Spacer(),
-      IconButton(
-        onPressed: onPressedFucntion,
-        icon: const Icon(Icons.settings),
-        iconSize: 24.w,
-      )
-    ]);
+    );
   }
 }
 
@@ -132,29 +140,28 @@ class _UserCreditInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 13.h),
         Row(children: [
-          Text(
-            "전체 크레딧",
-            style: AppTextTheme.medium_md,
+          NewfitTextMediumMd(
+            text: '전체 크레딧',
+            textColor: AppColors.black,
           ),
           SizedBox(width: 5.w),
-          Text(
-            "$totalCredit",
-            style: AppTextTheme.regular_md,
+          NewfitTextRegularMd(
+            text: '$totalCredit',
+            textColor: AppColors.main,
           ),
         ]),
         SizedBox(height: 7.h),
         Row(
           children: [
-            Text(
-              "일일 크레딧",
-              style: AppTextTheme.medium_md,
+            NewfitTextMediumMd(
+              text: '일일 크레딧',
+              textColor: AppColors.black,
             ),
             SizedBox(width: 5.w),
-            Text(
-              "$todayCredit",
-              style: AppTextTheme.regular_md,
+            NewfitTextRegularMd(
+              text: '$todayCredit',
+              textColor: AppColors.main,
             ),
           ],
         ),
