@@ -7,9 +7,8 @@ class Reservation {
   DateTime startAt;
   DateTime endAt;
 
-  int totalMinute(DateTime startAt, DateTime endAt) {
-    var startDuration = Duration(hours: startAt.hour, minutes: startAt.minute);
-    var endDuration = Duration(hours: endAt.hour, minutes: endAt.minute);
-    return startDuration.inMinutes - endDuration.inMinutes;
+  int totalMinute() {
+    return Duration(hours: endAt.hour, minutes: endAt.minute).inMinutes -
+        Duration(hours: startAt.hour, minutes: startAt.minute).inMinutes;
   }
 }
