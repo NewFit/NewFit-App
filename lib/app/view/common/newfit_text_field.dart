@@ -1,9 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 
 class NewfitInfoInputTextField extends StatelessWidget {
-  const NewfitInfoInputTextField({super.key});
+  const NewfitInfoInputTextField({
+    required this.hintText,
+    super.key,
+  });
+
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,8 @@ class NewfitInfoInputTextField extends StatelessWidget {
       child: TextFormField(
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 10.h),
+          contentPadding:
+              EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h, right: 0),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7.r),
             borderSide: BorderSide.none,
@@ -37,18 +44,50 @@ class NewfitInfoInputTextField extends StatelessWidget {
           ),
           fillColor: AppColors.white,
           filled: true,
-          hintText: '주소를 입력해주세요.',
+          hintText: hintText,
         ),
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           return _validator(value!);
         },
       ),
     );
   }
+
+  String? _validator(String value) {
+    return null;
+  }
+}
+
+class NewfitIdInputTextField extends NewfitInfoInputTextField {
+  NewfitIdInputTextField({required super.hintText});
+
+  @override
+  String? _validator(String value) {
+    if (value.length < 10) {
+      return ('아이디에는 특수기호를 사용할 수 없습니다.');
+    }
+  }
+}
+
+class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
+  NewfitPasswordInputTextField({required super.hintText});
+
+  @override
+  String? _validator(String value) {
+    if (value.length <= 7) {
+      return ('비밀번호를 더 길게 설정해주세요.');
+    }
+  }
 }
 
 class NewfitSearchTextField extends StatelessWidget {
-  const NewfitSearchTextField({super.key});
+  const NewfitSearchTextField({
+    required this.hintText,
+    super.key,
+  });
+
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +111,6 @@ class NewfitSearchTextField extends StatelessWidget {
               width: 2.w,
             ),
           ),
-          error: Text('error'),
           hintText: '주소를 입력해주세요.',
           prefixIcon: const Icon(
             Icons.search,
@@ -86,12 +124,4 @@ class NewfitSearchTextField extends StatelessWidget {
       ),
     );
   }
-}
-
-String? _validator(String pw) {
-  if (pw.length > 10) {
-    return ('비밀번호를 더 길게 설정해주세요.');
-  }
-
-  return null;
 }

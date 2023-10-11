@@ -2,6 +2,14 @@
 
 abstract class AppString {
   static const str_app_title = 'NewFit';
+  static const str_error_id_cannot_use_special_character =
+      '아이디에는 특수기호를 사용할 수 없습니다.';
+  static const str_error_need_long_password = '비밀번호를 더 길게 설정해주세요.';
+  static const str_error_cannot_use_email = '사용할 수 없는 이메일입니다.';
+  static const str_hintext_address = '주소를 입력해주세요.';
+  static const str_hintext_id = '아이디를 입력해주세요.';
+  static const str_hintext_password = '비밀번호를 입력해주세요.';
+
   // common_text의 key로 사용
   static const regular12 = "regular12";
   static const regular14 = "regular14";
