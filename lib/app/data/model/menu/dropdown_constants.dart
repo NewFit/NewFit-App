@@ -36,3 +36,13 @@ class RoutineDropdownConstants {
 
   static List<MenuList> choices = <MenuList>[favorite, edit, delete];
 }
+
+void routineDropdownChoiceAction(String menu) {
+  if (menu == RoutineDropdownConstants.favorite.menuText) {
+    print(menu);
+  } else if (menu == RoutineDropdownConstants.edit.menuText) {
+    print(menu);
+  } else if (menu == RoutineDropdownConstants.delete.menuText) {
+    print(menu);
+  }
+}
