@@ -70,19 +70,73 @@ class NewfitSearchListCell extends StatelessWidget {
 }
 
 class NewfitScoreboardListCell extends StatelessWidget {
-  const NewfitScoreboardListCell({super.key});
+  const NewfitScoreboardListCell({
+    required this.rank,
+    required this.userNickName,
+    required this.credit,
+    required this.image,
+    super.key,
+  });
 
+  final int rank;
+  final String userNickName;
+  final int credit;
+  final Image image;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GestureDetector(
+      child: Container(
+        width: double.infinity,
+        height: 56.h,
+        child: Row(
+          children: [
+            Padding(
+                padding: EdgeInsets.fromLTRB(30.w, 0, 25.w, 0),
+                child: NewfitTextMediumMd(
+                    text: "$rank", textColor: AppColors.black)),
+            CircleAvatar(), // NewfitCircleAvatar 로 변경될 예정
+            const Spacer(),
+            NewfitTextMediumMd(
+              text: userNickName,
+              textColor: AppColors.black,
+            ),
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 0, 40.w, 0),
+              child: NewfitTextRegularMd(
+                  text: "$credit credit", textColor: AppColors.textUnabled),
+            ),
+          ],
+        ),
+      ),
+      onTap: () {},
+    );
   }
 }
 
 class NewfitSettingListCell extends StatelessWidget {
-  const NewfitSettingListCell({super.key});
+  const NewfitSettingListCell({
+    required this.settingTitle,
+    super.key,
+  });
+
+  final String settingTitle;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return GestureDetector(
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.white,
+        ),
+        child: Column(children: [
+          NewfitTextRegularLg(
+            text: settingTitle,
+            textColor: AppColors.black,
+          ),
+        ]),
+      ),
+      onTap: () {},
+    );
   }
 }
