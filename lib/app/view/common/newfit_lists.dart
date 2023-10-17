@@ -126,15 +126,28 @@ class NewfitSettingListCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
+        width: double.infinity,
+        height: 40.h,
         decoration: BoxDecoration(
           color: AppColors.white,
         ),
-        child: Column(children: [
-          NewfitTextRegularLg(
-            text: settingTitle,
-            textColor: AppColors.black,
-          ),
-        ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
+              child: NewfitTextRegularLg(
+                text: settingTitle,
+                textColor: AppColors.black,
+              ),
+            ),
+            const Spacer(),
+            const Divider(
+              height: 0,
+            ),
+          ],
+        ),
       ),
       onTap: () {},
     );
