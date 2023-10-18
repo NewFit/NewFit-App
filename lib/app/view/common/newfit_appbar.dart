@@ -21,7 +21,7 @@ class NewfitAppBarWithButton extends StatelessWidget
   int todayCredit;
 
   late Widget creditInfo =
-      _UserCreditInfo(totalCredit: totalCredit, todayCredit: todayCredit);
+  _UserCreditInfo(totalCredit: totalCredit, todayCredit: todayCredit);
   double appBarHeight = 183.h;
 
   @override
@@ -65,11 +65,13 @@ class NewfitAppBarWithButton extends StatelessWidget
                     userName: "고라니",
                     onPressedFucntion: () {},
                   ),
-                  SizedBox(height: 13.h),
-                  _UserCreditInfo(
-                    totalCredit: totalCredit,
-                    todayCredit: todayCredit,
-                  ),
+                  if (scrollPosition.value <= 0.0)
+                    SizedBox(height: 13.h),
+                  if (scrollPosition.value <= 0.0)
+                    _UserCreditInfo(
+                      totalCredit: totalCredit,
+                      todayCredit: todayCredit,
+                    ),
                   SizedBox(height: 15.h),
                   Align(
                     alignment: Alignment.center,
