@@ -7,7 +7,7 @@ import 'package:new_fit/app/view/theme/app_fontweight.dart';
 class NewfitEquipmentListCell extends StatelessWidget {
   const NewfitEquipmentListCell({
     required this.equipmentTitle,
-    this.imageRoute = 'images/gorani.png',
+    this.imageRoute = 'images/test.png',
     required this.currentStatus,
     super.key,
   });
@@ -50,7 +50,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
                       child: Image(
                         width: 64.w,
                         height: 50.h,
-                        image: AssetImage('images/gorani.png'),
+                        image: AssetImage('images/test.png'),
                       ),
                     ),
                     SizedBox(width: 9.w),
