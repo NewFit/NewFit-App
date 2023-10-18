@@ -65,13 +65,12 @@ class NewfitAppBarWithButton extends StatelessWidget
                     userName: "고라니",
                     onPressedFucntion: () {},
                   ),
+                  if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
                   if (scrollPosition.value <= 0.0)
-                  SizedBox(height: 13.h),
-                  if (scrollPosition.value <= 0.0)
-                  _UserCreditInfo(
-                    totalCredit: totalCredit,
-                    todayCredit: todayCredit,
-                  ),
+                    _UserCreditInfo(
+                      totalCredit: totalCredit,
+                      todayCredit: todayCredit,
+                    ),
                   SizedBox(height: 15.h),
                   Align(
                     alignment: Alignment.center,
@@ -236,6 +235,7 @@ class _UserInfoAppBar extends StatelessWidget {
     required this.onPressedFucntion,
     super.key,
   });
+
   final String userName;
   final Function()? onPressedFucntion;
 

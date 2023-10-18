@@ -8,10 +8,10 @@ final List<Map<String, dynamic>> mockData = List.generate(
   (index) => {"equipmentTitle": "천국의계단", "currentStatus": 1},
 );
 
-class HomeView extends StatelessWidget {
+class HomePage extends StatelessWidget {
   final ScrollController scrollController;
 
-  const HomeView({required this.scrollController, super.key});
+  const HomePage({required this.scrollController, super.key});
 
   @override
   Widget build(BuildContext context) {
