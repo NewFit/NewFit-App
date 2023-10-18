@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
 
 class BaseBody extends StatelessWidget {
-  final ScrollController scrollController;
+  final ScrollController? scrollController;
   final List<Widget> widgetList;
 
   const BaseBody({
-    required this.scrollController,
+    this.scrollController,
     required this.widgetList,
     super.key,
   });
