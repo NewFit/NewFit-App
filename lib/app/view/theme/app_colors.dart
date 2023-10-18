@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   //newfit
-  static const Color main = Color(0xFF2F5FC0);
-  static const Color secondary = Color(0xFF2F5FC0);
+  static const Color main = Color(0xFF2563EB);
+  static const Color secondary = Color(0xFFBFDBFE);
   static const Color accent = Color(0x2F5FC0FF);
   static const Color black = Color(0xFF111111);
   static const Color white = Color(0xFCFCFCFF);
