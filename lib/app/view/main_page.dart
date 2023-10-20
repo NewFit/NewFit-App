@@ -19,7 +19,11 @@ class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return NewfitAppBarWithButton(scrollController: scrollController);
+    return NewfitAppBarWithButton(
+      scrollController: scrollController,
+      todayCredit: 10000,
+      totalCredit: 10000,
+    );
   }
 
   @override

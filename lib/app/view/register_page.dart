@@ -5,8 +5,10 @@ import 'package:new_fit/app/controller/register_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_page_indicator_dot.dart';
+import 'package:new_fit/app/view/register_accept_term_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
 
 class RegisterPage extends BaseView<RegisterPageController> {
@@ -66,12 +68,9 @@ class RegisterPage extends BaseView<RegisterPageController> {
             const Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: AppValues.screenPadding),
-              child: Text(
-                '',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: AppFontWeights.extrabold,
-                ),
+              child: NewfitTextBold3Xl(
+                text: "회원가입",
+                textColor: AppColors.black,
               ),
             ),
           ],
@@ -82,7 +81,7 @@ class RegisterPage extends BaseView<RegisterPageController> {
 
   @override
   Color pageBackgroundColor() {
-    return AppColors.white;
+    return AppColors.pageBackground;
   }
 
   @override
@@ -91,7 +90,7 @@ class RegisterPage extends BaseView<RegisterPageController> {
       physics: const NeverScrollableScrollPhysics(),
       controller: controller.tabController,
       children: [
-        Container(),
+        RegisterAcceptTermPage(),
         Container(),
         Container(),
         Container(),
