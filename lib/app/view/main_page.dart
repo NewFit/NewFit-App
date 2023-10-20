@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:new_fit/app/controller/main/main_controller.dart';
-import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
-import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
 import 'package:new_fit/app/view/main/home_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -20,7 +16,12 @@ class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return NewfitAppBarWithButton(scrollController: scrollController, totalCredit: 1000, todayCredit: 30,);
+    return NewfitAppBarWithButton(
+      scrollController: scrollController,
+      totalCredit: 10000,
+      todayCredit: 100,
+    );
+
   }
 
   @override
@@ -46,7 +47,11 @@ class MainPage extends BaseView<MainController> {
         // return goalView;
         return Container();
       case MenuCode.QR:
-        return Container();
+        return SvgPicture.asset(
+          'images/newfit_logo.svg',
+          height: 100,
+          width: 100,
+        );
       case MenuCode.MYPAGE:
         // return goalView;
         return Container();
