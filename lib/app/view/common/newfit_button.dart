@@ -55,7 +55,7 @@ class NewfitLoginButton extends StatelessWidget {
   final String buttonText;
   final Color buttonColor;
   final Color buttonTextColor;
-  final Icon buttonLeadingIcon;
+  final Widget buttonLeadingIcon;
   final Function() onPressFuntion;
 
   @override

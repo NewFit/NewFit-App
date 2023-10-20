@@ -30,4 +30,6 @@ abstract class AppString {
   static const qr = "images/icon_qr.svg";
   static const mypage = "images/icon_mypage.svg";
   static const newfit = "images/newfit_logo.svg";
+  static const google = "images/icon_google.png";
+  static const kakao = "images/icon_kakao.png";
 }

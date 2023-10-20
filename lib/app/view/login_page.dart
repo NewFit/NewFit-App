@@ -16,7 +16,7 @@ class LoginPage extends BaseView<LoginPageController> {
 
   @override
   Widget body(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       height: 640.h,
       child: Column(
@@ -28,7 +28,10 @@ class LoginPage extends BaseView<LoginPageController> {
             buttonText: '구글 로그인',
             buttonColor: const Color(0xFFECECEC),
             buttonTextColor: AppColors.black,
-            buttonLeadingIcon: Icon(Icons.abc),
+            buttonLeadingIcon: SizedBox(
+              height: 19.h,
+              child: Image.asset(AppString.google),
+            ),
             onPressFuntion: () {},
           ),
           SizedBox(
@@ -38,7 +41,10 @@ class LoginPage extends BaseView<LoginPageController> {
             buttonText: '카카오 로그인',
             buttonColor: const Color(0xFFFEE500),
             buttonTextColor: AppColors.black,
-            buttonLeadingIcon: const Icon(Icons.abc),
+            buttonLeadingIcon: SizedBox(
+              height: 19.h,
+              child: Image.asset(AppString.kakao),
+            ),
             onPressFuntion: () {},
           ),
         ],
