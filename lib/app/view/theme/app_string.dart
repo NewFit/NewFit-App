@@ -29,4 +29,5 @@ abstract class AppString {
   static const reserve = "images/icon_reserve.svg";
   static const qr = "images/icon_qr.svg";
   static const mypage = "images/icon_mypage.svg";
+  static const newfit = "images/newfit_logo.svg";
 }
