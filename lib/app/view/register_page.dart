@@ -38,13 +38,13 @@ class RegisterPage extends BaseView<RegisterPageController> {
                 }
               },
             ),
-            SizedBox(height: 50.h),
+            Spacer(flex: 2),
             Obx(
               () {
                 if (controller.currentTabIndex == 0) {}
 
                 return SizedBox(
-                  height: 50,
+                  height: 40.h,
                   width: double.infinity,
                   child: Stack(
                     children: [
@@ -65,6 +65,7 @@ class RegisterPage extends BaseView<RegisterPageController> {
                 );
               },
             ),
+            Spacer(),
             const Padding(
               padding:
                   EdgeInsets.symmetric(horizontal: AppValues.screenPadding),
