@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
 
 class NewfitButton extends StatelessWidget {
   const NewfitButton({
@@ -13,6 +14,16 @@ class NewfitButton extends StatelessWidget {
   final String buttonText;
   final Color buttonColor;
   final Function() onPressFuntion;
+
+  Color getTextColor() {
+    double luminance = buttonColor.computeLuminance();
+
+    if (luminance > 0.5) {
+      return AppColors.textBlack;
+    } else {
+      return AppColors.white;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +46,7 @@ class NewfitButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(buttonColor),
             elevation: MaterialStateProperty.all(0.0),
           ),
-          child: Text(buttonText),
+          child: NewfitTextBoldLg(text: buttonText, textColor: getTextColor(),),
         ),
       ),
     );
