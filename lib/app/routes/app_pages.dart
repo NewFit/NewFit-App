@@ -2,6 +2,8 @@
 
 import 'package:get/get.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
+import 'package:new_fit/app/bindings/login_binding.dart';
+import 'package:new_fit/app/view/login_page.dart';
 import 'package:new_fit/app/view/main_page.dart';
 import 'package:new_fit/app/view/register_page.dart';
 import '../bindings/main_binding.dart';
@@ -14,6 +16,7 @@ class AppPages {
 
   static const INITIAL = Routes.MAIN;
   static const REGISTER = Routes.REGISTER;
+  static const LOGIN = Routes.LOGIN;
   static const TEST_PAGE = Routes.TEST_PAGE;
 
   static final pages = [
@@ -27,6 +30,11 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => RegisterPage(),
       binding: RegisterBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOGIN,
+      page: () => LoginPage(),
+      binding: LoginBinding(),
       transition: Transition.fadeIn,
     ),
   ];

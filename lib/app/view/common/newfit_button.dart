@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
-
-import '../theme/app_text_theme.dart';
 
 class NewfitButton extends StatelessWidget {
   const NewfitButton({
@@ -59,13 +58,15 @@ class NewfitLoginButton extends StatelessWidget {
     super.key,
     required this.buttonText,
     required this.buttonColor,
+    required this.buttonTextColor,
     required this.buttonLeadingIcon,
     required this.onPressFuntion,
   });
 
   final String buttonText;
   final Color buttonColor;
-  final Icon buttonLeadingIcon;
+  final Color buttonTextColor;
+  final Widget buttonLeadingIcon;
   final Function() onPressFuntion;
 
   @override
@@ -89,7 +90,10 @@ class NewfitLoginButton extends StatelessWidget {
             children: [
               Align(alignment: Alignment.centerLeft, child: buttonLeadingIcon),
               Center(
-                child: Text(buttonText),
+                child: NewfitTextMediumMd(
+                  text: buttonText,
+                  textColor: buttonTextColor,
+                ),
               )
             ],
           )),
