@@ -1,7 +1,9 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/view/main_page.dart';
+import 'package:new_fit/app/view/register_page.dart';
 import '../bindings/main_binding.dart';
 
 part './app_routes.dart';
@@ -11,6 +13,7 @@ class AppPages {
   AppPages._();
 
   static const INITIAL = Routes.MAIN;
+  static const REGISTER = Routes.REGISTER;
   static const TEST_PAGE = Routes.TEST_PAGE;
 
   static final pages = [
@@ -18,6 +21,12 @@ class AppPages {
       name: _Paths.MAIN,
       page: () => MainPage(),
       binding: MainBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => RegisterPage(),
+      binding: RegisterBinding(),
       transition: Transition.fadeIn,
     ),
   ];
