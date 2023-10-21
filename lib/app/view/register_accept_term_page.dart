@@ -25,7 +25,7 @@ class RegisterAcceptTermPage extends BaseView<RegisterPageController> {
 
   @override
   Widget body(BuildContext context) {
-    return BaseBodyWithNoScroll(
+    return BaseBody(
       widgetList: [
         SizedBox(
           height: 20.h,

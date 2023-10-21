@@ -4,10 +4,10 @@ import 'package:new_fit/app/core/base/base_controller.dart';
 
 class RegisterPageController extends BaseController
     with GetTickerProviderStateMixin {
-  final emailEditingController = TextEditingController();
-  final passwordEditingController = TextEditingController();
-  final validPasswordEditingController = TextEditingController();
+  final nameEditingController = TextEditingController();
   final nicknameEditingController = TextEditingController();
+  final phonenumberEditingController = TextEditingController();
+  final emailEditingController = TextEditingController();
 
   late TabController tabController;
 
@@ -51,11 +51,10 @@ class RegisterPageController extends BaseController
 
   @override
   void dispose() {
+    nameEditingController.dispose();
+    nicknameEditingController.dispose();
+    phonenumberEditingController.dispose();
     emailEditingController.dispose();
-    passwordEditingController.dispose();
-    nicknameEditingController.dispose();
-    validPasswordEditingController.dispose();
-    nicknameEditingController.dispose();
 
     super.dispose();
   }

@@ -23,7 +23,7 @@ class NewfitPageIndicatorDot extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
-      top: currentTabIndex.value == targetTabIndex ? 0 : 25.h,
+      top: currentTabIndex.value == targetTabIndex ? 0 : 20.h,
       left: position,
       duration: const Duration(milliseconds: 300),
       curve: Curves.fastOutSlowIn,
