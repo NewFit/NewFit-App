@@ -27,7 +27,7 @@ class RegisterPageController extends BaseController
   @override
   void onInit() {
     super.onInit();
-    tabController = TabController(vsync: this, length: 4);
+    tabController = TabController(vsync: this, length: 6);
   }
 
   void emailValidation(String value) {

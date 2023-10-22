@@ -14,22 +14,34 @@ import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class RegisterAcceptTermPage extends BaseView<RegisterPageController> {
   @override
+  Widget pageScaffold(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: pageBackgroundColor(),
+      key: globalKey,
+      appBar: appBar(context),
+      floatingActionButton: floatingActionButton(),
+      body: pageContent(context),
+      bottomNavigationBar: bottomNavigationBar(),
+      bottomSheet: bottomSheet(),
+      drawer: drawer(),
+    );
+  }
+
+  @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return null;
   }
 
   @override
   Color pageBackgroundColor() {
-    return AppColors.pageBackground;
+    return const Color(0xFFF2F4F6);
   }
 
   @override
   Widget body(BuildContext context) {
-    return BaseBody(
+    return BaseBodyWithNoScroll(
       widgetList: [
-        SizedBox(
-          height: 20.h,
-        ),
         Row(children: [
           SvgPicture.asset(
             AppString.newfit,

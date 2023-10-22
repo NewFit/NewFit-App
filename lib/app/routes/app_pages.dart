@@ -3,9 +3,10 @@
 import 'package:get/get.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
-import 'package:new_fit/app/view/login_page.dart';
+import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main_page.dart';
-import 'package:new_fit/app/view/register_page.dart';
+import 'package:new_fit/app/view/register_page/register_page.dart';
+
 import '../bindings/main_binding.dart';
 
 part './app_routes.dart';

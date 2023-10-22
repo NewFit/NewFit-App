@@ -55,9 +55,12 @@ class BaseBodyWithNoScroll extends StatelessWidget {
         padding:
             const EdgeInsets.symmetric(horizontal: AppValues.screenPadding),
         width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: widgetList,
+        child: SizedBox(
+          height: 640.h,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: widgetList,
+          ),
         ),
       ),
     );
