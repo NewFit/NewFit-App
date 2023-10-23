@@ -245,15 +245,31 @@ class NewfitAppBarTranparent extends StatelessWidget
   Widget build(BuildContext context) {
     scrollController.addListener(_scrollListener);
     int transparency = 0;
+    double blurRadius = 0.0;
+    double opacity = 0;
 
     return Obx(() {
-      transparency = (scrollPosition.value).round();
+      transparency = (scrollPosition.value).round() * 2;
+      blurRadius = scrollPosition.value * 40 / 255;
+      opacity = scrollPosition.value * 0.2 / 255;
+
       if (transparency >= 255) {
         transparency = 255;
       } else if (transparency < 0) {
         transparency = 0;
       }
 
+      if (blurRadius >= 20) {
+        blurRadius = 20;
+      } else if (blurRadius < 0) {
+        blurRadius = 0;
+      }
+
+      if (opacity >= 0.1) {
+        opacity = 0.1;
+      } else if (opacity < 0) {
+        opacity = 0;
+      }
       Color appBarColor = Color.fromARGB(transparency, 255, 255, 255);
 
       return Container(
@@ -263,6 +279,14 @@ class NewfitAppBarTranparent extends StatelessWidget
             bottomLeft: Radius.circular(16.r),
             bottomRight: Radius.circular(16.r),
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black.withOpacity(opacity),
+              offset: Offset(0, 0),
+              spreadRadius: 0.1,
+              blurRadius: blurRadius,
+            ),
+          ],
           color: appBarColor,
         ),
         child: SafeArea(

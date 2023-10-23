@@ -7,82 +7,114 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/my_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/core/page_state.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
+import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
+import 'package:new_fit/app/view/common/newfit_calendar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class MyPage extends BaseView<MyPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return null;
+    return NewfitAppBarTranparent(
+      scrollController: scrollController,
+      appBarTitleText: '마이 페이지',
+    );
   }
 
   RxDouble scrollPosition = 0.0.obs;
-  // @override
-  // Color pageBackgroundColor() {
-  //   return AppColors.pageBackground;
-  // }
-
-  _scrollListener() {
-    scrollPosition.value = scrollController.offset;
+  Color appBarColor = Colors.black;
+  @override
+  Color pageBackgroundColor() {
+    return AppColors.pageBackground;
   }
 
   @override
   Widget body(BuildContext context) {
-    return test();
-  }
-
-  Widget test() {
-    return Stack(
-      children: [
-        SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            children: [
-              UserInfoTab(),
-              SizedBox(
-                height: 3000,
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          top: 0,
-          child: Align(
-            alignment: Alignment.center,
-            child: SafeArea(
-              child: Container(
-                width: 360.w,
-                child: NewfitAppBarTranparent(
-                  scrollController: scrollController,
-                  appBarTitleText: '마이 페이지',
+    return BaseBody(
+      scrollController: scrollController,
+      widgetList: [
+        Stack(
+          children: [
+            Column(
+              children: [
+                userInfoTab(),
+                SizedBox(height: 10.h),
+                routineButton(),
+                SizedBox(height: 10.h),
+                creditInfo(),
+                SizedBox(height: 10.h),
+                calendar(),
+                SizedBox(
+                  height: 3000,
                 ),
-              ),
+              ],
             ),
-          ),
+          ],
         ),
       ],
     );
   }
 
-  Widget UserInfoTab() {
+  Widget calendar() {
+    return Container(
+      width: 320.w,
+      height: 265.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.r),
+        color: AppColors.white,
+      ),
+      child: Padding(
+        padding: EdgeInsets.all(8.h),
+        child: NewfitCalendar(
+            streakOnColor: AppColors.main, streakOffColor: AppColors.accent),
+      ),
+    );
+  }
+
+  Widget creditInfo() {
+    return Container(
+      width: 320.w,
+      height: 100.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.r),
+        color: AppColors.white,
+      ),
+    );
+  }
+
+  Widget routineButton() {
+    return GestureDetector(
+      child: Container(
+        width: 320.w,
+        height: 50.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.r),
+          color: AppColors.white,
+        ),
+      ),
+    );
+  }
+
+  Widget userInfoTab() {
     return Stack(
       children: [
         SizedBox(
-          height: 250.h,
-          width: double.infinity,
+          height: 210.h,
+          width: 360.w,
         ),
         Positioned(
           top: 75.h,
           child: Container(
-            height: 175.h,
-            width: 360.w,
+            height: 135.h,
+            width: 320.w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(8.r),
-                topRight: Radius.circular(8.r),
+              borderRadius: BorderRadius.all(
+                Radius.circular(16.r),
               ),
               color: AppColors.white,
             ),
@@ -92,6 +124,61 @@ class MyPage extends BaseView<MyPageController> {
           alignment: Alignment.center,
           child: CircleAvatar(
             radius: 75.w,
+          ),
+        ),
+        Positioned(
+          width: 320.w,
+          top: 130.h,
+          child: SizedBox(
+            width: 320.w,
+            child: GestureDetector(
+              child: Row(
+                children: [
+                  Spacer(),
+                  NewfitTextBold2Xl(
+                    text: '고라니',
+                    textColor: AppColors.black,
+                  ),
+                  Icon(
+                    Icons.edit,
+                    color: Colors.grey,
+                  ),
+                  Spacer(),
+                ],
+              ),
+              onTap: () {},
+            ),
+          ),
+        ),
+        Positioned(
+          top: 165.h,
+          child: SizedBox(
+            width: 320.w,
+            child: GestureDetector(
+              child: Row(
+                children: [
+                  Spacer(),
+                  Container(
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: AppColors.unabledGrey,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 5.w, right: 8.w),
+                      child: Row(
+                        children: [
+                          Icon(Icons.location_on_outlined),
+                          NewfitTextMediumMd(
+                              text: "고라니 헬스장", textColor: AppColors.black),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+            ),
           ),
         ),
       ],
