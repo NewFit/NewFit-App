@@ -12,7 +12,7 @@ abstract class AppColors {
   static const Color unabledGrey = Color(0xFFE3E7EB);
   static const Color warning = Color(0xFFEF6056);
   static const Color warningText = Color(0xE6EF6056);
-  static const Color pageBackground = white;
+  static const Color pageBackground = Color(0xFFF2F4F6);
 
   //blue
   static const Color blue50 = Color(0xFFEFF6FF);

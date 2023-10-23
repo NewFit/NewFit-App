@@ -229,6 +229,62 @@ class NewfitAppBarWithSchedule extends StatelessWidget
   Size get preferredSize => Size.fromHeight(appBarHeight);
 }
 
+class NewfitAppBarTranparent extends StatelessWidget
+    implements PreferredSizeWidget {
+  NewfitAppBarTranparent({
+    super.key,
+    required this.scrollController,
+    required this.appBarTitleText,
+  });
+
+  final String appBarTitleText;
+  ScrollController scrollController;
+  Rx<double> scrollPosition = 0.0.obs;
+
+  @override
+  Widget build(BuildContext context) {
+    scrollController.addListener(_scrollListener);
+    int transparency = 0;
+
+    return Obx(() {
+      transparency = (scrollPosition.value).round();
+      if (transparency >= 255) {
+        transparency = 255;
+      } else if (transparency < 0) {
+        transparency = 0;
+      }
+
+      Color appBarColor = Color.fromARGB(transparency, 255, 255, 255);
+
+      return Container(
+        height: 50.h + MediaQuery.of(context).padding.top,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(16.r),
+            bottomRight: Radius.circular(16.r),
+          ),
+          color: appBarColor,
+        ),
+        child: SafeArea(
+          child: Center(
+            child: NewfitTextBoldXl(
+              text: appBarTitleText,
+              textColor: AppColors.black,
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(50.h);
+
+  _scrollListener() {
+    scrollPosition.value = scrollController.offset;
+  }
+}
+
 class _UserInfoAppBar extends StatelessWidget {
   const _UserInfoAppBar({
     required this.userName,
