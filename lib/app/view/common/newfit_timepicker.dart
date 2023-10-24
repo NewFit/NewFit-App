@@ -26,38 +26,49 @@ class NewfitTimepicker extends StatelessWidget {
           height: 408.h,
           child: Row(
             children: [
-              NewfitTimepickerGraph(
-                startTime: controller.startTime,
-                endTime: controller.endTime,
-                reservationList: reservationList,
-                selectedStartTime: controller.selectedStartTime,
-                selectedEndTime: controller.selectedEndTime,
-                onHeightTapped: (double value) {
-                  dev.log('$value');
-                  controller.updateTouchedTime(value);
-                },
-              ),
               SizedBox(
-                width: 200.w,
+                width: 116.w,
                 height: 408.h,
                 child: Stack(
                   children: [
                     Obx(() => Positioned(
-                          top: controller.selectedStartTimePosition,
-                          // Update the widget position based on widgetTop value
-                          left: 0,
-                          child: GestureDetector(
-                            onVerticalDragUpdate: (value) {
-                              controller
-                                  .updateSelectedStartTime(value.delta.dy);
-                            },
-                            child: NewfitTimepickerItem(
-                              controller: controller,
-                              isStart: true,
-                              reservationList: reservationList,
-                            ),
-                          ),
-                        )),
+                      top: controller.selectedStartTimePosition,
+                      // Update the widget position based on widgetTop value
+                      right: 0,
+                      child: GestureDetector(
+                        onVerticalDragUpdate: (value) {
+                          controller
+                              .updateSelectedStartTime(value.delta.dy);
+                        },
+                        child: NewfitTimepickerItem(
+                          controller: controller,
+                          isStart: true,
+                          reservationList: reservationList,
+                        ),
+                      ),
+                    )),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 2.w),
+                child: NewfitTimepickerGraph(
+                  startTime: controller.startTime,
+                  endTime: controller.endTime,
+                  reservationList: reservationList,
+                  selectedStartTime: controller.selectedStartTime,
+                  selectedEndTime: controller.selectedEndTime,
+                  onHeightTapped: (double value) {
+                    dev.log('$value');
+                    controller.updateTouchedTime(value);
+                  },
+                ),
+              ),
+              SizedBox(
+                width: 116.w,
+                height: 408.h,
+                child: Stack(
+                  children: [
                     Obx(() => Positioned(
                           top: controller.selectedEndTimePosition,
                           // Update the widget position based on widgetTop value
@@ -102,14 +113,14 @@ class NewfitTimepickerGraph extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 80.w,
+      width: 64.w,
       height: 380.h,
       child: Stack(
         children: [
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
-              width: 80.w,
+              width: 64.w,
               height: 360.h,
               decoration:
                   BoxDecoration(borderRadius: BorderRadius.circular(8.r)),
@@ -140,7 +151,7 @@ class NewfitTimepickerGraph extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: Container(
-              width: 80.w,
+              width: 64.w,
               height: 363.h,
               decoration: BoxDecoration(
                   border: Border.all(
@@ -159,8 +170,11 @@ class NewfitTimepickerGraph extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 2.w),
                 child: Container(
-                  height: 7.2.h,
-                  color: AppColors.pageBackground,
+                  height: 8.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.pageBackground,
+                    borderRadius: BorderRadius.circular(4.r)
+                  ),
                   child: NewfitTextRegularXs(
                     text: timeToStr(startTime),
                     textColor: Colors.transparent,
@@ -191,8 +205,11 @@ class NewfitTimepickerGraph extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Container(
-                height: 7.2.h,
-                color: AppColors.pageBackground,
+                height: 8.h,
+                decoration: BoxDecoration(
+                    color: AppColors.pageBackground,
+                    borderRadius: BorderRadius.circular(4.r)
+                ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: NewfitTextRegularXs(
@@ -268,7 +285,7 @@ class ReservationPainter extends CustomPainter {
           timeToPosition(startTime: startTime, time: reservation.startAt);
       final double endY =
           timeToPosition(startTime: startTime, time: reservation.endAt);
-      canvas.drawRect(Rect.fromLTRB(0, startY, 80.w, endY), reservedPaint);
+      canvas.drawRect(Rect.fromLTRB(0, startY, 64.w, endY), reservedPaint);
     }
   }
 
@@ -309,7 +326,7 @@ class NewReservationPainter extends CustomPainter {
         timeToPosition(startTime: startTime, time: newReservation.startAt);
     final double endY =
         timeToPosition(startTime: startTime, time: newReservation.endAt);
-    canvas.drawRect(Rect.fromLTRB(0, startY, 80.w, endY), newReservationPaint);
+    canvas.drawRect(Rect.fromLTRB(0, startY, 64.w, endY), newReservationPaint);
   }
 
   bool isOverlapping(Reservation a, Reservation b) {
@@ -338,17 +355,19 @@ class NewfitTimepickerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Row(
           children: [
+            if(!isStart)
             CustomPaint(
               painter: LeftRoundedTrianglePainter(
                   color: pickerColor(
                       time: isStart
                           ? controller.selectedStartTime
                           : controller.selectedEndTime)),
-              size: Size(18.h, 18.h),
+              size: Size(16.h, 16.h),
             ),
-            SizedBox(width: 20.w),
+            if(!isStart)
+            SizedBox(width: 10.w),
             Container(
-              width: 130.w,
+              width: 90.w,
               height: 48.h,
               decoration: BoxDecoration(
                   color: pickerBackgroundColor(
@@ -366,7 +385,18 @@ class NewfitTimepickerItem extends StatelessWidget {
                         ? controller.selectedStartTime
                         : controller.selectedEndTime),
               )),
-            )
+            ),
+            if(isStart)
+              SizedBox(width: 10.w),
+            if(isStart)
+              CustomPaint(
+                painter: RightRoundedTrianglePainter(
+                    color: pickerColor(
+                        time: isStart
+                            ? controller.selectedStartTime
+                            : controller.selectedEndTime)),
+                size: Size(16.h, 16.h),
+              ),
           ],
         ));
   }
@@ -440,6 +470,43 @@ class LeftRoundedTrianglePainter extends CustomPainter {
           0, height / 2, radius * cos(pi / 6), height / 2 + radius / 2)
       ..lineTo(width - radius * cos(pi / 6), height - radius / 2)
       ..quadraticBezierTo(width, height, width, height - radius)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return oldDelegate is LeftRoundedTrianglePainter &&
+        oldDelegate.color != color;
+  }
+}
+
+class RightRoundedTrianglePainter extends CustomPainter {
+  final Color color;
+
+  RightRoundedTrianglePainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    final double radius = size.width / 5;
+    final double width = size.width * tan(pi / 3) / 2;
+    final double height = size.height;
+
+    final Path path = Path()
+      ..moveTo(size.width - width, radius)
+      ..quadraticBezierTo(
+          size.width - width, 0, size.width - width + radius * cos(pi / 6), radius / 2)
+      ..lineTo(size.width - radius * cos(pi / 6), height / 2 - radius / 2)
+      ..quadraticBezierTo(
+          size.width, height / 2, size.width - radius * cos(pi / 6), height / 2 + radius / 2)
+      ..lineTo(size.width - width + radius * cos(pi / 6), height - radius / 2)
+      ..quadraticBezierTo(
+          size.width - width, height, size.width - width, height - radius)
       ..close();
 
     canvas.drawPath(path, paint);
