@@ -12,6 +12,7 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_calendar.dart';
+import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
@@ -49,9 +50,6 @@ class MyPage extends BaseView<MyPageController> {
                 creditInfo(),
                 SizedBox(height: 10.h),
                 calendar(),
-                SizedBox(
-                  height: 3000,
-                ),
               ],
             ),
           ],
@@ -84,6 +82,44 @@ class MyPage extends BaseView<MyPageController> {
         borderRadius: BorderRadius.circular(16.r),
         color: AppColors.white,
       ),
+      child: Column(
+        children: [
+          Spacer(
+            flex: 2,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                NewfitTextMediumMd(text: '전체 크레딧', textColor: AppColors.black),
+                Spacer(),
+                NewfitTextMediumMd(text: '10000', textColor: AppColors.main),
+              ],
+            ),
+          ),
+          Spacer(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                NewfitTextMediumMd(text: '일일 크레딧', textColor: AppColors.black),
+                Spacer(),
+                NewfitTextMediumMd(text: '75/100', textColor: AppColors.main),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: NewfitProgressBar(
+                  progressBarValue: 0.75, progressBarHeight: 8.h)),
+          Spacer(
+            flex: 2,
+          ),
+        ],
+      ),
     );
   }
 
@@ -95,6 +131,16 @@ class MyPage extends BaseView<MyPageController> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
           color: AppColors.white,
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
+          child: Row(
+            children: [
+              Icon(Icons.fitness_center),
+              SizedBox(width: 10.w),
+              NewfitTextBold2Xl(text: '마이 루틴', textColor: AppColors.black),
+            ],
+          ),
         ),
       ),
     );

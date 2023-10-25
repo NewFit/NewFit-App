@@ -290,11 +290,32 @@ class NewfitAppBarTranparent extends StatelessWidget
           color: appBarColor,
         ),
         child: SafeArea(
-          child: Center(
-            child: NewfitTextBoldXl(
-              text: appBarTitleText,
-              textColor: AppColors.black,
-            ),
+          child: Stack(
+            children: [
+              Center(
+                child: NewfitTextBoldXl(
+                  text: appBarTitleText,
+                  textColor: AppColors.black,
+                ),
+              ),
+              Positioned(
+                left: 15.w,
+                child: SizedBox(
+                  height: 50.h,
+                  child: Column(
+                    children: [
+                      Spacer(),
+                      IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Icon(Icons.arrow_back_ios),
+                        onPressed: () {},
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       );
