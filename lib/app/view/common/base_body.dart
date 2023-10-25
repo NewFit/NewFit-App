@@ -5,7 +5,7 @@ import 'package:new_fit/app/view/theme/app_values.dart';
 class BaseBody extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
-  double? columnHeight = 220.h;
+  double? columnHeight = 640.h;
 
   BaseBody({
     this.scrollController,
@@ -60,6 +60,38 @@ class BaseBodyWithNoScroll extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: widgetList,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class BaseBodyWithoutPadding extends StatelessWidget {
+  final ScrollController? scrollController;
+  final List<Widget> widgetList;
+  double? columnHeight = 640.h;
+
+  BaseBodyWithoutPadding({
+    this.scrollController,
+    required this.widgetList,
+    this.columnHeight,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Container(
+        width: double.infinity,
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: SizedBox(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: widgetList,
+            ),
           ),
         ),
       ),
