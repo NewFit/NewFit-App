@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/main/main_controller.dart';
+import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
+
+class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
+  NewfitAppBar({
+    required this.mainController,
+    required this.scrollController,
+    super.key,
+  });
+
+  MainController mainController;
+  ScrollController scrollController;
+  Rx<double> scrollPosition = 0.0.obs;
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      return Container();
+    });
+  }
+
+  _scrollListener() {
+    scrollPosition.value = scrollController.offset;
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(appBarHeight);
+}
 
 class NewfitAppBarWithButton extends StatelessWidget
     implements PreferredSizeWidget {
@@ -96,7 +124,7 @@ class NewfitAppBarWithButton extends StatelessWidget
 
 class NewfitAppBarElevated extends StatelessWidget
     implements PreferredSizeWidget {
-  const NewfitAppBarElevated({
+  NewfitAppBarElevated({
     super.key,
     required this.appBarTitleText,
   });
