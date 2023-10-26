@@ -5,6 +5,7 @@ import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
+import 'package:new_fit/app/view/common/newfit_fab.dart';
 import 'package:new_fit/app/view/common/newfit_routine_card.dart';
 
 class RoutinePage extends BaseView<RoutinePageController> {
@@ -35,5 +36,10 @@ class RoutinePage extends BaseView<RoutinePageController> {
         return SizedBox(height: 15.h);
       }
     });
+  }
+
+  @override
+  Widget? floatingActionButton() {
+    return NewfitFAB(fabTitleText: "루틴 추가", onPressedFunction: () {});
   }
 }
