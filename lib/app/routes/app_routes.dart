@@ -13,6 +13,7 @@ abstract class Routes {
   static const SETTING = _Paths.SETTING;
   static const MY = _Paths.MY;
   static const ROUTINE = _Paths.ROUTINE;
+  static const ROUTINE_MORE_INFO = _Paths.ROUTINE_MORE_INFO;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const SETTING = "/setting";
   static const MY = "/my";
   static const ROUTINE = "/routine";
+  static const ROUTINE_MORE_INFO = "/routine_more_info";
 }

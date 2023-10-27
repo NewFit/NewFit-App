@@ -4,11 +4,13 @@ import 'package:get/get.dart';
 import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
+import 'package:new_fit/app/bindings/routine_more_info_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
 import 'package:new_fit/app/view/register_page/register_page.dart';
+import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
 
 import '../bindings/main_binding.dart';
@@ -24,6 +26,7 @@ class AppPages {
   static const LOGIN = Routes.LOGIN;
   static const MY = Routes.MY;
   static const ROUTINE = Routes.ROUTINE;
+  static const ROUTINE_MORE_INFO = Routes.ROUTINE_MORE_INFO;
   static const TEST_PAGE = Routes.TEST_PAGE;
 
   static final pages = [
@@ -56,5 +59,11 @@ class AppPages {
       binding: RoutinePageBinding(),
       transition: Transition.fadeIn,
     ),
+    GetPage(
+      name: _Paths.ROUTINE_MORE_INFO,
+      page: () => RoutineMoreInfoPage(),
+      binding: RoutineMoreInfoPageBinding(),
+      transition: Transition.fadeIn,
+    )
   ];
 }
