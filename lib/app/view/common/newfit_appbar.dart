@@ -18,12 +18,86 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
   MainController mainController;
   ScrollController scrollController;
   Rx<double> scrollPosition = 0.0.obs;
+  double appBarHeight = 183.h;
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Container();
-    });
+    Widget replaceWidget = homeAppBar();
+    scrollController.addListener(_scrollListener);
+
+    return Obx(
+      () {
+        if (mainController.selectedMenuCode == MenuCode.HOME) {
+          replaceWidget = homeAppBar();
+          if (scrollPosition.value > 0.0) {
+            appBarHeight = 105.h + MediaQuery.of(context).padding.top;
+          } else {
+            appBarHeight = 175.h + MediaQuery.of(context).padding.top;
+          }
+        } else if (mainController.selectedMenuCode == MenuCode.SCOREBOARD) {
+          replaceWidget = SafeArea(
+            child: Center(
+              child: NewfitTextBoldXl(
+                text: "스코어보드",
+                textColor: AppColors.black,
+              ),
+            ),
+          );
+          appBarHeight = 50.h + MediaQuery.of(context).padding.top;
+        }
+        return Container(
+          height: appBarHeight,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(16.r),
+              bottomRight: Radius.circular(16.r),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                spreadRadius: 0,
+                blurRadius: 25.r,
+                offset: const Offset(0, 0),
+              ),
+            ],
+            color: Colors.white,
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
+              child: replaceWidget,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget homeAppBar() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 13.h),
+        _UserInfoAppBar(
+          userName: "고라니",
+          onPressedFucntion: () {},
+        ),
+        if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
+        if (scrollPosition.value <= 0.0)
+          _UserCreditInfo(
+            totalCredit: 10000,
+            todayCredit: 100,
+          ),
+        SizedBox(height: 15.h),
+        Align(
+          alignment: Alignment.center,
+          child: NewfitButton(
+              buttonText: "루틴으로 예약하기",
+              buttonColor: AppColors.main,
+              onPressFuntion: () {}),
+        ),
+      ],
+    );
   }
 
   _scrollListener() {
@@ -56,16 +130,14 @@ class NewfitAppBarWithButton extends StatelessWidget
   Widget build(BuildContext context) {
     scrollController.addListener(_scrollListener);
 
-    return Obx(() {
-      if (scrollPosition.value > 0.0) {
-        appBarHeight = 105.h + MediaQuery.of(context).padding.top;
-        creditInfo = const SizedBox();
-      } else {
-        appBarHeight = 175.h + MediaQuery.of(context).padding.top;
-        creditInfo =
-            _UserCreditInfo(totalCredit: totalCredit, todayCredit: todayCredit);
-      }
-      return Container(
+    return Obx(
+      () {
+        if (scrollPosition.value > 0.0) {
+          appBarHeight = 105.h + MediaQuery.of(context).padding.top;
+        } else {
+          appBarHeight = 175.h + MediaQuery.of(context).padding.top;
+        }
+        return Container(
           height: appBarHeight,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
@@ -106,12 +178,14 @@ class NewfitAppBarWithButton extends StatelessWidget
                         buttonText: "루틴으로 예약하기",
                         buttonColor: AppColors.main,
                         onPressFuntion: () {}),
-                  )
+                  ),
                 ],
               ),
             ),
-          ));
-    });
+          ),
+        );
+      },
+    );
   }
 
   _scrollListener() {
@@ -355,6 +429,15 @@ class NewfitAppBarTranparent extends StatelessWidget
 
   _scrollListener() {
     scrollPosition.value = scrollController.offset;
+  }
+}
+
+class _HomeAppBar extends StatelessWidget {
+  const _HomeAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
