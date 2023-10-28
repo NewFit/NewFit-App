@@ -50,6 +50,9 @@ class MyPage extends BaseView<MyPageController> {
                 creditInfo(),
                 SizedBox(height: 10.h),
                 calendar(),
+                SizedBox(
+                  height: 3000,
+                ),
               ],
             ),
           ],
