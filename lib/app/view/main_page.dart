@@ -44,8 +44,7 @@ class MainPage extends BaseView<MainController> {
   Widget getPageOnSelectedMenu(MenuCode menuCode) {
     switch (menuCode) {
       case MenuCode.HOME:
-        return NewfitIdInputTextField(
-            hintText: 'hintText', controller: TextEditingController());
+        return HomePage(scrollController: scrollController,);
       case MenuCode.RESERVE:
         // return goalView;
         return Container();
