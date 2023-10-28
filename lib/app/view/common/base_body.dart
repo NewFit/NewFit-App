@@ -5,6 +5,7 @@ import 'package:new_fit/app/view/theme/app_values.dart';
 class BaseBody extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
+
   double? columnHeight = 640.h;
 
   BaseBody({
@@ -24,6 +25,7 @@ class BaseBody extends StatelessWidget {
         width: double.infinity,
         child: SingleChildScrollView(
           controller: scrollController,
+
           child: SizedBox(
             height: columnHeight,
             child: Column(

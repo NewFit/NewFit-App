@@ -17,11 +17,9 @@ class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return NewfitAppBarWithButton(
-      scrollController: scrollController,
-      todayCredit: 10000,
-      totalCredit: 10000,
-    );
+
+    return NewfitAppBarWithButton(scrollController: scrollController, totalCredit: 1000, todayCredit: 30,);
+
   }
 
   @override
@@ -42,8 +40,7 @@ class MainPage extends BaseView<MainController> {
   Widget getPageOnSelectedMenu(MenuCode menuCode) {
     switch (menuCode) {
       case MenuCode.HOME:
-        return NewfitIdInputTextField(
-            hintText: 'hintText', controller: TextEditingController());
+        return HomePage(scrollController: scrollController,);
       case MenuCode.RESERVE:
         // return goalView;
         return Container();

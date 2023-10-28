@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
+import 'package:new_fit/app/view/common/newfit_timepicker.dart';
+import 'package:new_fit/app/view/main/test_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
@@ -22,7 +25,9 @@ class NewfitEquipmentListCell extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
       child: GestureDetector(
         onTap: () {
-          onPressFunc(context);
+          //Todo : 테스트 용 페이지 이동. 지워야 함
+          Get.to(TestPage());
+          //onPressFunc(context);
         },
         child: Container(
           width: 320.w,
@@ -160,18 +165,7 @@ void onPressFunc(BuildContext context) {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(30.w, 30.h, 30.w, 0),
-                    child: SizedBox(
-                      width: 300.w,
-                      child: LinearProgressIndicator(
-                        minHeight: 12,
-                        borderRadius: BorderRadius.circular(12.r),
-                        backgroundColor: Colors.black38,
-                        value: 0.5,
-                      ),
-                    ),
-                  ),
+                  //TODO : 여기 부분 수정
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0),
                     child: const Row(
@@ -190,6 +184,7 @@ void onPressFunc(BuildContext context) {
                       ],
                     ),
                   ),
+                  //TODO: 여기까지
                   Spacer(),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 30.h),
