@@ -94,6 +94,28 @@ class NewfitTextBold2Xl extends StatelessWidget {
   }
 }
 
+class NewfitTextBold3Xl extends StatelessWidget {
+  const NewfitTextBold3Xl({
+    required this.text,
+    required this.textColor,
+    super.key,
+  });
+  final String text;
+  final Color textColor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: TextStyle(
+        color: textColor,
+        fontSize: 30,
+        fontWeight: AppFontWeights.bold,
+      ),
+    );
+  }
+}
+
 class NewfitTextMediumMd extends StatelessWidget {
   const NewfitTextMediumMd({
     required this.text,
