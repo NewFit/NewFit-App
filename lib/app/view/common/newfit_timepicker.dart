@@ -2,26 +2,30 @@ import 'dart:math';
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/newfit_timepicker_controller.dart';
-
 import '../../data/model/reservation_model.dart';
 import '../theme/app_colors.dart';
+import '../theme/app_fontweight.dart';
 import '../theme/app_text_theme.dart';
 
 class NewfitTimepicker extends StatelessWidget {
   final List<Reservation> reservationList;
+  final Function(DateTime, DateTime) onTimeChanged;
   final DateTime now = DateTime.now();
 
-  NewfitTimepicker({super.key, required this.reservationList});
+  NewfitTimepicker({super.key, required this.reservationList, required this.onTimeChanged});
 
   final NewfitTimepickerController controller = NewfitTimepickerController();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => SizedBox(
+    return Obx(() {
+      onTimeChanged(controller.selectedStartTime, controller.selectedEndTime);
+      return SizedBox(
           width: 300.w,
           height: 408.h,
           child: Row(
@@ -32,21 +36,20 @@ class NewfitTimepicker extends StatelessWidget {
                 child: Stack(
                   children: [
                     Obx(() => Positioned(
-                      top: controller.selectedStartTimePosition,
-                      // Update the widget position based on widgetTop value
-                      right: 0,
-                      child: GestureDetector(
-                        onVerticalDragUpdate: (value) {
-                          controller
-                              .updateSelectedStartTime(value.delta.dy);
-                        },
-                        child: NewfitTimepickerItem(
-                          controller: controller,
-                          isStart: true,
-                          reservationList: reservationList,
-                        ),
-                      ),
-                    )),
+                          top: controller.selectedStartTimePosition,
+                          right: 0,
+                          child: GestureDetector(
+                            onVerticalDragUpdate: (value) {
+                              controller
+                                  .updateSelectedStartTime(value.delta.dy);
+                            },
+                            child: NewfitTimepickerItem(
+                              controller: controller,
+                              isStart: true,
+                              reservationList: reservationList,
+                            ),
+                          ),
+                        )),
                   ],
                 ),
               ),
@@ -89,7 +92,8 @@ class NewfitTimepicker extends StatelessWidget {
               )
             ],
           ),
-        ));
+        );
+    });
   }
 }
 
@@ -172,9 +176,8 @@ class NewfitTimepickerGraph extends StatelessWidget {
                 child: Container(
                   height: 8.h,
                   decoration: BoxDecoration(
-                    color: AppColors.pageBackground,
-                    borderRadius: BorderRadius.circular(4.r)
-                  ),
+                      color: AppColors.pageBackground,
+                      borderRadius: BorderRadius.circular(4.r)),
                   child: NewfitTextRegularXs(
                     text: timeToStr(startTime),
                     textColor: Colors.transparent,
@@ -208,8 +211,7 @@ class NewfitTimepickerGraph extends StatelessWidget {
                 height: 8.h,
                 decoration: BoxDecoration(
                     color: AppColors.pageBackground,
-                    borderRadius: BorderRadius.circular(4.r)
-                ),
+                    borderRadius: BorderRadius.circular(4.r)),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 2.w),
                   child: NewfitTextRegularXs(
@@ -355,17 +357,16 @@ class NewfitTimepickerItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Row(
           children: [
-            if(!isStart)
-            CustomPaint(
-              painter: LeftRoundedTrianglePainter(
-                  color: pickerColor(
-                      time: isStart
-                          ? controller.selectedStartTime
-                          : controller.selectedEndTime)),
-              size: Size(16.h, 16.h),
-            ),
-            if(!isStart)
-            SizedBox(width: 10.w),
+            if (!isStart)
+              CustomPaint(
+                painter: LeftRoundedTrianglePainter(
+                    color: pickerColor(
+                        time: isStart
+                            ? controller.selectedStartTime
+                            : controller.selectedEndTime)),
+                size: Size(10.h, 10.h),
+              ),
+            if (!isStart) SizedBox(width: 6.w),
             Container(
               width: 90.w,
               height: 48.h,
@@ -376,26 +377,24 @@ class NewfitTimepickerItem extends StatelessWidget {
                           : controller.selectedEndTime),
                   borderRadius: BorderRadius.circular(5.r)),
               child: Center(
-                  child: NewfitTextBold2Xl(
-                text: isStart
-                    ? DateFormat('HH:mm').format(controller.selectedStartTime)
-                    : DateFormat('HH:mm').format(controller.selectedEndTime),
-                textColor: pickerTextColor(
+                  child: NewfitTimeTextField(
+                color: pickerTextColor(
                     time: isStart
                         ? controller.selectedStartTime
                         : controller.selectedEndTime),
+                controller: controller,
+                isStart: isStart,
               )),
             ),
-            if(isStart)
-              SizedBox(width: 10.w),
-            if(isStart)
+            if (isStart) SizedBox(width: 6.w),
+            if (isStart)
               CustomPaint(
                 painter: RightRoundedTrianglePainter(
                     color: pickerColor(
                         time: isStart
                             ? controller.selectedStartTime
                             : controller.selectedEndTime)),
-                size: Size(16.h, 16.h),
+                size: Size(10.h, 10.h),
               ),
           ],
         ));
@@ -499,11 +498,11 @@ class RightRoundedTrianglePainter extends CustomPainter {
 
     final Path path = Path()
       ..moveTo(size.width - width, radius)
-      ..quadraticBezierTo(
-          size.width - width, 0, size.width - width + radius * cos(pi / 6), radius / 2)
+      ..quadraticBezierTo(size.width - width, 0,
+          size.width - width + radius * cos(pi / 6), radius / 2)
       ..lineTo(size.width - radius * cos(pi / 6), height / 2 - radius / 2)
-      ..quadraticBezierTo(
-          size.width, height / 2, size.width - radius * cos(pi / 6), height / 2 + radius / 2)
+      ..quadraticBezierTo(size.width, height / 2,
+          size.width - radius * cos(pi / 6), height / 2 + radius / 2)
       ..lineTo(size.width - width + radius * cos(pi / 6), height - radius / 2)
       ..quadraticBezierTo(
           size.width - width, height, size.width - width, height - radius)
@@ -524,3 +523,153 @@ double timeToPosition({required DateTime startTime, required DateTime time}) {
 
   return (time.difference(startTime).inMinutes) * minuteHeight;
 }
+
+class NewfitTimeTextField extends StatelessWidget {
+  final NewfitTimepickerController controller;
+  final bool isStart;
+  final Color color;
+
+  const NewfitTimeTextField(
+      {super.key,
+      required this.color,
+      required this.controller,
+      required this.isStart});
+
+  @override
+  Widget build(BuildContext context) {
+    final DateTime originalTime =
+        isStart ? controller.selectedStartTime : controller.selectedEndTime;
+
+    final TextEditingController textEditingController = TextEditingController();
+    textEditingController.text = DateFormat('HH:mm').format(originalTime);
+
+    final FocusNode focusNode = FocusNode();
+    focusNode.addListener(() {
+      if (!focusNode.hasFocus) {
+        final String value = textEditingController.text;
+
+        if(value.length < 5) {
+          textEditingController.text = DateFormat('HH:mm').format(originalTime);
+          return;
+        }
+        List<String> parts = value.split(":");
+        final int newHour = int.parse(parts[0]);
+        final int newMin = int.parse(parts[1]);
+        if (value.isNotEmpty && newHour < 24) {
+          DateTime newDateTime = DateTime(
+            originalTime.year,
+            originalTime.month,
+            originalTime.day,
+            newHour,
+            newMin,
+            originalTime.second,
+            originalTime.millisecond,
+            originalTime.microsecond,
+          );
+
+          if(isStart) {
+            controller.updateSelectedStartTime(
+                timeToPosition(startTime: originalTime, time: newDateTime));
+            textEditingController.text = DateFormat('HH:mm').format(controller.selectedStartTime);
+          } else {
+            controller.updateSelectedEndTime(
+                timeToPosition(startTime: originalTime, time: newDateTime));
+            textEditingController.text = DateFormat('HH:mm').format(controller.selectedEndTime);
+          }
+        }
+      }
+    });
+
+    return TextField(
+      controller: textEditingController,
+      focusNode: focusNode,
+      keyboardType: TextInputType.number,
+      inputFormatters: [TimeInputFormatter()],
+      onSubmitted: (value) {
+        if(value.length < 5) {
+          textEditingController.text = DateFormat('HH:mm').format(originalTime);
+          return;
+        }
+        List<String> parts = value.split(":");
+        final int newHour = int.parse(parts[0]);
+        final int newMin = int.parse(parts[1]);
+        if (value.isNotEmpty && newHour < 24) {
+          DateTime newDateTime = DateTime(
+            originalTime.year,
+            originalTime.month,
+            originalTime.day,
+            newHour,
+            newMin,
+            originalTime.second,
+            originalTime.millisecond,
+            originalTime.microsecond,
+          );
+
+          if(isStart) {
+            controller.updateSelectedStartTime(
+                timeToPosition(startTime: originalTime, time: newDateTime));
+          } else {
+            controller.updateSelectedEndTime(
+                timeToPosition(startTime: originalTime, time: newDateTime));
+          }
+        }
+      },
+      decoration: InputDecoration(
+        hintText: DateFormat('HH:mm').format(originalTime),
+        hintStyle: TextStyle(
+          color: color.withOpacity(0.5),
+          fontSize: 24,
+          fontWeight: AppFontWeights.bold,
+        ),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.zero,
+        counterText: '',
+      ),
+      textInputAction: TextInputAction.next,
+      maxLength: 5,
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: color,
+        fontSize: 24,
+        fontWeight: AppFontWeights.bold,
+      ),
+    );
+  }
+}
+
+class TimeInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    // 숫자만 남기고 모든 비숫자 문자를 제거합니다.
+    String newString = newValue.text.replaceAll(RegExp(r'\D'), '');
+    int cursorPosition = newValue.selection.end;
+
+    // 시간 형식에 맞게 문자열을 재구성합니다.
+    if (newString.length > 4) {
+      // 사용자가 너무 많은 숫자를 입력한 경우 마지막 숫자를 잘라냅니다.
+      newString = newString.substring(0, 4);
+    }
+
+    // 콜론을 삽입하여 시간 형식을 만듭니다.
+    if (newString.length > 2) {
+      newString = newString.substring(0, 2) + ':' + newString.substring(2);
+      // 커서 위치가 자동으로 조정되었는지 확인합니다. 만약 3번째 숫자를 입력한 경우, 커서는 콜론 뒤에 위치해야 합니다.
+      if (cursorPosition == 3) {
+        cursorPosition++;
+      }
+    }
+
+    // 커서 위치가 텍스트의 끝을 초과하지 않도록 합니다.
+    if (cursorPosition > newString.length) {
+      cursorPosition = newString.length;
+    }
+
+    // 새로운 텍스트와 커서 위치로 TextEditingValue를 반환합니다.
+    return TextEditingValue(
+      text: newString,
+      selection: TextSelection.collapsed(offset: cursorPosition),
+    );
+  }
+}
+

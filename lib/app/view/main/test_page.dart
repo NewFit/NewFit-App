@@ -1,6 +1,7 @@
 //TODO : 테스트 페이지입니다. 삭제 예정.
 
 import 'dart:math';
+import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
@@ -31,12 +32,12 @@ List<Reservation> generateRandomReservations(
 }
 
 final DateTime now = DateTime.now();
-final DateTime startTime = DateTime(now.year, now.month, now.day, now.hour, 0, 0);
+final DateTime startTime =
+    DateTime(now.year, now.month, now.day, now.hour, 0, 0);
 final DateTime endTime = startTime.add(const Duration(hours: 2));
 
 class TestPage extends StatelessWidget {
-  final reservationList =
-      generateRandomReservations(startTime, endTime);
+  final reservationList = generateRandomReservations(startTime, endTime);
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,13 @@ class TestPage extends StatelessWidget {
         child: Center(
           child: BaseBody(
             widgetList: [
-              NewfitTimepicker(reservationList: reservationList)
+              NewfitTimepicker(
+                reservationList: reservationList,
+                onTimeChanged: (DateTime start, DateTime end) {
+                  dev.log("$start");
+                  dev.log("$end");
+                },
+              )
             ],
           ),
         ),

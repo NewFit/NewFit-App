@@ -24,6 +24,15 @@ class NewfitTimepickerController extends GetxController {
     _selectedEndTimeController.value = timeToPosition(time: now.add(const Duration(minutes: 20)));
   }
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    ever(_selectedStartTimeController, (_) {
+      print("Selected start time has changed to $selectedStartTime");
+    });
+  }
+
   DateTime get selectedStartTime => positionToTime(value : _selectedStartTimeController.value);
   DateTime get selectedEndTime => positionToTime(value : _selectedEndTimeController.value);
   double get selectedStartTimePosition => _selectedStartTimeController.value;
@@ -38,7 +47,7 @@ class NewfitTimepickerController extends GetxController {
 
   void updateSelectedEndTime(double delta) {
     final double newTime = _selectedEndTimeController.value + delta;
-    if(newTime > _selectedStartTimeController.value && newTime <= 360.h) {
+    if(newTime > _selectedStartTimeController.value && newTime <= 361.h) {
       _selectedEndTimeController.value = newTime;
     }
   }
