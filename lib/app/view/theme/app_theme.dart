@@ -17,11 +17,9 @@ final ThemeData appThemeData = ThemeData(
   ),
 );
 
-/*
 BoxShadow Shadow = BoxShadow(
   color: AppColors.black.withOpacity(0.1),
   offset: Offset(0, 0),
   spreadRadius: 0.1,
   blurRadius: 20,
 );
-*/
