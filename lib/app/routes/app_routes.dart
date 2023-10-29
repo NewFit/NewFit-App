@@ -13,7 +13,7 @@ abstract class Routes {
   static const SETTING = _Paths.SETTING;
   static const MY = _Paths.MY;
   static const ROUTINE = _Paths.ROUTINE;
-
+  static const SCOREBOARD = _Paths.SCOREBOARD;
 }
 
 abstract class _Paths {
