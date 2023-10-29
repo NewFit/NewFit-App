@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_more_info_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
@@ -12,6 +13,7 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 
 class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+  RxBool isEditMode = false.obs;
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -23,28 +25,7 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
   Widget body(BuildContext context) {
     return BaseBody(
       scrollController: scrollController,
-      widgetList: [
-        Padding(
-          padding: EdgeInsets.only(bottom: 10.0.h),
-          child: NewfitRoutineEquipmentListCell(
-              listTitle: 'listTitle', minute: 10),
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10.0.h),
-          child: NewfitRoutineEquipmentListCell(
-              listTitle: 'listTitle', minute: 10),
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10.0.h),
-          child: NewfitRoutineEquipmentListCell(
-              listTitle: 'listTitle', minute: 10),
-        ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10.0.h),
-          child: NewfitRoutineEquipmentListCell(
-              listTitle: 'listTitle', minute: 10),
-        ),
-      ],
+      widgetList: routineEquipmentList(200),
     );
   }
 
@@ -53,13 +34,37 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
     return SafeArea(
       child: Padding(
         padding:
-            EdgeInsets.only(top: 20.h, bottom: 20.h, left: 30.h, right: 30.h),
+            EdgeInsets.only(top: 0.h, bottom: 10.h, left: 20.w, right: 20.w),
         child: NewfitButton(
           buttonText: '루틴 수정하기',
           buttonColor: AppColors.main,
-          onPressFuntion: () {},
+          onPressFuntion: () {
+            isEditMode.value = !isEditMode.value;
+          },
         ),
       ),
     );
+  }
+
+  List<Widget> routineEquipmentList(int length) {
+    return List.generate(length, (index) {
+      return Obx(
+        () {
+          if (!isEditMode.value) {
+            return Padding(
+              padding: EdgeInsets.only(bottom: 10.0.h),
+              child: NewfitRoutineEquipmentListCell(
+                  listTitle: 'listTitle', minute: 10),
+            );
+          } else {
+            return Padding(
+              padding: EdgeInsets.only(bottom: 10.0.h),
+              child: NewfitRoutineEquipmentListCell(
+                  listTitle: 'listTitle', minute: 10),
+            );
+          }
+        },
+      );
+    });
   }
 }
