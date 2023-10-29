@@ -25,6 +25,7 @@ class BaseBody extends StatelessWidget {
         width: double.infinity,
         child: SingleChildScrollView(
           controller: scrollController,
+
           child: SizedBox(
             height: columnHeight,
             child: Column(
