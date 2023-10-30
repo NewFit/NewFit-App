@@ -7,6 +7,8 @@ import 'package:new_fit/app/view/main/test_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
+import '../../routes/app_pages.dart';
+
 class NewfitEquipmentListCell extends StatelessWidget {
   const NewfitEquipmentListCell({
     required this.equipmentTitle,
@@ -26,7 +28,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           //Todo : 테스트 용 페이지 이동. 지워야 함
-          Get.to(TestPage());
+          Get.toNamed(Routes.HOME_RESERVATION);
           //onPressFunc(context);
         },
         child: Container(
