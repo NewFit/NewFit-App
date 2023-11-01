@@ -74,7 +74,7 @@ class NewfitBottomNavigationBar extends StatelessWidget {
       ),
       const BottomNavItem(
         iconSVGName: AppString.mypage,
-        menuCode: MenuCode.MYPAGE,
+        menuCode: MenuCode.SCOREBOARD,
       ),
     ];
   }
