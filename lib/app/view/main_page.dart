@@ -8,6 +8,7 @@ import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
 import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/main/home_page.dart';
+import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
@@ -17,10 +18,9 @@ class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return NewfitAppBarWithButton(
+    return NewfitAppBar(
+      mainController: controller,
       scrollController: scrollController,
-      todayCredit: 10000,
-      totalCredit: 10000,
     );
   }
 
@@ -28,7 +28,9 @@ class MainPage extends BaseView<MainController> {
   Widget body(BuildContext context) {
     return Container(
       key: UniqueKey(),
-      child: Obx(() => getPageOnSelectedMenu(controller.selectedMenuCode)),
+      child: Obx(() {
+        return getPageOnSelectedMenu(controller.selectedMenuCode);
+      }),
     );
   }
 
@@ -42,8 +44,7 @@ class MainPage extends BaseView<MainController> {
   Widget getPageOnSelectedMenu(MenuCode menuCode) {
     switch (menuCode) {
       case MenuCode.HOME:
-        return NewfitIdInputTextField(
-            hintText: 'hintText', controller: TextEditingController());
+        return HomePage(scrollController: scrollController,);
       case MenuCode.RESERVE:
         // return goalView;
         return Container();
@@ -53,40 +54,12 @@ class MainPage extends BaseView<MainController> {
           height: 100,
           width: 100,
         );
-      case MenuCode.MYPAGE:
-        // return goalView;
-        return Container();
+      case MenuCode.SCOREBOARD:
+        return ScoreboardPage();
+
       default:
         // return LoginPage();
         return Container();
     }
-  }
-}
-
-class _BasePage extends StatelessWidget {
-  final List<Widget> widgetList;
-  ScrollController scrollController;
-  _BasePage({
-    required this.widgetList,
-    required this.scrollController,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Container(
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppValues.screenPadding),
-        width: double.infinity,
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: widgetList,
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -14,6 +14,8 @@ abstract class Routes {
   static const MY = _Paths.MY;
   static const ROUTINE = _Paths.ROUTINE;
   static const ROUTINE_MORE_INFO = _Paths.ROUTINE_MORE_INFO;
+  static const SCOREBOARD = _Paths.SCOREBOARD;
+  static const HOME_RESERVATION = _Paths.HOME_RESERVATION;
 }
 
 abstract class _Paths {
@@ -25,4 +27,6 @@ abstract class _Paths {
   static const MY = "/my";
   static const ROUTINE = "/routine";
   static const ROUTINE_MORE_INFO = "/routine_more_info";
+  static const SCOREBOARD = '/scoreboard';
+  static const HOME_RESERVATION = '/home_reservation';
 }

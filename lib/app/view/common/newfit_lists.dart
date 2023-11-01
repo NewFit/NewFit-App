@@ -86,12 +86,16 @@ class NewfitScoreboardListCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        width: double.infinity,
+        width: 320.w,
         height: 56.h,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(8.h),
+        ),
         child: Row(
           children: [
             Padding(
-                padding: EdgeInsets.fromLTRB(30.w, 0, 25.w, 0),
+                padding: EdgeInsets.fromLTRB(20.w, 0, 25.w, 0),
                 child: NewfitTextMediumMd(
                     text: "$rank", textColor: AppColors.black)),
             CircleAvatar(), // NewfitCircleAvatar 로 변경될 예정
@@ -102,7 +106,7 @@ class NewfitScoreboardListCell extends StatelessWidget {
             ),
             const Spacer(),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 40.w, 0),
+              padding: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
               child: NewfitTextRegularMd(
                   text: "$credit credit", textColor: AppColors.textUnabled),
             ),
