@@ -1,1 +1,1 @@
-enum LoginPlatform { kakao, google }
+enum LoginPlatform { kakao, google, logout }
