@@ -1,7 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:new_fit/app/data/model/json_models/gym_model.dart';
+import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
 
 part 'mypage_model.g.dart';
 
