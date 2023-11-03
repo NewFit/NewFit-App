@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:new_fit/app/data/model/json_models/reservation_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_model.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 

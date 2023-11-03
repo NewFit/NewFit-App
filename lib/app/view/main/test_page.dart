@@ -4,10 +4,9 @@ import 'dart:math';
 import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_model.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
-
-import '../../data/model/json_models/reservation_model.dart';
 
 List<Reservation> generateRandomReservations(
     DateTime nearestHour, DateTime twoHoursLater) {

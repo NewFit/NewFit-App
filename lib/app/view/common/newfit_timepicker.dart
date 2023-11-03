@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/newfit_timepicker_controller.dart';
-import '../../data/model/json_models/reservation_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_model.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fontweight.dart';
 import '../theme/app_text_theme.dart';
