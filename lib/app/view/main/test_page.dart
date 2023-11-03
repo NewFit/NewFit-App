@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
 
-import '../../data/model/reservation_model.dart';
+import '../../data/model/json_models/reservation_model.dart';
 
 List<Reservation> generateRandomReservations(
     DateTime nearestHour, DateTime twoHoursLater) {
@@ -25,7 +25,7 @@ List<Reservation> generateRandomReservations(
     DateTime start = nearestHour.add(Duration(minutes: randomMinuteStart));
     DateTime end = start.add(Duration(minutes: randomDuration));
 
-    reservations.add(Reservation(startAt: start, endAt: end));
+    reservations.add(Reservation(start_at: start, end_at: end));
   }
 
   return reservations;

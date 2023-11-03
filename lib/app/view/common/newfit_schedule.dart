@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:new_fit/app/data/model/reservation_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation_model.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
@@ -30,12 +30,13 @@ class NewfitSchedule extends StatelessWidget {
     ];
 
     for (final (index, element) in scheduleList.indexed) {
-      int startPosition =
-          Duration(hours: element.startAt.hour, minutes: element.startAt.minute)
-                  .inMinutes -
-              todaysTotalMinute;
+      int startPosition = Duration(
+                  hours: element.start_at.hour,
+                  minutes: element.start_at.minute)
+              .inMinutes -
+          todaysTotalMinute;
 
-      element.endAt;
+      element.end_at;
       int scheduleDuration = element.totalMinute();
 
       activatedScheduleWidget.add(

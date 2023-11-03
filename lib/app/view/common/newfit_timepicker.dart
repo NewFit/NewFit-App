@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/newfit_timepicker_controller.dart';
-import '../../data/model/reservation_model.dart';
+import '../../data/model/json_models/reservation_model.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_fontweight.dart';
 import '../theme/app_text_theme.dart';
@@ -17,7 +17,8 @@ class NewfitTimepicker extends StatelessWidget {
   final Function(DateTime, DateTime) onTimeChanged;
   final DateTime now = DateTime.now();
 
-  NewfitTimepicker({super.key, required this.reservationList, required this.onTimeChanged});
+  NewfitTimepicker(
+      {super.key, required this.reservationList, required this.onTimeChanged});
 
   final NewfitTimepickerController controller = NewfitTimepickerController();
 
@@ -26,73 +27,72 @@ class NewfitTimepicker extends StatelessWidget {
     return Obx(() {
       onTimeChanged(controller.selectedStartTime, controller.selectedEndTime);
       return SizedBox(
-          width: 300.w,
-          height: 408.h,
-          child: Row(
-            children: [
-              SizedBox(
-                width: 116.w,
-                height: 408.h,
-                child: Stack(
-                  children: [
-                    Obx(() => Positioned(
-                          top: controller.selectedStartTimePosition,
-                          right: 0,
-                          child: GestureDetector(
-                            onVerticalDragUpdate: (value) {
-                              controller
-                                  .updateSelectedStartTime(value.delta.dy);
-                            },
-                            child: NewfitTimepickerItem(
-                              controller: controller,
-                              isStart: true,
-                              reservationList: reservationList,
-                            ),
+        width: 300.w,
+        height: 408.h,
+        child: Row(
+          children: [
+            SizedBox(
+              width: 116.w,
+              height: 408.h,
+              child: Stack(
+                children: [
+                  Obx(() => Positioned(
+                        top: controller.selectedStartTimePosition,
+                        right: 0,
+                        child: GestureDetector(
+                          onVerticalDragUpdate: (value) {
+                            controller.updateSelectedStartTime(value.delta.dy);
+                          },
+                          child: NewfitTimepickerItem(
+                            controller: controller,
+                            isStart: true,
+                            reservationList: reservationList,
                           ),
-                        )),
-                  ],
-                ),
+                        ),
+                      )),
+                ],
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                child: NewfitTimepickerGraph(
-                  startTime: controller.startTime,
-                  endTime: controller.endTime,
-                  reservationList: reservationList,
-                  selectedStartTime: controller.selectedStartTime,
-                  selectedEndTime: controller.selectedEndTime,
-                  onHeightTapped: (double value) {
-                    dev.log('$value');
-                    controller.updateTouchedTime(value);
-                  },
-                ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2.w),
+              child: NewfitTimepickerGraph(
+                startTime: controller.startTime,
+                endTime: controller.endTime,
+                reservationList: reservationList,
+                selectedStartTime: controller.selectedStartTime,
+                selectedEndTime: controller.selectedEndTime,
+                onHeightTapped: (double value) {
+                  dev.log('$value');
+                  controller.updateTouchedTime(value);
+                },
               ),
-              SizedBox(
-                width: 116.w,
-                height: 408.h,
-                child: Stack(
-                  children: [
-                    Obx(() => Positioned(
-                          top: controller.selectedEndTimePosition,
-                          // Update the widget position based on widgetTop value
-                          left: 0,
-                          child: GestureDetector(
-                            onVerticalDragUpdate: (value) {
-                              controller.updateSelectedEndTime(value.delta.dy);
-                            },
-                            child: NewfitTimepickerItem(
-                              controller: controller,
-                              isStart: false,
-                              reservationList: reservationList,
-                            ),
+            ),
+            SizedBox(
+              width: 116.w,
+              height: 408.h,
+              child: Stack(
+                children: [
+                  Obx(() => Positioned(
+                        top: controller.selectedEndTimePosition,
+                        // Update the widget position based on widgetTop value
+                        left: 0,
+                        child: GestureDetector(
+                          onVerticalDragUpdate: (value) {
+                            controller.updateSelectedEndTime(value.delta.dy);
+                          },
+                          child: NewfitTimepickerItem(
+                            controller: controller,
+                            isStart: false,
+                            reservationList: reservationList,
                           ),
-                        )),
-                  ],
-                ),
-              )
-            ],
-          ),
-        );
+                        ),
+                      )),
+                ],
+              ),
+            )
+          ],
+        ),
+      );
     });
   }
 }
@@ -142,8 +142,8 @@ class NewfitTimepickerGraph extends StatelessWidget {
                       painter: NewReservationPainter(
                           reservationList: reservationList,
                           newReservation: Reservation(
-                              startAt: selectedStartTime,
-                              endAt: selectedEndTime),
+                              start_at: selectedStartTime,
+                              end_at: selectedEndTime),
                           startTime: startTime,
                           endTime: endTime),
                     )
@@ -284,9 +284,9 @@ class ReservationPainter extends CustomPainter {
 
     for (Reservation reservation in reservationList) {
       final double startY =
-          timeToPosition(startTime: startTime, time: reservation.startAt);
+          timeToPosition(startTime: startTime, time: reservation.start_at);
       final double endY =
-          timeToPosition(startTime: startTime, time: reservation.endAt);
+          timeToPosition(startTime: startTime, time: reservation.end_at);
       canvas.drawRect(Rect.fromLTRB(0, startY, 64.w, endY), reservedPaint);
     }
   }
@@ -325,14 +325,14 @@ class NewReservationPainter extends CustomPainter {
           overlapped ? AppColors.warning.withOpacity(0.5) : AppColors.secondary;
 
     final double startY =
-        timeToPosition(startTime: startTime, time: newReservation.startAt);
+        timeToPosition(startTime: startTime, time: newReservation.start_at);
     final double endY =
-        timeToPosition(startTime: startTime, time: newReservation.endAt);
+        timeToPosition(startTime: startTime, time: newReservation.end_at);
     canvas.drawRect(Rect.fromLTRB(0, startY, 64.w, endY), newReservationPaint);
   }
 
   bool isOverlapping(Reservation a, Reservation b) {
-    return a.endAt.isAfter(b.startAt) && b.endAt.isAfter(a.startAt);
+    return a.end_at.isAfter(b.start_at) && b.end_at.isAfter(a.start_at);
   }
 
   @override
@@ -403,10 +403,10 @@ class NewfitTimepickerItem extends StatelessWidget {
   Color pickerColor({required DateTime time}) {
     bool flag = false;
     for (Reservation reservation in reservationList) {
-      if ((reservation.startAt.isBefore(time) ||
-              reservation.startAt.isAtSameMomentAs(time)) &&
-          (reservation.endAt.isAfter(time) ||
-              reservation.endAt.isAtSameMomentAs(time))) {
+      if ((reservation.start_at.isBefore(time) ||
+              reservation.start_at.isAtSameMomentAs(time)) &&
+          (reservation.end_at.isAfter(time) ||
+              reservation.end_at.isAtSameMomentAs(time))) {
         flag = true;
         break;
       }
@@ -418,10 +418,10 @@ class NewfitTimepickerItem extends StatelessWidget {
   Color pickerBackgroundColor({required DateTime time}) {
     bool flag = false;
     for (Reservation reservation in reservationList) {
-      if ((reservation.startAt.isBefore(time) ||
-              reservation.startAt.isAtSameMomentAs(time)) &&
-          (reservation.endAt.isAfter(time) ||
-              reservation.endAt.isAtSameMomentAs(time))) {
+      if ((reservation.start_at.isBefore(time) ||
+              reservation.start_at.isAtSameMomentAs(time)) &&
+          (reservation.end_at.isAfter(time) ||
+              reservation.end_at.isAtSameMomentAs(time))) {
         flag = true;
         break;
       }
@@ -433,10 +433,10 @@ class NewfitTimepickerItem extends StatelessWidget {
   Color pickerTextColor({required DateTime time}) {
     bool flag = false;
     for (Reservation reservation in reservationList) {
-      if ((reservation.startAt.isBefore(time) ||
-              reservation.startAt.isAtSameMomentAs(time)) &&
-          (reservation.endAt.isAfter(time) ||
-              reservation.endAt.isAtSameMomentAs(time))) {
+      if ((reservation.start_at.isBefore(time) ||
+              reservation.start_at.isAtSameMomentAs(time)) &&
+          (reservation.end_at.isAfter(time) ||
+              reservation.end_at.isAtSameMomentAs(time))) {
         flag = true;
         break;
       }
@@ -548,7 +548,7 @@ class NewfitTimeTextField extends StatelessWidget {
       if (!focusNode.hasFocus) {
         final String value = textEditingController.text;
 
-        if(value.length < 5) {
+        if (value.length < 5) {
           textEditingController.text = DateFormat('HH:mm').format(originalTime);
           return;
         }
@@ -567,14 +567,16 @@ class NewfitTimeTextField extends StatelessWidget {
             originalTime.microsecond,
           );
 
-          if(isStart) {
+          if (isStart) {
             controller.updateSelectedStartTime(
                 timeToPosition(startTime: originalTime, time: newDateTime));
-            textEditingController.text = DateFormat('HH:mm').format(controller.selectedStartTime);
+            textEditingController.text =
+                DateFormat('HH:mm').format(controller.selectedStartTime);
           } else {
             controller.updateSelectedEndTime(
                 timeToPosition(startTime: originalTime, time: newDateTime));
-            textEditingController.text = DateFormat('HH:mm').format(controller.selectedEndTime);
+            textEditingController.text =
+                DateFormat('HH:mm').format(controller.selectedEndTime);
           }
         }
       }
@@ -586,7 +588,7 @@ class NewfitTimeTextField extends StatelessWidget {
       keyboardType: TextInputType.number,
       inputFormatters: [TimeInputFormatter()],
       onSubmitted: (value) {
-        if(value.length < 5) {
+        if (value.length < 5) {
           textEditingController.text = DateFormat('HH:mm').format(originalTime);
           return;
         }
@@ -605,7 +607,7 @@ class NewfitTimeTextField extends StatelessWidget {
             originalTime.microsecond,
           );
 
-          if(isStart) {
+          if (isStart) {
             controller.updateSelectedStartTime(
                 timeToPosition(startTime: originalTime, time: newDateTime));
           } else {
@@ -672,4 +674,3 @@ class TimeInputFormatter extends TextInputFormatter {
     );
   }
 }
-
