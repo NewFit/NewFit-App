@@ -5,19 +5,19 @@ import 'package:json_annotation/json_annotation.dart';
 part 'routine_equipment_model.g.dart';
 
 @JsonSerializable()
-class Routine_Equipment {
+class RoutineEquipment {
   int sequence;
   int equipment_id;
   int duration;
 
-  Routine_Equipment({
+  RoutineEquipment({
     required this.sequence,
     required this.equipment_id,
     required this.duration,
   });
 
-  factory Routine_Equipment.fromJson(Map<String, dynamic> json) =>
-      _$Routine_EquipmentFromJson(json);
+  factory RoutineEquipment.fromJson(Map<String, dynamic> json) =>
+      _$RoutineEquipmentFromJson(json);
 
-  Map<String, dynamic> toJson() => _$Routine_EquipmentToJson(this);
+  Map<String, dynamic> toJson() => _$RoutineEquipmentToJson(this);
 }
