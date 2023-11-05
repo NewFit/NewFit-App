@@ -45,6 +45,8 @@ dependencies:
   table_calendar: ^3.0.9
   intl: ^0.18.1
   retrofit: ^4.0.3
+  json_annotation: ^4.8.1
+  retrofit_generator: ^8.0.3
 
 dev_dependencies:
   flutter_test:
