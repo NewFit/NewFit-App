@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:new_fit/app/data/model/json_models/mypage/mypage_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/access_token.dart';
 import 'package:new_fit/app/data/model/json_models/user/modify_user_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_email_model.dart';
@@ -19,9 +20,12 @@ abstract class UserService {
   @DELETE('/users')
   Future<HttpResponse> deleteUser(@Body() UserEmail userEmail);
 
-  @DELETE('/logout')
+  @POST('/logout')
   Future<HttpResponse> logout();
 
   @PATCH('/users')
   Future<HttpResponse> modifyUserInfo(@Body() ModifyUser modifyUser);
+
+  @GET('/users')
+  Future<MyPage> getMyPageInfo();
 }
