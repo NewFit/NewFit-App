@@ -1,4 +1,4 @@
-package com.example.new_fit
+package com.newfit.newfit
 
 import io.flutter.embedding.android.FlutterActivity
 
