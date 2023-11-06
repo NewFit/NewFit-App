@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_list_model.dart';
+import 'package:new_fit/app/data/model/json_models/equipment/equipment_spec_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'equipment_service.g.dart';
@@ -17,7 +18,10 @@ abstract class EquipmentService {
   Future<EquipmentList> getAllEquipmentsByPurpose(
       @Query('purpose') String purpose);
 
-  @GET('equipments')
+  @GET('/equipments')
   Future<EquipmentList> getIdenticalEquipments(
       @Query('euiqpment_id') int euiqpment_id);
+
+  @GET('/equipments/{equipment_gym_id}')
+  Future<EquipmentSpec> getEquipmentSpecification(@Path() int equipment_gym_id);
 }
