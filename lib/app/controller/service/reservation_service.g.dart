@@ -93,7 +93,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations?equipment_gym_id=1',
+              '/reservations',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -107,7 +107,7 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> deleteReservation() async {
+  Future<HttpResponse<dynamic>> deleteReservation(int reservation_id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -120,7 +120,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              'reservations/{reservation_id}',
+              'reservations/${reservation_id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -132,6 +132,33 @@ class _ReservationService implements ReservationService {
     final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
+  }
+
+  @override
+  Future<SpecificReservation> getSpecificReservation(int reservation_id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SpecificReservation>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'reservations/${reservation_id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SpecificReservation.fromJson(_result.data!);
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

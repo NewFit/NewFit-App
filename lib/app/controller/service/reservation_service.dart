@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_list_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/specific_reservation_model.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'reservation_service.g.dart';
@@ -16,10 +17,14 @@ abstract class ReservationService {
   @PATCH('/reservations/{reservationId}')
   Future<HttpResponse> editReservation(@Path() int reservationId);
 
-  @GET('/reservations?equipment_gym_id=1')
+  @GET('/reservations')
   Future<ReservationList> getReservationList(
       @Query('equipment_gym_id') int equipment_gym_id);
 
   @DELETE('reservations/{reservation_id}')
-  Future<HttpResponse> deleteReservation();
+  Future<HttpResponse> deleteReservation(@Path() int reservation_id);
+
+  @GET('reservations/{reservation_id}')
+  Future<SpecificReservation> getSpecificReservation(
+      @Path() int reservation_id);
 }
