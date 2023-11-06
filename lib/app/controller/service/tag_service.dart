@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:new_fit/app/data/model/json_models/tag/entrance_tag_model.dart';
 import 'package:new_fit/app/data/model/json_models/tag/equipment_tag_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -12,4 +13,7 @@ abstract class TagService {
 
   @PATCH('/reservations/start')
   Future<HttpResponse> startUsingEquipment(@Body() EquipmentTag equipmentTag);
+
+  @PATCH('/authority/entry')
+  Future<HttpResponse> enterGym(@Body() EntranceTag entranceTag);
 }
