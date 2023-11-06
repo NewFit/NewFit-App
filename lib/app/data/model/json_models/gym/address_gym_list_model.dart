@@ -3,20 +3,20 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
 
-part 'user_gym_list_model.g.dart';
+part 'address_gym_list_model.g.dart';
 
 @JsonSerializable()
-class UserGymList {
+class AddressGymList {
   int gym_count;
-  List<Gym> gyms;
+  List<AddressGym> gyms;
 
-  UserGymList({
+  AddressGymList({
     required this.gym_count,
     required this.gyms,
   });
 
-  factory UserGymList.fromJson(Map<String, dynamic> json) =>
-      _$UserGymListFromJson(json);
+  factory AddressGymList.fromJson(Map<String, dynamic> json) =>
+      _$AddressGymListFromJson(json);
 
-  Map<String, dynamic> toJson() => _$UserGymListToJson(this);
+  Map<String, dynamic> toJson() => _$AddressGymListToJson(this);
 }
