@@ -11,9 +11,9 @@ class MyPage {
   String nickname;
   int total_credit;
   int this_month_credit;
-  Gym current;
+  AuthorityGym current;
   int authority_gyms_count;
-  List<Gym> authority_gyms;
+  List<AuthorityGym> authority_gyms;
 
   MyPage({
     required this.profile_file_path,
