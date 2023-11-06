@@ -6,16 +6,19 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 class NewfitInfoInputTextField extends StatelessWidget {
   const NewfitInfoInputTextField({
     required this.hintText,
+    required this.controller,
     super.key,
   });
 
   final String hintText;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 320.w,
       child: TextFormField(
+        controller: controller,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
           contentPadding:
@@ -46,10 +49,13 @@ class NewfitInfoInputTextField extends StatelessWidget {
           filled: true,
           hintText: hintText,
         ),
+        autofocus: false,
+        /*
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: (value) {
           return _validator(value!);
         },
+        */
       ),
     );
   }
@@ -60,7 +66,10 @@ class NewfitInfoInputTextField extends StatelessWidget {
 }
 
 class NewfitIdInputTextField extends NewfitInfoInputTextField {
-  NewfitIdInputTextField({required super.hintText});
+  NewfitIdInputTextField({
+    required super.hintText,
+    required super.controller,
+  });
 
   @override
   String? _validator(String value) {
@@ -71,7 +80,10 @@ class NewfitIdInputTextField extends NewfitInfoInputTextField {
 }
 
 class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
-  NewfitPasswordInputTextField({required super.hintText});
+  NewfitPasswordInputTextField({
+    required super.hintText,
+    required super.controller,
+  });
 
   @override
   String? _validator(String value) {
