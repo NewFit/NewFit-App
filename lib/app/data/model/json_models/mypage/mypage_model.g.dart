@@ -11,10 +11,10 @@ MyPage _$MyPageFromJson(Map<String, dynamic> json) => MyPage(
       nickname: json['nickname'] as String,
       total_credit: json['total_credit'] as int,
       this_month_credit: json['this_month_credit'] as int,
-      current: Gym.fromJson(json['current'] as Map<String, dynamic>),
+      current: AuthorityGym.fromJson(json['current'] as Map<String, dynamic>),
       authority_gyms_count: json['authority_gyms_count'] as int,
       authority_gyms: (json['authority_gyms'] as List<dynamic>)
-          .map((e) => Gym.fromJson(e as Map<String, dynamic>))
+          .map((e) => AuthorityGym.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

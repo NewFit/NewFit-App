@@ -16,5 +16,5 @@ class StartAt {
   factory StartAt.fromJson(Map<String, dynamic> json) =>
       _$StartAtFromJson(json);
 
-  Map<String, dynamic> toJson() => _$StartAtListToJson(this);
+  Map<String, dynamic> toJson() => _$StartAtToJson(this);
 }
