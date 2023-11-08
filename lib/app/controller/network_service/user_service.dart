@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:new_fit/app/data/model/json_models/mypage/mypage_model.dart';
-import 'package:new_fit/app/data/model/json_models/user/access_token.dart';
+import 'package:new_fit/app/data/model/json_models/user/access_token_model.dart';
+import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
+import 'package:new_fit/app/data/model/json_models/user/token_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/modify_user_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_email_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_model.dart';
@@ -28,4 +30,7 @@ abstract class UserService {
 
   @GET('/users')
   Future<MyPage> getMyPageInfo();
+
+  @POST('login')
+  Future<Token> login(@Body() Attribute attribute);
 }
