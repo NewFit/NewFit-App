@@ -5,6 +5,7 @@ import 'package:new_fit/app/bindings/home_reservation_page_binding.dart';
 import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
+import 'package:new_fit/app/bindings/routine_more_info_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
@@ -12,6 +13,7 @@ import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart'
 import 'package:new_fit/app/view/main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
 import 'package:new_fit/app/view/register_page/register_page.dart';
+import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 
@@ -28,6 +30,7 @@ class AppPages {
   static const LOGIN = Routes.LOGIN;
   static const MY = Routes.MY;
   static const ROUTINE = Routes.ROUTINE;
+  static const ROUTINE_MORE_INFO = Routes.ROUTINE_MORE_INFO;
   static const SCOREBOARD = Routes.SCOREBOARD;
   static const TEST_PAGE = Routes.TEST_PAGE;
 
@@ -59,6 +62,12 @@ class AppPages {
       name: _Paths.ROUTINE,
       page: () => RoutinePage(),
       binding: RoutinePageBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.ROUTINE_MORE_INFO,
+      page: () => RoutineMoreInfoPage(),
+      binding: RoutineMoreInfoPageBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(

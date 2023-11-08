@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-import '../data/model/reservation_model.dart';
 import '../view/theme/app_colors.dart';
 
 class NewfitTimepickerController extends GetxController {
@@ -15,13 +14,15 @@ class NewfitTimepickerController extends GetxController {
 
   NewfitTimepickerController()
       : now = DateTime.now(),
-        startTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, DateTime.now().hour, 0, 0),
-        endTime = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, DateTime.now().hour + 2, 1, 0),
+        startTime = DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, DateTime.now().hour, 0, 0),
+        endTime = DateTime(DateTime.now().year, DateTime.now().month,
+            DateTime.now().day, DateTime.now().hour + 2, 1, 0),
         _selectedStartTimeController = 0.0.obs,
-        _selectedEndTimeController = 20.0.obs
-  {
+        _selectedEndTimeController = 20.0.obs {
     _selectedStartTimeController.value = timeToPosition(time: now);
-    _selectedEndTimeController.value = timeToPosition(time: now.add(const Duration(minutes: 20)));
+    _selectedEndTimeController.value =
+        timeToPosition(time: now.add(const Duration(minutes: 20)));
   }
 
   @override
@@ -33,35 +34,39 @@ class NewfitTimepickerController extends GetxController {
     });
   }
 
-  DateTime get selectedStartTime => positionToTime(value : _selectedStartTimeController.value);
-  DateTime get selectedEndTime => positionToTime(value : _selectedEndTimeController.value);
+  DateTime get selectedStartTime =>
+      positionToTime(value: _selectedStartTimeController.value);
+  DateTime get selectedEndTime =>
+      positionToTime(value: _selectedEndTimeController.value);
   double get selectedStartTimePosition => _selectedStartTimeController.value;
   double get selectedEndTimePosition => _selectedEndTimeController.value;
 
   void updateSelectedStartTime(double delta) {
     final double newTime = _selectedStartTimeController.value + delta;
-    if(newTime >= 0.h && newTime < _selectedEndTimeController.value) {
+    if (newTime >= 0.h && newTime < _selectedEndTimeController.value) {
       _selectedStartTimeController.value = newTime;
     }
   }
 
   void updateSelectedEndTime(double delta) {
     final double newTime = _selectedEndTimeController.value + delta;
-    if(newTime > _selectedStartTimeController.value && newTime <= 361.h) {
+    if (newTime > _selectedStartTimeController.value && newTime <= 361.h) {
       _selectedEndTimeController.value = newTime;
     }
   }
 
   void updateTouchedTime(double newTime) {
-    if(newTime > 0 && newTime <= 360.h) {
-      if(newTime < _selectedStartTimeController.value) {
+    if (newTime > 0 && newTime <= 360.h) {
+      if (newTime < _selectedStartTimeController.value) {
         _selectedStartTimeController.value = newTime;
         flag.value = false;
-      } else if(newTime > _selectedEndTimeController.value) {
+      } else if (newTime > _selectedEndTimeController.value) {
         _selectedEndTimeController.value = newTime;
         flag.value = true;
       } else {
-        flag.value ? _selectedStartTimeController.value = newTime : _selectedEndTimeController.value = newTime;
+        flag.value
+            ? _selectedStartTimeController.value = newTime
+            : _selectedEndTimeController.value = newTime;
         flag.value = !flag.value;
       }
     }
