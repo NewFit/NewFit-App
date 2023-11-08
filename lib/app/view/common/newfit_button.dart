@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
-
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
-
 
 class NewfitButton extends StatelessWidget {
   const NewfitButton({
@@ -49,7 +47,10 @@ class NewfitButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(buttonColor),
             elevation: MaterialStateProperty.all(0.0),
           ),
-          child: NewfitTextBoldLg(text: buttonText, textColor: getTextColor(),),
+          child: NewfitTextBoldLg(
+            text: buttonText,
+            textColor: getTextColor(),
+          ),
         ),
       ),
     );
