@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'access_token.g.dart';
+part 'access_token_model.g.dart';
 
 @JsonSerializable()
 class AccessToken {
