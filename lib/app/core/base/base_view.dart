@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -52,6 +54,7 @@ abstract class BaseView<Controller extends BaseController>
   }
 
   bool? resizeToAvoidBottomInset;
+
   //scaffold부분
   Widget pageScaffold(BuildContext context) {
     return Scaffold(

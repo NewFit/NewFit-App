@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:new_fit/app/data/model/json_models/equipment/equipment_list_model.dart';
-import 'package:new_fit/app/data/model/json_models/equipment/equipment_spec_model.dart';
+import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'equipment_service.g.dart';

@@ -1,5 +1,5 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:new_fit/app/controller/service/social_login.dart';
+import 'package:new_fit/app/services/service/social_login.dart';
 
 class GoogleLogin implements SocialLogin {
   @override
