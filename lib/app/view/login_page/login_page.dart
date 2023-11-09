@@ -1,19 +1,20 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:new_fit/app/controller/login_page_controller.dart';
+import 'package:new_fit/app/controller/network_service/user_service.dart';
 import 'package:new_fit/app/controller/service/google_login.dart';
+import 'package:new_fit/app/controller/service/kakao_login.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
-import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
-import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class LoginPage extends BaseView<LoginPageController> {
   @override
@@ -40,11 +41,7 @@ class LoginPage extends BaseView<LoginPageController> {
               child: Image.asset(AppString.google),
             ),
             onPressFuntion: () async {
-              controller.loginSuccess = await controller.googleLogin();
-
-              if (controller.loginSuccess) {
-                Get.offAndToNamed(AppPages.INITIAL);
-              }
+              await GoogleLogin().login();
             },
           ),
           SizedBox(
@@ -59,10 +56,14 @@ class LoginPage extends BaseView<LoginPageController> {
               child: Image.asset(AppString.kakao),
             ),
             onPressFuntion: () async {
-              controller.loginSuccess = await controller.kakaoLogin();
-
-              if (controller.loginSuccess) {
-                Get.offAndToNamed(AppPages.INITIAL);
+              String register = await KakaoLogin().login();
+              debugPrint(register);
+              if (register == AppString.notRegistered) {
+                debugPrint("tt");
+                Get.toNamed(AppPages.REGISTER);
+              } else if (register == AppString.registered) {
+                debugPrint("tt");
+                Get.toNamed(AppPages.INITIAL);
               }
             },
           ),
