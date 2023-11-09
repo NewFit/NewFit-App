@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
@@ -18,7 +20,7 @@ class HomePage extends BaseView<HomePageController> {
   List<Widget> buildEquipmentList() {
     return List<Widget>.generate(
       mockData.length,
-          (index) {
+      (index) {
         final equipment = mockData[index];
         return NewfitEquipmentListCell(
           equipmentTitle: equipment['equipmentTitle'],
@@ -36,7 +38,6 @@ class HomePage extends BaseView<HomePageController> {
   @override
   Widget body(BuildContext context) {
     return BaseBody(
-        scrollController: scrollController,
-        widgetList: buildEquipmentList());
+        scrollController: scrollController, widgetList: buildEquipmentList());
   }
 }

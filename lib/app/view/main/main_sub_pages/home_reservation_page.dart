@@ -1,8 +1,8 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +33,7 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return NewfitAppBarFlat(appBarTitleText: '천국의 계단 1');
+    return const NewfitAppBarFlat(appBarTitleText: '천국의 계단 1');
   }
 
   @override
@@ -45,11 +45,11 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
   Widget body(BuildContext context) {
     final DateTime now = DateTime.now();
     final DateTime startTime =
-    DateTime(now.year, now.month, now.day, now.hour, 0, 0);
+        DateTime(now.year, now.month, now.day, now.hour, 0, 0);
     final DateTime endTime = startTime.add(const Duration(hours: 2));
 
     final reservationList =
-    controller.generateRandomReservations(startTime, endTime);
+        controller.generateRandomReservations(startTime, endTime);
 
     return BaseBodyWithNoScroll(
       widgetList: [
@@ -103,8 +103,7 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
               onPressFuntion: () {
                 Get.back();
                 Get.snackbar('예약 확인',
-                    '${DateFormat("HH:mm").format(controller.startTime.value)} ~ ${DateFormat(
-                        "HH:mm").format(controller.endTime.value)}');
+                    '${DateFormat("HH:mm").format(controller.startTime.value)} ~ ${DateFormat("HH:mm").format(controller.endTime.value)}');
               }),
         ),
       ],

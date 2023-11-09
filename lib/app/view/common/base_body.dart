@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
@@ -25,7 +27,6 @@ class BaseBody extends StatelessWidget {
         width: double.infinity,
         child: SingleChildScrollView(
           controller: scrollController,
-
           child: SizedBox(
             height: columnHeight,
             child: Column(
@@ -43,7 +44,7 @@ class BaseBodyWithNoScroll extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
 
-  BaseBodyWithNoScroll({
+  const BaseBodyWithNoScroll({
     this.scrollController,
     required this.widgetList,
     super.key,
