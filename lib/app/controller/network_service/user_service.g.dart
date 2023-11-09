@@ -177,7 +177,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              'login',
+              '/login',
               queryParameters: queryParameters,
               data: _data,
             )
