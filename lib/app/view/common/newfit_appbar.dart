@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -84,7 +86,7 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
         if (scrollPosition.value <= 0.0)
-          _UserCreditInfo(
+          const _UserCreditInfo(
             totalCredit: 10000,
             todayCredit: 100,
           ),
@@ -198,7 +200,7 @@ class NewfitAppBarWithButton extends StatelessWidget
 
 class NewfitAppBarElevated extends StatelessWidget
     implements PreferredSizeWidget {
-  NewfitAppBarElevated({
+  const NewfitAppBarElevated({
     super.key,
     required this.appBarTitleText,
   });
@@ -406,13 +408,13 @@ class NewfitAppBarTranparent extends StatelessWidget
                   height: 50.h,
                   child: Column(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         padding: EdgeInsets.zero,
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: const Icon(Icons.arrow_back_ios),
                         onPressed: () {},
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -453,24 +455,22 @@ class _UserInfoAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 15.h,
-            backgroundImage: AssetImage('images/gorani.png'),
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 15.h,
+          backgroundImage: const AssetImage('images/gorani.png'),
+        ),
+        SizedBox(width: 10.w),
+        NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
+        const Spacer(),
+        GestureDetector(
+          onTap: onPressedFucntion,
+          child: const Icon(
+            Icons.settings,
           ),
-          SizedBox(width: 10.w),
-          NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
-          const Spacer(),
-          GestureDetector(
-            onTap: onPressedFucntion,
-            child: const Icon(
-              Icons.settings,
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }
@@ -490,7 +490,7 @@ class _UserCreditInfo extends StatelessWidget {
     return Column(
       children: [
         Row(children: [
-          NewfitTextMediumMd(
+          const NewfitTextMediumMd(
             text: '전체 크레딧',
             textColor: AppColors.black,
           ),
@@ -503,7 +503,7 @@ class _UserCreditInfo extends StatelessWidget {
         SizedBox(height: 7.h),
         Row(
           children: [
-            NewfitTextMediumMd(
+            const NewfitTextMediumMd(
               text: '일일 크레딧',
               textColor: AppColors.black,
             ),

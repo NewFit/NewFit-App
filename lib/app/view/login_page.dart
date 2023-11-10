@@ -1,14 +1,12 @@
-import 'package:dio/dio.dart';
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_fit/app/controller/login_page_controller.dart';
-import 'package:new_fit/app/controller/network_service/user_service.dart';
-import 'package:new_fit/app/controller/service/google_login.dart';
-import 'package:new_fit/app/controller/service/kakao_login.dart';
+import 'package:new_fit/app/services/service/google_login.dart';
+import 'package:new_fit/app/services/service/kakao_login.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
-import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
-import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';

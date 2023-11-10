@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:new_fit/app/data/model/json_models/reservation/reservation_list_model.dart';
-import 'package:new_fit/app/data/model/json_models/reservation/specific_reservation_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'reservation_service.g.dart';

@@ -1,6 +1,6 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_more_info_page_controller.dart';
@@ -53,13 +53,13 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
           if (!isEditMode.value) {
             return Padding(
               padding: EdgeInsets.only(bottom: 10.0.h),
-              child: NewfitRoutineEquipmentListCell(
+              child: const NewfitRoutineEquipmentListCell(
                   listTitle: 'listTitle', minute: 10),
             );
           } else {
             return Padding(
               padding: EdgeInsets.only(bottom: 10.0.h),
-              child: NewfitRoutineEquipmentListCell(
+              child: const NewfitRoutineEquipmentListCell(
                   listTitle: 'listTitle', minute: 10),
             );
           }

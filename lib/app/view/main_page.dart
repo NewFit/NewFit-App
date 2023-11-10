@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -8,10 +10,6 @@ import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
 import 'package:new_fit/app/view/main/home_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
-import 'package:new_fit/app/view/theme/app_colors.dart';
-import 'package:new_fit/app/view/theme/app_text_theme.dart';
-
-import 'package:new_fit/app/view/theme/app_values.dart';
 
 class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);

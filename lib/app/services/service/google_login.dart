@@ -1,10 +1,10 @@
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:new_fit/app/controller/service/social_login.dart';
+import 'package:new_fit/app/services/service/social_login.dart';
 
 class GoogleLogin implements SocialLogin {
   @override
   Future<String> login() async {
-    GoogleSignIn _googleSignIn = GoogleSignIn(
+    GoogleSignIn googleSignIn = GoogleSignIn(
       scopes: [
         'email',
       ],
@@ -12,14 +12,14 @@ class GoogleLogin implements SocialLogin {
     final GoogleSignInAccount? googleUser;
 
     try {
-      googleUser = await _googleSignIn.signIn();
+      googleUser = await googleSignIn.signIn();
     } catch (error) {
       return "false";
     }
 
     try {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleUser!.authentication;
+      //final GoogleSignInAuthentication googleSignInAuthentication =
+      await googleUser!.authentication;
     } catch (error) {
       return "false";
     }

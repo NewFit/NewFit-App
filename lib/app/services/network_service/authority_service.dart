@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
-import 'package:new_fit/app/data/model/json_models/gym/address_gym_list_model.dart';
-import 'package:new_fit/app/data/model/json_models/reservation/reservation_list_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'authority_service.g.dart';
