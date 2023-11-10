@@ -8,12 +8,10 @@ import 'package:new_fit/app/controller/login_page_controller.dart';
 import 'package:new_fit/app/services/service/google_login.dart';
 import 'package:new_fit/app/services/service/kakao_login.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
-import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class LoginPage extends BaseView<LoginPageController> {
   @override
