@@ -36,7 +36,7 @@ class KakaoLogin implements SocialLogin {
       tokenInfo = await UserApi.instance.accessTokenInfo();
       debugPrint('토큰 유효성 체크 성공 ${tokenInfo.id} ${tokenInfo.expiresIn}');
       if (token != null) {
-        debugPrint("up");
+        debugPrint("정보 보내고 유저 토큰 받기");
         newfitToken = await userService.login(Attribute(
             attribute_name: tokenInfo.id.toString(), provider_type: "KAKAO"));
         return newfitToken!.id_type;
