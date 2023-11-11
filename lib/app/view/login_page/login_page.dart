@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/login_page_controller.dart';
 import 'package:new_fit/app/services/service/google_login.dart';
-import 'package:new_fit/app/services/service/kakao_login.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
@@ -38,7 +37,7 @@ class LoginPage extends BaseView<LoginPageController> {
               child: Image.asset(AppString.google),
             ),
             onPressFuntion: () async {
-              await GoogleLogin().login();
+              controller.googleLogin();
             },
           ),
           SizedBox(
@@ -53,15 +52,7 @@ class LoginPage extends BaseView<LoginPageController> {
               child: Image.asset(AppString.kakao),
             ),
             onPressFuntion: () async {
-              String register = await KakaoLogin().login();
-              debugPrint(register);
-              if (register == AppString.notRegistered) {
-                debugPrint("tt");
-                Get.toNamed(AppPages.REGISTER);
-              } else if (register == AppString.registered) {
-                debugPrint("tt");
-                Get.toNamed(AppPages.INITIAL);
-              }
+              controller.kakaoLogin();
             },
           ),
           SizedBox(
