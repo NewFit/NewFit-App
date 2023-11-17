@@ -32,7 +32,7 @@ class GoogleLogin implements SocialLogin {
       idToken = await getGoogleUserIdToken();
       debugPrint("정보 보내고 유저 토큰 받기");
       newfitToken = await userService
-          .login(Attribute(attribute_name: idToken, provider_type: "KAKAO"));
+          .login(Attribute(attribute_name: idToken, provider_type: "GOOGLE"));
       return newfitToken!.id_type;
     } catch (error) {
       printError();
@@ -58,7 +58,7 @@ class GoogleLogin implements SocialLogin {
     try {
       final GoogleSignInAuthentication googleSignInAuthentication =
           await googleUser!.authentication;
-      return googleSignInAuthentication.idToken!;
+      return googleUser.id;
     } catch (error) {
       return "false";
     }
