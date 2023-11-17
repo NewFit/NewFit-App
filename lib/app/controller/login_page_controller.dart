@@ -17,6 +17,7 @@ class LoginPageController extends BaseController {
 
   void googleLogin() async {
     registerStatus = await GoogleLogin().login();
+    print(registerStatus);
     checkRegisterStatus();
   }
 
