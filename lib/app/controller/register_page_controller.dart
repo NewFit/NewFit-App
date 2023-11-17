@@ -1,3 +1,4 @@
+import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
@@ -8,6 +9,7 @@ class RegisterPageController extends BaseController
   final nicknameEditingController = TextEditingController();
   final phonenumberEditingController = TextEditingController();
   final emailEditingController = TextEditingController();
+  final animateIconController = AnimateIconController();
 
   late TabController tabController;
 
