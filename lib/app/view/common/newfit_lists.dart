@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -52,9 +54,9 @@ class NewfitSearchListCell extends StatelessWidget {
                   toggled.value
                       ? Container(
                           height: 30,
-                          decoration: BoxDecoration(color: Colors.red),
+                          decoration: const BoxDecoration(color: Colors.red),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   const Spacer(),
                 ],
               ),
@@ -86,15 +88,19 @@ class NewfitScoreboardListCell extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        width: double.infinity,
+        width: 320.w,
         height: 56.h,
+        decoration: BoxDecoration(
+          color: AppColors.white,
+          borderRadius: BorderRadius.circular(8.h),
+        ),
         child: Row(
           children: [
             Padding(
-                padding: EdgeInsets.fromLTRB(30.w, 0, 25.w, 0),
+                padding: EdgeInsets.fromLTRB(20.w, 0, 25.w, 0),
                 child: NewfitTextMediumMd(
                     text: "$rank", textColor: AppColors.black)),
-            CircleAvatar(), // NewfitCircleAvatar 로 변경될 예정
+            const CircleAvatar(), // NewfitCircleAvatar 로 변경될 예정
             const Spacer(),
             NewfitTextMediumMd(
               text: userNickName,
@@ -102,7 +108,7 @@ class NewfitScoreboardListCell extends StatelessWidget {
             ),
             const Spacer(),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 0, 40.w, 0),
+              padding: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
               child: NewfitTextRegularMd(
                   text: "$credit credit", textColor: AppColors.textUnabled),
             ),
@@ -128,7 +134,7 @@ class NewfitSettingListCell extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 40.h,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: AppColors.white,
         ),
         child: Column(

@@ -46,7 +46,10 @@ class NewfitButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(buttonColor),
             elevation: MaterialStateProperty.all(0.0),
           ),
-          child: NewfitTextBoldLg(text: buttonText, textColor: getTextColor(),),
+          child: NewfitTextBoldLg(
+            text: buttonText,
+            textColor: getTextColor(),
+          ),
         ),
       ),
     );

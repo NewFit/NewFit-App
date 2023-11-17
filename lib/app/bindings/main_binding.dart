@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:new_fit/app/bindings/home_page_binding.dart';
+import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 
 class MainBinding implements Bindings {
@@ -7,5 +9,7 @@ class MainBinding implements Bindings {
     Get.lazyPut<MainController>(() {
       return MainController();
     });
+    ScoreboardPageBinding().dependencies();
+    HomePageBinding().dependencies();
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:new_fit/app/data/network/kakao_key.dart';
 import 'package:new_fit/app/main.dart';
 
 import '/flavors/build_config.dart';
@@ -17,5 +19,6 @@ void main() async {
     envConfig: devConfig,
   );
 
+  KakaoSdk.init(nativeAppKey: KAKAO_NATIVE_KEY);
   runApp(const App());
 }

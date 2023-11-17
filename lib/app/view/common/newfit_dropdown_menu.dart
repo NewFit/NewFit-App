@@ -8,6 +8,7 @@ class NewfitDropDownMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      icon: const Icon(Icons.more_vert),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.r)),
       onSelected: routineDropdownChoiceAction,
       itemBuilder: (BuildContext context) {
