@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
-import 'package:animate_icons/animate_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -58,17 +57,10 @@ class RegisterPage extends BaseView<RegisterPageController> {
                 return Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: IconButton(
-                    icon: AnimateIcons(
+                    icon: Icon(
+                      icon,
+                      color: AppColors.textUnabled,
                       size: 28.h,
-                      startIcon: Icons.close,
-                      endIcon: Icons.arrow_back_ios,
-                      onStartIconPress: () {
-                        return true;
-                      },
-                      onEndIconPress: () {
-                        return true;
-                      },
-                      controller: controller.animateIconController,
                     ),
                     constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
@@ -90,7 +82,14 @@ class RegisterPage extends BaseView<RegisterPageController> {
             SizedBox(height: 30.h),
             Obx(
               () {
-                if (controller.currentTabIndex.value == 0) {}
+                Color? disableColor = null;
+                Color? activeColor = null;
+                if (controller.currentTabIndex.value == 0) {
+                  disableColor = Colors.transparent;
+                } else {
+                  disableColor = AppColors.secondary;
+                  activeColor = AppColors.main;
+                }
 
                 return SizedBox(
                   height: 13.h,
@@ -98,9 +97,12 @@ class RegisterPage extends BaseView<RegisterPageController> {
                   child: Stack(
                       children: List.generate(5, (index) {
                     return NewfitPageIndicatorDot(
-                        currentTabIndex: controller.currentTabIndex,
-                        targetTabIndex: index + 1,
-                        position: 20.w + 40.w * index);
+                      currentTabIndex: controller.currentTabIndex,
+                      targetTabIndex: index + 1,
+                      position: 20.w + 40.w * index,
+                      activeColor: activeColor,
+                      disabledColor: disableColor,
+                    );
                   })),
                 );
               },
