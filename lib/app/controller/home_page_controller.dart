@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
-
-import '../data/model/json_models/equipment/equipment_list_model.dart';
-import 'network_service/equipment_service.dart';
+import '../data/model/json_models/equipment/equipment_models.dart';
+import '../services/network_service/equipment_service.dart';
 
 class HomePageController extends BaseController {
   final Dio dio = Dio();
