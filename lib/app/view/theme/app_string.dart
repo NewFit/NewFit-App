@@ -24,6 +24,10 @@ abstract class AppString {
   // Get 라우팅 argument의 key로 사용
   static const roomName = "roomName";
 
+  static const notRegistered = "oauth-history-id";
+  static const registeredButNoGym = "user-id";
+  static const registered = "authority-id";
+
   // Local 이미지 소스
   static const home = "images/icon_home.svg";
   static const reserve = "images/icon_reserve.svg";

@@ -1,6 +1,10 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
 
@@ -15,14 +19,14 @@ class HomePage extends BaseView<HomePageController> {
 
   HomePage({required this.scrollController});
 
-  List<Widget> buildEquipmentList() {
+  List<Widget> buildEquipmentList(EquipmentList equipmentList) {
     return List<Widget>.generate(
-      mockData.length,
-          (index) {
-        final equipment = mockData[index];
+      equipmentList.equipments.length,
+      (index) {
+        final equipment = equipmentList.equipments[index];
         return NewfitEquipmentListCell(
-          equipmentTitle: equipment['equipmentTitle'],
-          currentStatus: equipment['currentStatus'],
+          equipmentTitle: equipment.equipment_gym_name,
+          currentStatus: equipment.condition == 'AVAILABLE' ? 1 : 0,
         );
       },
     );
@@ -35,8 +39,16 @@ class HomePage extends BaseView<HomePageController> {
 
   @override
   Widget body(BuildContext context) {
-    return BaseBody(
-        scrollController: scrollController,
-        widgetList: buildEquipmentList());
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return CircularProgressIndicator(); // 로딩 중
+      }
+      if (controller.equipmentList.value == null) {
+        return Text("No data available");
+      }
+      final equipments = controller.equipmentList.value!;
+      return BaseBody(
+          scrollController: scrollController, widgetList: buildEquipmentList(equipments));
+    });
   }
 }

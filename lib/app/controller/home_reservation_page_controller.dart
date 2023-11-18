@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
-import 'package:new_fit/app/data/model/json_models/reservation/reservation_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 
 class HomeReservationPageController extends BaseController {
   //final RxList<Reservation> reservations = ;

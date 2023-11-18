@@ -1,12 +1,14 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:new_fit/app/data/model/json_models/reservation/reservation_model.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class NewfitSchedule extends StatelessWidget {
-  NewfitSchedule({
+  const NewfitSchedule({
     required this.scheduleList,
     super.key,
   });
@@ -56,8 +58,8 @@ class NewfitSchedule extends StatelessWidget {
             text: "${DateFormat('h:mm').format(DateTime.now())}",
             textColor: AppColors.unabledGrey,
           ),
-          Spacer(),
-          NewfitTextRegularXs(
+          const Spacer(),
+          const NewfitTextRegularXs(
             text: "오후 4시",
             textColor: AppColors.unabledGrey,
           ),

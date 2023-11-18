@@ -57,7 +57,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
                       child: Image(
                         width: 64.w,
                         height: 50.h,
-                        image: AssetImage('images/test.png'),
+                        image: const AssetImage('images/test.png'),
                       ),
                     ),
                     SizedBox(width: 9.w),
@@ -71,7 +71,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
@@ -172,7 +172,7 @@ void onPressFunc(BuildContext context) {
                     padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0),
                     child: const Row(
                       children: [
-                        tmpNewFitButton(),
+                        TmpNewFitButton(),
                         Spacer(),
                         Text(
                           '~',
@@ -182,12 +182,12 @@ void onPressFunc(BuildContext context) {
                           ),
                         ),
                         Spacer(),
-                        tmpNewFitButton(),
+                        TmpNewFitButton(),
                       ],
                     ),
                   ),
                   //TODO: 여기까지
-                  Spacer(),
+                  const Spacer(),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 30.h),
                     child: NewfitButton(
@@ -203,8 +203,8 @@ void onPressFunc(BuildContext context) {
       });
 }
 
-class tmpNewFitButton extends StatelessWidget {
-  const tmpNewFitButton({super.key});
+class TmpNewFitButton extends StatelessWidget {
+  const TmpNewFitButton({super.key});
 
   @override
   Widget build(BuildContext context) {

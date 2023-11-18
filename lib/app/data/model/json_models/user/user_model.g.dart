@@ -19,3 +19,26 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'nickname': instance.nickname,
       'tel': instance.tel,
     };
+
+UserEmail _$UserEmailFromJson(Map<String, dynamic> json) => UserEmail(
+      email: json['email'] as String,
+    );
+
+Map<String, dynamic> _$UserEmailToJson(UserEmail instance) => <String, dynamic>{
+      'email': instance.email,
+    };
+
+ModifyUser _$ModifyUserFromJson(Map<String, dynamic> json) => ModifyUser(
+      email: json['email'] as String,
+      nickname: json['nickname'] as String,
+      tel: json['tel'] as String,
+      image: json['image'] as String,
+    );
+
+Map<String, dynamic> _$ModifyUserToJson(ModifyUser instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'nickname': instance.nickname,
+      'tel': instance.tel,
+      'image': instance.image,
+    };

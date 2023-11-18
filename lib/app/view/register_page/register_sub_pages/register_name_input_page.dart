@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/controller/register_page_controller.dart';
@@ -15,7 +17,7 @@ class RigsterNameInputPage extends BaseView<RegisterPageController> {
 
   @override
   Color pageBackgroundColor() {
-    return Color(0xFFF2F4F6);
+    return const Color(0xFFF2F4F6);
   }
 
   @override
@@ -30,7 +32,7 @@ class RigsterNameInputPage extends BaseView<RegisterPageController> {
           hintText: '이름',
           controller: controller.nameEditingController,
         ),
-        Spacer(),
+        const Spacer(),
         NewfitButton(
           buttonText: '다음',
           buttonColor: AppColors.main,

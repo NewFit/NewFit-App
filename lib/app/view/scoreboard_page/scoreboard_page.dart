@@ -1,11 +1,10 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/controller/score_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
-import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_circle_avatar.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
 
@@ -42,7 +41,7 @@ List<Widget> scoreboardList(int length) {
                 child: Row(
                   children: [
                     NewfitCircleAvatar(radius: 40.h),
-                    Spacer(),
+                    const Spacer(),
                     NewfitCircleAvatar(radius: 40.h),
                   ],
                 ),

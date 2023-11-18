@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -66,7 +68,7 @@ class NewfitInfoInputTextField extends StatelessWidget {
 }
 
 class NewfitIdInputTextField extends NewfitInfoInputTextField {
-  NewfitIdInputTextField({
+  const NewfitIdInputTextField({
     required super.hintText,
     required super.controller,
   });
@@ -76,11 +78,12 @@ class NewfitIdInputTextField extends NewfitInfoInputTextField {
     if (value.length < 10) {
       return ('아이디에는 특수기호를 사용할 수 없습니다.');
     }
+    return null;
   }
 }
 
 class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
-  NewfitPasswordInputTextField({
+  const NewfitPasswordInputTextField({
     required super.hintText,
     required super.controller,
   });
@@ -90,6 +93,7 @@ class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
     if (value.length <= 7) {
       return ('비밀번호를 더 길게 설정해주세요.');
     }
+    return null;
   }
 }
 

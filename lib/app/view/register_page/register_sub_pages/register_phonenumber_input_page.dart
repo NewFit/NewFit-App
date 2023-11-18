@@ -1,6 +1,6 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/controller/register_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
@@ -17,7 +17,7 @@ class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
 
   @override
   Color pageBackgroundColor() {
-    return Color(0xFFF2F4F6);
+    return const Color(0xFFF2F4F6);
   }
 
   @override

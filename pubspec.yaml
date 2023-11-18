@@ -51,6 +51,8 @@ dependencies:
   retrofit: ^4.0.3
   json_annotation: ^4.8.1
   retrofit_generator: ^8.0.3
+  webview_flutter: ^4.4.2
+  logging: ^1.2.0
 
 dev_dependencies:
   flutter_test:
