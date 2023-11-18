@@ -4,7 +4,7 @@ import 'package:new_fit/app/core/base/base_controller.dart';
 import '../data/model/json_models/equipment/equipment_models.dart';
 import '../services/network_service/equipment_service.dart';
 
-const String TEST_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuZXdmaXQub2ZmaWNpYWxAZ21haWwuY29tIiwiaWF0IjoxNjk5NTI5OTA5LCJleHAiOjE5OTk1MzE3MDksInN1YiI6IkhhcHB5TWFuYWdlciIsImF1dGhvcml0eUlkTGlzdCI6WzFdLCJpZCI6MX0.XelWyqLEwHQnx2sBa4BWwv4jQLLjW8y5NIy26d0to3s";
+const String TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuZXdmaXQub2ZmaWNpYWxAZ21haWwuY29tIiwiaWF0IjoxNjk5NTI5OTA5LCJleHAiOjE5OTk1MzE3MDksInN1YiI6IkhhcHB5TWFuYWdlciIsImF1dGhvcml0eUlkTGlzdCI6WzFdLCJpZCI6MX0.6hNPdgJdxRz2bX5XIo8SKmGJ7AQS7jWSykLPYq33qPo';
 
 class HomePageController extends BaseController {
   final Dio dio = Dio();
@@ -19,7 +19,7 @@ class HomePageController extends BaseController {
 
     dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) {
-        options.headers["Authorization"] = TEST_TOKEN;
+        options.headers["Authorization"] = "Bearer $TEST_TOKEN";
         return handler.next(options);
       },
     ));
