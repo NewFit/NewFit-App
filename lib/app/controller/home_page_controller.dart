@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
@@ -17,11 +19,10 @@ class HomePageController extends BaseController {
   void onInit() async {
     super.onInit();
 
-    dio.interceptors.add(InterceptorsWrapper(
-      onRequest: (options, handler) {
-        options.headers["Authorization"] = "Bearer $TEST_TOKEN";
-        return handler.next(options);
-      },
+    dio.interceptors.add(LogInterceptor(
+      request: true,
+      responseBody: true,
+      requestBody: true,
     ));
 
     service = EquipmentService(dio);
@@ -31,9 +32,15 @@ class HomePageController extends BaseController {
   void loadEquipments() async {
     isLoading(true);
     try {
-      var equipments = await service.getAllEquipmentsInGym();
+      var equipments = await service.getAllEquipmentsInGym("Bearer $TEST_TOKEN");
       equipmentList(equipments);
-    } finally {
+    } catch (e) {
+      if (e is DioException) {
+        log('DioError: ${e.message}');
+        log('Response data: ${e.response?.data}');
+        log('Request data: ${e.requestOptions.data}');
+      }
+    }finally {
       isLoading(false);
     }
   }
