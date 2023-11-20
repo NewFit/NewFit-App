@@ -9,10 +9,33 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
 
 // Todo : Mock data임. 나중에 지워버리기
-final List<Map<String, dynamic>> mockData = List.generate(
-  10,
-  (index) => {"equipmentTitle": "천국의계단", "currentStatus": 1},
-);
+final EquipmentList mockData =
+    EquipmentList(gym_name: 'GYM', equipments_count: 5, equipments: [
+  Equipment(
+      equipment_id: 0,
+      equipment_gym_id: 0,
+      equipment_gym_name: '천국의 계단 1',
+      purpose: '',
+      condition: 'AVAILABLE'),
+  Equipment(
+      equipment_id: 1,
+      equipment_gym_id: 0,
+      equipment_gym_name: '천국의 계단 2',
+      purpose: '',
+      condition: 'AVAILABLE'),
+  Equipment(
+      equipment_id: 2,
+      equipment_gym_id: 0,
+      equipment_gym_name: '천국의 계단 3',
+      purpose: '',
+      condition: 'AVAILABLE'),
+  Equipment(
+      equipment_id: 3,
+      equipment_gym_id: 0,
+      equipment_gym_name: '천국의 계단 4',
+      purpose: '',
+      condition: 'AVAILABLE'),
+]);
 
 class HomePage extends BaseView<HomePageController> {
   final ScrollController scrollController;
@@ -39,16 +62,19 @@ class HomePage extends BaseView<HomePageController> {
 
   @override
   Widget body(BuildContext context) {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return CircularProgressIndicator(); // 로딩 중
-      }
-      if (controller.equipmentList.value == null) {
-        return Text("No data available");
-      }
-      final equipments = controller.equipmentList.value!;
-      return BaseBody(
-          scrollController: scrollController, widgetList: buildEquipmentList(equipments));
-    });
+    // return Obx(() {
+    //   if (controller.isLoading.value) {
+    //     return CircularProgressIndicator(); // 로딩 중
+    //   }
+    //   if (controller.equipmentList.value == null) {
+    //     return Text("No data available");
+    //   }
+    //   final equipments = controller.equipmentList.value!;
+    //   return BaseBody(
+    //       scrollController: scrollController, widgetList: buildEquipmentList(equipments));
+    // });
+    return BaseBody(
+        scrollController: scrollController,
+        widgetList: buildEquipmentList(mockData));
   }
 }
