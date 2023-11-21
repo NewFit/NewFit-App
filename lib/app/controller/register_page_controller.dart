@@ -1,7 +1,10 @@
 import 'package:animate_icons/animate_icons.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
+import 'package:new_fit/app/data/model/json_models/user/user_model.dart';
+import 'package:new_fit/app/services/network_service/user_service.dart';
 
 class RegisterPageController extends BaseController
     with GetTickerProviderStateMixin {
@@ -21,6 +24,8 @@ class RegisterPageController extends BaseController
 
   var emailEnabled = false.obs;
   var passwordEnabled = false.obs;
+
+  var dio = Dio();
 
   void updateTabIndex(int index) {
     currentTabIndex.value = index;
@@ -49,6 +54,14 @@ class RegisterPageController extends BaseController
     } else {
       passwordEnabled.value = false;
     }
+  }
+
+  void register() {
+    UserService(dio).signUp(User(
+        username: nameEditingController.text,
+        email: emailEditingController.text,
+        nickname: nicknameEditingController.text,
+        tel: phonenumberEditingController.text));
   }
 
   @override
