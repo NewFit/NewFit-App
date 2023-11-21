@@ -22,7 +22,7 @@ class _UserService implements UserService {
   String? baseUrl;
 
   @override
-  Future<AccessToken> loginAndGetAccessToken(User user) async {
+  Future<AccessToken> signUp(User user) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -36,7 +36,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/api/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )

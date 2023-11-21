@@ -13,8 +13,8 @@ part 'user_service.g.dart';
 abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
-  @POST('/users')
-  Future<AccessToken> loginAndGetAccessToken(@Body() User user);
+  @POST('/api/v1/users')
+  Future<AccessToken> signUp(@Body() User user);
 
   @DELETE('/users')
   Future<HttpResponse> deleteUser(@Body() UserEmail userEmail);
