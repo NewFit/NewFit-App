@@ -14,7 +14,8 @@ abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
   @POST('/api/v1/users')
-  Future<AccessToken> signUp(@Body() User user);
+  Future<AccessToken> signUp(
+      @Header('access-token') String accessToken, @Body() User user);
 
   @DELETE('/users')
   Future<HttpResponse> deleteUser(@Body() UserEmail userEmail);
