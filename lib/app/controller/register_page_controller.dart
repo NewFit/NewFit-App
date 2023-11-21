@@ -57,11 +57,13 @@ class RegisterPageController extends BaseController
   }
 
   void register() {
-    UserService(dio).signUp(User(
-        username: nameEditingController.text,
-        email: emailEditingController.text,
-        nickname: nicknameEditingController.text,
-        tel: phonenumberEditingController.text));
+    UserService(dio).signUp(
+        'jwt-token 자리 보안상의 이유로 올리진 않음',
+        User(
+            username: nameEditingController.text,
+            email: emailEditingController.text,
+            nickname: nicknameEditingController.text,
+            tel: phonenumberEditingController.text));
   }
 
   @override
