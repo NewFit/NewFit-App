@@ -16,14 +16,7 @@ class RegisterPageController extends BaseController
 
   late TabController tabController;
 
-  var emailValue = ''.obs;
-  var passwordValue = ''.obs;
-  var validpasswordValue = ''.obs;
   var currentTabIndex = 0.obs;
-  var profileImageNumber = 0.obs;
-
-  var emailEnabled = false.obs;
-  var passwordEnabled = false.obs;
 
   var dio = Dio();
 
@@ -35,25 +28,6 @@ class RegisterPageController extends BaseController
   void onInit() {
     super.onInit();
     tabController = TabController(vsync: this, length: 6);
-  }
-
-  void emailValidation(String value) {
-    String pattern =
-        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-    RegExp regExp = RegExp(pattern);
-    if (regExp.hasMatch(value)) {
-      emailEnabled.value = true;
-    } else {
-      emailEnabled.value = false;
-    }
-  }
-
-  void passwordValidation(String value) {
-    if (value.isNotEmpty && value == passwordValue.value) {
-      passwordEnabled.value = true;
-    } else {
-      passwordEnabled.value = false;
-    }
   }
 
   void register() {
