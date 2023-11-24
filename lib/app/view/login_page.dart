@@ -43,7 +43,7 @@ class LoginPage extends BaseView<LoginPageController> {
             height: 8.h,
           ),
           NewfitLoginButton(
-            buttonText: '오 로그인',
+            buttonText: '카카오 로그인',
             buttonColor: const Color(0xFFFEE500),
             buttonTextColor: AppColors.black,
             buttonLeadingIcon: SizedBox(

@@ -1,0 +1,1305 @@
+Launching lib/main_dev.dart on NOGUEN in debug mode...
+Automatically signing iOS for device deployment using specified development team in Xcode project: VF3TAS8J2N
+Running Xcode build...                                          
+ └─Compiling, linking and signing...                         3.6s
+Xcode build done.                                           13.8s
+Installing and launching...                                     
+You may be prompted to give access to control Xcode. Flutter uses Xcode to run your app. If access is not allowed, you can change this through your Settings > Privacy & Security > Automation.
+[VERBOSE-2:FlutterDarwinContextMetalImpeller.mm(37)] Using the Impeller rendering backend.
+Installing and launching...                                        23.0s
+Syncing files to device NOGUEN...                                  204ms
+
+Flutter run key commands.
+r Hot reload. 🔥🔥🔥
+R Hot restart.
+h List all available interactive commands.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+
+A Dart VM Service on NOGUEN is available at: http://127.0.0.1:52660/LUYHKgw7P7E=/
+The Flutter DevTools debugger and profiler on NOGUEN is available at: http://127.0.0.1:9101?uri=http://127.0.0.1:52660/LUYHKgw7P7E=/
+flutter: 카카오계정으로 로그인 성공 c0L9oANy2sYgXeHOY7gVCkWOvbz9P8LuJHsKKw0fAAABi7M73qzDukuslKNZWg
+flutter: 토큰 유효성 체크 성공 3155068609 43199
+flutter:
+flutter: ╔╣ Request ║ POST
+flutter: ║  http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/login
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ Headers
+flutter: ╟ content-type: application/json
+flutter: ╟ contentType: application/json
+flutter: ╟ responseType: ResponseType.json
+flutter: ╟ followRedirects: true
+flutter: ╟ connectTimeout: null
+flutter: ╟ receiveTimeout: null
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ Body
+flutter: ╟ attribute_name: 3155068609
+flutter: ╟ provider_type: KAKAO
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ║ {attribute_name: 3155068609, provider_type: KAKAO}
+flutter:
+flutter: ╔╣ DioError ║ Status: 500
+flutter: ║  http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/login
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ DioExceptionType.badResponse
+flutter: ║    {
+flutter: ║         cause: null,
+flutter: ║         stackTrace: [
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "getExceptionForNullValidator",
+flutter: ║                 fileName: "ConstraintTree.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTr
+flutter: ║                 ee"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "getInitializedConstraintValidator",
+flutter: ║                 fileName: "ConstraintTree.java",
+flutter: ║                 lineNumber: 162,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTr
+flutter: ║                 ee"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateConstraints",
+flutter: ║                 fileName: "SimpleConstraintTree.java",
+flutter: ║                 lineNumber: 58,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.hibernate.validator.internal.engine.constraintvalidation.SimpleConstr
+flutter: ║                 aintTree"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateConstraints",
+flutter: ║                 fileName: "ConstraintTree.java",
+flutter: ║                 lineNumber: 75,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.hibernate.validator.internal.engine.constraintvalidation.ConstraintTr
+flutter: ║                 ee"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doValidateConstraint",
+flutter: ║                 fileName: "MetaConstraint.java",
+flutter: ║                 lineNumber: 130,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.hibernate.validator.internal.metadata.core.MetaConstraint"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateConstraint",
+flutter: ║                 fileName: "MetaConstraint.java",
+flutter: ║                 lineNumber: 123,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.hibernate.validator.internal.metadata.core.MetaConstraint"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateMetaConstraint",
+flutter: ║                 fileName: "ValidatorImpl.java",
+flutter: ║                 lineNumber: 555,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.hibernate.validator.internal.engine.ValidatorImpl"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateConstraintsForSingleDefaultGroupElement",
+flutter: ║                 fileName: "ValidatorImpl.java",
+flutter: ║                 lineNumber: 518,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.hibernate.validator.internal.engine.ValidatorImpl"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateConstraintsForDefaultGroup",
+flutter: ║                 fileName: "ValidatorImpl.java",
+flutter: ║                 lineNumber: 488,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.hibernate.validator.internal.engine.ValidatorImpl"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateConstraintsForCurrentGroup",
+flutter: ║                 fileName: "ValidatorImpl.java",
+flutter: ║                 lineNumber: 450,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.hibernate.validator.internal.engine.ValidatorImpl"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateInContext",
+flutter: ║                 fileName: "ValidatorImpl.java",
+flutter: ║                 lineNumber: 400,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.hibernate.validator.internal.engine.ValidatorImpl"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validate",
+flutter: ║                 fileName: "ValidatorImpl.java",
+flutter: ║                 lineNumber: 172,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.hibernate.validator.internal.engine.ValidatorImpl"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validate",
+flutter: ║                 fileName: "SpringValidatorAdapter.java",
+flutter: ║                 lineNumber: 104,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.validation.beanvalidation.SpringValidatorAdapter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validate",
+flutter: ║                 fileName: "ValidatorAdapter.java",
+flutter: ║                 lineNumber: 66,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.boot.autoconfigure.validation.ValidatorAdapter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validate",
+flutter: ║                 fileName: "DataBinder.java",
+flutter: ║                 lineNumber: 932,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.validation.DataBinder"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "validateIfApplicable",
+flutter: ║                 fileName: "AbstractMessageConverterMethodArgumentResolver.java",
+flutter: ║                 lineNumber: 248,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConv
+flutter: ║                 erterMethodArgumentResolver"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "resolveArgument",
+flutter: ║                 fileName: "RequestResponseBodyMethodProcessor.java",
+flutter: ║                 lineNumber: 142,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.servlet.mvc.method.annotation.RequestResponseBody
+flutter: ║                 MethodProcessor"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "resolveArgument",
+flutter: ║                 fileName: "HandlerMethodArgumentResolverComposite.java",
+flutter: ║                 lineNumber: 122,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.method.support.HandlerMethodArgumentResolverCompo
+flutter: ║                 site"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "getMethodArgumentValues",
+flutter: ║                 fileName: "InvocableHandlerMethod.java",
+flutter: ║                 lineNumber: 179,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.method.support.InvocableHandlerMethod"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invokeForRequest",
+flutter: ║                 fileName: "InvocableHandlerMethod.java",
+flutter: ║                 lineNumber: 146,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.method.support.InvocableHandlerMethod"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invokeAndHandle",
+flutter: ║                 fileName: "ServletInvocableHandlerMethod.java",
+flutter: ║                 lineNumber: 118,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHan
+flutter: ║                 dlerMethod"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invokeHandlerMethod",
+flutter: ║                 fileName: "RequestMappingHandlerAdapter.java",
+flutter: ║                 lineNumber: 884,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
+flutter: ║                 erAdapter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "handleInternal",
+flutter: ║                 fileName: "RequestMappingHandlerAdapter.java",
+flutter: ║                 lineNumber: 797,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
+flutter: ║                 erAdapter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "handle",
+flutter: ║                 fileName: "AbstractHandlerMethodAdapter.java",
+flutter: ║                 lineNumber: 87,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doDispatch",
+flutter: ║                 fileName: "DispatcherServlet.java",
+flutter: ║                 lineNumber: 1081,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.servlet.DispatcherServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doService",
+flutter: ║                 fileName: "DispatcherServlet.java",
+flutter: ║                 lineNumber: 974,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.servlet.DispatcherServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "processRequest",
+flutter: ║                 fileName: "FrameworkServlet.java",
+flutter: ║                 lineNumber: 1011,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.servlet.FrameworkServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doPost",
+flutter: ║                 fileName: "FrameworkServlet.java",
+flutter: ║                 lineNumber: 914,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.servlet.FrameworkServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "service",
+flutter: ║                 fileName: "HttpServlet.java",
+flutter: ║                 lineNumber: 590,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "jakarta.servlet.http.HttpServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "service",
+flutter: ║                 fileName: "FrameworkServlet.java",
+flutter: ║                 lineNumber: 885,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.servlet.FrameworkServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "service",
+flutter: ║                 fileName: "HttpServlet.java",
+flutter: ║                 lineNumber: 658,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "jakarta.servlet.http.HttpServlet"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 205,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "WsFilter.java",
+flutter: ║                 lineNumber: 51,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.tomcat.websocket.server.WsFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 110,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 110,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "lambda$doFilterInternal$3",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 231,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.security.web.FilterChainProxy"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 365,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "AuthorizationFilter.java",
+flutter: ║                 lineNumber: 100,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.access.intercept.AuthorizationFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ExceptionTranslationFilter.java",
+flutter: ║                 lineNumber: 126,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.access.ExceptionTranslationFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ExceptionTranslationFilter.java",
+flutter: ║                 lineNumber: 120,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.access.ExceptionTranslationFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "SessionManagementFilter.java",
+flutter: ║                 lineNumber: 131,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.session.SessionManagementFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "SessionManagementFilter.java",
+flutter: ║                 lineNumber: 85,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.session.SessionManagementFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "AnonymousAuthenticationFilter.java",
+flutter: ║                 lineNumber: 100,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.authentication.AnonymousAuthenticationFi
+flutter: ║                 lter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "SecurityContextHolderAwareRequestFilter.java",
+flutter: ║                 lineNumber: 179,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
+flutter: ║                 uestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "RequestCacheAwareFilter.java",
+flutter: ║                 lineNumber: 63,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.savedrequest.RequestCacheAwareFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "TokenAuthenticationFilter.java",
+flutter: ║                 lineNumber: 37,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "com.newfit.reservation.common.auth.jwt.TokenAuthenticationFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "CustomExceptionHandlingFilter.java",
+flutter: ║                 lineNumber: 20,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "com.newfit.reservation.common.exception.CustomExceptionHandlingFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "LogoutFilter.java",
+flutter: ║                 lineNumber: 107,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.authentication.logout.LogoutFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "LogoutFilter.java",
+flutter: ║                 lineNumber: 93,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.authentication.logout.LogoutFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doHeadersAfter",
+flutter: ║                 fileName: "HeaderWriterFilter.java",
+flutter: ║                 lineNumber: 90,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.header.HeaderWriterFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "HeaderWriterFilter.java",
+flutter: ║                 lineNumber: 75,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.header.HeaderWriterFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "SecurityContextHolderFilter.java",
+flutter: ║                 lineNumber: 82,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.context.SecurityContextHolderFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "SecurityContextHolderFilter.java",
+flutter: ║                 lineNumber: 69,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.context.SecurityContextHolderFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "WebAsyncManagerIntegrationFilter.java",
+flutter: ║                 lineNumber: 62,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.context.request.async.WebAsyncManagerInt
+flutter: ║                 egrationFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "DisableEncodeUrlFilter.java",
+flutter: ║                 lineNumber: 42,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.session.DisableEncodeUrlFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 374,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.springframework.security.web.FilterChainProxy$VirtualFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 233,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.security.web.FilterChainProxy"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "FilterChainProxy.java",
+flutter: ║                 lineNumber: 191,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.security.web.FilterChainProxy"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invokeDelegate",
+flutter: ║                 fileName: "DelegatingFilterProxy.java",
+flutter: ║                 lineNumber: 352,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.DelegatingFilterProxy"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "DelegatingFilterProxy.java",
+flutter: ║                 lineNumber: 268,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.DelegatingFilterProxy"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "RequestContextFilter.java",
+flutter: ║                 lineNumber: 100,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.RequestContextFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "FormContentFilter.java",
+flutter: ║                 lineNumber: 93,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.FormContentFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilterInternal",
+flutter: ║                 fileName: "CharacterEncodingFilter.java",
+flutter: ║                 lineNumber: 201,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.CharacterEncodingFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "OncePerRequestFilter.java",
+flutter: ║                 lineNumber: 116,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.springframework.web.filter.OncePerRequestFilter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "internalDoFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 174,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doFilter",
+flutter: ║                 fileName: "ApplicationFilterChain.java",
+flutter: ║                 lineNumber: 149,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.ApplicationFilterChain"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invoke",
+flutter: ║                 fileName: "StandardWrapperValve.java",
+flutter: ║                 lineNumber: 166,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.StandardWrapperValve"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invoke",
+flutter: ║                 fileName: "StandardContextValve.java",
+flutter: ║                 lineNumber: 90,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.StandardContextValve"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invoke",
+flutter: ║                 fileName: "AuthenticatorBase.java",
+flutter: ║                 lineNumber: 482,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.authenticator.AuthenticatorBase"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invoke",
+flutter: ║                 fileName: "StandardHostValve.java",
+flutter: ║                 lineNumber: 115,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.StandardHostValve"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invoke",
+flutter: ║                 fileName: "ErrorReportValve.java",
+flutter: ║                 lineNumber: 93,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.valves.ErrorReportValve"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "invoke",
+flutter: ║                 fileName: "StandardEngineValve.java",
+flutter: ║                 lineNumber: 74,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.core.StandardEngineValve"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "service",
+flutter: ║                 fileName: "CoyoteAdapter.java",
+flutter: ║                 lineNumber: 341,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.catalina.connector.CoyoteAdapter"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "service",
+flutter: ║                 fileName: "Http11Processor.java",
+flutter: ║                 lineNumber: 391,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.coyote.http11.Http11Processor"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "process",
+flutter: ║                 fileName: "AbstractProcessorLight.java",
+flutter: ║                 lineNumber: 63,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.coyote.AbstractProcessorLight"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "process",
+flutter: ║                 fileName: "AbstractProtocol.java",
+flutter: ║                 lineNumber: 894,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.coyote.AbstractProtocol$ConnectionHandler"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "doRun",
+flutter: ║                 fileName: "NioEndpoint.java",
+flutter: ║                 lineNumber: 1740,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.tomcat.util.net.NioEndpoint$SocketProcessor"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "run",
+flutter: ║                 fileName: "SocketProcessorBase.java",
+flutter: ║                 lineNumber: 52,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.tomcat.util.net.SocketProcessorBase"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "runWorker",
+flutter: ║                 fileName: "ThreadPoolExecutor.java",
+flutter: ║                 lineNumber: 1191,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.tomcat.util.threads.ThreadPoolExecutor"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "run",
+flutter: ║                 fileName: "ThreadPoolExecutor.java",
+flutter: ║                 lineNumber: 659,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: null,
+flutter: ║                 moduleVersion: null,
+flutter: ║                 methodName: "run",
+flutter: ║                 fileName: "TaskThread.java",
+flutter: ║                 lineNumber: 61,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 "org.apache.tomcat.util.threads.TaskThread$WrappingRunnable"
+flutter: ║            },
+flutter: ║            {
+flutter: ║                 classLoaderName: null,
+flutter: ║                 moduleName: "java.base",
+flutter: ║                 moduleVersion: "17.0.8.1",
+flutter: ║                 methodName: "run",
+flutter: ║                 fileName: "Thread.java",
+flutter: ║                 lineNumber: 833,
+flutter: ║                 nativeMethod: false,
+flutter: ║                 className: "java.lang.Thread"
+flutter: ║            }
+flutter: ║         ],
+flutter: ║         "HV000030: No validator could be found for constraint 'jakarta.validation.constrai
+flutter: ║         nts.NotBlank' validating type 'com.newfit.reservation.domains.auth.domain.Provider
+flutter: ║         Type'. Check configuration for 'providerType'"
+flutter: ║         suppressed: []
+flutter: ║         "HV000030: No validator could be found for constraint 'jakarta.validation.constrai
+flutter: ║         nts.NotBlank' validating type 'com.newfit.reservation.domains.auth.domain.Provider
+flutter: ║         Type'. Check configuration for 'providerType'"
+flutter: ║    }
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter:
+[VERBOSE-2:dart_vm_initializer.cc(41)] Unhandled Exception: DioException [bad response]: The request returned an invalid status code of 500.
+#0      DioMixin.fetch.<anonymous closure> (package:dio/src/dio_mixin.dart:507:7)
+#1      _RootZone.runUnary (dart:async/zone.dart:1661:54)
+#2      _FutureListener.handleError (dart:async/future_impl.dart:174:22)
+#3      Future._propagateToListeners.handleError (dart:async/future_impl.dart:852:47)
+#4      Future._propagateToListeners (dart:async/future_impl.dart:873:13)
+#5      Future._completeError (dart:async/future_impl.dart:649:5)
+#6      _SyncCompleter._completeError (dart:async/future_impl.dart:60:12)
+#7      _Completer.completeError (dart:async/future_impl.dart:26:5)
+#8      Future.any.onError (dart:async/future.dart:620:45)
+#9      _RootZone.runBinary (dart:async/zone.dart:1666:54)
+#10     _FutureListener.handleError (dart:async/future_impl.dart:171:22)
+#11     Future._propagateToListeners.handleError (dart:async/future_impl.dart:852:47)
+#12     Future._propagateToListeners (dart:async/future_impl.dart:873:13)
+#13     Future._completeError (dart:async/future_impl.dart:649:5)
+#14     Future._asyncCompleteError.<anonymous closure> (dart:async/future_impl.dart:739:7)
+#15     _microtaskLoop (dart:async/schedule_microtask.dart:40:21)
+#16     _startMicrotaskLoop (dart:async/schedule_microtask.dart:49:5)
+
+
+
+Application finished.
+Launching lib/main_dev.dart on NOGUEN in debug mode...
+Automatically signing iOS for device deployment using specified development team in Xcode project: VF3TAS8J2N
+Running Xcode build...                                          
+ └─Compiling, linking and signing...                         4.2s
+Xcode build done.                                           16.4s
+Installing and launching...                                     
+You may be prompted to give access to control Xcode. Flutter uses Xcode to run your app. If access is not allowed, you can change this through your Settings > Privacy & Security > Automation.
+[VERBOSE-2:FlutterDarwinContextMetalImpeller.mm(37)] Using the Impeller rendering backend.
+Installing and launching...                                        12.4s
+Syncing files to device NOGUEN...                                  157ms
+
+Flutter run key commands.
+r Hot reload. 🔥🔥🔥
+R Hot restart.
+h List all available interactive commands.
+d Detach (terminate "flutter run" but leave application running).
+c Clear the screen
+q Quit (terminate the application on the device).
+
+A Dart VM Service on NOGUEN is available at: http://127.0.0.1:53079/Z7mg9R0J4rY=/
+The Flutter DevTools debugger and profiler on NOGUEN is available at: http://127.0.0.1:9101?uri=http://127.0.0.1:53079/Z7mg9R0J4rY=/
+flutter: 카카오계정으로 로그인 성공 qpRIlijTsxtD7N9KDcYWqukLX8Bc2hIXdeYKKwzTAAABi7NGZqfDukuslKNZWg
+flutter: 토큰 유효성 체크 성공 3155068609 43199
+flutter:
+flutter: ╔╣ Request ║ POST
+flutter: ║  http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/login
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ Headers
+flutter: ╟ content-type: application/json
+flutter: ╟ contentType: application/json
+flutter: ╟ responseType: ResponseType.json
+flutter: ╟ followRedirects: true
+flutter: ╟ connectTimeout: null
+flutter: ╟ receiveTimeout: null
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ Body
+flutter: ╟ attribute_name: 3155068609
+flutter: ╟ provider_type: KAKAO
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ║ {attribute_name: 3155068609, provider_type: KAKAO}
+flutter:
+flutter: ╔╣ Response ║ POST ║ Status: 201
+flutter: ║  http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/login
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ Headers
+flutter: ╟ cache-control: [no-cache, no-store, max-age=0, must-revalidate]
+flutter: ╟ date: [Thu, 09 Nov 2023 08:50:18 GMT]
+flutter: ╟ transfer-encoding: [chunked]
+flutter: ╟ pragma: [no-cache]
+flutter: ╟ x-frame-options: [DENY]
+flutter: ╟ content-type: [application/json]
+flutter: ╟ x-xss-protection: [0]
+flutter: ╟ x-content-type-options: [nosniff]
+flutter: ╟ expires: [0]
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: ╔ Body
+flutter: ║
+flutter: ║    {
+flutter: ║         "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuZXdmaXQub2ZmaWNpYWxAZ21haWwuY29t
+flutter: ║         IiwiaWF0IjoxNjk5NTE5ODE4LCJleHAiOjE2OTk1MjA0MTh9.2tzFxBkTm_m5Dh3jDd4JqnzQuNazUrx5n
+flutter: ║         LbOVAd8FZc"
+flutter: ║         refresh_token: null,
+flutter: ║         id: 1,
+flutter: ║         id_type: "oauth-history-id"
+flutter: ║    }
+flutter: ║
+flutter: ╚══════════════════════════════════════════════════════════════════════════════════════════╝
+flutter: hello
+
+
+Application finished.
