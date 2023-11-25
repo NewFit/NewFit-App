@@ -15,7 +15,7 @@ abstract class UserService {
 
   @POST('/api/v1/users')
   Future<AccessToken> signUp(
-      @Header('access-token') String accessToken, @Body() User user);
+      @Header('Authorization') String accessToken, @Body() User user);
 
   @DELETE('/users')
   Future<HttpResponse> deleteUser(@Body() UserEmail userEmail);
