@@ -48,14 +48,7 @@ class GoogleLogin implements SocialLogin {
 
     try {
       googleUser = await googleSignIn.signIn();
-    } catch (error) {
-      return "false";
-    }
-
-    try {
-      final GoogleSignInAuthentication googleSignInAuthentication =
-          await googleUser!.authentication;
-      return googleUser.id;
+      return googleUser!.id;
     } catch (error) {
       return "false";
     }
