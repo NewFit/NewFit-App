@@ -26,7 +26,9 @@ class RegisterWelcomePage extends BaseView<RegisterPageController> {
         NewfitButton(
           buttonText: '환영합니다!',
           buttonColor: AppColors.main,
-          onPressFuntion: () {},
+          onPressFuntion: () {
+            controller.register();
+          },
         ),
       ],
     );
