@@ -27,7 +27,8 @@ class GoogleLogin implements SocialLogin {
   Future<String> login() async {
     dio.interceptors.add(logger);
     UserService userService = UserService(dio);
-    String idToken = await getGoogleUserIdToken();
+    String idToken;
+
     try {
       idToken = await getGoogleUserIdToken();
       debugPrint("정보 보내고 유저 토큰 받기");
@@ -42,11 +43,7 @@ class GoogleLogin implements SocialLogin {
   }
 
   Future<String> getGoogleUserIdToken() async {
-    GoogleSignIn googleSignIn = GoogleSignIn(
-      scopes: [
-        'email',
-      ],
-    );
+    GoogleSignIn googleSignIn = GoogleSignIn();
     final GoogleSignInAccount? googleUser;
 
     try {
