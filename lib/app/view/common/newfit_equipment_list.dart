@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
 import 'package:new_fit/app/view/main/test_page.dart';
@@ -23,12 +24,13 @@ class NewfitEquipmentListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomePageController controller = Get.find();
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
       child: GestureDetector(
         onTap: () {
-          //Todo : 테스트 용 페이지 이동. 지워야 함
-          Get.toNamed(Routes.HOME_RESERVATION);
+          controller.navigateTo(route: Routes.HOME_RESERVATION,);
           //onPressFunc(context);
         },
         child: Container(
