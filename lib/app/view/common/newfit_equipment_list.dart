@@ -3,8 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
-import 'package:new_fit/app/view/common/newfit_timepicker.dart';
-import 'package:new_fit/app/view/main/test_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
@@ -30,7 +28,9 @@ class NewfitEquipmentListCell extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
       child: GestureDetector(
         onTap: () {
-          controller.navigateTo(route: Routes.HOME_RESERVATION,);
+          controller.navigateTo(
+            route: Routes.HOME_RESERVATION,
+          );
           //onPressFunc(context);
         },
         child: Container(

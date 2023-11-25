@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
-import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
 
