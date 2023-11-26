@@ -29,6 +29,7 @@ class AppPages {
 
   static const INITIAL = Routes.MAIN;
   static const REGISTER = Routes.REGISTER;
+  static const REGISTER_GYM = Routes.REGISTER_GYM;
   static const LOGIN = Routes.LOGIN;
   static const MY = Routes.MY;
   static const ROUTINE = Routes.ROUTINE;
