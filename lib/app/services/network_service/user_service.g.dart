@@ -24,11 +24,15 @@ class _UserService implements UserService {
   @override
   Future<AccessToken> signUp(
     String accessToken,
+    int historyId,
     User user,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'oauth-history-id': historyId,
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(user.toJson());
