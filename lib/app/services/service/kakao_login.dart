@@ -4,13 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/services/service/social_login.dart';
 import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/token_model.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class KakaoLogin implements SocialLogin {
+class KakaoLogin extends SocialLogin with StorageUtil {
   OAuthToken? token;
   Token? newfitToken;
   GetStorage storage = GetStorage();
@@ -39,6 +40,7 @@ class KakaoLogin implements SocialLogin {
         debugPrint("정보 보내고 유저 토큰 받기");
         newfitToken = await userService.login(Attribute(
             attribute_name: tokenInfo.id.toString(), provider_type: "KAKAO"));
+        saveString('access-token', newfitToken!.access_token);
         return newfitToken!.id_type;
       } else {
         debugPrint("token is null");
