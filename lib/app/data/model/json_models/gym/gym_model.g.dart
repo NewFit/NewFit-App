@@ -18,12 +18,14 @@ Map<String, dynamic> _$AuthorityGymToJson(AuthorityGym instance) =>
     };
 
 AddressGym _$AddressGymFromJson(Map<String, dynamic> json) => AddressGym(
+      gym_id: json['gym_id'] as int,
       gym_name: json['gym_name'] as String,
       address: json['address'] as String,
     );
 
 Map<String, dynamic> _$AddressGymToJson(AddressGym instance) =>
     <String, dynamic>{
+      'gym_id': instance.gym_id,
       'gym_name': instance.gym_name,
       'address': instance.address,
     };

@@ -22,10 +22,12 @@ class AuthorityGym {
 
 @JsonSerializable()
 class AddressGym {
+  int gym_id;
   String gym_name;
   String address;
 
   AddressGym({
+    required this.gym_id,
     required this.gym_name,
     required this.address,
   });
