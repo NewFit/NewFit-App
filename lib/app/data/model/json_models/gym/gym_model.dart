@@ -40,8 +40,8 @@ class AddressGym {
 
 @JsonSerializable()
 class AddressGymList {
-  String gym_count;
-  AddressGym gyms;
+  int gym_count;
+  List<AddressGym> gyms;
 
   AddressGymList({
     required this.gym_count,
