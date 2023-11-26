@@ -36,6 +36,7 @@ class GoogleLogin extends SocialLogin with StorageUtil {
       newfitToken = await userService
           .login(Attribute(attribute_name: idToken, provider_type: "GOOGLE"));
       saveString('access-token', newfitToken!.access_token);
+      saveInt('oauth-history-id', newfitToken!.id);
       return newfitToken!.id_type;
     } catch (error) {
       printError();
