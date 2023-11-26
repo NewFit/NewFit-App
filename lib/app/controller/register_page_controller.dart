@@ -3,12 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_model.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RegisterPageController extends BaseController
-    with GetTickerProviderStateMixin {
+    with GetTickerProviderStateMixin, StorageUtil {
   final nameEditingController = TextEditingController();
   final nicknameEditingController = TextEditingController();
   final phonenumberEditingController = TextEditingController();
@@ -45,7 +46,8 @@ class RegisterPageController extends BaseController
 
     dio.interceptors.add(logger);
     UserService(dio).signUp(
-      'Bearer 임시 액세스 토큰',
+      'Bearer ${getString('access-token')}',
+      getInt('oauth-history-id')!,
       User(
         username: nameEditingController.text,
         email: emailEditingController.text,
