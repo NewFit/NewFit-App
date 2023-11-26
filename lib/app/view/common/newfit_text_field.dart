@@ -98,9 +98,11 @@ class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
 
 class NewfitSearchTextField extends StatelessWidget {
   final TextEditingController textEditingController;
+  final Function(String) onSubmittedFunction;
 
   const NewfitSearchTextField({
     required this.textEditingController,
+    required this.onSubmittedFunction,
     super.key,
   });
 
@@ -137,6 +139,9 @@ class NewfitSearchTextField extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
+        onSubmitted: (value) {
+          onSubmittedFunction(value);
+        },
       ),
     );
   }
