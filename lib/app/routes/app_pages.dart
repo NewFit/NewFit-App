@@ -5,7 +5,6 @@ import 'package:new_fit/app/bindings/home_reservation_page_binding.dart';
 import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
-import 'package:new_fit/app/bindings/register_gym_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_more_info_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
@@ -13,7 +12,6 @@ import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
-import 'package:new_fit/app/view/register_page/register_gym_page.dart';
 import 'package:new_fit/app/view/register_page/register_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
@@ -47,11 +45,6 @@ class AppPages {
       name: _Paths.REGISTER,
       page: () => RegisterPage(),
       binding: RegisterBinding(),
-    ),
-    GetPage(
-      name: _Paths.REGISTER_GYM,
-      page: () => RegisterGymPage(),
-      binding: RegisterGymPageBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
