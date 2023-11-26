@@ -8,7 +8,6 @@ class BaseBody extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
   double? columnHeight = 220.h;
-  //double? columnHeight = 640.h;
   BaseBody({
     this.scrollController,
     required this.widgetList,
@@ -42,10 +41,12 @@ class BaseBody extends StatelessWidget {
 class BaseBodyWithNoScroll extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
+  double? screenPadding = AppValues.screenPadding;
 
-  const BaseBodyWithNoScroll({
+  BaseBodyWithNoScroll({
     this.scrollController,
     required this.widgetList,
+    this.screenPadding,
     super.key,
   });
 
@@ -54,8 +55,7 @@ class BaseBodyWithNoScroll extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Container(
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppValues.screenPadding),
+        padding: EdgeInsets.symmetric(horizontal: screenPadding!),
         width: double.infinity,
         child: SizedBox(
           height: 640.h,
@@ -85,7 +85,7 @@ class BaseBodyWithoutPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
           controller: scrollController,
