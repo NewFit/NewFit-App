@@ -24,7 +24,7 @@ class _AppState extends State<App> {
       builder: (buildContext, widget) => GetMaterialApp(
         title: _envConfig.appName,
         debugShowCheckedModeBanner: false,
-        initialRoute: AppPages.REGISTER,
+        initialRoute: AppPages.LOGIN,
         getPages: AppPages.pages,
         initialBinding: InitialBinding(),
         theme: appThemeData,
