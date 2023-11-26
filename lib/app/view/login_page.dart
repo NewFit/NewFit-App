@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_fit/app/controller/login_page_controller.dart';
+import 'package:new_fit/app/services/service/google_login.dart';
+import 'package:new_fit/app/services/service/kakao_login.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -34,7 +36,7 @@ class LoginPage extends BaseView<LoginPageController> {
               child: Image.asset(AppString.google),
             ),
             onPressFuntion: () async {
-              controller.googleLogin();
+              GoogleLogin().login();
             },
           ),
           SizedBox(
@@ -48,12 +50,9 @@ class LoginPage extends BaseView<LoginPageController> {
               height: 19.h,
               child: Image.asset(AppString.kakao),
             ),
-            onPressFuntion: () async {
-              controller.kakaoLogin();
+            onPressFuntion: () {
+              KakaoLogin().login();
             },
-          ),
-          SizedBox(
-            height: 30.h,
           ),
         ],
       ),
