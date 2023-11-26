@@ -30,7 +30,7 @@ class RigsterEmailInputPage extends BaseView<RegisterPageController> {
         NewfitTextfieldWithTitle(
           titleText: '이메일을 입력해주세요.',
           hintText: 'newfit@newfit.com',
-          controller: controller.nameEditingController,
+          controller: controller.emailEditingController,
         ),
         const Spacer(),
         NewfitButton(

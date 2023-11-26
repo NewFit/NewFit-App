@@ -34,8 +34,8 @@ class NewfitPageIndicatorDot extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
           color: currentTabIndex.value == targetTabIndex
-              ? AppColors.main
-              : AppColors.secondary,
+              ? activeColor
+              : disabledColor,
         ),
         duration: const Duration(milliseconds: 300),
       ),
