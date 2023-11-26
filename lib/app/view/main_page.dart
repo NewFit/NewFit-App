@@ -8,7 +8,6 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
-import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/main/home_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 
