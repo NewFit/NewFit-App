@@ -97,18 +97,21 @@ class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
 }
 
 class NewfitSearchTextField extends StatelessWidget {
+  final TextEditingController textEditingController;
+  final Function(String) onSubmittedFunction;
+
   const NewfitSearchTextField({
-    required this.hintText,
+    required this.textEditingController,
+    required this.onSubmittedFunction,
     super.key,
   });
-
-  final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 320.w,
       child: TextField(
+        controller: textEditingController,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -136,6 +139,9 @@ class NewfitSearchTextField extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
+        onSubmitted: (value) {
+          onSubmittedFunction(value);
+        },
       ),
     );
   }
