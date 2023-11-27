@@ -30,7 +30,7 @@ class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
         NewfitTextfieldWithTitle(
           titleText: '전화번호를 입력해주세요.',
           hintText: '01012340000',
-          controller: controller.nameEditingController,
+          controller: controller.phonenumberEditingController,
         ),
         Spacer(),
         NewfitButton(

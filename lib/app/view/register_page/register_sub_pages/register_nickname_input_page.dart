@@ -30,7 +30,7 @@ class RigsterNicknameInputPage extends BaseView<RegisterPageController> {
         NewfitTextfieldWithTitle(
           titleText: '닉네임을 입력해주세요.',
           hintText: '뉴핏',
-          controller: controller.nameEditingController,
+          controller: controller.nicknameEditingController,
         ),
         const Spacer(),
         NewfitButton(
