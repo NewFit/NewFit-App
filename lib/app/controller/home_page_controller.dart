@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../data/model/json_models/equipment/equipment_models.dart';
 import '../services/network_service/equipment_service.dart';
 
-const String TEST_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJuZXdmaXQub2ZmaWNpYWxAZ21haWwuY29tIiwiaWF0IjoxNjk5NTI5OTA5LCJleHAiOjE5OTk1MzE3MDksInN1YiI6IkhhcHB5TWFuYWdlciIsImF1dGhvcml0eUlkTGlzdCI6WzFdLCJpZCI6MX0.6hNPdgJdxRz2bX5XIo8SKmGJ7AQS7jWSykLPYq33qPo';
-
-class HomePageController extends BaseController {
+class HomePageController extends BaseController with StorageUtil {
   final Dio dio = Dio();
   late final EquipmentService service;
 
@@ -19,20 +19,30 @@ class HomePageController extends BaseController {
   void onInit() async {
     super.onInit();
 
-    dio.interceptors.add(LogInterceptor(
-      request: true,
-      responseBody: true,
-      requestBody: true,
-    ));
-
-    service = EquipmentService(dio);
+    initService();
     loadEquipments();
+  }
+
+  void initService() {
+    final logger = PrettyDioLogger(
+      requestHeader: true,
+      requestBody: true,
+      responseBody: true,
+      responseHeader: true,
+      error: true,
+      compact: true,
+      maxWidth: 500,
+    );
+
+    dio.interceptors.add(logger);
+    service = EquipmentService(dio);
   }
 
   void loadEquipments() async {
     isLoading(true);
     try {
-      var equipments = await service.getAllEquipmentsInGym("Bearer $TEST_TOKEN");
+      var equipments = await service
+          .getAllEquipmentsInGym("Bearer ${getString('access-token')}", 1);
       equipmentList(equipments);
     } catch (e) {
       if (e is DioException) {
@@ -40,7 +50,7 @@ class HomePageController extends BaseController {
         log('Response data: ${e.response?.data}');
         log('Request data: ${e.requestOptions.data}');
       }
-    }finally {
+    } finally {
       isLoading(false);
     }
   }

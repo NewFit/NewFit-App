@@ -17,7 +17,7 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
   @override
   Widget body(BuildContext context) {
     return BaseBodyWithNoScroll(
-      screenPadding: 0,
+      //screenPadding: 0,
       widgetList: [
         NewfitSearchTextField(
           textEditingController: controller.textEditingController,

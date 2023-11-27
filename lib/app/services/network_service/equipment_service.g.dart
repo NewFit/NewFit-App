@@ -14,7 +14,7 @@ class _EquipmentService implements EquipmentService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/';
   }
 
   final Dio _dio;
@@ -22,10 +22,16 @@ class _EquipmentService implements EquipmentService {
   String? baseUrl;
 
   @override
-  Future<EquipmentList> getAllEquipmentsInGym(String accessToken) async {
+  Future<EquipmentList> getAllEquipmentsInGym(
+    String accessToken,
+    int authorityId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'authority-id': authorityId,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -36,7 +42,7 @@ class _EquipmentService implements EquipmentService {
     )
             .compose(
               _dio.options,
-              '/equipments',
+              '/api/v1/equipments',
               queryParameters: queryParameters,
               data: _data,
             )
