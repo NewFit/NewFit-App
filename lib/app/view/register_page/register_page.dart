@@ -79,7 +79,7 @@ class RegisterPage extends BaseView<RegisterPageController> {
                 );
               },
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: 26.h),
             Obx(
               () {
                 Color? disableColor = null;
