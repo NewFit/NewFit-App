@@ -41,7 +41,7 @@ class KakaoLogin extends SocialLogin with StorageUtil {
         newfitToken = await userService.login(Attribute(
             attribute_name: tokenInfo.id.toString(), provider_type: "KAKAO"));
         saveString('access-token', newfitToken!.access_token);
-        saveInt('oauth-history-id', newfitToken!.id);
+        saveInt('user-id', newfitToken!.id);
         return newfitToken!.id_type;
       } else {
         debugPrint("token is null");
