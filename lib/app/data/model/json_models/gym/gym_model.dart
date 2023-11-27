@@ -22,10 +22,12 @@ class AuthorityGym {
 
 @JsonSerializable()
 class AddressGym {
+  int gym_id;
   String gym_name;
   String address;
 
   AddressGym({
+    required this.gym_id,
     required this.gym_name,
     required this.address,
   });
@@ -38,8 +40,8 @@ class AddressGym {
 
 @JsonSerializable()
 class AddressGymList {
-  String gym_count;
-  AddressGym gyms;
+  int gym_count;
+  List<AddressGym> gyms;
 
   AddressGymList({
     required this.gym_count,

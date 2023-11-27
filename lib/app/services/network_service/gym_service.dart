@@ -10,6 +10,7 @@ part 'gym_service.g.dart';
 abstract class GymService {
   factory GymService(Dio dio, {String baseUrl}) = _GymService;
 
-  @GET('/gyms')
-  Future<AddressGymList> getGymList(@Query('gym_name') String gym_name);
+  @GET('/api/v1/gyms')
+  Future<AddressGymList> getGymList(@Header('Authorization') String accessToken,
+      @Header('user-id') int user_id, @Query('gym_name') String gym_name);
 }

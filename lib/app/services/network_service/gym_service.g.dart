@@ -22,10 +22,18 @@ class _GymService implements GymService {
   String? baseUrl;
 
   @override
-  Future<AddressGymList> getGymList(String gym_name) async {
+  Future<AddressGymList> getGymList(
+    String accessToken,
+    int user_id,
+    String gym_name,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'gym_name': gym_name};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'user-id': user_id,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AddressGymList>(Options(
@@ -35,7 +43,7 @@ class _GymService implements GymService {
     )
             .compose(
               _dio.options,
-              '/gyms',
+              '/api/v1/gyms',
               queryParameters: queryParameters,
               data: _data,
             )
