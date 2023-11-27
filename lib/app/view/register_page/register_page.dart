@@ -45,35 +45,51 @@ class RegisterPage extends BaseView<RegisterPageController> {
             SizedBox(
               height: 10.h,
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Container(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.close,
-                    color: AppColors.textUnabled,
-                    size: 28.h,
+            Obx(
+              () {
+                IconData icon = Icons.close;
+                if (controller.currentTabIndex.value != 0) {
+                  icon = Icons.arrow_back_ios;
+                } else {
+                  icon = Icons.close;
+                }
+
+                return Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
+                  child: IconButton(
+                    icon: Icon(
+                      icon,
+                      color: AppColors.textUnabled,
+                      size: 28.h,
+                    ),
+                    constraints: const BoxConstraints(),
+                    padding: EdgeInsets.zero,
+                    onPressed: () {
+                      if (controller.tabController.index != 0) {
+                        controller.tabController.animateTo(
+                            (controller.tabController.index - 1) % 6);
+                        controller.currentTabIndex.value =
+                            controller.tabController.index;
+                        FocusManager.instance.primaryFocus?.unfocus();
+                      } else {
+                        Get.back();
+                      }
+                    },
                   ),
-                  constraints: BoxConstraints(),
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    if (controller.tabController.index != 0) {
-                      controller.tabController
-                          .animateTo((controller.tabController.index - 1) % 6);
-                      controller.currentTabIndex.value =
-                          controller.tabController.index;
-                      FocusManager.instance.primaryFocus?.unfocus();
-                    } else {
-                      //페이지 이동 코드
-                    }
-                  },
-                ),
-              ),
+                );
+              },
             ),
             SizedBox(height: 30.h),
             Obx(
               () {
-                if (controller.currentTabIndex == 0) {}
+                Color? disableColor = null;
+                Color? activeColor = null;
+                if (controller.currentTabIndex.value == 0) {
+                  disableColor = Colors.transparent;
+                } else {
+                  disableColor = AppColors.secondary;
+                  activeColor = AppColors.main;
+                }
 
                 return SizedBox(
                   height: 13.h,
@@ -81,9 +97,12 @@ class RegisterPage extends BaseView<RegisterPageController> {
                   child: Stack(
                       children: List.generate(5, (index) {
                     return NewfitPageIndicatorDot(
-                        currentTabIndex: controller.currentTabIndex,
-                        targetTabIndex: index + 1,
-                        position: 20.w + 40.w * index);
+                      currentTabIndex: controller.currentTabIndex,
+                      targetTabIndex: index + 1,
+                      position: 20.w + 40.w * index,
+                      activeColor: activeColor,
+                      disabledColor: disableColor,
+                    );
                   })),
                 );
               },

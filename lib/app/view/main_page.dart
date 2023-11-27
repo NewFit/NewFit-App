@@ -17,8 +17,8 @@ class MainPage extends BaseView<MainController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarWithButton(
       scrollController: scrollController,
+      todayCredit: 10000,
       totalCredit: 10000,
-      todayCredit: 100,
     );
   }
 
