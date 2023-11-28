@@ -9,7 +9,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RegisterGymPageController extends BaseController with StorageUtil {
   TextEditingController textEditingController = TextEditingController();
-  AddressGymList addressGymList = AddressGymList(gym_count: 0, gyms: []);
+  Rx<AddressGymList> addressGymList =
+      AddressGymList(gym_count: 0, gyms: []).obs;
   Dio dio = Dio();
   final prettyDioLogger = PrettyDioLogger(
     requestHeader: true,
@@ -21,10 +22,13 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     maxWidth: 80,
   );
 
+  RxInt gym_id = 0.obs;
+  RxBool selected = false.obs;
+
   Future<void> getAddressGymList(String gymName) async {
     dio.interceptors.add(prettyDioLogger);
     try {
-      addressGymList = await GymService(dio).getGymList(
+      addressGymList.value = await GymService(dio).getGymList(
           'Bearer ${getString('access-token')!}',
           getInt('oauth-history-id')!,
           gymName);
