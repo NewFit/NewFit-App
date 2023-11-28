@@ -46,11 +46,35 @@ class NewfitButton extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(buttonColor),
             elevation: MaterialStateProperty.all(0.0),
           ),
-          child: NewfitTextBoldLg(
+          child: NewfitTextBoldXl(
             text: buttonText,
             textColor: getTextColor(),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class NewfitTextButton extends StatelessWidget {
+  final String buttonText;
+  final Color textColor;
+  final Function() onPressFuntion;
+
+  const NewfitTextButton({
+    super.key,
+    required this.buttonText,
+    required this.textColor,
+    required this.onPressFuntion,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressFuntion(),
+      child: NewfitTextBoldXl(
+        text: buttonText,
+        textColor: textColor,
       ),
     );
   }
