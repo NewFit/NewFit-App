@@ -5,8 +5,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/controller/reigster_gym_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
+import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
 import 'package:new_fit/app/view/common/newfit_text_field.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
 
 class RegisterGymPage extends BaseView<RegisterGymPageController> {
   @override
@@ -24,7 +26,7 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
           onSubmittedFunction: controller.getAddressGymList,
         ),
         SizedBox(
-          height: 300.h,
+          height: 420.h,
           child: ListView.builder(
             itemCount: controller.addressGymList.gym_count,
             itemBuilder: (context, index) {
@@ -33,6 +35,19 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
                 gymLocationText: controller.addressGymList.gyms[index].address,
               );
             },
+          ),
+        ),
+        NewfitButton(
+          buttonText: '등록 요청하기',
+          buttonColor: AppColors.main,
+          onPressFuntion: () {},
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: NewfitTextButton(
+            buttonText: '다음에 할게요',
+            textColor: Colors.grey,
+            onPressFuntion: () {},
           ),
         ),
       ],
