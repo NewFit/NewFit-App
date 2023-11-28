@@ -10,11 +10,13 @@ class NewfitSearchListCell extends StatelessWidget {
   NewfitSearchListCell({
     required this.gymTitleText,
     required this.gymLocationText,
+    required this.onTapFunction,
     super.key,
   });
 
   final String gymTitleText;
   final String gymLocationText;
+  final Function() onTapFunction;
   Rx<bool> toggled = false.obs;
 
   @override
@@ -64,6 +66,7 @@ class NewfitSearchListCell extends StatelessWidget {
           ),
           onTap: () {
             toggled.value = !toggled.value;
+            onTapFunction();
           },
         );
       }),
