@@ -23,7 +23,7 @@ class RegisterGymPageController extends BaseController with StorageUtil {
   );
 
   RxInt gym_id = 0.obs;
-  RxBool selected = false.obs;
+  RxList<bool> selected = RxList.empty();
 
   Future<void> getAddressGymList(String gymName) async {
     dio.interceptors.add(prettyDioLogger);
@@ -32,6 +32,8 @@ class RegisterGymPageController extends BaseController with StorageUtil {
           'Bearer ${getString('access-token')!}',
           getInt('oauth-history-id')!,
           gymName);
+      selected =
+          RxList.generate(addressGymList.value.gym_count, (index) => false);
     } catch (error) {
       error.printError();
     }
