@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/reigster_gym_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
@@ -96,7 +97,9 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
               buttonText: '등록 요청하기',
               buttonColor: buttonColor,
               onPressFuntion: () async {
-                await controller.registerGym();
+                if (controller.selected.contains(true)) {
+                  await controller.registerGym();
+                } else {}
               },
             );
           },
@@ -106,7 +109,9 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
           child: NewfitTextButton(
             buttonText: '다음에 할게요',
             textColor: Colors.grey,
-            onPressFuntion: () {},
+            onPressFunction: () {
+              Get.toNamed(AppPages.INITIAL);
+            },
           ),
         ),
       ],
