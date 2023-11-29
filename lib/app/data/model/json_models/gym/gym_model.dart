@@ -53,3 +53,16 @@ class AddressGymList {
 
   Map<String, dynamic> toJson() => _$AddressGymListToJson(this);
 }
+
+@JsonSerializable()
+class GymId {
+  int gym_id;
+
+  GymId({
+    required this.gym_id,
+  });
+
+  factory GymId.fromJson(Map<String, dynamic> json) => _$GymIdFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GymIdToJson(this);
+}
