@@ -79,7 +79,7 @@ class _GymService implements GymService {
     )
             .compose(
               _dio.options,
-              '/api/v1/gyms',
+              '/api/v1/authority',
               queryParameters: queryParameters,
               data: _data,
             )
