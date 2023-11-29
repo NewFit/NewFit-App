@@ -59,19 +59,19 @@ class NewfitButton extends StatelessWidget {
 class NewfitTextButton extends StatelessWidget {
   final String buttonText;
   final Color textColor;
-  final Function() onPressFuntion;
+  final Function() onPressFunction;
 
   const NewfitTextButton({
     super.key,
     required this.buttonText,
     required this.textColor,
-    required this.onPressFuntion,
+    required this.onPressFunction,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressFuntion(),
+      onTap: onPressFunction,
       child: NewfitTextBoldXl(
         text: buttonText,
         textColor: textColor,
