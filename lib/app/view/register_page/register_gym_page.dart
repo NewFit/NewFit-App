@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/reigster_gym_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
@@ -12,6 +13,7 @@ import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 
 class RegisterGymPage extends BaseView<RegisterGymPageController> {
+  RxBool redraw = false.obs;
   @override
   Widget pageScaffold(BuildContext context) {
     return Scaffold(
@@ -41,11 +43,12 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
           textEditingController: controller.textEditingController,
           onSubmittedFunction: controller.getAddressGymList,
         ),
-        Obx(
-          () {
-            return SizedBox(
-              height: 420.h,
-              child: ListView.builder(
+        SizedBox(
+          height: 420.h,
+          child: Obx(
+            () {
+              if (redraw.value) ;
+              return ListView.builder(
                 itemCount: controller.addressGymList.value.gym_count,
                 itemBuilder: (context, index) {
                   return NewfitSearchListCell(
@@ -53,27 +56,43 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
                         controller.addressGymList.value.gyms[index].gym_name,
                     gymLocationText:
                         controller.addressGymList.value.gyms[index].address,
+                    toggled: controller.selected[index].obs,
+                    toggledColor: controller.selected[index]
+                        ? AppColors.main
+                        : AppColors.white,
                     onTapFunction: () {
-                      controller.selected.value = !controller.selected.value;
+                      if (controller.selected[index]) {
+                        controller.selected = RxList.generate(
+                            controller.addressGymList.value.gym_count,
+                            (index) => false);
+                        redraw.value = !redraw.value;
+                      } else {
+                        controller.selected = RxList.generate(
+                            controller.addressGymList.value.gym_count,
+                            (index) => false);
+                        controller.selected[index] = true;
+                        redraw.value = !redraw.value;
+                      }
                     },
                   );
                 },
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
         Obx(
           () {
             Color buttonColor = Colors.grey;
 
-            if (controller.selected.value) {
+            if (redraw.value) ;
+            if (controller.selected.contains(true)) {
               buttonColor = AppColors.main;
             } else {
               buttonColor = Colors.grey;
             }
             return NewfitButton(
               buttonText: '등록 요청하기',
-              buttonColor: AppColors.main,
+              buttonColor: buttonColor,
               onPressFuntion: () {},
             );
           },
