@@ -13,7 +13,6 @@ import '../services/network_service/equipment_service.dart';
 class HomePageController extends BaseController with StorageUtil {
   final Dio dio = Dio();
   late final EquipmentService service;
-  late final AuthorityService testService;
 
   var equipmentList = Rx<EquipmentList?>(null);
   var isLoading = true.obs;
@@ -38,7 +37,6 @@ class HomePageController extends BaseController with StorageUtil {
     );
 
     dio.interceptors.add(logger);
-    testService = AuthorityService(dio);
     service = EquipmentService(dio);
   }
 
@@ -46,16 +44,6 @@ class HomePageController extends BaseController with StorageUtil {
     isLoading(true);
     try {
       final token = "Bearer ${getString('access-token')}";
-      log('===> $token');
-
-      final id = getInt('oauth-history-id');
-      if(id == null) {
-        throw Exception('id is null');
-      }
-      log('===> $id');
-
-      await testService.registerMyGym(id, token,
-          RegisterAuthorityGym(gym_id: 1));
 
       var equipments = await service.getAllEquipmentsInGym(1, token);
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,6 +46,8 @@ class RegisterGymPageController extends BaseController with StorageUtil {
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
     try {
+      log(gymId.toString());
+
       await GymService(dio).registerGym(
         getInt('oauth-history-id')!,
         'Bearer ${getString('access-token')!}',
