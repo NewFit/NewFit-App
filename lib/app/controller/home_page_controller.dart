@@ -47,6 +47,7 @@ class HomePageController extends BaseController with StorageUtil {
       final authorityId = getInt('authority-id');
 
       if(authorityId != null) {
+        log('authority id is $authorityId');
         var equipments = await service.getAllEquipmentsInGym(authorityId, token);
         equipmentList(equipments);
       } else {

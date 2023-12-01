@@ -30,10 +30,10 @@ class RegisterWelcomePage extends BaseView<RegisterPageController> {
         NewfitButton(
           buttonText: '환영합니다!',
           buttonColor: AppColors.main,
-          onPressFuntion: () async {
+          onPressFuntion: () {
             try {
-              await controller.register();
-              Get.toNamed(AppPages.REGISTER_GYM);
+              controller.register();
+              //Get.toNamed(AppPages.REGISTER_GYM);
             } catch (error) {
               error.printError();
             }
