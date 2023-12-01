@@ -36,7 +36,7 @@ class RegisterWelcomePage extends BaseView<RegisterPageController> {
             } catch (error) {
               error.printError();
             }
-            Get.toNamed(AppPages.INITIAL);
+            Get.toNamed(AppPages.REGISTER_GYM);
           },
         ),
       ],

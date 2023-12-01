@@ -43,13 +43,10 @@ class BaseBodyWithNoScroll extends StatelessWidget {
   final List<Widget> widgetList;
   double? screenPadding;
 
-
   BaseBodyWithNoScroll({
     this.scrollController,
     required this.widgetList,
-
     required this.screenPadding,
-
     super.key,
   });
 
