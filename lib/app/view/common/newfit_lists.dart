@@ -10,63 +10,72 @@ class NewfitSearchListCell extends StatelessWidget {
   NewfitSearchListCell({
     required this.gymTitleText,
     required this.gymLocationText,
+    required this.onTapFunction,
+    required this.toggled,
+    required this.toggledColor,
     super.key,
   });
 
   final String gymTitleText;
   final String gymLocationText;
+  final Function() onTapFunction;
+  final Color toggledColor;
   Rx<bool> toggled = false.obs;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(bottom: 3.h),
-      child: Obx(() {
-        return GestureDetector(
-          child: Container(
-            width: double.infinity,
-            height: toggled.value ? 100.h : 56.h,
-            decoration: const BoxDecoration(color: AppColors.white),
-            child: Padding(
-              padding: EdgeInsets.only(left: 15.w, right: 15.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Spacer(),
-                  NewfitTextMediumMd(
-                    text: gymTitleText,
-                    textColor: AppColors.black,
-                  ),
-                  SizedBox(height: 4.h),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.location_on_outlined,
-                        size: 12.w,
-                        color: AppColors.textUnabled,
-                      ),
-                      NewfitTextRegularMd(
-                        text: gymLocationText,
-                        textColor: AppColors.textUnabled,
-                      )
-                    ],
-                  ),
-                  toggled.value
-                      ? Container(
-                          height: 30,
-                          decoration: const BoxDecoration(color: Colors.red),
+      child: GestureDetector(
+        child: Stack(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 56.h,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                border: Border.all(
+                  color: toggledColor,
+                  strokeAlign: BorderSide.strokeAlignInside,
+                  width: 2.w,
+                ),
+              ),
+              child: Padding(
+                padding: EdgeInsets.only(left: 15.w, right: 15.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Spacer(),
+                    NewfitTextMediumMd(
+                      text: gymTitleText,
+                      textColor: AppColors.black,
+                    ),
+                    SizedBox(height: 4.h),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.location_on_outlined,
+                          size: 12.w,
+                          color: AppColors.textUnabled,
+                        ),
+                        NewfitTextRegularMd(
+                          text: gymLocationText,
+                          textColor: AppColors.textUnabled,
                         )
-                      : const SizedBox(),
-                  const Spacer(),
-                ],
+                      ],
+                    ),
+                    const Spacer(),
+                  ],
+                ),
               ),
             ),
-          ),
-          onTap: () {
-            toggled.value = !toggled.value;
-          },
-        );
-      }),
+          ],
+        ),
+        onTap: () {
+          toggled.value = !toggled.value;
+          onTapFunction();
+        },
+      ),
     );
   }
 }

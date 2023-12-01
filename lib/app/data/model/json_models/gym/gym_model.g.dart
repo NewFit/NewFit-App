@@ -55,3 +55,11 @@ Map<String, dynamic> _$AddressGymListToJson(AddressGymList instance) =>
       'gym_count': instance.gym_count,
       'gyms': instance.gyms,
     };
+
+GymId _$GymIdFromJson(Map<String, dynamic> json) => GymId(
+      gym_id: json['gym_id'] as int,
+    );
+
+Map<String, dynamic> _$GymIdToJson(GymId instance) => <String, dynamic>{
+      'gym_id': instance.gym_id,
+    };
