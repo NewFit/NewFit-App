@@ -8,6 +8,7 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_textfield_with_category.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_values.dart';
 
 class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
   @override
@@ -23,6 +24,7 @@ class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
   @override
   Widget body(BuildContext context) {
     return BaseBodyWithNoScroll(
+      screenPadding: AppValues.screenPadding,
       widgetList: [
         SizedBox(
           height: 50.h,
