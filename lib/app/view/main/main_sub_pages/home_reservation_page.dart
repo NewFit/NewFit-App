@@ -11,6 +11,7 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
+import 'package:new_fit/app/view/theme/app_values.dart';
 
 import '../../common/newfit_button.dart';
 import '../../theme/app_colors.dart';
@@ -52,6 +53,7 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
         controller.generateRandomReservations(startTime, endTime);
 
     return BaseBodyWithNoScroll(
+      screenPadding: AppValues.screenPadding,
       widgetList: [
         DecoratedBox(
             decoration: BoxDecoration(
