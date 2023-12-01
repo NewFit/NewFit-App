@@ -30,7 +30,7 @@ class LoginPageController extends BaseController {
       Get.toNamed(AppPages.INITIAL);
     } else if (registerStatus == AppString.registeredButNoGym) {
       debugPrint("registered but gym not registered");
-      Get.toNamed(AppPages.REGISTER);
+      Get.toNamed(AppPages.REGISTER_GYM);
     }
   }
 }
