@@ -99,6 +99,7 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
               onPressFuntion: () async {
                 if (controller.selected.contains(true)) {
                   await controller.registerGym();
+                  Get.toNamed(AppPages.INITIAL);
                 } else {}
               },
             );

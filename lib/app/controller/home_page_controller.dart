@@ -44,10 +44,14 @@ class HomePageController extends BaseController with StorageUtil {
     isLoading(true);
     try {
       final token = "Bearer ${getString('access-token')}";
+      final authorityId = getInt('authority-id');
 
-      var equipments = await service.getAllEquipmentsInGym(1, token);
-
-      equipmentList(equipments);
+      if(authorityId != null) {
+        var equipments = await service.getAllEquipmentsInGym(authorityId, token);
+        equipmentList(equipments);
+      } else {
+        log('ERROR : authority id is null!');
+      }
     } finally {
       isLoading(false);
     }

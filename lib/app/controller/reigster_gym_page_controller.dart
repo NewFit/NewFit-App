@@ -46,14 +46,12 @@ class RegisterGymPageController extends BaseController with StorageUtil {
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
     try {
-      log(gymId.toString());
-
       await GymService(dio).registerGym(
         getInt('oauth-history-id')!,
         'Bearer ${getString('access-token')!}',
         GymId(gym_id: gymId),
       );
-
+      saveInt('authority-id', gymId);
     } catch (error) {
       error.printError();
     }

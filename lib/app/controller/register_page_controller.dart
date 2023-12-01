@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_icons/animate_icons.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,8 @@ import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_model.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../routes/app_pages.dart';
 
 class RegisterPageController extends BaseController
     with GetTickerProviderStateMixin, StorageUtil {
@@ -33,7 +37,7 @@ class RegisterPageController extends BaseController
     tabController = TabController(vsync: this, length: 6);
   }
 
-  void register() {
+  Future<void> register() async {
     final logger = PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
@@ -45,7 +49,7 @@ class RegisterPageController extends BaseController
     );
 
     dio.interceptors.add(logger);
-    UserService(dio).signUp(
+    await UserService(dio).signUp(
       'Bearer ${getString('access-token')}',
       getInt('oauth-history-id')!,
       User(
