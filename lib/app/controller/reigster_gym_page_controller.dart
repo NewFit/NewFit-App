@@ -9,8 +9,10 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RegisterGymPageController extends BaseController with StorageUtil {
   TextEditingController textEditingController = TextEditingController();
+
   Rx<AddressGymList> addressGymList =
       AddressGymList(gym_count: 0, gyms: []).obs;
+
   Dio dio = Dio();
   final prettyDioLogger = PrettyDioLogger(
     requestHeader: true,
@@ -47,6 +49,7 @@ class RegisterGymPageController extends BaseController with StorageUtil {
         'Bearer ${getString('access-token')!}',
         GymId(gym_id: gymId),
       );
+
     } catch (error) {
       error.printError();
     }
