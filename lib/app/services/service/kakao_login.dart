@@ -41,7 +41,7 @@ class KakaoLogin extends SocialLogin with StorageUtil {
         newfitToken = await userService.login(Attribute(
             attribute_name: tokenInfo.id.toString(), provider_type: "KAKAO"));
         saveString('access-token', newfitToken!.access_token);
-        saveInt('user-id', newfitToken!.id);
+        checkIdTypeAndSave();
         return newfitToken!.id_type;
       } else {
         debugPrint("token is null");
@@ -83,6 +83,16 @@ class KakaoLogin extends SocialLogin with StorageUtil {
         debugPrint('카카오계정으로 로그인 실패 $error');
         return null;
       }
+    }
+  }
+
+  void checkIdTypeAndSave() {
+    if (newfitToken!.id_type == 'user-id') {
+      saveInt('user-id', newfitToken!.id);
+    } else if (newfitToken!.id_type == 'oauth-history-id') {
+      saveInt('oauth-history-id', newfitToken!.id);
+    } else if (newfitToken!.id_type == 'authority-id') {
+      saveInt('authority-id', newfitToken!.id);
     }
   }
 
