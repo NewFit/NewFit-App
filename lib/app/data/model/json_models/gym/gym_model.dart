@@ -5,6 +5,20 @@ import 'package:json_annotation/json_annotation.dart';
 part 'gym_model.g.dart';
 
 @JsonSerializable()
+class RegisterAuthorityGym {
+  int gym_id;
+
+  RegisterAuthorityGym({
+    required this.gym_id,
+  });
+
+  factory RegisterAuthorityGym.fromJson(Map<String, dynamic> json) =>
+      _$RegisterAuthorityGymFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RegisterAuthorityGymToJson(this);
+}
+
+@JsonSerializable()
 class AuthorityGym {
   int authority_id;
   String gym_name;
@@ -52,4 +66,17 @@ class AddressGymList {
       _$AddressGymListFromJson(json);
 
   Map<String, dynamic> toJson() => _$AddressGymListToJson(this);
+}
+
+@JsonSerializable()
+class GymId {
+  int gym_id;
+
+  GymId({
+    required this.gym_id,
+  });
+
+  factory GymId.fromJson(Map<String, dynamic> json) => _$GymIdFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GymIdToJson(this);
 }
