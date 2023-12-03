@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/setting_page_controller.dart';
 
-class ScoreboardPageBinding implements Bindings {
+class SettingPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SettingPageController>(() {
