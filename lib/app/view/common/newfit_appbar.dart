@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -37,7 +38,7 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
             appBarHeight = 175.h + MediaQuery.of(context).padding.top;
           }
         } else if (mainController.selectedMenuCode == MenuCode.SCOREBOARD) {
-          replaceWidget = SafeArea(
+          replaceWidget = const SafeArea(
             child: Center(
               child: NewfitTextBoldXl(
                 text: "스코어보드",
@@ -89,7 +90,9 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(height: 13.h),
         _UserInfoAppBar(
           userName: "고라니",
-          onPressedFucntion: () {},
+          onPressedFucntion: () {
+            Get.toNamed(AppPages.SETTING);
+          },
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
         if (scrollPosition.value <= 0.0)
