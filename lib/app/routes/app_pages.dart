@@ -38,6 +38,7 @@ class AppPages {
   static const ROUTINE_MORE_INFO = Routes.ROUTINE_MORE_INFO;
   static const SCOREBOARD = Routes.SCOREBOARD;
   static const TEST_PAGE = Routes.TEST_PAGE;
+  static const SETTING = Routes.SETTING;
 
   static final pages = [
     GetPage(
