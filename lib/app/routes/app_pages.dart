@@ -9,6 +9,7 @@ import 'package:new_fit/app/bindings/register_gym_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_more_info_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
+import 'package:new_fit/app/bindings/setting_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/main_page.dart';
@@ -18,6 +19,7 @@ import 'package:new_fit/app/view/register_page/register_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
+import 'package:new_fit/app/view/setting/setting_page.dart';
 
 import '../bindings/main_binding.dart';
 
@@ -88,6 +90,12 @@ class AppPages {
       name: _Paths.HOME_RESERVATION,
       page: () => HomeReservationPage(),
       binding: HomeReservationPageBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.SETTING,
+      page: () => SettingPage(),
+      binding: SettingPageBinding(),
       transition: Transition.fadeIn,
     ),
   ];
