@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,8 @@ import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
 import 'package:new_fit/app/services/network_service/gym_service.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import '../data/model/json_models/user/token_model.dart';
 
 class RegisterGymPageController extends BaseController with StorageUtil {
   TextEditingController textEditingController = TextEditingController();
@@ -43,13 +47,14 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
+    saveInt('authority-id', gymId);
     try {
+      final accessToken = getString('access-token')!;
       await GymService(dio).registerGym(
         getInt('oauth-history-id')!,
-        'Bearer ${getString('access-token')!}',
+        'Bearer $accessToken}',
         GymId(gym_id: gymId),
       );
-
     } catch (error) {
       error.printError();
     }

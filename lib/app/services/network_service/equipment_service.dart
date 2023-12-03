@@ -6,12 +6,13 @@ part 'equipment_service.g.dart';
 
 @RestApi(
     baseUrl:
-        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1")
+        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1/")
 abstract class EquipmentService {
   factory EquipmentService(Dio dio, {String baseUrl}) = _EquipmentService;
 
   @GET('/equipments')
   Future<EquipmentList> getAllEquipmentsInGym(
+    @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
 

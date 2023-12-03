@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/register_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
@@ -23,28 +24,41 @@ class RigsterNameInputPage extends BaseView<RegisterPageController> {
 
   @override
   Widget body(BuildContext context) {
-    return BaseBodyWithNoScroll(
-      screenPadding: AppValues.screenPadding,
-      widgetList: [
-        SizedBox(
-          height: 50.h,
-        ),
-        NewfitTextfieldWithTitle(
-          titleText: '이름을 입력해주세요.',
-          hintText: '이름',
-          controller: controller.nameEditingController,
-        ),
-        const Spacer(),
-        NewfitButton(
-          buttonText: '다음',
-          buttonColor: AppColors.main,
-          onPressFuntion: () {
-            controller.tabController
-                .animateTo((controller.tabController.index + 1) % 3);
-            controller.currentTabIndex.value = 2;
-          },
-        ),
-      ],
+    controller.nameEditingController.addListener(() {
+      controller.updateNameActive();
+    });
+
+    return Obx(
+      () => BaseBodyWithNoScroll(
+        screenPadding: AppValues.screenPadding,
+        widgetList: [
+          SizedBox(
+            height: 50.h,
+          ),
+          NewfitTextfieldWithTitle(
+            titleText: '이름을 입력해주세요.',
+            hintText: '이름',
+            controller: controller.nameEditingController,
+          ),
+          const Spacer(),
+          if (controller.nameActive)
+            NewfitButton(
+              buttonText: '다음',
+              buttonColor: AppColors.main,
+              onPressFuntion: () {
+                controller.tabController
+                    .animateTo((controller.tabController.index + 1) % 3);
+                controller.currentTabIndex.value = 2;
+              },
+            )
+          else
+            NewfitButton(
+              buttonText: '다음',
+              buttonColor: AppColors.secondary,
+              onPressFuntion: () {},
+            ),
+        ],
+      ),
     );
   }
 }

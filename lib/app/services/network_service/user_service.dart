@@ -17,7 +17,7 @@ abstract class UserService {
   Future<AccessToken> signUp(@Header('Authorization') String accessToken,
       @Header('oauth-history-id') int historyId, @Body() User user);
 
-  @DELETE('/users')
+  @DELETE('/api/v1/users')
   Future<HttpResponse> deleteUser(@Body() UserEmail userEmail);
 
   @POST('/logout')

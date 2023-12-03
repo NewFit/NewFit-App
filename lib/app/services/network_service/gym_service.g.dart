@@ -57,7 +57,7 @@ class _GymService implements GymService {
   }
 
   @override
-  Future<AddressGymList> registerGym(
+  Future<void> registerGym(
     int user_id,
     String accessToken,
     GymId gym_id,
@@ -71,25 +71,22 @@ class _GymService implements GymService {
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(gym_id.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AddressGymList>(Options(
+    await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/api/v1/authority',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = AddressGymList.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/api/v1/authority',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

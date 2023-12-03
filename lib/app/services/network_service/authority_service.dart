@@ -7,12 +7,19 @@ part 'authority_service.g.dart';
 
 @RestApi(
     baseUrl:
-        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/")
+        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1/")
 abstract class AuthorityService {
   factory AuthorityService(Dio dio, {String baseUrl}) = _AuthorityService;
 
   @GET('/authority')
   Future<AddressGym> getMyGymList();
+
+  @POST('/authority')
+  Future<void> registerMyGym(
+      @Header('user-id') int userId,
+      @Header('Authorization') String accessToken,
+      @Body() RegisterAuthorityGym gym
+      );
 
   @GET('/authority/reservations')
   Future<ReservationList> getMyReservationList();

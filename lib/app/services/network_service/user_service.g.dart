@@ -72,7 +72,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/api/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )
