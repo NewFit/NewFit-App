@@ -37,7 +37,7 @@ class LoginPageController extends BaseController with StorageUtil {
     }
   }
 
-  void deleteUser() {
+  Future<void> deleteUser() async {
     Dio dio = Dio();
     final logger = PrettyDioLogger(
       requestHeader: true,
@@ -50,8 +50,6 @@ class LoginPageController extends BaseController with StorageUtil {
     );
 
     dio.interceptors.add(logger);
-    print(getInt('user-id')!);
-    print(getString('access-token')!);
     UserService(dio).deleteUser(getInt('user-id')!, getString('access-token')!,
         UserEmail(email: 'nhg1113@gmail.com'));
   }
