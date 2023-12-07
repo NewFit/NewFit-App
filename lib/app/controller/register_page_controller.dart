@@ -94,15 +94,15 @@ class RegisterPageController extends BaseController
       ),
     );
 
-    log(newfitToken.access_token);
-    log(accessToken);
-
-    if (newfitToken.access_token == accessToken) {
-      log('TOKEN 일치');
-    } else {
-      log('TOKEN 불일치, access_token 새로 저장');
-      saveString('newfit-access-token', newfitToken.access_token);
-    }
+    // log(newfitToken.access_token);
+    // log(accessToken);
+    //
+    // if (newfitToken.access_token == accessToken) {
+    //   log('TOKEN 일치');
+    // } else {
+    //   log('TOKEN 불일치, access_token 새로 저장');
+    //   saveString('newfit-access-token', newfitToken.access_token);
+    // }
     saveUserInfo();
     Get.toNamed(AppPages.REGISTER_GYM);
   }

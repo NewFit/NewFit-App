@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -33,10 +34,11 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> getAddressGymList(String gymName) async {
     dio.interceptors.add(prettyDioLogger);
+
     try {
       addressGymList.value = await GymService(dio).getGymList(
           'Bearer ${getString('access-token')!}',
-          getInt('oauth-history-id')!,
+          getInt('user-id')!,
           gymName);
       selected =
           RxList.generate(addressGymList.value.gym_count, (index) => false);
@@ -47,26 +49,24 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
-    // dio.interceptors.add(InterceptorsWrapper(
-    //   onResponse: (response, handler) {
-    //     String? authorityId = response.headers.value('authority-id');
-    //     if(authorityId == null) {
-    //       log('ERROR : authorityId is null!');
-    //     } else {
-    //       log('authorityId is $authorityId');
-    //       saveInt('authority-id', int.parse(authorityId));
-    //     }
-    //     handler.next(response);
-    //   },
-    // ));
 
     try {
       final accessToken = getString('access-token')!;
-      await GymService(dio).registerGym(
-        getInt('oauth-history-id')!,
+
+      log(accessToken);
+      log(getInt('user-id')?.toString() ?? 'NULL');
+
+      final response = await GymService(dio).registerGym(
+        getInt('user-id')!,
         'Bearer $accessToken',
         GymId(gym_id: gymId),
       );
+
+      log("${response.response.headers}");
+
+      int authorityId = int.parse(response.response.headers.value('authority-id')!);
+      saveInt('authority-id', authorityId);
+
     } catch (error) {
       error.printError();
     }

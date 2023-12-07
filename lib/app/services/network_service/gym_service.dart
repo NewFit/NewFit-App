@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
 import 'package:retrofit/retrofit.dart';
 
@@ -15,7 +15,7 @@ abstract class GymService {
       @Header('user-id') int user_id, @Query('gym_name') String gym_name);
 
   @POST('/api/v1/authority')
-  Future<void> registerGym(@Header('user-id') int user_id,
+  Future<HttpResponse> registerGym(@Header('user-id') int user_id,
       @Header('Authorization') String accessToken, @Body() GymId gym_id);
 
 }
