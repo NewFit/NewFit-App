@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/setting_page_controller.dart';
@@ -41,6 +43,39 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
               UserEmail(email: getString('user-email')!));
         },
         settingTitle: '회원탈퇴',
+      ),
+      NewfitSettingListCell(
+        onPressedFunction: () async {
+          Dio dio = Dio();
+          final logger = PrettyDioLogger(
+            requestHeader: true,
+            requestBody: true,
+            responseBody: true,
+            responseHeader: true,
+            error: true,
+            compact: true,
+            maxWidth: 80,
+          );
+          dio.interceptors.add(logger);
+
+          final response = await UserService(dio).modifyUserInfo(
+            'Bearer ${getString('access-token')!}',
+            getInt('user-id')!,
+            ModifyUser(
+              email: 'nhg1113@naver.com',
+              nickname: 'noguen3',
+              tel: '010-2057-3318',
+              image: 'Base64EncodedImageFile',
+            ),
+          );
+
+          print(response.response.headers);
+
+          saveString('user-email', 'nhg1113@naver.com');
+          saveString('user-nickname', 'noguen');
+          saveString('user-tel', '010-2057-3318');
+        },
+        settingTitle: '유저 정보 변경 테스트',
       ),
     ]);
   }
