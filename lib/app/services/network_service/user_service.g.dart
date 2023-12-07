@@ -123,10 +123,18 @@ class _UserService implements UserService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> modifyUserInfo(ModifyUser modifyUser) async {
+  Future<HttpResponse<dynamic>> modifyUserInfo(
+    String accessToken,
+    int userId,
+    ModifyUser modifyUser,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'user-id': userId,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(modifyUser.toJson());
     final _result =
