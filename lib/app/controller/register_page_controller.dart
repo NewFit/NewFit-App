@@ -51,7 +51,8 @@ class RegisterPageController extends BaseController
   void updatePhoneNumActive() {
     final RegExp phoneNumValidator = RegExp(r'^(\d{2,3})-(\d{3,4})-(\d{4})$');
 
-    _phoneNumActive.value = phoneNumValidator.hasMatch(phonenumberEditingController.text);
+    _phoneNumActive.value =
+        phoneNumValidator.hasMatch(phonenumberEditingController.text);
   }
 
   void updateEmailActive() {
@@ -83,7 +84,7 @@ class RegisterPageController extends BaseController
     dio.interceptors.add(logger);
     final accessToken = getString('access-token')!;
     var newfitToken = await UserService(dio).signUp(
-      'Bearer $accessToken}',
+      'Bearer $accessToken',
       getInt('oauth-history-id')!,
       User(
         username: nameEditingController.text,
@@ -96,14 +97,21 @@ class RegisterPageController extends BaseController
     log(newfitToken.access_token);
     log(accessToken);
 
-    if(newfitToken.access_token == accessToken) {
+    if (newfitToken.access_token == accessToken) {
       log('TOKEN 일치');
     } else {
       log('TOKEN 불일치, access_token 새로 저장');
       saveString('newfit-access-token', newfitToken.access_token);
     }
-
+    saveUserInfo();
     Get.toNamed(AppPages.REGISTER_GYM);
+  }
+
+  void saveUserInfo() {
+    saveString('user-email', emailEditingController.text);
+    saveString('user-name', nameEditingController.text);
+    saveString('user-nickname', nicknameEditingController.text);
+    saveString('user-tel', phonenumberEditingController.text);
   }
 
   @override

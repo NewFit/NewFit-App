@@ -33,7 +33,7 @@ class RegisterWelcomePage extends BaseView<RegisterPageController> {
           onPressFuntion: () {
             try {
               controller.register();
-              //Get.toNamed(AppPages.REGISTER_GYM);
+              Get.toNamed(AppPages.REGISTER_GYM);
             } catch (error) {
               error.printError();
             }

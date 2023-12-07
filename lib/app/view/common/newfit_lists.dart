@@ -136,14 +136,17 @@ class NewfitScoreboardListCell extends StatelessWidget {
 class NewfitSettingListCell extends StatelessWidget {
   const NewfitSettingListCell({
     required this.settingTitle,
+    required this.onPressedFunction,
     super.key,
   });
 
   final String settingTitle;
+  final Function()? onPressedFunction;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onPressedFunction,
       child: Container(
         width: double.infinity,
         height: 40.h,
@@ -168,7 +171,6 @@ class NewfitSettingListCell extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
     );
   }
 }
