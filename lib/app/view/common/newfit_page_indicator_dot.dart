@@ -1,7 +1,8 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:new_fit/app/controller/register_page_controller.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 
 class NewfitPageIndicatorDot extends StatelessWidget {
@@ -33,8 +34,8 @@ class NewfitPageIndicatorDot extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.r),
           color: currentTabIndex.value == targetTabIndex
-              ? AppColors.main
-              : AppColors.secondary,
+              ? activeColor
+              : disabledColor,
         ),
         duration: const Duration(milliseconds: 300),
       ),

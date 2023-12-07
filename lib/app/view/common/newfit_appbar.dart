@@ -1,8 +1,11 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -35,7 +38,7 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
             appBarHeight = 175.h + MediaQuery.of(context).padding.top;
           }
         } else if (mainController.selectedMenuCode == MenuCode.SCOREBOARD) {
-          replaceWidget = SafeArea(
+          replaceWidget = const SafeArea(
             child: Center(
               child: NewfitTextBoldXl(
                 text: "스코어보드",
@@ -44,6 +47,13 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           );
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
+        } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
+          replaceWidget = myReservationAppBar();
+          if (scrollPosition.value > 0.0) {
+            appBarHeight = 105.h + MediaQuery.of(context).padding.top;
+          } else {
+            appBarHeight = 175.h + MediaQuery.of(context).padding.top;
+          }
         }
         return Container(
           height: appBarHeight,
@@ -80,11 +90,40 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
         SizedBox(height: 13.h),
         _UserInfoAppBar(
           userName: "고라니",
+          onPressedFucntion: () {
+            Get.toNamed(AppPages.SETTING);
+          },
+        ),
+        if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
+        if (scrollPosition.value <= 0.0)
+          const _UserCreditInfo(
+            totalCredit: 10000,
+            todayCredit: 100,
+          ),
+        SizedBox(height: 15.h),
+        Align(
+          alignment: Alignment.center,
+          child: NewfitButton(
+              buttonText: "루틴으로 예약하기",
+              buttonColor: AppColors.main,
+              onPressFuntion: () {}),
+        ),
+      ],
+    );
+  }
+
+  Widget myReservationAppBar() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 13.h),
+        _UserInfoAppBar(
+          userName: "고라니",
           onPressedFucntion: () {},
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
         if (scrollPosition.value <= 0.0)
-          _UserCreditInfo(
+          const _UserCreditInfo(
             totalCredit: 10000,
             todayCredit: 100,
           ),
@@ -198,7 +237,7 @@ class NewfitAppBarWithButton extends StatelessWidget
 
 class NewfitAppBarElevated extends StatelessWidget
     implements PreferredSizeWidget {
-  NewfitAppBarElevated({
+  const NewfitAppBarElevated({
     super.key,
     required this.appBarTitleText,
   });
@@ -406,13 +445,13 @@ class NewfitAppBarTranparent extends StatelessWidget
                   height: 50.h,
                   child: Column(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         padding: EdgeInsets.zero,
-                        icon: Icon(Icons.arrow_back_ios),
+                        icon: const Icon(Icons.arrow_back_ios),
                         onPressed: () {},
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -453,24 +492,22 @@ class _UserInfoAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 15.h,
-            backgroundImage: AssetImage('images/gorani.png'),
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 15.h,
+          backgroundImage: const AssetImage('images/gorani.png'),
+        ),
+        SizedBox(width: 10.w),
+        NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
+        const Spacer(),
+        GestureDetector(
+          onTap: onPressedFucntion,
+          child: const Icon(
+            Icons.settings,
           ),
-          SizedBox(width: 10.w),
-          NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
-          const Spacer(),
-          GestureDetector(
-            onTap: onPressedFucntion,
-            child: const Icon(
-              Icons.settings,
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }
@@ -490,7 +527,7 @@ class _UserCreditInfo extends StatelessWidget {
     return Column(
       children: [
         Row(children: [
-          NewfitTextMediumMd(
+          const NewfitTextMediumMd(
             text: '전체 크레딧',
             textColor: AppColors.black,
           ),
@@ -503,7 +540,7 @@ class _UserCreditInfo extends StatelessWidget {
         SizedBox(height: 7.h),
         Row(
           children: [
-            NewfitTextMediumMd(
+            const NewfitTextMediumMd(
               text: '일일 크레딧',
               textColor: AppColors.black,
             ),

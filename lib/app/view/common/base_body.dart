@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
@@ -5,9 +7,7 @@ import 'package:new_fit/app/view/theme/app_values.dart';
 class BaseBody extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
-
-  double? columnHeight = 640.h;
-
+  double? columnHeight = 220.h;
   BaseBody({
     this.scrollController,
     required this.widgetList,
@@ -25,7 +25,6 @@ class BaseBody extends StatelessWidget {
         width: double.infinity,
         child: SingleChildScrollView(
           controller: scrollController,
-
           child: SizedBox(
             height: columnHeight,
             child: Column(
@@ -42,10 +41,12 @@ class BaseBody extends StatelessWidget {
 class BaseBodyWithNoScroll extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
+  double? screenPadding;
 
   BaseBodyWithNoScroll({
     this.scrollController,
     required this.widgetList,
+    required this.screenPadding,
     super.key,
   });
 
@@ -54,8 +55,7 @@ class BaseBodyWithNoScroll extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Container(
-        padding:
-            const EdgeInsets.symmetric(horizontal: AppValues.screenPadding),
+        padding: EdgeInsets.symmetric(horizontal: screenPadding!),
         width: double.infinity,
         child: SizedBox(
           height: 640.h,
@@ -85,7 +85,7 @@ class BaseBodyWithoutPadding extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         child: SingleChildScrollView(
           controller: scrollController,
