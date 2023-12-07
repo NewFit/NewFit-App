@@ -18,15 +18,16 @@ abstract class UserService {
       @Header('oauth-history-id') int historyId, @Body() User user);
 
   @DELETE('/api/v1/users')
-  Future<HttpResponse> deleteUser(@Body() UserEmail userEmail);
+  Future<HttpResponse> deleteUser(@Header('user-id') int userId,
+      @Header('Authorization') String accessToken, @Body() UserEmail userEmail);
 
-  @POST('/logout')
+  @POST('/api/v1/logout')
   Future<HttpResponse> logout();
 
-  @PATCH('/users')
+  @PATCH('/api/v1/users')
   Future<HttpResponse> modifyUserInfo(@Body() ModifyUser modifyUser);
 
-  @GET('/users')
+  @GET('/api/v1/users')
   Future<MyPage> getMyPageInfo();
 
   @POST('/login')

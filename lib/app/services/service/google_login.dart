@@ -36,12 +36,22 @@ class GoogleLogin extends SocialLogin with StorageUtil {
       newfitToken = await userService
           .login(Attribute(attribute_name: idToken, provider_type: "GOOGLE"));
       saveString('access-token', newfitToken!.access_token);
-      saveInt('oauth-history-id', newfitToken!.id);
+      checkIdTypeAndSave();
       return newfitToken!.id_type;
     } catch (error) {
       printError();
       debugPrint(error.toString());
       return "";
+    }
+  }
+
+  void checkIdTypeAndSave() {
+    if (newfitToken!.id_type == 'user-id') {
+      saveInt('user-id', newfitToken!.id);
+    } else if (newfitToken!.id_type == 'oauth-history-id') {
+      saveInt('oauth-history-id', newfitToken!.id);
+    } else if (newfitToken!.id_type == 'authority-id') {
+      saveInt('authority-id', newfitToken!.id);
     }
   }
 
