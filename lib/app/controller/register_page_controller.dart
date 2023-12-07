@@ -103,9 +103,15 @@ class RegisterPageController extends BaseController
       log('TOKEN 불일치, access_token 새로 저장');
       saveString('newfit-access-token', newfitToken.access_token);
     }
-
-    saveString('user-email', emailEditingController.text);
+    saveUserInfo();
     Get.toNamed(AppPages.REGISTER_GYM);
+  }
+
+  void saveUserInfo() {
+    saveString('user-email', emailEditingController.text);
+    saveString('user-name', nameEditingController.text);
+    saveString('user-nickname', nicknameEditingController.text);
+    saveString('user-tel', phonenumberEditingController.text);
   }
 
   @override
