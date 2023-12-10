@@ -53,7 +53,7 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     try {
       final accessToken = getString(AppString.key_access_token)!;
       await AuthorityService(dio).registerMyGym(
-        getInt(AppString.key_authority_id)!,
+        getInt(AppString.key_user_id)!,
         '${AppString.jwt_prefix} $accessToken',
         RegisterAuthorityGym(gym_id: gymId),
       );
