@@ -1,4 +1,4 @@
-import 'dart:io';
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -69,13 +69,13 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
             ),
           );
 
-          print(response.response.headers);
+          print(response.response.headers['access-token']);
 
           saveString('user-email', 'nhg1113@naver.com');
           saveString('user-nickname', 'noguen');
           saveString('user-tel', '010-2057-3318');
         },
-        settingTitle: '유저 정보 변경 테스트',
+        settingTitle: '유저 정보 변경 테스트(하드코딩으로 테스트)',
       ),
     ]);
   }
