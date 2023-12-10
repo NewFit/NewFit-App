@@ -22,10 +22,18 @@ class _ReservationService implements ReservationService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> reserveEquipment(int equipmentGymId) async {
+  Future<HttpResponse<dynamic>> reserveEquipment(
+    int authorityId,
+    String accessToken,
+    int equipmentGymId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
@@ -50,10 +58,18 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> editReservation(int reservationId) async {
+  Future<HttpResponse<dynamic>> editReservation(
+    int authorityId,
+    String accessToken,
+    int reservationId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
@@ -78,12 +94,20 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<ReservationList> getReservationList(int equipmentGymId) async {
+  Future<ReservationList> getReservationList(
+    int authorityId,
+    String accessToken,
+    int equipmentGymId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'equipment_gym_id': equipmentGymId
     };
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ReservationList>(Options(
@@ -107,10 +131,18 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> deleteReservation(int reservationId) async {
+  Future<HttpResponse<dynamic>> deleteReservation(
+    int authorityId,
+    String accessToken,
+    int reservationId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
@@ -166,6 +198,41 @@ class _ReservationService implements ReservationService {
               baseUrl,
             ))));
     final value = SpecificReservation.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SpecificEquipmentsReservation> getSpecificEquipmentsReservation(
+    int authorityId,
+    String accessToken,
+    int equipmentId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SpecificEquipmentsReservation>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/reservations/equipments/${equipmentId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SpecificEquipmentsReservation.fromJson(_result.data!);
     return value;
   }
 

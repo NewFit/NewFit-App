@@ -12,23 +12,36 @@ abstract class ReservationService {
   factory ReservationService(Dio dio, {String baseUrl}) = _ReservationService;
 
   @POST('/reservations/{equipmentGymId}')
-  Future<HttpResponse> reserveEquipment(@Path() int equipmentGymId);
+  Future<HttpResponse> reserveEquipment(@Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken, @Path() int equipmentGymId);
 
   @PATCH('/reservations/{reservationId}')
-  Future<HttpResponse> editReservation(@Path() int reservationId);
+  Future<HttpResponse> editReservation(@Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken, @Path() int reservationId);
 
   @GET('/reservations')
   Future<ReservationList> getReservationList(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
       @Query('equipment_gym_id') int equipmentGymId);
 
   @DELETE('/reservations/{reservation_id}')
-  Future<HttpResponse> deleteReservation(@Path() int reservationId);
+  Future<HttpResponse> deleteReservation(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
+      @Path() int reservationId);
 
   @GET('/reservations/{reservation_id}')
   Future<SpecificReservation> getSpecificReservation(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
       @Path() int reservationId);
+
+  @GET('/reservations/equipments/{equipmentId}')
+  Future<SpecificEquipmentsReservation> getSpecificEquipmentsReservation(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
+      @Path() int equipmentId);
 
   @PATCH('/reservations/start')
   Future<HttpResponse> startUsingEquipment(
