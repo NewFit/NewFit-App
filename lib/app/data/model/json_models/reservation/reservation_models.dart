@@ -67,10 +67,11 @@ class SpecificReservation {
   int equipment_gym_id;
   List<Reservation> reservation;
 
-  SpecificReservation(
-      {required this.gym_name,
-      required this.equipment_gym_id,
-      required this.reservation});
+  SpecificReservation({
+    required this.gym_name,
+    required this.equipment_gym_id,
+    required this.reservation,
+  });
 
   factory SpecificReservation.fromJson(Map<String, dynamic> json) =>
       _$SpecificReservationFromJson(json);
@@ -103,4 +104,42 @@ class EndAt {
   factory EndAt.fromJson(Map<String, dynamic> json) => _$EndAtFromJson(json);
 
   Map<String, dynamic> toJson() => _$EndAtToJson(this);
+}
+
+@JsonSerializable()
+class SpecificEquipmentsReservation {
+  int equipment_gyms_count;
+  List<EquipmentGym> equipment_gyms;
+
+  SpecificEquipmentsReservation({
+    required this.equipment_gyms_count,
+    required this.equipment_gyms,
+  });
+
+  factory SpecificEquipmentsReservation.fromJson(Map<String, dynamic> json) =>
+      _$SpecificEquipmentsReservationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SpecificEquipmentsReservationToJson(this);
+}
+
+@JsonSerializable()
+class EquipmentGym {
+  String gym_name;
+  int equipment_gym_id;
+  String equipment_gym_name;
+  int occupied_times_count;
+  List<Reservation> occupied_times;
+
+  EquipmentGym({
+    required this.gym_name,
+    required this.equipment_gym_id,
+    required this.equipment_gym_name,
+    required this.occupied_times_count,
+    required this.occupied_times,
+  });
+
+  factory EquipmentGym.fromJson(Map<String, dynamic> json) =>
+      _$EquipmentGymFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EquipmentGymToJson(this);
 }
