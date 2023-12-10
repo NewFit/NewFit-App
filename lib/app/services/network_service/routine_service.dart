@@ -1,7 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:dio/dio.dart';
-import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/data/model/json_models/routine/routine_models.dart';
 import 'package:retrofit/retrofit.dart';
 
