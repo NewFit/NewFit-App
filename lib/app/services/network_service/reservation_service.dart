@@ -6,7 +6,7 @@ part 'reservation_service.g.dart';
 
 @RestApi(
     baseUrl:
-        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/")
+        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1")
 abstract class ReservationService {
   factory ReservationService(Dio dio, {String baseUrl}) = _ReservationService;
 
@@ -18,12 +18,11 @@ abstract class ReservationService {
 
   @GET('/reservations')
   Future<ReservationList> getReservationList(
-      @Query('equipment_gym_id') int equipment_gym_id);
+      @Query('equipment_gym_id') int equipmentGymId);
 
-  @DELETE('reservations/{reservation_id}')
-  Future<HttpResponse> deleteReservation(@Path() int reservation_id);
+  @DELETE('/reservations/{reservation_id}')
+  Future<HttpResponse> deleteReservation(@Path() int reservationId);
 
-  @GET('reservations/{reservation_id}')
-  Future<SpecificReservation> getSpecificReservation(
-      @Path() int reservation_id);
+  @GET('/reservations/{reservation_id}')
+  Future<SpecificReservation> getSpecificReservation(@Path() int reservationId);
 }
