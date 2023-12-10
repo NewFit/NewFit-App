@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -66,7 +67,7 @@ class NewfitInfoInputTextField extends StatelessWidget {
 }
 
 class NewfitIdInputTextField extends NewfitInfoInputTextField {
-  NewfitIdInputTextField({
+  const NewfitIdInputTextField({
     required super.hintText,
     required super.controller,
   });
@@ -76,11 +77,12 @@ class NewfitIdInputTextField extends NewfitInfoInputTextField {
     if (value.length < 10) {
       return ('아이디에는 특수기호를 사용할 수 없습니다.');
     }
+    return null;
   }
 }
 
 class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
-  NewfitPasswordInputTextField({
+  const NewfitPasswordInputTextField({
     required super.hintText,
     required super.controller,
   });
@@ -90,22 +92,26 @@ class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
     if (value.length <= 7) {
       return ('비밀번호를 더 길게 설정해주세요.');
     }
+    return null;
   }
 }
 
 class NewfitSearchTextField extends StatelessWidget {
+  final TextEditingController textEditingController;
+  final Function(String) onSubmittedFunction;
+
   const NewfitSearchTextField({
-    required this.hintText,
+    required this.textEditingController,
+    required this.onSubmittedFunction,
     super.key,
   });
-
-  final String hintText;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: 320.w,
       child: TextField(
+        controller: textEditingController,
         textAlignVertical: TextAlignVertical.center,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(vertical: 10.h),
@@ -133,6 +139,9 @@ class NewfitSearchTextField extends StatelessWidget {
             color: AppColors.black,
           ),
         ),
+        onSubmitted: (value) {
+          onSubmittedFunction(value);
+        },
       ),
     );
   }

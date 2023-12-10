@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
+
+import '../../routes/app_pages.dart';
 
 class NewfitEquipmentListCell extends StatelessWidget {
   const NewfitEquipmentListCell({
@@ -18,11 +22,16 @@ class NewfitEquipmentListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomePageController controller = Get.find();
+
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
       child: GestureDetector(
         onTap: () {
-          onPressFunc(context);
+          controller.navigateTo(
+            route: Routes.HOME_RESERVATION,
+          );
+          //onPressFunc(context);
         },
         child: Container(
           width: 320.w,
@@ -50,7 +59,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
                       child: Image(
                         width: 64.w,
                         height: 50.h,
-                        image: AssetImage('images/test.png'),
+                        image: const AssetImage('images/test.png'),
                       ),
                     ),
                     SizedBox(width: 9.w),
@@ -64,7 +73,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
@@ -160,23 +169,12 @@ void onPressFunc(BuildContext context) {
                       },
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(30.w, 30.h, 30.w, 0),
-                    child: SizedBox(
-                      width: 300.w,
-                      child: LinearProgressIndicator(
-                        minHeight: 12,
-                        borderRadius: BorderRadius.circular(12.r),
-                        backgroundColor: Colors.black38,
-                        value: 0.5,
-                      ),
-                    ),
-                  ),
+                  //TODO : 여기 부분 수정
                   Padding(
                     padding: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0),
                     child: const Row(
                       children: [
-                        tmpNewFitButton(),
+                        TmpNewFitButton(),
                         Spacer(),
                         Text(
                           '~',
@@ -186,11 +184,12 @@ void onPressFunc(BuildContext context) {
                           ),
                         ),
                         Spacer(),
-                        tmpNewFitButton(),
+                        TmpNewFitButton(),
                       ],
                     ),
                   ),
-                  Spacer(),
+                  //TODO: 여기까지
+                  const Spacer(),
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 30.h),
                     child: NewfitButton(
@@ -206,8 +205,8 @@ void onPressFunc(BuildContext context) {
       });
 }
 
-class tmpNewFitButton extends StatelessWidget {
-  const tmpNewFitButton({super.key});
+class TmpNewFitButton extends StatelessWidget {
+  const TmpNewFitButton({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,10 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:new_fit/app/controller/login_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
-import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -26,27 +27,34 @@ class LoginPage extends BaseView<LoginPageController> {
           SvgPicture.asset(AppString.newfit),
           const Spacer(),
           NewfitLoginButton(
-            buttonText: '구글 로그인',
+            buttonText: AppString.button_google_login,
             buttonColor: const Color(0xFFECECEC),
             buttonTextColor: AppColors.black,
             buttonLeadingIcon: SizedBox(
               height: 19.h,
               child: Image.asset(AppString.google),
             ),
-            onPressFuntion: () {},
+            onPressFuntion: () async {
+              controller.googleLogin();
+            },
           ),
           SizedBox(
             height: 8.h,
           ),
           NewfitLoginButton(
-            buttonText: '카카오 로그인',
+            buttonText: AppString.button_kakao_login,
             buttonColor: const Color(0xFFFEE500),
             buttonTextColor: AppColors.black,
             buttonLeadingIcon: SizedBox(
               height: 19.h,
               child: Image.asset(AppString.kakao),
             ),
-            onPressFuntion: () {},
+            onPressFuntion: () async {
+              controller.kakaoLogin();
+            },
+          ),
+          SizedBox(
+            height: 30.h,
           ),
         ],
       ),

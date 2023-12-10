@@ -24,6 +24,5 @@ class NewfitProgressBar extends StatelessWidget {
         value: progressBarValue,
       ),
     );
-    ;
   }
 }
