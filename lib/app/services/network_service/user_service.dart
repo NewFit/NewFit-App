@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:new_fit/app/data/model/json_models/mypage/mypage_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/token_model.dart';
@@ -25,7 +25,10 @@ abstract class UserService {
   Future<HttpResponse> logout();
 
   @PATCH('/api/v1/users')
-  Future<HttpResponse> modifyUserInfo(@Body() ModifyUser modifyUser);
+  Future<HttpResponse> modifyUserInfo(
+      @Header('Authorization') String accessToken,
+      @Header('user-id') int userId,
+      @Body() ModifyUser modifyUser);
 
   @GET('/api/v1/users')
   Future<MyPage> getMyPageInfo();

@@ -71,3 +71,46 @@ StartAt _$StartAtFromJson(Map<String, dynamic> json) => StartAt(
 Map<String, dynamic> _$StartAtToJson(StartAt instance) => <String, dynamic>{
       'start_at': instance.start_at.toIso8601String(),
     };
+
+EndAt _$EndAtFromJson(Map<String, dynamic> json) => EndAt(
+      end_at: DateTime.parse(json['end_at'] as String),
+    );
+
+Map<String, dynamic> _$EndAtToJson(EndAt instance) => <String, dynamic>{
+      'end_at': instance.end_at.toIso8601String(),
+    };
+
+SpecificEquipmentsReservation _$SpecificEquipmentsReservationFromJson(
+        Map<String, dynamic> json) =>
+    SpecificEquipmentsReservation(
+      equipment_gyms_count: json['equipment_gyms_count'] as int,
+      equipment_gyms: (json['equipment_gyms'] as List<dynamic>)
+          .map((e) => EquipmentGym.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$SpecificEquipmentsReservationToJson(
+        SpecificEquipmentsReservation instance) =>
+    <String, dynamic>{
+      'equipment_gyms_count': instance.equipment_gyms_count,
+      'equipment_gyms': instance.equipment_gyms,
+    };
+
+EquipmentGym _$EquipmentGymFromJson(Map<String, dynamic> json) => EquipmentGym(
+      gym_name: json['gym_name'] as String,
+      equipment_gym_id: json['equipment_gym_id'] as int,
+      equipment_gym_name: json['equipment_gym_name'] as String,
+      occupied_times_count: json['occupied_times_count'] as int,
+      occupied_times: (json['occupied_times'] as List<dynamic>)
+          .map((e) => Reservation.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$EquipmentGymToJson(EquipmentGym instance) =>
+    <String, dynamic>{
+      'gym_name': instance.gym_name,
+      'equipment_gym_id': instance.equipment_gym_id,
+      'equipment_gym_name': instance.equipment_gym_name,
+      'occupied_times_count': instance.occupied_times_count,
+      'occupied_times': instance.occupied_times,
+    };

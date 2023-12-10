@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
+import 'package:new_fit/app/services/network_service/authority_service.dart';
 import 'package:new_fit/app/services/network_service/gym_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';

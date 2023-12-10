@@ -22,10 +22,17 @@ class _AuthorityService implements AuthorityService {
   String? baseUrl;
 
   @override
-  Future<AddressGym> getMyGymList() async {
+  Future<AddressGym> getMyGymList(
+    String authorityId,
+    String accessToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AddressGym>(Options(
@@ -82,10 +89,17 @@ class _AuthorityService implements AuthorityService {
   }
 
   @override
-  Future<ReservationList> getMyReservationList() async {
+  Future<ReservationList> getMyReservationList(
+    String authorityId,
+    String accessToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ReservationList>(Options(
@@ -106,6 +120,39 @@ class _AuthorityService implements AuthorityService {
             ))));
     final value = ReservationList.fromJson(_result.data!);
     return value;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> enterGym(
+    String accessToken,
+    EntranceTag entranceTag,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(entranceTag.toJson());
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/authority/entry',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
