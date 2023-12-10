@@ -18,5 +18,4 @@ abstract class GymService {
   @POST('/api/v1/authority')
   Future<void> registerGym(@Header('user-id') int user_id,
       @Header('Authorization') String accessToken, @Body() GymId gym_id);
-
 }
