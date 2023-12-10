@@ -41,4 +41,10 @@ abstract class ReservationService {
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
       @Body() StartAt startAt);
+
+  @PATCH('/reservations/start')
+  Future<HttpResponse> endUsingEquipment(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
+      @Body() EndAt endAt);
 }
