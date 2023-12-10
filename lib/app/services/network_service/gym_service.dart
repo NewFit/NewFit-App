@@ -12,5 +12,9 @@ abstract class GymService {
 
   @GET('/gyms')
   Future<AddressGymList> getGymList(@Header('Authorization') String accessToken,
-      @Header('user-id') int userId, @Query('gym_name') String gymName);
+      @Header('user-id') int user_id, @Query('gym_name') String gym_name);
+
+  @POST('/api/v1/authority')
+  Future<AddressGymList> registerGym(@Header('user-id') int user_id,
+      @Header('Authorization') String accessToken, @Body() GymId gym_id);
 }
