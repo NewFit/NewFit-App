@@ -31,13 +31,17 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> getAddressGymList(String gymName) async {
     dio.interceptors.add(prettyDioLogger);
+
     try {
+      print('h');
       addressGymList.value = await GymService(dio).getGymList(
           '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
-          getInt(AppString.key_oauth_history_id)!,
+          getInt(AppString.key_user_id)!,
           gymName);
+      print('h');
       selected =
           RxList.generate(addressGymList.value.gym_count, (index) => false);
+      print('h');
     } catch (error) {
       error.printError();
     }
@@ -48,10 +52,10 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     saveInt(AppString.key_authority_id, gymId);
     try {
       final accessToken = getString(AppString.key_access_token)!;
-      await GymService(dio).registerGym(
+      await AuthorityService(dio).registerMyGym(
         getInt(AppString.key_authority_id)!,
-        '${AppString.jwt_prefix} $accessToken}',
-        GymId(gym_id: gymId),
+        '${AppString.jwt_prefix} $accessToken',
+        RegisterAuthorityGym(gym_id: gymId),
       );
     } catch (error) {
       error.printError();
