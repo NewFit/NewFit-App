@@ -4,37 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 // Todo : Mock data임. 나중에 지워버리기
-final EquipmentList mockData =
-    EquipmentList(gym_name: 'GYM', equipments_count: 5, equipments: [
-  Equipment(
-      equipment_id: 0,
-      equipment_gym_id: 0,
-      equipment_gym_name: '천국의 계단 1',
-      purpose: '',
-      condition: 'AVAILABLE'),
-  Equipment(
-      equipment_id: 1,
-      equipment_gym_id: 0,
-      equipment_gym_name: '천국의 계단 2',
-      purpose: '',
-      condition: 'AVAILABLE'),
-  Equipment(
-      equipment_id: 2,
-      equipment_gym_id: 0,
-      equipment_gym_name: '천국의 계단 3',
-      purpose: '',
-      condition: 'AVAILABLE'),
-  Equipment(
-      equipment_id: 3,
-      equipment_gym_id: 0,
-      equipment_gym_name: '천국의 계단 4',
-      purpose: '',
-      condition: 'AVAILABLE'),
-]);
+final List<Map<String, dynamic>> mockData = List.generate(
+  10,
+  (index) =>
+      {"equipmentTitle": AppString.str_tmp_equipment_name, "currentStatus": 1},
+);
 
 class HomePage extends BaseView<HomePageController> {
   final ScrollController scrollController;
@@ -48,7 +28,10 @@ class HomePage extends BaseView<HomePageController> {
         final equipment = equipmentList.equipments[index];
         return NewfitEquipmentListCell(
           equipmentTitle: equipment.equipment_gym_name,
-          currentStatus: equipment.condition == 'AVAILABLE' ? 1 : 0,
+          currentStatus:
+              equipment.condition == AppString.equipment_condition_available
+                  ? 1
+                  : 0,
         );
       },
     );
@@ -61,19 +44,17 @@ class HomePage extends BaseView<HomePageController> {
 
   @override
   Widget body(BuildContext context) {
-    // return Obx(() {
-    //   if (controller.isLoading.value) {
-    //     return CircularProgressIndicator(); // 로딩 중
-    //   }
-    //   if (controller.equipmentList.value == null) {
-    //     return Text("No data available");
-    //   }
-    //   final equipments = controller.equipmentList.value!;
-    //   return BaseBody(
-    //       scrollController: scrollController, widgetList: buildEquipmentList(equipments));
-    // });
-    return BaseBody(
-        scrollController: scrollController,
-        widgetList: buildEquipmentList(mockData));
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const CircularProgressIndicator();
+      }
+      if (controller.equipmentList.value == null) {
+        return const Text(AppString.str_no_data);
+      }
+      final equipments = controller.equipmentList.value!;
+      return BaseBody(
+          scrollController: scrollController,
+          widgetList: buildEquipmentList(equipments));
+    });
   }
 }

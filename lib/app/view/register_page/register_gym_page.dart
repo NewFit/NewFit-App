@@ -11,6 +11,7 @@ import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
 import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 class RegisterGymPage extends BaseView<RegisterGymPageController> {
   RxBool redraw = false.obs;
@@ -94,11 +95,12 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
               buttonColor = Colors.grey;
             }
             return NewfitButton(
-              buttonText: '등록 요청하기',
+              buttonText: AppString.button_request_register,
               buttonColor: buttonColor,
               onPressFuntion: () async {
                 if (controller.selected.contains(true)) {
                   await controller.registerGym();
+                  Get.toNamed(AppPages.INITIAL);
                 } else {}
               },
             );
@@ -107,7 +109,7 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
         Padding(
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: NewfitTextButton(
-            buttonText: '다음에 할게요',
+            buttonText: AppString.button_do_later,
             textColor: Colors.grey,
             onPressFunction: () {
               Get.toNamed(AppPages.INITIAL);

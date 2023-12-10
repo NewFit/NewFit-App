@@ -6,6 +6,18 @@ part of 'gym_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+RegisterAuthorityGym _$RegisterAuthorityGymFromJson(
+        Map<String, dynamic> json) =>
+    RegisterAuthorityGym(
+      gym_id: json['gym_id'] as int,
+    );
+
+Map<String, dynamic> _$RegisterAuthorityGymToJson(
+        RegisterAuthorityGym instance) =>
+    <String, dynamic>{
+      'gym_id': instance.gym_id,
+    };
+
 AuthorityGym _$AuthorityGymFromJson(Map<String, dynamic> json) => AuthorityGym(
       authority_id: json['authority_id'] as int,
       gym_name: json['gym_name'] as String,

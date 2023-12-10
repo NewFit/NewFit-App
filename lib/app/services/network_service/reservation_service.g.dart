@@ -14,7 +14,7 @@ class _ReservationService implements ReservationService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1/';
   }
 
   final Dio _dio;
@@ -22,10 +22,18 @@ class _ReservationService implements ReservationService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<dynamic>> reserveEquipment(int equipmentGymId) async {
+  Future<HttpResponse<dynamic>> reserveEquipment(
+    int authorityId,
+    String accessToken,
+    int equipmentGymId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
@@ -50,10 +58,18 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> editReservation(int reservationId) async {
+  Future<HttpResponse<dynamic>> editReservation(
+    int authorityId,
+    String accessToken,
+    int reservationId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
@@ -78,12 +94,20 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<ReservationList> getReservationList(int equipment_gym_id) async {
+  Future<ReservationList> getReservationList(
+    int authorityId,
+    String accessToken,
+    int equipmentGymId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'equipment_gym_id': equipment_gym_id
+      r'equipment_gym_id': equipmentGymId
     };
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<ReservationList>(Options(
@@ -107,10 +131,18 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> deleteReservation(int reservation_id) async {
+  Future<HttpResponse<dynamic>> deleteReservation(
+    int authorityId,
+    String accessToken,
+    int reservationId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
@@ -120,7 +152,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              'reservations/${reservation_id}',
+              '/reservations/{reservation_id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -135,10 +167,18 @@ class _ReservationService implements ReservationService {
   }
 
   @override
-  Future<SpecificReservation> getSpecificReservation(int reservation_id) async {
+  Future<SpecificReservation> getSpecificReservation(
+    int authorityId,
+    String accessToken,
+    int reservationId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SpecificReservation>(Options(
@@ -148,7 +188,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              'reservations/${reservation_id}',
+              '/reservations/{reservation_id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -159,6 +199,152 @@ class _ReservationService implements ReservationService {
             ))));
     final value = SpecificReservation.fromJson(_result.data!);
     return value;
+  }
+
+  @override
+  Future<SpecificEquipmentsReservation> getSpecificEquipmentsReservation(
+    int authorityId,
+    String accessToken,
+    int equipmentId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SpecificEquipmentsReservation>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/reservations/equipments/${equipmentId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SpecificEquipmentsReservation.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> startUsingEquipment(
+    int authorityId,
+    String accessToken,
+    EquipmentTag equipmentTag,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(equipmentTag.toJson());
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/reservations/start',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> reserveWithRoutine(
+    int authorityId,
+    String accessToken,
+    StartAt startAt,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(startAt.toJson());
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'reservations/routines/{routine_id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> endUsingEquipment(
+    int authorityId,
+    String accessToken,
+    EndAt endAt,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(endAt.toJson());
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/reservations/start',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -9,13 +9,14 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
 import 'package:new_fit/app/view/common/newfit_routine_card.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 class RoutinePage extends BaseView<RoutinePageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarTranparent(
-      appBarTitleText: "루틴 페이지",
+      appBarTitleText: AppString.str_routine_title,
       scrollController: scrollController,
     );
   }
@@ -42,6 +43,7 @@ class RoutinePage extends BaseView<RoutinePageController> {
 
   @override
   Widget? floatingActionButton() {
-    return NewfitFAB(fabTitleText: "루틴 추가", onPressedFunction: () {});
+    return NewfitFAB(
+        fabTitleText: AppString.button_add_routine, onPressedFunction: () {});
   }
 }

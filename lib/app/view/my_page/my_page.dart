@@ -10,6 +10,7 @@ import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_calendar.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class MyPage extends BaseView<MyPageController> {
@@ -19,7 +20,7 @@ class MyPage extends BaseView<MyPageController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarTranparent(
       scrollController: scrollController,
-      appBarTitleText: '마이 페이지',
+      appBarTitleText: AppString.str_mypage_title,
     );
   }
 
@@ -90,7 +91,9 @@ class MyPage extends BaseView<MyPageController> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: const Row(
               children: [
-                NewfitTextMediumMd(text: '전체 크레딧', textColor: AppColors.black),
+                NewfitTextMediumMd(
+                    text: AppString.str_total_credit,
+                    textColor: AppColors.black),
                 Spacer(),
                 NewfitTextMediumMd(text: '10000', textColor: AppColors.main),
               ],
@@ -101,7 +104,9 @@ class MyPage extends BaseView<MyPageController> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: const Row(
               children: [
-                NewfitTextMediumMd(text: '일일 크레딧', textColor: AppColors.black),
+                NewfitTextMediumMd(
+                    text: AppString.str_today_credit,
+                    textColor: AppColors.black),
                 Spacer(),
                 NewfitTextMediumMd(text: '75/100', textColor: AppColors.main),
               ],
@@ -138,7 +143,8 @@ class MyPage extends BaseView<MyPageController> {
               const Icon(Icons.fitness_center),
               SizedBox(width: 10.w),
               const NewfitTextBold2Xl(
-                  text: '마이 루틴', textColor: AppColors.black),
+                  text: AppString.button_my_routine,
+                  textColor: AppColors.black),
             ],
           ),
         ),

@@ -11,6 +11,7 @@ import 'package:new_fit/app/view/common/newfit_lists.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
+import 'package:new_fit/app/view/theme/app_values.dart';
 
 class RegisterAcceptTermPage extends BaseView<RegisterPageController> {
   @override
@@ -41,6 +42,7 @@ class RegisterAcceptTermPage extends BaseView<RegisterPageController> {
   @override
   Widget body(BuildContext context) {
     return BaseBodyWithNoScroll(
+      screenPadding: AppValues.screenPadding,
       widgetList: [
         Row(children: [
           SvgPicture.asset(
@@ -64,10 +66,11 @@ class RegisterAcceptTermPage extends BaseView<RegisterPageController> {
           thickness: 1.h,
         ),
         SizedBox(height: 20.h),
-        const NewfitToggleList(toggleText: "약관 전체 동의하기", checked: true),
+        const NewfitToggleList(
+            toggleText: AppString.button_aceept_all_terms, checked: true),
         const Spacer(),
         NewfitButton(
-          buttonText: "다음",
+          buttonText: AppString.button_next,
           buttonColor: AppColors.main,
           onPressFuntion: () {
             controller.tabController

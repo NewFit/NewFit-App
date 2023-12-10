@@ -9,16 +9,17 @@ import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
 import 'package:new_fit/app/view/main/home_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_my_reservation_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return NewfitAppBarWithButton(
+    return NewfitAppBar(
+      mainController: controller,
       scrollController: scrollController,
-      todayCredit: 10000,
-      totalCredit: 10000,
     );
   }
 
@@ -46,10 +47,10 @@ class MainPage extends BaseView<MainController> {
           scrollController: scrollController,
         );
       case MenuCode.RESERVE:
-        return Container();
+        return HomeMyReservationPage();
       case MenuCode.QR:
         return SvgPicture.asset(
-          'images/newfit_logo.svg',
+          AppString.newfit,
           height: 100,
           width: 100,
         );

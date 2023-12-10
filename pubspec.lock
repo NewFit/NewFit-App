@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.2.0"
+  animate_icons:
+    dependency: "direct main"
+    description:
+      name: animate_icons
+      sha256: "3201c60f2051997cf3cbde4b2f07d269e01fa53a6a3a2986ef26f614419880fd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   ansi:
     dependency: transitive
     description:
@@ -85,10 +93,10 @@ packages:
     dependency: transitive
     description:
       name: build_daemon
-      sha256: "0343061a33da9c5810b2d6cee51945127d8f4c060b7fbdd9d54917f0a3feaaa1"
+      sha256: "5f02d73eb2ba16483e693f80bee4f088563a820e47d1027d4cdfe62b5bb43e65"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.1"
+    version: "4.0.0"
   build_resolvers:
     dependency: transitive
     description:
@@ -364,10 +372,10 @@ packages:
     dependency: "direct main"
     description:
       name: google_sign_in
-      sha256: "8f8b94880f2753ccb796744259da529674e49b9af2e372abf6978c590c0ebfef"
+      sha256: f45038d27bcad37498f282295ae97eece23c9349fc16649154067b87b9f1fd03
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.6"
+    version: "6.1.5"
   google_sign_in_android:
     dependency: transitive
     description:
@@ -1104,4 +1112,3 @@ packages:
 sdks:
   dart: ">=3.1.0 <4.0.0"
   flutter: ">=3.13.0"
-

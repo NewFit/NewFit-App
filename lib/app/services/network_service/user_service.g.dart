@@ -58,10 +58,18 @@ class _UserService implements UserService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> deleteUser(UserEmail userEmail) async {
+  Future<HttpResponse<dynamic>> deleteUser(
+    int userId,
+    String accessToken,
+    UserEmail userEmail,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'user-id': userId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(userEmail.toJson());
     final _result =
@@ -72,7 +80,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/api/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -100,7 +108,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/logout',
+              '/api/v1/logout',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -115,10 +123,18 @@ class _UserService implements UserService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> modifyUserInfo(ModifyUser modifyUser) async {
+  Future<HttpResponse<dynamic>> modifyUserInfo(
+    String accessToken,
+    int userId,
+    ModifyUser modifyUser,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'user-id': userId,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(modifyUser.toJson());
     final _result =
@@ -129,7 +145,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/api/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -157,7 +173,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/users',
+              '/api/v1/users',
               queryParameters: queryParameters,
               data: _data,
             )
