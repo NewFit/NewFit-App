@@ -91,3 +91,16 @@ class StartAt {
 
   Map<String, dynamic> toJson() => _$StartAtToJson(this);
 }
+
+@JsonSerializable()
+class EndAt {
+  DateTime end_at;
+
+  EndAt({
+    required this.end_at,
+  });
+
+  factory EndAt.fromJson(Map<String, dynamic> json) => _$EndAtFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EndAtToJson(this);
+}

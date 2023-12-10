@@ -71,3 +71,11 @@ StartAt _$StartAtFromJson(Map<String, dynamic> json) => StartAt(
 Map<String, dynamic> _$StartAtToJson(StartAt instance) => <String, dynamic>{
       'start_at': instance.start_at.toIso8601String(),
     };
+
+EndAt _$EndAtFromJson(Map<String, dynamic> json) => EndAt(
+      end_at: DateTime.parse(json['end_at'] as String),
+    );
+
+Map<String, dynamic> _$EndAtToJson(EndAt instance) => <String, dynamic>{
+      'end_at': instance.end_at.toIso8601String(),
+    };
