@@ -6,6 +6,7 @@ import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
 import 'package:new_fit/app/services/network_service/authority_service.dart';
 import 'package:new_fit/app/services/network_service/gym_service.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RegisterGymPageController extends BaseController with StorageUtil {
@@ -32,8 +33,8 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     dio.interceptors.add(prettyDioLogger);
     try {
       addressGymList.value = await GymService(dio).getGymList(
-          'Bearer ${getString('access-token')!}',
-          getInt('oauth-history-id')!,
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+          getInt(AppString.key_oauth_history_id)!,
           gymName);
       selected =
           RxList.generate(addressGymList.value.gym_count, (index) => false);
@@ -44,13 +45,13 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
-    saveInt('authority-id', gymId);
+    saveInt(AppString.key_authority_id, gymId);
     try {
-      final accessToken = getString('access-token')!;
-      await AuthorityService(dio).registerMyGym(
-        getInt('oauth-history-id')!,
-        'Bearer $accessToken}',
-        RegisterAuthorityGym(gym_id: gymId),
+      final accessToken = getString(AppString.key_access_token)!;
+      await GymService(dio).registerGym(
+        getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} $accessToken}',
+        GymId(gym_id: gymId),
       );
     } catch (error) {
       error.printError();

@@ -10,6 +10,7 @@ import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_routine_equipmentlist.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
@@ -18,7 +19,8 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarTranparent(
-        scrollController: scrollController, appBarTitleText: "루틴 상세 정보");
+        scrollController: scrollController,
+        appBarTitleText: AppString.str_routine_spec_title);
   }
 
   @override
@@ -36,7 +38,7 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
         padding:
             EdgeInsets.only(top: 0.h, bottom: 10.h, left: 20.w, right: 20.w),
         child: NewfitButton(
-          buttonText: '루틴 수정하기',
+          buttonText: AppString.button_edit_routine,
           buttonColor: AppColors.main,
           onPressFuntion: () {
             isEditMode.value = !isEditMode.value;

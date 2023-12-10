@@ -10,13 +10,14 @@ import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class SettingPage extends BaseView<SettingPageController> with StorageUtil {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return const NewfitAppBarElevated(
-      appBarTitleText: '설정',
+      appBarTitleText: AppString.str_settting_title,
     );
   }
 

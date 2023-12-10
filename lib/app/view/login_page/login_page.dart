@@ -26,7 +26,7 @@ class LoginPage extends BaseView<LoginPageController> {
           SvgPicture.asset(AppString.newfit),
           const Spacer(),
           NewfitLoginButton(
-            buttonText: '구글 로그인',
+            buttonText: AppString.button_google_login,
             buttonColor: const Color(0xFFECECEC),
             buttonTextColor: AppColors.black,
             buttonLeadingIcon: SizedBox(
@@ -41,7 +41,7 @@ class LoginPage extends BaseView<LoginPageController> {
             height: 8.h,
           ),
           NewfitLoginButton(
-            buttonText: '카카오 로그인',
+            buttonText: AppString.button_kakao_login,
             buttonColor: const Color(0xFFFEE500),
             buttonTextColor: AppColors.black,
             buttonLeadingIcon: SizedBox(
