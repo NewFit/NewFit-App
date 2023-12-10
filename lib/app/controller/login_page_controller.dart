@@ -25,14 +25,14 @@ class LoginPageController extends BaseController with StorageUtil {
   }
 
   void checkRegisterStatus() {
-    if (registerStatus == AppString.notRegistered) {
-      debugPrint("not registered user");
+    if (registerStatus == AppString.key_oauth_history_id) {
+      debugPrint(AppString.debug_not_registered);
       Get.toNamed(AppPages.REGISTER);
-    } else if (registerStatus == AppString.registered) {
-      debugPrint("registered user");
+    } else if (registerStatus == AppString.key_authority_id) {
+      debugPrint(AppString.debug_registered);
       Get.toNamed(AppPages.INITIAL);
-    } else if (registerStatus == AppString.registeredButNoGym) {
-      debugPrint("registered but gym not registered");
+    } else if (registerStatus == AppString.key_user_id) {
+      debugPrint(AppString.debug_gym_not_registered);
       Get.toNamed(AppPages.REGISTER_GYM);
     }
   }
@@ -50,7 +50,9 @@ class LoginPageController extends BaseController with StorageUtil {
     );
 
     dio.interceptors.add(logger);
-    UserService(dio).deleteUser(getInt('user-id')!, getString('access-token')!,
-        UserEmail(email: 'nhg1113@gmail.com'));
+    UserService(dio).deleteUser(
+        getInt(AppString.key_user_id)!,
+        getString(AppString.key_access_token)!,
+        UserEmail(email: AppString.key_email));
   }
 }

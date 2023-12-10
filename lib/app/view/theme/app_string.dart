@@ -6,7 +6,7 @@ abstract class AppString {
   static const str_register_title = "회원가입";
   static const str_routine_spec_title = "루틴 상세 정보";
   static const str_routine_title = "루틴";
-  static const str_settting_title = "회원가입";
+  static const str_settting_title = "설정";
   static const str_total_credit = "전체 크레딧";
   static const str_today_credit = "일일 크레딧";
   static const str_error_id_cannot_use_special_character =
@@ -42,11 +42,30 @@ abstract class AppString {
   static const snackbar_check_reservation = "예약 확인";
 
   /*System Texts*/
-  static const key_notRegistered = 'oauth-history-id';
-  static const key_registeredButNoGym = 'user-id';
-  static const key_registered = 'authority-id';
+  static const key_oauth_history_id = 'oauth-history-id';
+  static const key_user_id = 'user-id';
+  static const key_authority_id = 'authority-id';
+  static const key_access_token = 'access-token';
+  static const key_email = 'user-email';
+  static const key_name = 'user-name';
+  static const key_nickname = 'user-nickname';
+  static const key_tel = 'user-tel';
+
+  static const provier_type_google = 'GOOGLE';
+  static const provier_type_kakao = 'KAKAO';
+  static const provier_type_apple = 'APPLE';
   static const date_format_hh_mm = 'HH:mm';
   static const equipment_condition_available = 'AVAILABLE';
+
+  static const debug_kakao_login_success = '카카오계정으로 로그인 성공';
+  static const debug_kakao_login_fail = '카카오계정으로 로그인 실패';
+  static const debug_not_registered = 'not registered user';
+  static const debug_registered = 'registered user';
+  static const debug_gym_not_registered = 'registered but gym not registered';
+
+  static const platform_error_code = 'CANCELED';
+
+  static const jwt_prefix = 'Bearer';
 
   // Local 이미지 소스
   static const home = 'images/icon_home.svg';

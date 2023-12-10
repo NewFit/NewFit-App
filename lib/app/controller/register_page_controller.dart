@@ -8,6 +8,7 @@ import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_model.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../routes/app_pages.dart';
@@ -82,10 +83,10 @@ class RegisterPageController extends BaseController
     );
 
     dio.interceptors.add(logger);
-    final accessToken = getString('access-token')!;
+    final accessToken = getString(AppString.key_access_token)!;
     var newfitToken = await UserService(dio).signUp(
-      'Bearer $accessToken',
-      getInt('oauth-history-id')!,
+      '${AppString.jwt_prefix} $accessToken',
+      getInt(AppString.key_oauth_history_id)!,
       User(
         username: nameEditingController.text,
         email: emailEditingController.text,
@@ -101,17 +102,17 @@ class RegisterPageController extends BaseController
       log('TOKEN 일치');
     } else {
       log('TOKEN 불일치, access_token 새로 저장');
-      saveString('newfit-access-token', newfitToken.access_token);
+      saveString(AppString.key_access_token, newfitToken.access_token);
     }
     saveUserInfo();
     Get.toNamed(AppPages.REGISTER_GYM);
   }
 
   void saveUserInfo() {
-    saveString('user-email', emailEditingController.text);
-    saveString('user-name', nameEditingController.text);
-    saveString('user-nickname', nicknameEditingController.text);
-    saveString('user-tel', phonenumberEditingController.text);
+    saveString(AppString.key_email, emailEditingController.text);
+    saveString(AppString.key_name, nameEditingController.text);
+    saveString(AppString.key_nickname, nicknameEditingController.text);
+    saveString(AppString.key_tel, phonenumberEditingController.text);
   }
 
   @override
