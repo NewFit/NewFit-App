@@ -4,10 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
-import 'package:new_fit/app/services/network_service/authority_service.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../data/model/json_models/equipment/equipment_models.dart';
-import '../data/model/json_models/gym/gym_model.dart';
 import '../services/network_service/equipment_service.dart';
 
 class HomePageController extends BaseController with StorageUtil {
@@ -46,9 +44,10 @@ class HomePageController extends BaseController with StorageUtil {
       final token = "Bearer ${getString('access-token')}";
       final authorityId = getInt('authority-id');
 
-      if(authorityId != null) {
+      if (authorityId != null) {
         log('authority id is $authorityId');
-        var equipments = await service.getAllEquipmentsInGym(authorityId, token);
+        var equipments =
+            await service.getAllEquipmentsInGym(authorityId, token);
         equipmentList(equipments);
       } else {
         log('ERROR : authority id is null!');
