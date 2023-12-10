@@ -11,6 +11,7 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
 
 import '../../common/newfit_button.dart';
@@ -34,7 +35,8 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return const NewfitAppBarFlat(appBarTitleText: '천국의 계단 1');
+    return const NewfitAppBarFlat(
+        appBarTitleText: AppString.str_tmp_equipment_name);
   }
 
   @override
@@ -76,9 +78,9 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.r),
                           child: SizedBox.fromSize(
-                            size: Size.fromRadius(50.h), // Image radius
+                            size: Size.fromRadius(50.h),
                             child: const Image(
-                              image: AssetImage('images/gorani.png'),
+                              image: AssetImage(AppString.gorani),
                             ),
                           ),
                         ),
@@ -100,12 +102,12 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 30.h),
           child: NewfitButton(
-              buttonText: '예약',
+              buttonText: AppString.button_reservation,
               buttonColor: AppColors.main,
               onPressFuntion: () {
                 Get.back();
-                Get.snackbar('예약 확인',
-                    '${DateFormat("HH:mm").format(controller.startTime.value)} ~ ${DateFormat("HH:mm").format(controller.endTime.value)}');
+                Get.snackbar(AppString.snackbar_check_reservation,
+                    '${DateFormat(AppString.date_format_hh_mm).format(controller.startTime.value)} ~ ${DateFormat(AppString.date_format_hh_mm).format(controller.endTime.value)}');
               }),
         ),
       ],
