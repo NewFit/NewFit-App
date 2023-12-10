@@ -24,10 +24,9 @@ abstract class EquipmentService {
   @GET('/equipments')
   Future<EquipmentList> getIdenticalEquipments(
       @Header('Authorization') String accessToken,
-      @Query('equipment_id') int equipment_id);
+      @Query('equipment_id') int equipmentId);
 
   @GET('/equipments/{equipment_gym_id}')
   Future<EquipmentSpec> getEquipmentSpecification(
-      @Header('Authorization') String accessToken,
-      @Path() int equipment_gym_id);
+      @Header('Authorization') String accessToken, @Path() int equipmentGymId);
 }

@@ -14,7 +14,7 @@ class _GymService implements GymService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/avi/v1';
   }
 
   final Dio _dio;
@@ -24,14 +24,14 @@ class _GymService implements GymService {
   @override
   Future<AddressGymList> getGymList(
     String accessToken,
-    int user_id,
-    String gym_name,
+    int userId,
+    String gymName,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'gym_name': gym_name};
+    final queryParameters = <String, dynamic>{r'gym_name': gymName};
     final _headers = <String, dynamic>{
       r'Authorization': accessToken,
-      r'user-id': user_id,
+      r'user-id': userId,
     };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
@@ -43,7 +43,7 @@ class _GymService implements GymService {
     )
             .compose(
               _dio.options,
-              '/api/v1/gyms',
+              '/gyms',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -54,39 +54,6 @@ class _GymService implements GymService {
             ))));
     final value = AddressGymList.fromJson(_result.data!);
     return value;
-  }
-
-  @override
-  Future<void> registerGym(
-    int user_id,
-    String accessToken,
-    GymId gym_id,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'user-id': user_id,
-      r'Authorization': accessToken,
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(gym_id.toJson());
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/api/v1/authority',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
