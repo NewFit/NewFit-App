@@ -449,7 +449,9 @@ class NewfitAppBarTranparent extends StatelessWidget
                       IconButton(
                         padding: EdgeInsets.zero,
                         icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.back();
+                        },
                       ),
                       const Spacer(),
                     ],
@@ -499,7 +501,12 @@ class _UserInfoAppBar extends StatelessWidget {
           backgroundImage: const AssetImage('images/gorani.png'),
         ),
         SizedBox(width: 10.w),
-        NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
+        GestureDetector(
+            child: NewfitTextBoldLg(
+                text: "$userName님 >", textColor: AppColors.black),
+            onTap: () {
+              Get.toNamed(AppPages.MY);
+            }),
         const Spacer(),
         GestureDetector(
           onTap: onPressedFucntion,

@@ -64,7 +64,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
                     ),
                     SizedBox(width: 9.w),
                     Text(
-                      "gorani",
+                      equipmentTitle,
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: AppFontWeights.bold,

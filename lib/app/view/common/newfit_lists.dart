@@ -416,38 +416,3 @@ class TmpNewFitButton extends StatelessWidget {
     );
   }
 }
-
-class NewfitToggleList extends StatelessWidget {
-  const NewfitToggleList({
-    required this.toggleText,
-    required this.checked,
-    super.key,
-  });
-
-  final String toggleText;
-  final bool checked;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      child: SizedBox(
-        child: Row(
-          children: [
-            Icon(
-              Icons.check_circle_outline,
-              color: checked ? AppColors.main : AppColors.unabledGrey,
-              size: 24.h,
-            ),
-            SizedBox(
-              width: 5.h,
-            ),
-            NewfitTextMediumMd(
-              text: toggleText,
-              textColor: AppColors.black,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
