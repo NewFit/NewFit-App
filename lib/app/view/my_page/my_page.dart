@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/my_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_calendar.dart';
@@ -33,6 +36,7 @@ class MyPage extends BaseView<MyPageController> {
 
   @override
   Widget body(BuildContext context) {
+    controller.loadMyPageInfo();
     return BaseBody(
       scrollController: scrollController,
       widgetList: [
@@ -47,9 +51,6 @@ class MyPage extends BaseView<MyPageController> {
                 creditInfo(),
                 SizedBox(height: 10.h),
                 calendar(),
-                const SizedBox(
-                  height: 3000,
-                ),
               ],
             ),
           ],
@@ -61,7 +62,7 @@ class MyPage extends BaseView<MyPageController> {
   Widget calendar() {
     return Container(
       width: 320.w,
-      height: 265.h,
+      height: 320.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: AppColors.white,
@@ -75,60 +76,75 @@ class MyPage extends BaseView<MyPageController> {
   }
 
   Widget creditInfo() {
-    return Container(
-      width: 320.w,
-      height: 100.h,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16.r),
-        color: AppColors.white,
-      ),
-      child: Column(
-        children: [
-          const Spacer(
-            flex: 2,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: const Row(
-              children: [
-                NewfitTextMediumMd(
-                    text: AppString.str_total_credit,
-                    textColor: AppColors.black),
-                Spacer(),
-                NewfitTextMediumMd(text: '10000', textColor: AppColors.main),
-              ],
+    return Obx(() {
+      if (controller.isLoading.value) ;
+      return Container(
+        width: 320.w,
+        height: 100.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16.r),
+          color: AppColors.white,
+        ),
+        child: Column(
+          children: [
+            const Spacer(
+              flex: 2,
             ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: const Row(
-              children: [
-                NewfitTextMediumMd(
-                    text: AppString.str_today_credit,
-                    textColor: AppColors.black),
-                Spacer(),
-                NewfitTextMediumMd(text: '75/100', textColor: AppColors.main),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                children: [
+                  const NewfitTextMediumMd(
+                      text: AppString.str_total_credit,
+                      textColor: AppColors.black),
+                  const Spacer(),
+                  NewfitTextMediumMd(
+                      text: '${controller.myPageinfo.value.total_credit}',
+                      textColor: AppColors.main),
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: 10.h,
-          ),
-          Padding(
+            const Spacer(),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                children: [
+                  const NewfitTextMediumMd(
+                      text: AppString.str_today_credit,
+                      textColor: AppColors.black),
+                  const Spacer(),
+                  NewfitTextMediumMd(
+                      text:
+                          '${controller.myPageinfo.value.this_month_credit} / 100',
+                      textColor: AppColors.main),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: NewfitProgressBar(
-                  progressBarValue: 0.75, progressBarHeight: 8.h)),
-          const Spacer(
-            flex: 2,
-          ),
-        ],
-      ),
-    );
+                progressBarValue:
+                    controller.myPageinfo.value.this_month_credit / 100,
+                progressBarHeight: 8.h,
+              ),
+            ),
+            const Spacer(
+              flex: 2,
+            ),
+          ],
+        ),
+      );
+    });
   }
 
   Widget routineButton() {
     return GestureDetector(
+      onTap: () {
+        Get.toNamed(AppPages.ROUTINE);
+      },
       child: Container(
         width: 320.w,
         height: 50.h,
@@ -153,87 +169,95 @@ class MyPage extends BaseView<MyPageController> {
   }
 
   Widget userInfoTab() {
-    return Stack(
-      children: [
-        SizedBox(
-          height: 210.h,
-          width: 360.w,
-        ),
-        Positioned(
-          top: 75.h,
-          child: Container(
-            height: 135.h,
-            width: 320.w,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(16.r),
-              ),
-              color: AppColors.white,
+    return Obx(
+      () {
+        if (controller.isLoading.value) ;
+
+        return Stack(
+          children: [
+            SizedBox(
+              height: 210.h,
+              width: 360.w,
             ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: CircleAvatar(
-            radius: 75.w,
-          ),
-        ),
-        Positioned(
-          width: 320.w,
-          top: 130.h,
-          child: SizedBox(
-            width: 320.w,
-            child: GestureDetector(
-              child: const Row(
-                children: [
-                  Spacer(),
-                  NewfitTextBold2Xl(
-                    text: '고라니',
-                    textColor: AppColors.black,
+            Positioned(
+              top: 75.h,
+              child: Container(
+                height: 135.h,
+                width: 320.w,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(16.r),
                   ),
-                  Icon(
-                    Icons.edit,
-                    color: Colors.grey,
-                  ),
-                  Spacer(),
-                ],
+                  color: AppColors.white,
+                ),
               ),
-              onTap: () {},
             ),
-          ),
-        ),
-        Positioned(
-          top: 165.h,
-          child: SizedBox(
-            width: 320.w,
-            child: GestureDetector(
-              child: Row(
-                children: [
-                  const Spacer(),
-                  Container(
-                    height: 30.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: AppColors.unabledGrey,
-                    ),
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 5.w, right: 8.w),
-                      child: const Row(
-                        children: [
-                          Icon(Icons.location_on_outlined),
-                          NewfitTextMediumMd(
-                              text: "고라니 헬스장", textColor: AppColors.black),
-                        ],
+            Align(
+              alignment: Alignment.center,
+              child: CircleAvatar(
+                radius: 75.w,
+                foregroundImage:
+                    NetworkImage(controller.myPageinfo.value.profile_file_path),
+              ),
+            ),
+            Positioned(
+              width: 320.w,
+              top: 130.h,
+              child: SizedBox(
+                width: 320.w,
+                child: GestureDetector(
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      NewfitTextBold2Xl(
+                        text: controller.myPageinfo.value.nickname,
+                        textColor: AppColors.black,
                       ),
-                    ),
+                      const Icon(
+                        Icons.edit,
+                        color: Colors.grey,
+                      ),
+                      const Spacer(),
+                    ],
                   ),
-                  const Spacer(),
-                ],
+                  onTap: () {},
+                ),
               ),
             ),
-          ),
-        ),
-      ],
+            Positioned(
+              top: 165.h,
+              child: SizedBox(
+                width: 320.w,
+                child: GestureDetector(
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      Container(
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.r),
+                          color: AppColors.unabledGrey,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 5.w, right: 8.w),
+                          child: const Row(
+                            children: [
+                              Icon(Icons.location_on_outlined),
+                              NewfitTextMediumMd(
+                                  text: "고라니 헬스장", textColor: AppColors.black),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }
