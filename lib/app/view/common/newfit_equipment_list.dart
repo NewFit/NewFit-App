@@ -7,11 +7,12 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
 import '../../routes/app_pages.dart';
+import '../theme/app_string.dart';
 
 class NewfitEquipmentListCell extends StatelessWidget {
   const NewfitEquipmentListCell({
     required this.equipmentTitle,
-    this.imageRoute = 'images/test.png',
+    this.imageRoute = AppString.defaultEquipment,
     required this.currentStatus,
     super.key,
   });
@@ -59,12 +60,12 @@ class NewfitEquipmentListCell extends StatelessWidget {
                       child: Image(
                         width: 64.w,
                         height: 50.h,
-                        image: const AssetImage('images/test.png'),
+                        image: AssetImage(imageRoute),
                       ),
                     ),
                     SizedBox(width: 9.w),
                     Text(
-                      "gorani",
+                      equipmentTitle,
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: AppFontWeights.bold,
@@ -89,14 +90,24 @@ class NewfitEquipmentListCell extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 3.w),
-                      Text(
-                        '예약가능',
-                        style: TextStyle(
-                          color: AppColors.main,
-                          fontWeight: AppFontWeights.extrabold,
-                          fontSize: 10.sp,
+                      if (currentStatus == 1)
+                        Text(
+                          AppString.str_reservation_available,
+                          style: TextStyle(
+                            color: AppColors.main,
+                            fontWeight: AppFontWeights.extrabold,
+                            fontSize: 10.sp,
+                          ),
+                        )
+                      else
+                        Text(
+                          AppString.str_reservation_unavailable,
+                          style: TextStyle(
+                            color: AppColors.warningText,
+                            fontWeight: AppFontWeights.extrabold,
+                            fontSize: 10.sp,
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),
