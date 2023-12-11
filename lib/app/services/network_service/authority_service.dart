@@ -19,7 +19,7 @@ abstract class AuthorityService {
   );
 
   @POST('/authority')
-  Future<void> registerMyGym(
+  Future<HttpResponse> registerMyGym(
       @Header('user-id') int userId,
       @Header('Authorization') String accessToken,
       @Body() RegisterAuthorityGym gym);

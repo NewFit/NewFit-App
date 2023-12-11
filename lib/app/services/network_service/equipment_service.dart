@@ -23,10 +23,13 @@ abstract class EquipmentService {
 
   @GET('/equipments')
   Future<EquipmentList> getIdenticalEquipments(
+      @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
       @Query('equipment_id') int equipmentId);
 
   @GET('/equipments/{equipment_gym_id}')
   Future<EquipmentSpec> getEquipmentSpecification(
-      @Header('Authorization') String accessToken, @Path() int equipmentGymId);
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
+      @Path('equipment_gym_id') int equipmentGymId);
 }
