@@ -11,6 +11,7 @@ import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
 import 'package:new_fit/app/view/main/home_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_my_reservation_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
@@ -49,7 +50,7 @@ class MainPage extends BaseView<MainController> {
         return HomeMyReservationPage();
       case MenuCode.QR:
         return SvgPicture.asset(
-          'images/newfit_logo.svg',
+          AppString.newfit,
           height: 100,
           width: 100,
         );

@@ -7,6 +7,7 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_circle_avatar.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
 class ScoreboardPage extends BaseView<ScoreboardPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
@@ -63,7 +64,7 @@ List<Widget> scoreboardList(int length) {
         rank: index,
         userNickName: 'userNickName',
         credit: 1000,
-        image: Image.asset('images/gorani.png'),
+        image: Image.asset(AppString.gorani),
       ),
     );
   });

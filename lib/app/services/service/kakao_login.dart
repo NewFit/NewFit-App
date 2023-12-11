@@ -9,6 +9,7 @@ import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/services/service/social_login.dart';
 import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/token_model.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class KakaoLogin extends SocialLogin with StorageUtil {
@@ -35,22 +36,20 @@ class KakaoLogin extends SocialLogin with StorageUtil {
     try {
       token = await getKakaoToken();
       tokenInfo = await UserApi.instance.accessTokenInfo();
-      debugPrint('토큰 유효성 체크 성공 ${tokenInfo.id} ${tokenInfo.expiresIn}');
       if (token != null) {
-        debugPrint("정보 보내고 유저 토큰 받기");
         newfitToken = await userService.login(Attribute(
-            attribute_name: tokenInfo.id.toString(), provider_type: "KAKAO"));
-        saveString('access-token', newfitToken!.access_token);
+            attribute_name: tokenInfo.id.toString(),
+            provider_type: AppString.provier_type_kakao));
+        saveString(AppString.key_access_token, newfitToken!.access_token);
         checkIdTypeAndSave();
         return newfitToken!.id_type;
       } else {
-        debugPrint("token is null");
-        return "";
+        return '';
       }
     } catch (error) {
       printError();
       debugPrint(error.toString());
-      return "";
+      return '';
     }
   }
 
@@ -58,41 +57,43 @@ class KakaoLogin extends SocialLogin with StorageUtil {
     if (await isKakaoTalkInstalled()) {
       try {
         token = await UserApi.instance.loginWithKakaoTalk();
-        debugPrint('카카오계정으로 로그인 성공 ${token?.accessToken}');
+        debugPrint(
+            '${AppString.debug_kakao_login_success} ${token?.accessToken}');
         return token;
       } catch (error) {
-        debugPrint('카카오톡으로 로그인 실패 $error');
-        if (error is PlatformException && error.code == 'CANCELED') {
+        debugPrint('${AppString.debug_kakao_login_fail} $error');
+        if (error is PlatformException &&
+            error.code == AppString.platform_error_code) {
           return null;
         }
         try {
           token = await UserApi.instance.loginWithKakaoAccount();
-          debugPrint('카카오계정으로 로그인 성공');
+          debugPrint(AppString.debug_kakao_login_success);
           return token;
         } catch (error) {
-          debugPrint('카카오계정으로 로그인 실패 $error');
+          debugPrint('${AppString.debug_kakao_login_fail} $error');
           return null;
         }
       }
     } else {
       try {
         token = await UserApi.instance.loginWithKakaoAccount();
-        debugPrint('카카오계정으로 로그인 성공');
+        debugPrint(AppString.debug_kakao_login_success);
         return token;
       } catch (error) {
-        debugPrint('카카오계정으로 로그인 실패 $error');
+        debugPrint('${AppString.debug_kakao_login_fail} $error');
         return null;
       }
     }
   }
 
   void checkIdTypeAndSave() {
-    if (newfitToken!.id_type == 'user-id') {
-      saveInt('user-id', newfitToken!.id);
-    } else if (newfitToken!.id_type == 'oauth-history-id') {
-      saveInt('oauth-history-id', newfitToken!.id);
-    } else if (newfitToken!.id_type == 'authority-id') {
-      saveInt('authority-id', newfitToken!.id);
+    if (newfitToken!.id_type == AppString.key_user_id) {
+      saveInt(AppString.key_user_id, newfitToken!.id);
+    } else if (newfitToken!.id_type == AppString.key_oauth_history_id) {
+      saveInt(AppString.key_oauth_history_id, newfitToken!.id);
+    } else if (newfitToken!.id_type == AppString.key_authority_id) {
+      saveInt(AppString.key_authority_id, newfitToken!.id);
     }
   }
 

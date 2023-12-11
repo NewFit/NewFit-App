@@ -9,6 +9,7 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_textfield_with_category.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
 
 class RigsterNameInputPage extends BaseView<RegisterPageController> {
@@ -36,14 +37,14 @@ class RigsterNameInputPage extends BaseView<RegisterPageController> {
             height: 50.h,
           ),
           NewfitTextfieldWithTitle(
-            titleText: '이름을 입력해주세요.',
-            hintText: '이름',
+            titleText: AppString.textfield_name,
+            hintText: AppString.textfield_name_hint,
             controller: controller.nameEditingController,
           ),
           const Spacer(),
           if (controller.nameActive)
             NewfitButton(
-              buttonText: '다음',
+              buttonText: AppString.button_next,
               buttonColor: AppColors.main,
               onPressFuntion: () {
                 controller.tabController
@@ -53,7 +54,7 @@ class RigsterNameInputPage extends BaseView<RegisterPageController> {
             )
           else
             NewfitButton(
-              buttonText: '다음',
+              buttonText: AppString.button_next,
               buttonColor: AppColors.secondary,
               onPressFuntion: () {},
             ),

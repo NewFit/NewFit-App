@@ -9,6 +9,7 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_textfield_with_category.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
 
 class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
@@ -36,14 +37,14 @@ class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
             height: 50.h,
           ),
           NewfitTextfieldWithTitle(
-            titleText: '전화번호를 입력해주세요.',
-            hintText: '01012340000',
+            titleText: AppString.textfield_tel,
+            hintText: AppString.textfield_tel,
             controller: controller.phonenumberEditingController,
           ),
-          Spacer(),
+          const Spacer(),
           if (controller.phoneNumActive)
             NewfitButton(
-              buttonText: '다음',
+              buttonText: AppString.button_next,
               buttonColor: AppColors.main,
               onPressFuntion: () {
                 controller.tabController
@@ -53,7 +54,7 @@ class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
             )
           else
             NewfitButton(
-              buttonText: '다음',
+              buttonText: AppString.button_next,
               buttonColor: AppColors.secondary,
               onPressFuntion: () {},
             ),

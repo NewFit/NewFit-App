@@ -14,7 +14,7 @@ class _GymService implements GymService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1';
   }
 
   final Dio _dio;
@@ -43,7 +43,7 @@ class _GymService implements GymService {
     )
             .compose(
               _dio.options,
-              '/api/v1/gyms',
+              '/gyms',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -54,43 +54,6 @@ class _GymService implements GymService {
             ))));
     final value = AddressGymList.fromJson(_result.data!);
     return value;
-  }
-
-  @override
-  Future<HttpResponse<dynamic>> registerGym(
-    int user_id,
-    String accessToken,
-    GymId gym_id,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{
-      r'user-id': user_id,
-      r'Authorization': accessToken,
-    };
-    _headers.removeWhere((k, v) => v == null);
-    final _data = <String, dynamic>{};
-    _data.addAll(gym_id.toJson());
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/api/v1/authority',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -66,10 +66,11 @@ class RegisterAcceptTermPage extends BaseView<RegisterPageController> {
           thickness: 1.h,
         ),
         SizedBox(height: 20.h),
-        const NewfitToggleList(toggleText: "약관 전체 동의하기", checked: true),
+        const NewfitToggleList(
+            toggleText: AppString.button_aceept_all_terms, checked: true),
         const Spacer(),
         NewfitButton(
-          buttonText: "다음",
+          buttonText: AppString.button_next,
           buttonColor: AppColors.main,
           onPressFuntion: () {
             controller.tabController

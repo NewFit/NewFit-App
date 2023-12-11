@@ -16,6 +16,7 @@ import 'package:new_fit/app/view/register_page/register_sub_pages/register_phone
 import 'package:new_fit/app/view/register_page/register_sub_pages/register_welcome_page.dart';
 
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class RegisterPage extends BaseView<RegisterPageController> {
@@ -82,8 +83,8 @@ class RegisterPage extends BaseView<RegisterPageController> {
             SizedBox(height: 26.h),
             Obx(
               () {
-                Color? disableColor = null;
-                Color? activeColor = null;
+                Color? disableColor;
+                Color? activeColor;
                 if (controller.currentTabIndex.value == 0) {
                   disableColor = Colors.transparent;
                 } else {
@@ -113,7 +114,7 @@ class RegisterPage extends BaseView<RegisterPageController> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: const NewfitTextBold3Xl(
-                text: "회원가입",
+                text: AppString.str_register_title,
                 textColor: AppColors.black,
               ),
             ),

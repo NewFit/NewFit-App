@@ -14,7 +14,7 @@ class _RoutineService implements RoutineService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1';
   }
 
   final Dio _dio;
@@ -22,10 +22,17 @@ class _RoutineService implements RoutineService {
   String? baseUrl;
 
   @override
-  Future<MyRoutineList> getMyRoutineList() async {
+  Future<MyRoutineList> getMyRoutineList(
+    int authorityId,
+    String accessToken,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<MyRoutineList>(Options(
@@ -49,10 +56,18 @@ class _RoutineService implements RoutineService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> addRoutine(PostRoutine postRoutine) async {
+  Future<HttpResponse<dynamic>> addRoutine(
+    int authorityId,
+    String accessToken,
+    PostRoutine postRoutine,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(postRoutine.toJson());
     final _result =
@@ -79,12 +94,18 @@ class _RoutineService implements RoutineService {
 
   @override
   Future<HttpResponse<dynamic>> editRoutine(
+    int authorityId,
+    String accessToken,
     int routine_id,
     PatchRoutine patchRoutine,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(patchRoutine.toJson());
     final _result =
@@ -110,10 +131,18 @@ class _RoutineService implements RoutineService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> deleteRoutine(RoutineId routineId) async {
+  Future<HttpResponse<dynamic>> deleteRoutine(
+    int authorityId,
+    String accessToken,
+    RoutineId routineId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(routineId.toJson());
     final _result =
@@ -139,10 +168,18 @@ class _RoutineService implements RoutineService {
   }
 
   @override
-  Future<RoutineDetail> getMyRoutineDetails(int routine_id) async {
+  Future<RoutineDetail> getMyRoutineDetails(
+    int authorityId,
+    String accessToken,
+    int routine_id,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<RoutineDetail>(Options(
@@ -163,35 +200,6 @@ class _RoutineService implements RoutineService {
             ))));
     final value = RoutineDetail.fromJson(_result.data!);
     return value;
-  }
-
-  @override
-  Future<HttpResponse<dynamic>> reserveWithRoutine(StartAt startAt) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(startAt.toJson());
-    final _result =
-        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/routines/{routine_id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = _result.data;
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

@@ -89,10 +89,10 @@ class _EquipmentService implements EquipmentService {
   @override
   Future<EquipmentList> getIdenticalEquipments(
     String accessToken,
-    int equipment_id,
+    int equipmentId,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'equipment_id': equipment_id};
+    final queryParameters = <String, dynamic>{r'equipment_id': equipmentId};
     final _headers = <String, dynamic>{r'Authorization': accessToken};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
@@ -120,7 +120,7 @@ class _EquipmentService implements EquipmentService {
   @override
   Future<EquipmentSpec> getEquipmentSpecification(
     String accessToken,
-    int equipment_gym_id,
+    int equipmentGymId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -135,7 +135,7 @@ class _EquipmentService implements EquipmentService {
     )
             .compose(
               _dio.options,
-              '/equipments/${equipment_gym_id}',
+              '/equipments/{equipment_gym_id}',
               queryParameters: queryParameters,
               data: _data,
             )
