@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -52,11 +54,16 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     saveInt(AppString.key_authority_id, gymId);
     try {
       final accessToken = getString(AppString.key_access_token)!;
-      await AuthorityService(dio).registerMyGym(
+      final response = await AuthorityService(dio).registerMyGym(
         getInt(AppString.key_user_id)!,
         '${AppString.jwt_prefix} $accessToken',
         RegisterAuthorityGym(gym_id: gymId),
       );
+
+      //TODO : 이 부분 있어야 하는지 아니면 다른 부분에서 authorityId를 저장하는지 확인 필요.
+      int authorityId = int.parse(response.response.headers.value(AppString.key_authority_id)!);
+      log(authorityId.toString());
+      saveInt(AppString.key_authority_id, authorityId);
 
     } catch (error) {
       error.printError();
