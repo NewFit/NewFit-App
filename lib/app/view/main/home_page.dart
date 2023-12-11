@@ -9,19 +9,16 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 
-// Todo : Mock data임. 나중에 지워버리기
-final List<Map<String, dynamic>> mockData = List.generate(
-  10,
-  (index) =>
-      {"equipmentTitle": AppString.str_tmp_equipment_name, "currentStatus": 1},
-);
-
 class HomePage extends BaseView<HomePageController> {
   final ScrollController scrollController;
 
   HomePage({required this.scrollController});
 
-  List<Widget> buildEquipmentList(EquipmentList equipmentList) {
+  List<Widget> buildEquipmentList(EquipmentList? equipmentList) {
+    if(equipmentList == null) {
+      return <Widget>[];
+    }
+
     return List<Widget>.generate(
       equipmentList.equipments.length,
       (index) {
@@ -32,6 +29,8 @@ class HomePage extends BaseView<HomePageController> {
               equipment.condition == AppString.equipment_condition_available
                   ? 1
                   : 0,
+          equipmentId: equipment.equipment_id,
+          equipmentGymId: equipment.equipment_gym_id,
         );
       },
     );
@@ -51,7 +50,7 @@ class HomePage extends BaseView<HomePageController> {
       if (controller.equipmentList.value == null) {
         return const Center(child: Text(AppString.str_no_data));
       }
-      final equipments = controller.equipmentList.value!;
+      final equipments = controller.equipmentList.value;
       return BaseBody(
           scrollController: scrollController,
           widgetList: buildEquipmentList(equipments));

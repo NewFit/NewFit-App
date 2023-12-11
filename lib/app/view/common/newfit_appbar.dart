@@ -10,6 +10,7 @@ import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
+import 'package:new_fit/app/view/theme/app_values.dart';
 
 class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
   NewfitAppBar({
@@ -284,7 +285,7 @@ class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
     required this.appBarTitleText,
   });
 
-  final String appBarTitleText;
+  final Widget appBarTitleText;
 
   @override
   Widget build(BuildContext context) {
@@ -298,11 +299,20 @@ class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
         color: Colors.transparent,
       ),
       child: SafeArea(
-        child: Center(
-          child: NewfitTextBoldXl(
-            text: appBarTitleText,
-            textColor: AppColors.black,
-          ),
+        child: Stack(
+          children: [
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: AppValues.margin),
+                  child: IconButton(
+                      onPressed: () => Get.back(),
+                      icon: const Icon(Icons.arrow_back_ios_new_outlined)),
+                )),
+            Center(
+              child: appBarTitleText,
+            ),
+          ],
         ),
       ),
     );

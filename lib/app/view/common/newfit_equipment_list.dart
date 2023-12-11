@@ -15,8 +15,12 @@ class NewfitEquipmentListCell extends StatelessWidget {
     this.imageRoute = AppString.defaultEquipment,
     required this.currentStatus,
     super.key,
+    required this.equipmentId,
+    required this.equipmentGymId,
   });
 
+  final int equipmentId;
+  final int equipmentGymId;
   final String equipmentTitle;
   final String imageRoute;
   final int currentStatus;
@@ -30,9 +34,8 @@ class NewfitEquipmentListCell extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           controller.navigateTo(
-            route: Routes.HOME_RESERVATION,
-          );
-          //onPressFunc(context);
+              route: Routes.HOME_RESERVATION,
+              args: [equipmentId, equipmentGymId]);
         },
         child: Container(
           width: 320.w,

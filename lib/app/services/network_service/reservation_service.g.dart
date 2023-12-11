@@ -26,6 +26,7 @@ class _ReservationService implements ReservationService {
     int authorityId,
     String accessToken,
     int equipmentGymId,
+    Reservation reservation,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -34,7 +35,8 @@ class _ReservationService implements ReservationService {
       r'Authorization': accessToken,
     };
     _headers.removeWhere((k, v) => v == null);
-    final Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(reservation.toJson());
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
