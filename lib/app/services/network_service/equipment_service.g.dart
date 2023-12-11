@@ -88,12 +88,16 @@ class _EquipmentService implements EquipmentService {
 
   @override
   Future<EquipmentList> getIdenticalEquipments(
+    int authorityId,
     String accessToken,
     int equipmentId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'equipment_id': equipmentId};
-    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -119,12 +123,16 @@ class _EquipmentService implements EquipmentService {
 
   @override
   Future<EquipmentSpec> getEquipmentSpecification(
+    int authorityId,
     String accessToken,
     int equipmentGymId,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -135,7 +143,7 @@ class _EquipmentService implements EquipmentService {
     )
             .compose(
               _dio.options,
-              '/equipments/{equipment_gym_id}',
+              '/equipments/${equipmentGymId}',
               queryParameters: queryParameters,
               data: _data,
             )
