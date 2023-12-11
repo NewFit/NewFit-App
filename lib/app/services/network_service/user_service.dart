@@ -31,9 +31,15 @@ abstract class UserService {
       @Body() ModifyUser modifyUser);
 
   @GET('/api/v1/users')
-  Future<MyPageInfo> getMyPageInfo(
+  Future<MyPageInfo> getMyPageInfoForNotRegistered(
     @Header('Authorization') String accessToken,
     @Header('user-id') int userId,
+  );
+
+  @GET('/api/v1/users')
+  Future<MyPageInfo> getMyPageInfo(
+    @Header('Authorization') String accessToken,
+    @Header('authority-id') int userId,
   );
 
   @POST('/login')
