@@ -49,7 +49,7 @@ class HomePage extends BaseView<HomePageController> {
         return const CircularProgressIndicator();
       }
       if (controller.equipmentList.value == null) {
-        return const Text(AppString.str_no_data);
+        return const Center(child: Text(AppString.str_no_data));
       }
       final equipments = controller.equipmentList.value!;
       return BaseBody(
