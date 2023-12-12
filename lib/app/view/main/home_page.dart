@@ -15,7 +15,7 @@ class HomePage extends BaseView<HomePageController> {
   HomePage({required this.scrollController});
 
   List<Widget> buildEquipmentList(EquipmentList? equipmentList) {
-    if(equipmentList == null) {
+    if (equipmentList == null) {
       return <Widget>[];
     }
 

@@ -56,11 +56,8 @@ class NewfitAppBar extends StatelessWidget
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
-          if (scrollPosition.value > 0.0) {
-            appBarHeight = 105.h + MediaQuery.of(context).padding.top;
-          } else {
-            appBarHeight = 175.h + MediaQuery.of(context).padding.top;
-          }
+            appBarHeight = 135.h + MediaQuery.of(context).padding.top;
+
         }
         return Container(
           height: appBarHeight,
@@ -96,16 +93,16 @@ class NewfitAppBar extends StatelessWidget
       children: [
         SizedBox(height: 13.h),
         _UserInfoAppBar(
-          userName: getString(AppString.key_nickname)!,
-          onPressedFucntion: () {
+          userName: getString(AppString.key_nickname) ?? 'NULL',
+          onPressedFunction: () {
             Get.toNamed(AppPages.SETTING);
           },
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
         if (scrollPosition.value <= 0.0)
           _UserCreditInfo(
-            totalCredit: getInt(AppString.key_total_credit)!,
-            todayCredit: getInt(AppString.key_this_month_credit)!,
+            totalCredit: getInt(AppString.key_total_credit) ?? 0,
+            todayCredit: getInt(AppString.key_this_month_credit) ?? 0,
           ),
         SizedBox(height: 15.h),
         Align(
@@ -126,14 +123,9 @@ class NewfitAppBar extends StatelessWidget
         SizedBox(height: 13.h),
         _UserInfoAppBar(
           userName: getString(AppString.key_nickname)!,
-          onPressedFucntion: () {},
+          onPressedFunction: () {},
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
-        if (scrollPosition.value <= 0.0)
-          _UserCreditInfo(
-            totalCredit: getInt(AppString.key_total_credit)!,
-            todayCredit: getInt(AppString.key_this_month_credit)!,
-          ),
         SizedBox(height: 15.h),
         Align(
           alignment: Alignment.center,
@@ -276,7 +268,7 @@ class NewfitAppBarWithSchedule extends StatelessWidget
               SizedBox(height: 13.h),
               _UserInfoAppBar(
                 userName: "고라니",
-                onPressedFucntion: () {},
+                onPressedFunction: () {},
               ),
               SizedBox(height: 13.h),
               SizedBox(height: 15.h),
@@ -413,12 +405,40 @@ class _HomeAppBar extends StatelessWidget {
 class _UserInfoAppBar extends StatelessWidget with StorageUtil {
   _UserInfoAppBar({
     required this.userName,
-    required this.onPressedFucntion,
+    required this.onPressedFunction,
     super.key,
   });
 
   final String userName;
-  final Function()? onPressedFucntion;
+  final Function()? onPressedFunction;
+
+  ImageProvider<Object>? getProfileImage() {
+    String? imageUrl = getString(AppString.key_profile_file_path);
+
+    if (imageUrl != null && isValidUrl(imageUrl)) {
+      try {
+        return NetworkImage(imageUrl);
+      } catch (e) {
+        return const AssetImage(AppString.gorani);
+      }
+    } else {
+      return const AssetImage(AppString.gorani);
+    }
+  }
+
+  bool isValidUrl(String url) {
+    var pattern = r'^(?:http|ftp)s?://' // http:// or https://
+        r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+' // domain
+        r'(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|' // domain name
+        r'localhost|' // localhost
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|' // ...or ipv4
+        r'\[?[A-F0-9]*:[A-F0-9:]+\]?)' // ...or ipv6
+        r'(?::\d+)?' // optional port
+        r'(?:/?|[/?]\S+)$';
+    RegExp regExp = RegExp(pattern, caseSensitive: false);
+
+    return regExp.hasMatch(url);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -426,10 +446,7 @@ class _UserInfoAppBar extends StatelessWidget with StorageUtil {
       children: [
         CircleAvatar(
           radius: 15.h,
-          foregroundImage: (getString(AppString.key_profile_file_path) != null
-                  ? const AssetImage(AppString.gorani)
-                  : NetworkImage(getString(AppString.key_profile_file_path)!))
-              as ImageProvider,
+          foregroundImage: getProfileImage(),
         ),
         SizedBox(width: 10.w),
         GestureDetector(
@@ -440,7 +457,7 @@ class _UserInfoAppBar extends StatelessWidget with StorageUtil {
             }),
         const Spacer(),
         GestureDetector(
-          onTap: onPressedFucntion,
+          onTap: onPressedFunction,
           child: const Icon(
             Icons.settings,
           ),
