@@ -54,7 +54,6 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     saveInt(AppString.key_gym_id, gymId);
     try {
       final accessToken = getString(AppString.key_access_token)!;
-      await AuthorityService(dio).registerMyGym(
 
       final response = await AuthorityService(dio).registerMyGym(
         getInt(AppString.key_user_id)!,
@@ -62,10 +61,10 @@ class RegisterGymPageController extends BaseController with StorageUtil {
         RegisterAuthorityGym(gym_id: gymId),
       );
 
-      int authorityId = int.parse(response.response.headers.value(AppString.key_authority_id)!);
+      int authorityId = int.parse(
+          response.response.headers.value(AppString.key_authority_id)!);
       log(authorityId.toString());
       saveInt(AppString.key_authority_id, authorityId);
-
     } catch (error) {
       error.printError();
     }
