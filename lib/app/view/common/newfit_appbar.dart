@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
+import 'package:new_fit/app/controller/routine_add_page_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
+import 'package:new_fit/app/view/common/newfit_text_field.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
@@ -516,4 +518,64 @@ class _UserCreditInfo extends StatelessWidget {
       ],
     );
   }
+}
+
+class NewfitRoutineAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
+  NewfitRoutineAppBar({
+    super.key,
+    required this.controller,
+  });
+
+  RoutineAddPageController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50.h + MediaQuery.of(context).padding.top,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(16.r),
+          bottomRight: Radius.circular(16.r),
+        ),
+        color: Colors.transparent,
+      ),
+      child: SafeArea(
+        child: Stack(
+          children: [
+            Center(
+                child: SizedBox(
+              width: 200.w,
+              child: NewfitInfoInputTextField(
+                controller: controller.routineNameEditingController,
+                hintText: '',
+              ),
+            )),
+            Positioned(
+              left: 15.w,
+              child: SizedBox(
+                height: 50.h,
+                child: Column(
+                  children: [
+                    const Spacer(),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      icon: const Icon(Icons.arrow_back_ios),
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                    const Spacer(),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(50.h);
 }
