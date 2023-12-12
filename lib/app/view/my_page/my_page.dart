@@ -9,6 +9,7 @@ import 'package:new_fit/app/controller/my_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
+import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_calendar.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
@@ -18,6 +19,7 @@ import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class MyPage extends BaseView<MyPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+  MyPageController controller = Get.put(MyPageController());
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -35,23 +37,47 @@ class MyPage extends BaseView<MyPageController> {
   }
 
   @override
+  Widget pageContent(BuildContext context) {
+    return SafeArea(child: body(context));
+  }
+
+  @override
   Widget body(BuildContext context) {
-    controller.loadMyPageInfo();
+    controller = Get.isRegistered<MyPageController>()
+        ? Get.find<MyPageController>()
+        : Get.put(MyPageController());
+
     return BaseBody(
       scrollController: scrollController,
       widgetList: [
         Stack(
           children: [
-            Column(
-              children: [
-                userInfoTab(),
-                SizedBox(height: 10.h),
-                routineButton(),
-                SizedBox(height: 10.h),
-                creditInfo(),
-                SizedBox(height: 10.h),
-                calendar(),
-              ],
+            FutureBuilder(
+              future: controller.mainFuture.value,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.active:
+                  case ConnectionState.waiting:
+                    return const Loading();
+                  case ConnectionState.done:
+                    if (snapshot.hasError) return Container();
+                    controller.assignFutures((snapshot.data! as List));
+
+                    return Column(
+                      children: [
+                        userInfoTab(),
+                        SizedBox(height: 10.h),
+                        routineButton(),
+                        SizedBox(height: 10.h),
+                        creditInfo(),
+                        SizedBox(height: 10.h),
+                        calendar(),
+                      ],
+                    );
+                  case ConnectionState.none:
+                    return const Loading();
+                }
+              },
             ),
           ],
         ),
@@ -76,68 +102,65 @@ class MyPage extends BaseView<MyPageController> {
   }
 
   Widget creditInfo() {
-    return Obx(() {
-      if (controller.isLoading.value) ;
-      return Container(
-        width: 320.w,
-        height: 100.h,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16.r),
-          color: AppColors.white,
-        ),
-        child: Column(
-          children: [
-            const Spacer(
-              flex: 2,
+    return Container(
+      width: 320.w,
+      height: 100.h,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16.r),
+        color: AppColors.white,
+      ),
+      child: Column(
+        children: [
+          const Spacer(
+            flex: 2,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                const NewfitTextMediumMd(
+                    text: AppString.str_total_credit,
+                    textColor: AppColors.black),
+                const Spacer(),
+                NewfitTextMediumMd(
+                    text: '${controller.myPageInfo.value.total_credit}',
+                    textColor: AppColors.main),
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                children: [
-                  const NewfitTextMediumMd(
-                      text: AppString.str_total_credit,
-                      textColor: AppColors.black),
-                  const Spacer(),
-                  NewfitTextMediumMd(
-                      text: '${controller.myPageinfo.value.total_credit}',
-                      textColor: AppColors.main),
-                ],
-              ),
+          ),
+          const Spacer(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: Row(
+              children: [
+                const NewfitTextMediumMd(
+                    text: AppString.str_today_credit,
+                    textColor: AppColors.black),
+                const Spacer(),
+                NewfitTextMediumMd(
+                    text:
+                        '${controller.myPageInfo.value.this_month_credit ?? 0} / 100',
+                    textColor: AppColors.main),
+              ],
             ),
-            const Spacer(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                children: [
-                  const NewfitTextMediumMd(
-                      text: AppString.str_today_credit,
-                      textColor: AppColors.black),
-                  const Spacer(),
-                  NewfitTextMediumMd(
-                      text:
-                          '${controller.myPageinfo.value.this_month_credit} / 100',
-                      textColor: AppColors.main),
-                ],
-              ),
+          ),
+          SizedBox(
+            height: 10.h,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: NewfitProgressBar(
+              progressBarValue:
+                  (controller.myPageInfo.value.this_month_credit ?? 0) / 100,
+              progressBarHeight: 8.h,
             ),
-            SizedBox(
-              height: 10.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: NewfitProgressBar(
-                progressBarValue:
-                    controller.myPageinfo.value.this_month_credit / 100,
-                progressBarHeight: 8.h,
-              ),
-            ),
-            const Spacer(
-              flex: 2,
-            ),
-          ],
-        ),
-      );
-    });
+          ),
+          const Spacer(
+            flex: 2,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget routineButton() {
@@ -169,95 +192,92 @@ class MyPage extends BaseView<MyPageController> {
   }
 
   Widget userInfoTab() {
-    return Obx(
-      () {
-        if (controller.isLoading.value) ;
-
-        return Stack(
-          children: [
-            SizedBox(
-              height: 210.h,
-              width: 360.w,
+    return Stack(
+      children: [
+        SizedBox(
+          height: 210.h,
+          width: 360.w,
+        ),
+        Positioned(
+          top: 75.h,
+          child: Container(
+            height: 135.h,
+            width: 320.w,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(
+                Radius.circular(16.r),
+              ),
+              color: AppColors.white,
             ),
-            Positioned(
-              top: 75.h,
-              child: Container(
-                height: 135.h,
-                width: 320.w,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(16.r),
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: CircleAvatar(
+            radius: 75.w,
+            foregroundImage: NetworkImage(
+                controller.myPageInfo.value.profile_file_path ?? ''),
+          ),
+        ),
+        Positioned(
+          width: 320.w,
+          top: 130.h,
+          child: SizedBox(
+            width: 320.w,
+            child: GestureDetector(
+              child: Row(
+                children: [
+                  const Spacer(),
+                  NewfitTextBold2Xl(
+                    text: controller.myPageInfo.value.nickname ?? '',
+                    textColor: AppColors.black,
                   ),
-                  color: AppColors.white,
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: CircleAvatar(
-                radius: 75.w,
-                foregroundImage:
-                    NetworkImage(controller.myPageinfo.value.profile_file_path),
-              ),
-            ),
-            Positioned(
-              width: 320.w,
-              top: 130.h,
-              child: SizedBox(
-                width: 320.w,
-                child: GestureDetector(
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      NewfitTextBold2Xl(
-                        text: controller.myPageinfo.value.nickname,
-                        textColor: AppColors.black,
-                      ),
-                      const Icon(
-                        Icons.edit,
-                        color: Colors.grey,
-                      ),
-                      const Spacer(),
-                    ],
+                  const Icon(
+                    Icons.edit,
+                    color: Colors.grey,
                   ),
-                  onTap: () {},
-                ),
+                  const Spacer(),
+                ],
               ),
+              onTap: () {},
             ),
-            Positioned(
-              top: 165.h,
-              child: SizedBox(
-                width: 320.w,
-                child: GestureDetector(
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      Container(
-                        height: 30.h,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8.r),
-                          color: AppColors.unabledGrey,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 5.w, right: 8.w),
-                          child: const Row(
-                            children: [
-                              Icon(Icons.location_on_outlined),
-                              NewfitTextMediumMd(
-                                  text: "고라니 헬스장", textColor: AppColors.black),
-                            ],
-                          ),
-                        ),
+          ),
+        ),
+        Positioned(
+          top: 165.h,
+          child: SizedBox(
+            width: 320.w,
+            child: GestureDetector(
+              child: Row(
+                children: [
+                  const Spacer(),
+                  Container(
+                    height: 30.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.r),
+                      color: AppColors.unabledGrey,
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 5.w, right: 8.w),
+                      child: Row(
+                        children: [
+                          Icon(Icons.location_on_outlined),
+                          NewfitTextMediumMd(
+                              text: controller
+                                      .myPageInfo.value.current?.gym_name ??
+                                  '',
+                              textColor: AppColors.black),
+                        ],
                       ),
-                      const Spacer(),
-                    ],
+                    ),
                   ),
-                ),
+                  const Spacer(),
+                ],
               ),
             ),
-          ],
-        );
-      },
+          ),
+        ),
+      ],
     );
   }
 }
