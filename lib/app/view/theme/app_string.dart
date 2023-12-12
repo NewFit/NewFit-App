@@ -39,6 +39,7 @@ abstract class AppString {
   static const button_do_later = "다음에 할게요.";
   static const button_edit_routine = "루틴 수정하기";
   static const button_add_routine = "루틴 추가";
+  static const button_add_equipment = "기구 추가";
 
   // SnackBar Text
   static const snackbar_check_reservation = "예약 확인";
@@ -56,7 +57,6 @@ abstract class AppString {
   static const key_total_credit = 'total-credit';
   static const key_this_month_credit = 'this-month-credit';
   static const key_gym_id = 'gym_id';
-
 
   static const provier_type_google = 'GOOGLE';
   static const provier_type_kakao = 'KAKAO';
