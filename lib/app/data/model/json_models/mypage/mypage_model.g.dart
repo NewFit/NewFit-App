@@ -7,14 +7,16 @@ part of 'mypage_model.dart';
 // **************************************************************************
 
 MyPageInfo _$MyPageInfoFromJson(Map<String, dynamic> json) => MyPageInfo(
-      profile_file_path: json['profile_file_path'] as String,
-      nickname: json['nickname'] as String,
-      total_credit: json['total_credit'] as int,
-      this_month_credit: json['this_month_credit'] as int,
-      current: AuthorityGym.fromJson(json['current'] as Map<String, dynamic>),
-      authority_gyms_count: json['authority_gyms_count'] as int,
-      authority_gyms: (json['authority_gyms'] as List<dynamic>)
-          .map((e) => AuthorityGym.fromJson(e as Map<String, dynamic>))
+      profile_file_path: json['profile_file_path'] as String?,
+      nickname: json['nickname'] as String?,
+      total_credit: json['total_credit'] as int?,
+      this_month_credit: json['this_month_credit'] as int?,
+      current: json['current'] == null
+          ? null
+          : AuthorityGym.fromJson(json['current'] as Map<String, dynamic>),
+      authority_gyms_count: json['authority_gyms_count'] as int?,
+      authority_gyms: (json['authority_gyms'] as List<dynamic>?)
+          ?.map((e) => AuthorityGym.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

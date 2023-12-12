@@ -7,22 +7,22 @@ part 'mypage_model.g.dart';
 
 @JsonSerializable()
 class MyPageInfo {
-  String profile_file_path;
-  String nickname;
-  int total_credit;
-  int this_month_credit;
-  AuthorityGym current;
-  int authority_gyms_count;
-  List<AuthorityGym> authority_gyms;
+  String? profile_file_path;
+  String? nickname;
+  int? total_credit;
+  int? this_month_credit;
+  AuthorityGym? current;
+  int? authority_gyms_count;
+  List<AuthorityGym>? authority_gyms;
 
   MyPageInfo({
-    required this.profile_file_path,
-    required this.nickname,
-    required this.total_credit,
-    required this.this_month_credit,
-    required this.current,
-    required this.authority_gyms_count,
-    required this.authority_gyms,
+    this.profile_file_path,
+    this.nickname,
+    this.total_credit,
+    this.this_month_credit,
+    this.current,
+    this.authority_gyms_count,
+    this.authority_gyms,
   });
 
   factory MyPageInfo.fromJson(Map<String, dynamic> json) =>
