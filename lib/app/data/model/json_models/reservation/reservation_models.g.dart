@@ -7,14 +7,14 @@ part of 'reservation_models.dart';
 // **************************************************************************
 
 Reservation _$ReservationFromJson(Map<String, dynamic> json) => Reservation(
-      start_at: DateTime.parse(json['start_at'] as String),
-      end_at: DateTime.parse(json['end_at'] as String),
+      start_at: const DateTimeConverter().fromJson(json['start_at'] as String),
+      end_at: const DateTimeConverter().fromJson(json['end_at'] as String),
     );
 
 Map<String, dynamic> _$ReservationToJson(Reservation instance) =>
     <String, dynamic>{
-      'start_at': instance.start_at.toIso8601String(),
-      'end_at': instance.end_at.toIso8601String(),
+      'start_at': const DateTimeConverter().toJson(instance.start_at),
+      'end_at': const DateTimeConverter().toJson(instance.end_at),
     };
 
 PatchReservation _$PatchReservationFromJson(Map<String, dynamic> json) =>

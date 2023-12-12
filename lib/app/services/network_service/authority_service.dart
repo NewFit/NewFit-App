@@ -14,23 +14,25 @@ abstract class AuthorityService {
 
   @GET('/authority')
   Future<AddressGym> getMyGymList(
-    @Header('authority-id') String authorityId,
+    @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
 
   @POST('/authority')
-  Future<void> registerMyGym(
+  Future<HttpResponse> registerMyGym(
       @Header('user-id') int userId,
       @Header('Authorization') String accessToken,
       @Body() RegisterAuthorityGym gym);
 
   @GET('/authority/reservations')
   Future<ReservationList> getMyReservationList(
-    @Header('authority-id') String authorityId,
+    @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
 
   @PATCH('/authority/entry')
-  Future<HttpResponse> enterGym(@Header('Authorization') String accessToken,
+  Future<HttpResponse> enterGym(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
       @Body() EntranceTag entranceTag);
 }

@@ -15,6 +15,8 @@ abstract class AppString {
   static const str_error_cannot_use_email = "사용할 수 없는 이메일입니다.";
   static const str_tmp_equipment_name = "천국의 계단1";
   static const str_no_data = "정보가 없습니다.";
+  static const str_reservation_available = "예약 가능";
+  static const str_reservation_unavailable = "예약 불가";
 
   static const textfield_email = "이메일을 입력해주세요.";
   static const textfield_email_hint = "newfit@newfit.com";
@@ -53,6 +55,8 @@ abstract class AppString {
   static const key_profile_file_path = 'user-profile-file-path';
   static const key_total_credit = 'total-credit';
   static const key_this_month_credit = 'this-month-credit';
+  static const key_gym_id = 'gym_id';
+
 
   static const provier_type_google = 'GOOGLE';
   static const provier_type_kakao = 'KAKAO';
@@ -79,4 +83,5 @@ abstract class AppString {
   static const google = 'images/icon_google.png';
   static const kakao = 'images/icon_kakao.png';
   static const gorani = 'images/gorani.png';
+  static const defaultEquipment = 'images/test.png';
 }

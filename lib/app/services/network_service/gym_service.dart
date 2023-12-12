@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:dio/dio.dart' hide Headers;
 import 'package:new_fit/app/data/model/json_models/gym/gym_model.dart';
 import 'package:retrofit/retrofit.dart';
 

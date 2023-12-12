@@ -12,8 +12,11 @@ abstract class ReservationService {
   factory ReservationService(Dio dio, {String baseUrl}) = _ReservationService;
 
   @POST('/reservations/{equipmentGymId}')
-  Future<HttpResponse> reserveEquipment(@Header('authority-id') int authorityId,
-      @Header('Authorization') String accessToken, @Path() int equipmentGymId);
+  Future<HttpResponse> reserveEquipment(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
+      @Path('equipmentGymId') int equipmentGymId,
+      @Body() Reservation reservation);
 
   @PATCH('/reservations/{reservationId}')
   Future<HttpResponse> editReservation(@Header('authority-id') int authorityId,

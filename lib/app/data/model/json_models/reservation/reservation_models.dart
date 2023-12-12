@@ -1,12 +1,31 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../json_datetime_converter.dart';
 
 part 'reservation_models.g.dart';
 
+class DateTimeConverter implements JsonConverter<DateTime, String> {
+  const DateTimeConverter();
+
+  @override
+  DateTime fromJson(String json) {
+    return DateTime.parse(json);
+  }
+
+  @override
+  String toJson(DateTime dateTime) {
+    return DateFormat("yyyy-MM-ddTHH:mm:ss").format(dateTime);
+  }
+}
+
 @JsonSerializable()
 class Reservation {
+  @DateTimeConverter()
   DateTime start_at;
+  @DateTimeConverter()
   DateTime end_at;
 
   Reservation({

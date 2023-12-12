@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -49,14 +51,21 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
-    saveInt(AppString.key_authority_id, gymId);
+    saveInt(AppString.key_gym_id, gymId);
     try {
       final accessToken = getString(AppString.key_access_token)!;
       await AuthorityService(dio).registerMyGym(
+
+      final response = await AuthorityService(dio).registerMyGym(
         getInt(AppString.key_user_id)!,
         '${AppString.jwt_prefix} $accessToken',
         RegisterAuthorityGym(gym_id: gymId),
       );
+
+      int authorityId = int.parse(response.response.headers.value(AppString.key_authority_id)!);
+      log(authorityId.toString());
+      saveInt(AppString.key_authority_id, authorityId);
+
     } catch (error) {
       error.printError();
     }

@@ -2,11 +2,14 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
+import '../json_datetime_converter.dart';
+
 part 'entrance_tag_model.g.dart';
 
 @JsonSerializable()
 class EntranceTag {
   int gym_id;
+  @DateTimeConverter()
   DateTime tag_at;
 
   EntranceTag({
