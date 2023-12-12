@@ -77,12 +77,12 @@ class RoutineDetail {
 
 @JsonSerializable()
 class PostRoutine {
-  String routine_name;
-  List<RoutineEquipment> routine_equipments;
+  String? routine_name;
+  List<RoutineEquipment>? routine_equipments;
 
   PostRoutine({
-    required this.routine_name,
-    required this.routine_equipments,
+    this.routine_name,
+    this.routine_equipments,
   });
 
   factory PostRoutine.fromJson(Map<String, dynamic> json) =>

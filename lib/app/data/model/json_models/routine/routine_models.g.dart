@@ -61,9 +61,9 @@ Map<String, dynamic> _$RoutineDetailToJson(RoutineDetail instance) =>
     };
 
 PostRoutine _$PostRoutineFromJson(Map<String, dynamic> json) => PostRoutine(
-      routine_name: json['routine_name'] as String,
-      routine_equipments: (json['routine_equipments'] as List<dynamic>)
-          .map((e) => RoutineEquipment.fromJson(e as Map<String, dynamic>))
+      routine_name: json['routine_name'] as String?,
+      routine_equipments: (json['routine_equipments'] as List<dynamic>?)
+          ?.map((e) => RoutineEquipment.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
