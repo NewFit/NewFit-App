@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/my_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
@@ -261,7 +259,7 @@ class MyPage extends BaseView<MyPageController> {
                       padding: EdgeInsets.only(left: 5.w, right: 8.w),
                       child: Row(
                         children: [
-                          Icon(Icons.location_on_outlined),
+                          const Icon(Icons.location_on_outlined),
                           NewfitTextMediumMd(
                               text: controller
                                       .myPageInfo.value.current?.gym_name ??
