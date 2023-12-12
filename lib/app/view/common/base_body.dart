@@ -7,7 +7,8 @@ import 'package:new_fit/app/view/theme/app_values.dart';
 class BaseBody extends StatelessWidget {
   final ScrollController? scrollController;
   final List<Widget> widgetList;
-  double? columnHeight = 220.h;
+  double? columnHeight = 640.h;
+
   BaseBody({
     this.scrollController,
     required this.widgetList,
