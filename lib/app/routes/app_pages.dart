@@ -37,6 +37,7 @@ class AppPages {
   static const LOGIN = Routes.LOGIN;
   static const MY = Routes.MY;
   static const ROUTINE = Routes.ROUTINE;
+  static const ROUTINE_ADD = Routes.ROUTINE_ADD;
   static const ROUTINE_MORE_INFO = Routes.ROUTINE_MORE_INFO;
   static const SCOREBOARD = Routes.SCOREBOARD;
   static const TEST_PAGE = Routes.TEST_PAGE;
