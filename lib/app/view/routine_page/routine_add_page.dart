@@ -9,8 +9,10 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
+import 'package:new_fit/app/view/common/newfit_routine_equipmentlist.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class RoutineAddPage extends BaseView<RoutineAddPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
@@ -25,9 +27,16 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
 
   @override
   Widget body(BuildContext context) {
-    return BaseBody(
-      widgetList: [],
-      scrollController: scrollController,
+    return SingleChildScrollView(
+      controller: scrollController,
+      child: Obx(() {
+        if (controller.reload.value) ;
+        return Center(
+          child: Column(
+            children: newfitRoutineCardList(),
+          ),
+        );
+      }),
     );
   }
 
@@ -37,9 +46,12 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w),
         child: NewfitButton(
-            buttonText: AppString.button_add_routine,
-            buttonColor: AppColors.main,
-            onPressFuntion: () {}),
+          buttonText: AppString.button_add_routine,
+          buttonColor: AppColors.main,
+          onPressFuntion: () {
+            controller.addRoutine();
+          },
+        ),
       ),
     );
   }
@@ -50,7 +62,116 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
       backgroundColor: AppColors.main,
       contentColor: AppColors.white,
       fabTitleText: AppString.button_add_equipment,
-      onPressedFunction: () {},
+      onPressedFunction: () {
+        Get.dialog(
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 150.h),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                color: AppColors.white,
+              ),
+              child: Column(children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: const NewfitTextBold2Xl(
+                      text: 'text', textColor: AppColors.black),
+                ),
+                GestureDetector(
+                  child: newfitImage(),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.h),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: GestureDetector(
+                          child: Icon(Icons.remove),
+                        ),
+                      ),
+                      Container(
+                        width: 80.w,
+                        height: 30.h,
+                        decoration: BoxDecoration(
+                            border: Border.all(),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.r))),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.w),
+                        child: GestureDetector(
+                          child: Icon(Icons.add),
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
+                  child: SizedBox(
+                    height: 30.h,
+                    child: NewfitButton(
+                      buttonText: '추가',
+                      buttonColor: AppColors.main,
+                      onPressFuntion: () {
+                        controller.addEquipment();
+                        Get.back();
+                      },
+                    ),
+                  ),
+                )
+              ]),
+            ),
+          ),
+        );
+      },
     );
   }
+
+  List<Widget> newfitRoutineCardList() {
+    return List.generate(
+        controller.postRoutine.value.routine_equipments?.length ?? 0, (index) {
+      return Padding(
+        padding: EdgeInsets.only(top: 10.h),
+        child: NewfitRoutineEquipmentListCell(
+          listTitle:
+              '${controller.postRoutine.value.routine_equipments?[index].sequence ?? ''}',
+          minute: controller
+                  .postRoutine.value.routine_equipments?[index].duration ??
+              0,
+        ),
+      );
+    });
+  }
+}
+
+Widget newfitImage() {
+  return SizedBox(
+    width: 125.w,
+    height: 125.w,
+    child: Stack(
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(8.r)),
+          child: const Image(
+            image: AssetImage('images/gorani.png'),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.main,
+            ),
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.r),
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
