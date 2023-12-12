@@ -29,7 +29,7 @@ abstract class _Paths {
   static const SETTING = "/setting";
   static const MY = "/my";
   static const ROUTINE = "/routine";
-  static const ROUTINE_ADD = "/routine_add";
+  static const ROUTINE_ADD = "/routine/routine_add";
   static const ROUTINE_MORE_INFO = "/routine_more_info";
   static const SCOREBOARD = '/scoreboard';
   static const HOME_RESERVATION = '/home_reservation';
