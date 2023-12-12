@@ -6,6 +6,7 @@ import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
 import 'package:new_fit/app/bindings/register_gym_page_binding.dart';
+import 'package:new_fit/app/bindings/routine_add_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_more_info_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
@@ -16,6 +17,7 @@ import 'package:new_fit/app/view/main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
 import 'package:new_fit/app/view/register_page/register_gym_page.dart';
 import 'package:new_fit/app/view/register_page/register_page.dart';
+import 'package:new_fit/app/view/routine_page/routine_add_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
@@ -73,6 +75,12 @@ class AppPages {
       name: _Paths.ROUTINE,
       page: () => RoutinePage(),
       binding: RoutinePageBinding(),
+      transition: Transition.fadeIn,
+    ),
+    GetPage(
+      name: _Paths.ROUTINE_ADD,
+      page: () => RoutineAddPage(),
+      binding: RoutineAddPageBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
