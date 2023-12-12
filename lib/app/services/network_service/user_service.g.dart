@@ -160,13 +160,20 @@ class _UserService implements UserService {
   }
 
   @override
-  Future<MyPage> getMyPageInfo() async {
+  Future<MyPageInfo> getMyPageInfoForNotRegistered(
+    String accessToken,
+    int userId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'user-id': userId,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<MyPage>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MyPageInfo>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -182,7 +189,41 @@ class _UserService implements UserService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MyPage.fromJson(_result.data!);
+    final value = MyPageInfo.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MyPageInfo> getMyPageInfo(
+    String accessToken,
+    int userId,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'authority-id': userId,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<MyPageInfo>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/v1/users',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MyPageInfo.fromJson(_result.data!);
     return value;
   }
 

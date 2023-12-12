@@ -59,11 +59,10 @@ class RegisterGymPageController extends BaseController with StorageUtil {
         '${AppString.jwt_prefix} $accessToken',
         RegisterAuthorityGym(gym_id: gymId),
       );
-
-      int authorityId = int.parse(response.response.headers.value(AppString.key_authority_id)!);
+      int authorityId = int.parse(
+          response.response.headers.value(AppString.key_authority_id)!);
       log(authorityId.toString());
       saveInt(AppString.key_authority_id, authorityId);
-
     } catch (error) {
       error.printError();
     }

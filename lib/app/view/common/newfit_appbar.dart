@@ -4,15 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
 
-class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
+class NewfitAppBar extends StatelessWidget
+    with StorageUtil
+    implements PreferredSizeWidget {
   NewfitAppBar({
     required this.mainController,
     required this.scrollController,
@@ -90,16 +94,16 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         SizedBox(height: 13.h),
         _UserInfoAppBar(
-          userName: "고라니",
+          userName: getString(AppString.key_nickname)!,
           onPressedFucntion: () {
             Get.toNamed(AppPages.SETTING);
           },
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
         if (scrollPosition.value <= 0.0)
-          const _UserCreditInfo(
-            totalCredit: 10000,
-            todayCredit: 100,
+          _UserCreditInfo(
+            totalCredit: getInt(AppString.key_total_credit)!,
+            todayCredit: getInt(AppString.key_this_month_credit)!,
           ),
         SizedBox(height: 15.h),
         Align(
@@ -119,14 +123,14 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         SizedBox(height: 13.h),
         _UserInfoAppBar(
-          userName: "고라니",
+          userName: getString(AppString.key_nickname)!,
           onPressedFucntion: () {},
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
         if (scrollPosition.value <= 0.0)
-          const _UserCreditInfo(
-            totalCredit: 10000,
-            todayCredit: 100,
+          _UserCreditInfo(
+            totalCredit: getInt(AppString.key_total_credit)!,
+            todayCredit: getInt(AppString.key_this_month_credit)!,
           ),
         SizedBox(height: 15.h),
         Align(
@@ -137,94 +141,6 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
               onPressFuntion: () {}),
         ),
       ],
-    );
-  }
-
-  _scrollListener() {
-    scrollPosition.value = scrollController.offset;
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(appBarHeight);
-}
-
-class NewfitAppBarWithButton extends StatelessWidget
-    implements PreferredSizeWidget {
-  NewfitAppBarWithButton({
-    super.key,
-    required this.scrollController,
-    required this.totalCredit,
-    required this.todayCredit,
-  });
-
-  ScrollController scrollController;
-  Rx<double> scrollPosition = 0.0.obs;
-  int totalCredit;
-  int todayCredit;
-
-  late Widget creditInfo =
-      _UserCreditInfo(totalCredit: totalCredit, todayCredit: todayCredit);
-  double appBarHeight = 183.h;
-
-  @override
-  Widget build(BuildContext context) {
-    scrollController.addListener(_scrollListener);
-
-    return Obx(
-      () {
-        if (scrollPosition.value > 0.0) {
-          appBarHeight = 105.h + MediaQuery.of(context).padding.top;
-        } else {
-          appBarHeight = 175.h + MediaQuery.of(context).padding.top;
-        }
-        return Container(
-          height: appBarHeight,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(16.r),
-              bottomRight: Radius.circular(16.r),
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 0,
-                blurRadius: 25.r,
-                offset: const Offset(0, 0),
-              ),
-            ],
-            color: Colors.white,
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(height: 13.h),
-                  _UserInfoAppBar(
-                    userName: "고라니",
-                    onPressedFucntion: () {},
-                  ),
-                  if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
-                  if (scrollPosition.value <= 0.0)
-                    _UserCreditInfo(
-                      totalCredit: totalCredit,
-                      todayCredit: todayCredit,
-                    ),
-                  SizedBox(height: 15.h),
-                  Align(
-                    alignment: Alignment.center,
-                    child: NewfitButton(
-                        buttonText: "루틴으로 예약하기",
-                        buttonColor: AppColors.main,
-                        onPressFuntion: () {}),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 
@@ -433,7 +349,7 @@ class NewfitAppBarTranparent extends StatelessWidget
           boxShadow: [
             BoxShadow(
               color: AppColors.black.withOpacity(opacity),
-              offset: Offset(0, 0),
+              offset: const Offset(0, 0),
               spreadRadius: 0.1,
               blurRadius: blurRadius,
             ),
@@ -459,7 +375,9 @@ class NewfitAppBarTranparent extends StatelessWidget
                       IconButton(
                         padding: EdgeInsets.zero,
                         icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.back();
+                        },
                       ),
                       const Spacer(),
                     ],
@@ -490,8 +408,8 @@ class _HomeAppBar extends StatelessWidget {
   }
 }
 
-class _UserInfoAppBar extends StatelessWidget {
-  const _UserInfoAppBar({
+class _UserInfoAppBar extends StatelessWidget with StorageUtil {
+  _UserInfoAppBar({
     required this.userName,
     required this.onPressedFucntion,
     super.key,
@@ -506,10 +424,18 @@ class _UserInfoAppBar extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 15.h,
-          backgroundImage: const AssetImage('images/gorani.png'),
+          foregroundImage: (getString(AppString.key_profile_file_path) != null
+                  ? const AssetImage(AppString.gorani)
+                  : NetworkImage(getString(AppString.key_profile_file_path)!))
+              as ImageProvider,
         ),
         SizedBox(width: 10.w),
-        NewfitTextBoldLg(text: "$userName님", textColor: AppColors.black),
+        GestureDetector(
+            child: NewfitTextBoldLg(
+                text: "$userName님 >", textColor: AppColors.black),
+            onTap: () {
+              Get.toNamed(AppPages.MY);
+            }),
         const Spacer(),
         GestureDetector(
           onTap: onPressedFucntion,
@@ -526,7 +452,6 @@ class _UserCreditInfo extends StatelessWidget {
   const _UserCreditInfo({
     required this.totalCredit,
     required this.todayCredit,
-    super.key,
   });
 
   final int totalCredit;
@@ -536,22 +461,24 @@ class _UserCreditInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(children: [
-          const NewfitTextMediumMd(
-            text: '전체 크레딧',
-            textColor: AppColors.black,
-          ),
-          SizedBox(width: 5.w),
-          NewfitTextRegularMd(
-            text: '$totalCredit',
-            textColor: AppColors.main,
-          ),
-        ]),
+        Row(
+          children: [
+            const NewfitTextMediumMd(
+              text: AppString.str_total_credit,
+              textColor: AppColors.black,
+            ),
+            SizedBox(width: 5.w),
+            NewfitTextRegularMd(
+              text: '$totalCredit',
+              textColor: AppColors.main,
+            ),
+          ],
+        ),
         SizedBox(height: 7.h),
         Row(
           children: [
             const NewfitTextMediumMd(
-              text: '일일 크레딧',
+              text: AppString.str_today_credit,
               textColor: AppColors.black,
             ),
             SizedBox(width: 5.w),
@@ -566,7 +493,7 @@ class _UserCreditInfo extends StatelessWidget {
           alignment: Alignment.center,
           child: NewfitProgressBar(
             progressBarHeight: 4.h,
-            progressBarValue: 0.3,
+            progressBarValue: todayCredit / 100,
           ),
         ),
       ],

@@ -52,6 +52,9 @@ abstract class AppString {
   static const key_name = 'user-name';
   static const key_nickname = 'user-nickname';
   static const key_tel = 'user-tel';
+  static const key_profile_file_path = 'user-profile-file-path';
+  static const key_total_credit = 'total-credit';
+  static const key_this_month_credit = 'this-month-credit';
   static const key_gym_id = 'gym_id';
 
   static const provier_type_google = 'GOOGLE';
