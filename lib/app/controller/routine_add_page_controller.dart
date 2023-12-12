@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
@@ -42,5 +43,6 @@ class RoutineAddPageController extends BaseController with StorageUtil {
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       postRoutine.value,
     );
+    Get.back();
   }
 }
