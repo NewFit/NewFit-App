@@ -5,46 +5,42 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
-import 'package:new_fit/app/controller/home_reservation_page_controller.dart';
-import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
-
+import '../../../controller/home_reservation_page_controller.dart';
 import '../../common/newfit_button.dart';
 import '../../theme/app_colors.dart';
 import '../../theme/app_text_theme.dart';
 
-class HomeReservationPage extends BaseView<HomeReservationPageController> {
-  @override
-  PreferredSizeWidget? appBar(BuildContext context) {
+class HomeReservationPage extends StatelessWidget {
+  PreferredSizeWidget? appBar(BuildContext context,
+      HomeReservationPageController reservationController) {
     return NewfitAppBarFlat(
       appBarTitleText: Obx(() {
-        if (controller.isLoadingInSpec.value) {
+        if (reservationController.isLoadingInSpec.value) {
           return const CircularProgressIndicator();
         }
-        if (controller.equipmentSpec.value == null) {
+        if (reservationController.equipmentSpec.value == null) {
           return const Center(child: Text(AppString.str_no_data));
         }
         return NewfitTextBoldXl(
-          text: controller.equipmentSpec.value?.equipment_gym_name ?? "",
+          text: reservationController.equipmentSpec.value?.equipment_gym_name ??
+              "",
           textColor: AppColors.black,
         );
       }),
     );
   }
 
-  @override
   Color pageBackgroundColor() {
     return const Color(0xFFF2F4F6);
   }
 
-  @override
-  Widget body(BuildContext context) {
+  Widget body(BuildContext context,
+      HomeReservationPageController reservationController) {
     return BaseBodyWithNoScroll(
       screenPadding: AppValues.screenPadding,
       widgetList: [
@@ -56,10 +52,10 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
                 )),
             child: Column(children: [
               Obx(() {
-                if (controller.isLoading.value) {
+                if (reservationController.isLoading.value) {
                   return const CircularProgressIndicator();
                 }
-                if (controller.equipmentList.value == null) {
+                if (reservationController.equipmentList.value == null) {
                   return const Center(child: Text(AppString.str_no_data));
                 }
                 return Container(
@@ -67,12 +63,13 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
                   color: Colors.transparent,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount:
-                        controller.equipmentList.value?.equipments_count ?? 0,
+                    itemCount: reservationController
+                            .equipmentList.value?.equipments_count ??
+                        0,
                     itemBuilder: (context, index) {
                       return GestureDetector(
                         onTap: () {
-                          controller.selectNewSpec(index);
+                          reservationController.selectNewSpec(index);
                         },
                         child: Padding(
                           padding: EdgeInsets.fromLTRB(20.w, 8.h, 0, 0),
@@ -87,7 +84,7 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(8.r),
                                       border: Border.all(
-                                          color: controller
+                                          color: reservationController
                                                       .selectedIndex.value ==
                                                   index
                                               ? AppColors.main.withOpacity(0.5)
@@ -110,18 +107,19 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
             ])),
         const Spacer(),
         Obx(() {
-          if (controller.isLoadingInSpec.value) {
+          if (reservationController.isLoadingInSpec.value) {
             return const CircularProgressIndicator();
           }
-          if (controller.equipmentSpec.value == null) {
+          if (reservationController.equipmentSpec.value == null) {
             return const Center(child: Text(AppString.str_no_data));
           }
           return NewfitTimepicker(
               reservationList:
-                  controller.equipmentSpec.value?.occupied_times ?? [],
+                  reservationController.equipmentSpec.value?.occupied_times ??
+                      [],
               onTimeChanged: (DateTime start, DateTime end) {
-                controller.startTime.value = start;
-                controller.endTime.value = end;
+                reservationController.startTime.value = start;
+                reservationController.endTime.value = end;
                 log("$start ~ $end");
               });
         }),
@@ -132,10 +130,22 @@ class HomeReservationPage extends BaseView<HomeReservationPageController> {
               buttonText: AppString.button_reservation,
               buttonColor: AppColors.main,
               onPressFuntion: () {
-                controller.equipmentReservation();
+                reservationController.equipmentReservation();
               }),
         ),
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final reservationController = Get.put(HomeReservationPageController(),
+        tag: Get.arguments[1].toString());
+
+    return Scaffold(
+      appBar: appBar(context, reservationController),
+      body: body(context, reservationController),
+      backgroundColor: pageBackgroundColor(),
     );
   }
 }

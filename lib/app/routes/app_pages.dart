@@ -1,7 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
-import 'package:new_fit/app/bindings/home_reservation_page_binding.dart';
 import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
@@ -90,7 +89,6 @@ class AppPages {
     GetPage(
       name: _Paths.HOME_RESERVATION,
       page: () => HomeReservationPage(),
-      binding: HomeReservationPageBinding(),
       transition: Transition.fadeIn,
     ),
     GetPage(
