@@ -57,7 +57,6 @@ abstract class AppString {
   static const key_this_month_credit = 'this-month-credit';
   static const key_gym_id = 'gym_id';
 
-
   static const provier_type_google = 'GOOGLE';
   static const provier_type_kakao = 'KAKAO';
   static const provier_type_apple = 'APPLE';
