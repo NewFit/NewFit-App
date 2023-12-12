@@ -23,7 +23,7 @@ class _AuthorityService implements AuthorityService {
 
   @override
   Future<AddressGym> getMyGymList(
-    String authorityId,
+    int authorityId,
     String accessToken,
   ) async {
     const _extra = <String, dynamic>{};
@@ -94,7 +94,7 @@ class _AuthorityService implements AuthorityService {
 
   @override
   Future<ReservationList> getMyReservationList(
-    String authorityId,
+    int authorityId,
     String accessToken,
   ) async {
     const _extra = <String, dynamic>{};
@@ -128,7 +128,7 @@ class _AuthorityService implements AuthorityService {
 
   @override
   Future<HttpResponse<dynamic>> enterGym(
-    String authorityId,
+    int authorityId,
     String accessToken,
     EntranceTag entranceTag,
   ) async {

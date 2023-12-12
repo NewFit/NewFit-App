@@ -51,7 +51,7 @@ class RegisterGymPageController extends BaseController with StorageUtil {
 
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
-    saveInt(AppString.key_authority_id, gymId);
+    saveInt(AppString.key_gym_id, gymId);
     try {
       final accessToken = getString(AppString.key_access_token)!;
       final response = await AuthorityService(dio).registerMyGym(
@@ -60,7 +60,6 @@ class RegisterGymPageController extends BaseController with StorageUtil {
         RegisterAuthorityGym(gym_id: gymId),
       );
 
-      //TODO : 이 부분 있어야 하는지 아니면 다른 부분에서 authorityId를 저장하는지 확인 필요.
       int authorityId = int.parse(response.response.headers.value(AppString.key_authority_id)!);
       log(authorityId.toString());
       saveInt(AppString.key_authority_id, authorityId);
