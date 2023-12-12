@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
+import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
 import 'package:new_fit/app/view/common/newfit_routine_card.dart';
@@ -13,6 +14,7 @@ import 'package:new_fit/app/view/theme/app_string.dart';
 
 class RoutinePage extends BaseView<RoutinePageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+  RoutinePageController controller = Get.put(RoutinePageController());
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarTranparent(
@@ -26,15 +28,40 @@ class RoutinePage extends BaseView<RoutinePageController> {
   @override
   Widget body(BuildContext context) {
     return BaseBody(
-      widgetList: newfitRoutineCardList(),
+      widgetList: [
+        FutureBuilder(
+          future: controller.mainFuture.value,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.active:
+              case ConnectionState.waiting:
+                return const Loading();
+              case ConnectionState.done:
+                if (snapshot.hasError) return Container();
+                controller.assignFutures((snapshot.data! as List));
+
+                return Column(
+                  children: newfitRoutineCardList(),
+                );
+              case ConnectionState.none:
+                return const Loading();
+            }
+          },
+        )
+      ],
       scrollController: scrollController,
     );
   }
 
   List<Widget> newfitRoutineCardList() {
-    return List.generate(20, (index) {
+    return List.generate(controller.myRoutineInfo.value.routines?.length ?? 0,
+        (index) {
       if (index % 2 == 1) {
-        return const NewfitRoutineCard();
+        return NewfitRoutineCard(
+          routineName:
+              controller.myRoutineInfo.value.routines?[index].name ?? '',
+          equipmentCount: controller.myRoutineInfo.value.routines_count ?? 0,
+        );
       } else {
         return SizedBox(height: 15.h);
       }
