@@ -22,14 +22,6 @@ class NewfitRoutineCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.1),
-            offset: const Offset(0, 0),
-            spreadRadius: 0.1,
-            blurRadius: 20,
-          ),
-        ],
       ),
       child: Column(
         children: [
