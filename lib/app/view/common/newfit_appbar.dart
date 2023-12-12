@@ -54,11 +54,8 @@ class NewfitAppBar extends StatelessWidget
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
-          if (scrollPosition.value > 0.0) {
-            appBarHeight = 105.h + MediaQuery.of(context).padding.top;
-          } else {
-            appBarHeight = 175.h + MediaQuery.of(context).padding.top;
-          }
+            appBarHeight = 135.h + MediaQuery.of(context).padding.top;
+
         }
         return Container(
           height: appBarHeight,
@@ -127,11 +124,6 @@ class NewfitAppBar extends StatelessWidget
           onPressedFunction: () {},
         ),
         if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
-        if (scrollPosition.value <= 0.0)
-          _UserCreditInfo(
-            totalCredit: getInt(AppString.key_total_credit)!,
-            todayCredit: getInt(AppString.key_this_month_credit)!,
-          ),
         SizedBox(height: 15.h),
         Align(
           alignment: Alignment.center,
