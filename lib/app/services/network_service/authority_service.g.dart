@@ -128,12 +128,16 @@ class _AuthorityService implements AuthorityService {
 
   @override
   Future<HttpResponse<dynamic>> enterGym(
+    String authorityId,
     String accessToken,
     EntranceTag entranceTag,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'Authorization': accessToken};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(entranceTag.toJson());

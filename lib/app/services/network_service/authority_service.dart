@@ -31,6 +31,8 @@ abstract class AuthorityService {
   );
 
   @PATCH('/authority/entry')
-  Future<HttpResponse> enterGym(@Header('Authorization') String accessToken,
+  Future<HttpResponse> enterGym(
+      @Header('authority-id') String authorityId,
+      @Header('Authorization') String accessToken,
       @Body() EntranceTag entranceTag);
 }
