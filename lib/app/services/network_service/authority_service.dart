@@ -14,7 +14,7 @@ abstract class AuthorityService {
 
   @GET('/authority')
   Future<AddressGym> getMyGymList(
-    @Header('authority-id') String authorityId,
+    @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
 
@@ -26,11 +26,13 @@ abstract class AuthorityService {
 
   @GET('/authority/reservations')
   Future<ReservationList> getMyReservationList(
-    @Header('authority-id') String authorityId,
+    @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
 
   @PATCH('/authority/entry')
-  Future<HttpResponse> enterGym(@Header('Authorization') String accessToken,
+  Future<HttpResponse> enterGym(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
       @Body() EntranceTag entranceTag);
 }
