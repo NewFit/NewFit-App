@@ -112,9 +112,9 @@ Map<String, dynamic> _$MyRoutineToJson(MyRoutine instance) => <String, dynamic>{
 
 MyRoutineList _$MyRoutineListFromJson(Map<String, dynamic> json) =>
     MyRoutineList(
-      routines_count: json['routines_count'] as int,
-      routines: (json['routines'] as List<dynamic>)
-          .map((e) => MyRoutine.fromJson(e as Map<String, dynamic>))
+      routines_count: json['routines_count'] as int?,
+      routines: (json['routines'] as List<dynamic>?)
+          ?.map((e) => MyRoutine.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

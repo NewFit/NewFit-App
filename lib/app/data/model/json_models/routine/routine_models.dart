@@ -135,12 +135,12 @@ class MyRoutine {
 
 @JsonSerializable()
 class MyRoutineList {
-  int routines_count;
-  List<MyRoutine> routines;
+  int? routines_count;
+  List<MyRoutine>? routines;
 
   MyRoutineList({
-    required this.routines_count,
-    required this.routines,
+    this.routines_count,
+    this.routines,
   });
 
   factory MyRoutineList.fromJson(Map<String, dynamic> json) =>
