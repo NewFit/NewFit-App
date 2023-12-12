@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
@@ -15,6 +16,7 @@ import 'package:new_fit/app/view/theme/app_string.dart';
 
 class MainPage extends BaseView<MainController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+  final HomeMyReservationPageController homeMyReservationPageController = Get.find();
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBar(

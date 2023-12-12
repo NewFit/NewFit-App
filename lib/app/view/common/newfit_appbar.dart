@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
@@ -13,6 +15,8 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:new_fit/app/view/theme/app_values.dart';
+
+import 'newfit_schedule.dart';
 
 class NewfitAppBar extends StatelessWidget
     with StorageUtil
@@ -54,8 +58,11 @@ class NewfitAppBar extends StatelessWidget
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
-            appBarHeight = 135.h + MediaQuery.of(context).padding.top;
-
+          if (scrollPosition.value > 0.0) {
+            appBarHeight = 105.h + MediaQuery.of(context).padding.top;
+          } else {
+            appBarHeight = 155.h + MediaQuery.of(context).padding.top;
+          }
         }
         return Container(
           height: appBarHeight,
@@ -115,6 +122,8 @@ class NewfitAppBar extends StatelessWidget
   }
 
   Widget myReservationAppBar() {
+    final HomeMyReservationPageController myReservationPageController =
+        Get.find();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -123,8 +132,26 @@ class NewfitAppBar extends StatelessWidget
           userName: getString(AppString.key_nickname)!,
           onPressedFunction: () {},
         ),
-        if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
-        SizedBox(height: 15.h),
+        if (scrollPosition.value <= 0.0)
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.h),
+            child: Obx(() {
+              if (myReservationPageController.isLoading.value) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (myReservationPageController.reservationList.value == null) {
+                return const Center(child: Text(AppString.str_no_data));
+              }
+              return NewfitSchedule(
+                scheduleList: myReservationPageController
+                        .reservationList.value?.reservations ??
+                    [],
+                startTime: myReservationPageController.startTime.value,
+                endTime: myReservationPageController.endTime.value,
+              );
+            }),
+          ),
+        SizedBox(height: 5.h),
         Align(
           alignment: Alignment.center,
           child: NewfitButton(

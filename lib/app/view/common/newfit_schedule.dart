@@ -1,8 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
@@ -11,8 +16,26 @@ class NewfitSchedule extends StatelessWidget {
   const NewfitSchedule({
     required this.scheduleList,
     super.key,
+    required this.startTime,
+    required this.endTime,
   });
+
+  final DateTime startTime;
+  final DateTime endTime;
   final List<Reservation> scheduleList;
+
+  String timeToStr(DateTime time) {
+    if (time.hour == 0) return '자정';
+    if (time.hour == 12) return '정오';
+
+    if (time.hour > 0 && time.hour < 12) {
+      return '오전 ${time.hour}시';
+    } else if (time.hour > 12 && time.hour < 24) {
+      return '오후 ${time.hour - 12}시';
+    }
+
+    return '에러';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +55,8 @@ class NewfitSchedule extends StatelessWidget {
     ];
 
     for (final (index, element) in scheduleList.indexed) {
+      log('$index, $element');
+
       int startPosition = Duration(
                   hours: element.start_at.hour,
                   minutes: element.start_at.minute)
@@ -54,14 +79,20 @@ class NewfitSchedule extends StatelessWidget {
       width: 320.w,
       child: Column(children: [
         Row(children: [
-          NewfitTextRegularXs(
-            text: "${DateFormat('h:mm').format(DateTime.now())}",
-            textColor: AppColors.unabledGrey,
+          Padding(
+            padding: EdgeInsets.only(left: 5.w),
+            child: NewfitTextRegularXs(
+              text: timeToStr(startTime),
+              textColor: AppColors.main,
+            ),
           ),
           const Spacer(),
-          const NewfitTextRegularXs(
-            text: "오후 4시",
-            textColor: AppColors.unabledGrey,
+          Padding(
+            padding: EdgeInsets.only(right: 5.w),
+            child: NewfitTextRegularXs(
+              text: timeToStr(endTime),
+              textColor: AppColors.main,
+            ),
           ),
         ]),
         Stack(children: activatedScheduleWidget),
