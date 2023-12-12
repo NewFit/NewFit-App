@@ -56,18 +56,24 @@ class RoutinePage extends BaseView<RoutinePageController> {
   }
 
   List<Widget> newfitRoutineCardList() {
-    return List.generate(controller.myRoutineInfo.value.routines?.length ?? 0,
-        (index) {
-      if (index % 2 == 1) {
-        return NewfitRoutineCard(
-          routineName:
-              controller.myRoutineInfo.value.routines?[index].name ?? '',
-          equipmentCount: controller.myRoutineInfo.value.routines_count ?? 0,
-        );
-      } else {
-        return SizedBox(height: 15.h);
-      }
-    });
+    return List.generate(
+      (controller.myRoutineInfo.value.routines?.length ?? 0) + 1,
+      (index) {
+        if (index == controller.myRoutineInfo.value.routines?.length) {
+          return SizedBox(height: 60.h);
+        } else {
+          return Padding(
+            padding: EdgeInsets.only(top: 10.h),
+            child: NewfitRoutineCard(
+              routineName:
+                  controller.myRoutineInfo.value.routines?[index].name ?? '',
+              equipmentCount:
+                  controller.myRoutineInfo.value.routines_count ?? 0,
+            ),
+          );
+        }
+      },
+    );
   }
 
   @override
