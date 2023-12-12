@@ -5,11 +5,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
 import 'package:new_fit/app/view/common/newfit_routine_card.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 
 class RoutinePage extends BaseView<RoutinePageController> {
@@ -71,6 +73,12 @@ class RoutinePage extends BaseView<RoutinePageController> {
   @override
   Widget? floatingActionButton() {
     return NewfitFAB(
-        fabTitleText: AppString.button_add_routine, onPressedFunction: () {});
+      backgroundColor: AppColors.white,
+      contentColor: AppColors.black,
+      fabTitleText: AppString.button_add_routine,
+      onPressedFunction: () {
+        Get.toNamed(AppPages.ROUTINE_ADD);
+      },
+    );
   }
 }
