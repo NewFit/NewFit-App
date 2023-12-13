@@ -91,7 +91,7 @@ class PatchReservation {
 class ReservationList {
   String gym_name;
   int reservation_count;
-  List<ReservationWithId> reservations;
+  List<Reservation> reservations;
 
   ReservationList({
     required this.gym_name,
@@ -109,7 +109,7 @@ class ReservationList {
 class ReservationListWithId {
   String gym_name;
   int reservation_count;
-  List<Reservation> reservations;
+  List<ReservationWithId> reservations;
 
   ReservationListWithId({
     required this.gym_name,
