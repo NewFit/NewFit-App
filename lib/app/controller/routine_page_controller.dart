@@ -54,4 +54,18 @@ class RoutinePageController extends BaseController with StorageUtil {
       isLoading(false);
     }
   }
+
+  deleteRoutine(int routineId) {
+    isLoading(true);
+    try {
+      dio.interceptors.add(prettyDioLogger);
+      RoutineService(dio).deleteRoutine(
+        getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+        RoutineId(routine_id: routineId),
+      );
+    } finally {
+      isLoading(false);
+    }
+  }
 }
