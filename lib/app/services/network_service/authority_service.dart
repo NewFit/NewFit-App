@@ -25,7 +25,7 @@ abstract class AuthorityService {
       @Body() RegisterAuthorityGym gym);
 
   @GET('/authority/reservations')
-  Future<ReservationList> getMyReservationList(
+  Future<ReservationListWithId> getMyReservationList(
     @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
