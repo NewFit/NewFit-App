@@ -17,7 +17,6 @@ import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class MyPage extends BaseView<MyPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
-  MyPageController controller = Get.put(MyPageController());
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
@@ -41,10 +40,6 @@ class MyPage extends BaseView<MyPageController> {
 
   @override
   Widget body(BuildContext context) {
-    controller = Get.isRegistered<MyPageController>()
-        ? Get.find<MyPageController>()
-        : Get.put(MyPageController());
-
     return BaseBody(
       scrollController: scrollController,
       widgetList: [
