@@ -3,7 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 
 class NewfitDropDownMenu extends StatelessWidget {
-  const NewfitDropDownMenu({super.key});
+  final void Function(String) routineDropdownChoiceAction;
+
+  const NewfitDropDownMenu({
+    required this.routineDropdownChoiceAction,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
