@@ -8,24 +8,23 @@ import 'package:new_fit/app/view/common/base_body.dart';
 import '../../common/newfit_equipment_list.dart';
 
 class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
-  // List<Widget> buildEquipmentList(ReservationList? reservationList) {
-  //   if (reservationList == null) {
-  //     return <Widget>[];
-  //   }
-  //
-  //   return List<Widget>.generate(
-  //     reservationList.reservations.length,
-  //         (index) {
-  //       final reservation = reservationList.reservations[index];
-  //       return NewfitEquipmentListCell(
-  //         equipmentTitle: reservation.,
-  //         currentStatus: -1,
-  //         equipmentId: equipment.equipment_id,
-  //         equipmentGymId: equipment.equipment_gym_id,
-  //       );
-  //     },
-  //   );
-  // }
+  List<Widget> buildEquipmentList(List<SpecificReservation>? reservationList) {
+    if (reservationList == null) {
+      return <Widget>[];
+    }
+
+    return List<Widget>.generate(
+      reservationList.length,
+          (index) {
+        final reservation = reservationList[index];
+        return NewfitEquipmentListWithoutAvailableCell(
+          equipmentTitle: reservation.gym_name,
+          currentStatus: -1,
+          equipmentGymId: reservation.equipment_gym_id,
+        );
+      },
+    );
+  }
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {

@@ -123,6 +123,114 @@ class NewfitEquipmentListCell extends StatelessWidget {
   }
 }
 
+class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
+  const NewfitEquipmentListWithoutAvailableCell({
+    required this.equipmentTitle,
+    this.imageRoute = AppString.defaultEquipment,
+    required this.currentStatus,
+    super.key,
+    required this.equipmentGymId,
+  });
+
+  final int equipmentGymId;
+  final String equipmentTitle;
+  final String imageRoute;
+  final int currentStatus;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Padding(
+      padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
+      child: GestureDetector(
+        onTap: () {
+        },
+        child: Container(
+          width: 320.w,
+          height: 60.h,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.r),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black.withOpacity(0.1),
+                  offset: const Offset(0, 0),
+                  spreadRadius: 0.1,
+                  blurRadius: 20,
+                ),
+              ]),
+          child: Row(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    SizedBox(width: 3.w),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.r),
+                      child: Image(
+                        width: 64.w,
+                        height: 50.h,
+                        image: AssetImage(imageRoute),
+                      ),
+                    ),
+                    SizedBox(width: 9.w),
+                    Text(
+                      equipmentTitle,
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: AppFontWeights.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8.h, 8.w, 0),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 10.w,
+                        height: 10.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.w),
+                          color: AppColors.main,
+                        ),
+                      ),
+                      SizedBox(width: 3.w),
+                      if (currentStatus == 1)
+                        Text(
+                          AppString.str_reservation_available,
+                          style: TextStyle(
+                            color: AppColors.main,
+                            fontWeight: AppFontWeights.extrabold,
+                            fontSize: 10.sp,
+                          ),
+                        )
+                      else
+                        Text(
+                          AppString.str_reservation_unavailable,
+                          style: TextStyle(
+                            color: AppColors.warningText,
+                            fontWeight: AppFontWeights.extrabold,
+                            fontSize: 10.sp,
+                          ),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 void onPressFunc(BuildContext context) {
   showModalBottomSheet<dynamic>(
       enableDrag: true,
