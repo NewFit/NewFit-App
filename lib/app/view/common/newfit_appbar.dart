@@ -8,6 +8,7 @@ import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart'
 import 'package:new_fit/app/controller/main/main_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
+import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
@@ -143,9 +144,15 @@ class NewfitAppBar extends StatelessWidget
                 return const Center(child: Text(AppString.str_no_data));
               }
               return NewfitSchedule(
-                scheduleList: myReservationPageController
-                        .reservationList.value?.reservations ??
-                    [],
+                scheduleList: List.generate(
+                    myReservationPageController
+                            .reservationList.value?.reservations.length ??
+                        0,
+                    (index) => Reservation(
+                        start_at: myReservationPageController.reservationList
+                            .value!.reservations[index].start_at,
+                        end_at: myReservationPageController.reservationList
+                            .value!.reservations[index].end_at)),
                 startTime: myReservationPageController.startTime.value,
                 endTime: myReservationPageController.endTime.value,
               );

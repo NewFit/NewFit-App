@@ -14,8 +14,9 @@ import '../view/theme/app_string.dart';
 class HomeMyReservationPageController extends BaseController with StorageUtil {
   final Dio dio = Dio();
   late final ReservationService service;
+  late final AuthorityService authorityService;
 
-  var reservationList = Rx<ReservationList?>(null);
+  var reservationList = Rx<ReservationListWithId?>(null);
   var isLoading = true.obs;
   var specificReservationList = RxList<SpecificReservation>();
   var isLoadingSpecs = true.obs;
@@ -53,6 +54,7 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
 
     dio.interceptors.add(logger);
     service = ReservationService(dio);
+    authorityService = AuthorityService(dio);
   }
 
   void loadMyReservationList() async {
@@ -66,11 +68,10 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
       final token =
           '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
       final authorityId = getInt(AppString.key_authority_id);
-      final gymId = getInt(AppString.key_gym_id)!;
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        var reservation = await service.getReservationList(authorityId, token, gymId);
+        var reservation = await authorityService.getMyReservationList(authorityId, token);
         reservationList(reservation);
       } else {
         log('ERROR : authority id is null!');
@@ -91,12 +92,13 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
       final token =
           '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
       final authorityId = getInt(AppString.key_authority_id);
-      final gymId = getInt(AppString.key_gym_id)!;
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        var reservation = await service.getReservationList(authorityId, token, gymId);
-        reservationList(reservation);
+        for(var item in reservationList.value?.reservations ?? <ReservationWithId>[]) {
+          var reservation = await service.getSpecificReservation(authorityId, token, item.reservation_id);
+          specificReservationList.add(reservation);
+        }
       } else {
         log('ERROR : authority id is null!');
       }

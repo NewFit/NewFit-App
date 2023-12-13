@@ -7,31 +7,33 @@ import 'package:new_fit/app/view/common/base_body.dart';
 
 import '../../common/newfit_equipment_list.dart';
 
-class HomeMyReservationPage extends StatelessWidget {
-  List<Widget> buildEquipmentList(ReservationList? reservationList) {
-    if (reservationList == null) {
-      return <Widget>[];
-    }
+class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
+  // List<Widget> buildEquipmentList(ReservationList? reservationList) {
+  //   if (reservationList == null) {
+  //     return <Widget>[];
+  //   }
+  //
+  //   return List<Widget>.generate(
+  //     reservationList.reservations.length,
+  //         (index) {
+  //       final reservation = reservationList.reservations[index];
+  //       return NewfitEquipmentListCell(
+  //         equipmentTitle: reservation.,
+  //         currentStatus: -1,
+  //         equipmentId: equipment.equipment_id,
+  //         equipmentGymId: equipment.equipment_gym_id,
+  //       );
+  //     },
+  //   );
+  // }
 
-    return List<Widget>.generate(
-      reservationList.reservations.length,
-          (index) {
-        final reservation = reservationList.reservations[index];
-        return NewfitEquipmentListCell(
-          equipmentTitle: reservation.,
-          currentStatus: -1,
-          equipmentId: equipment.equipment_id,
-          equipmentGymId: equipment.equipment_gym_id,
-        );
-      },
-    );
+  @override
+  PreferredSizeWidget? appBar(BuildContext context) {
+    return null;
   }
 
   @override
-  Widget build(BuildContext context) {
-    final controller = Get.put(HomeMyReservationPageController());
-    return Scaffold(
-      body: BaseBody(widgetList: []),
-    );
+  Widget body(BuildContext context) {
+    return BaseBody(widgetList: []);
   }
 }

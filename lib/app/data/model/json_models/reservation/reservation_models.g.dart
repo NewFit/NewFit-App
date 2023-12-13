@@ -50,7 +50,7 @@ ReservationList _$ReservationListFromJson(Map<String, dynamic> json) =>
       gym_name: json['gym_name'] as String,
       reservation_count: json['reservation_count'] as int,
       reservations: (json['reservations'] as List<dynamic>)
-          .map((e) => ReservationWithId.fromJson(e as Map<String, dynamic>))
+          .map((e) => Reservation.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -67,7 +67,7 @@ ReservationListWithId _$ReservationListWithIdFromJson(
       gym_name: json['gym_name'] as String,
       reservation_count: json['reservation_count'] as int,
       reservations: (json['reservations'] as List<dynamic>)
-          .map((e) => Reservation.fromJson(e as Map<String, dynamic>))
+          .map((e) => ReservationWithId.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
