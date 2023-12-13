@@ -1,35 +1,59 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
+import 'package:new_fit/app/controller/home_page_controller.dart';
+import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 
-// Todo : Mock data임. 나중에 지워버리기
-final List<Map<String, dynamic>> mockData = List.generate(
-  10,
-  (index) => {"equipmentTitle": "천국의계단", "currentStatus": 1},
-);
-
-class HomePage extends StatelessWidget {
+class HomePage extends BaseView<HomePageController> {
   final ScrollController scrollController;
 
-  const HomePage({required this.scrollController, super.key});
+  HomePage({required this.scrollController});
 
-  @override
-  Widget build(BuildContext context) {
-    return BaseBody(
-        scrollController: scrollController,
-        widgetList: buildEquipmentList());
-  }
+  List<Widget> buildEquipmentList(EquipmentList? equipmentList) {
+    if (equipmentList == null) {
+      return <Widget>[];
+    }
 
-  List<Widget> buildEquipmentList() {
     return List<Widget>.generate(
-      mockData.length,
-          (index) {
-        final equipment = mockData[index];
+      equipmentList.equipments.length,
+      (index) {
+        final equipment = equipmentList.equipments[index];
         return NewfitEquipmentListCell(
-          equipmentTitle: equipment['equipmentTitle'],
-          currentStatus: equipment['currentStatus'],
+          equipmentTitle: equipment.equipment_gym_name,
+          currentStatus:
+              equipment.condition == AppString.equipment_condition_available
+                  ? 1
+                  : 0,
+          equipmentId: equipment.equipment_id,
+          equipmentGymId: equipment.equipment_gym_id,
         );
       },
     );
+  }
+
+  @override
+  PreferredSizeWidget? appBar(BuildContext context) {
+    return null;
+  }
+
+  @override
+  Widget body(BuildContext context) {
+    return Obx(() {
+      if (controller.isLoading.value) {
+        return const CircularProgressIndicator();
+      }
+      if (controller.equipmentList.value == null) {
+        return const Center(child: Text(AppString.str_no_data));
+      }
+      final equipments = controller.equipmentList.value;
+      return BaseBody(
+          scrollController: scrollController,
+          widgetList: buildEquipmentList(equipments));
+    });
   }
 }

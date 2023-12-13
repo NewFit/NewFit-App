@@ -1,29 +1,29 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/preferred_size.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/controller/my_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
-import 'package:new_fit/app/core/page_state.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_calendar.dart';
 import 'package:new_fit/app/view/common/newfit_progressbar.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class MyPage extends BaseView<MyPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+  MyPageController controller = Get.put(MyPageController());
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarTranparent(
       scrollController: scrollController,
-      appBarTitleText: '마이 페이지',
+      appBarTitleText: AppString.str_mypage_title,
     );
   }
 
@@ -35,25 +35,47 @@ class MyPage extends BaseView<MyPageController> {
   }
 
   @override
+  Widget pageContent(BuildContext context) {
+    return SafeArea(child: body(context));
+  }
+
+  @override
   Widget body(BuildContext context) {
+    controller = Get.isRegistered<MyPageController>()
+        ? Get.find<MyPageController>()
+        : Get.put(MyPageController());
+
     return BaseBody(
       scrollController: scrollController,
       widgetList: [
         Stack(
           children: [
-            Column(
-              children: [
-                userInfoTab(),
-                SizedBox(height: 10.h),
-                routineButton(),
-                SizedBox(height: 10.h),
-                creditInfo(),
-                SizedBox(height: 10.h),
-                calendar(),
-                SizedBox(
-                  height: 3000,
-                ),
-              ],
+            FutureBuilder(
+              future: controller.mainFuture.value,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.active:
+                  case ConnectionState.waiting:
+                    return const Loading();
+                  case ConnectionState.done:
+                    if (snapshot.hasError) return Container();
+                    controller.assignFutures((snapshot.data! as List));
+
+                    return Column(
+                      children: [
+                        userInfoTab(),
+                        SizedBox(height: 10.h),
+                        routineButton(),
+                        SizedBox(height: 10.h),
+                        creditInfo(),
+                        SizedBox(height: 10.h),
+                        calendar(),
+                      ],
+                    );
+                  case ConnectionState.none:
+                    return const Loading();
+                }
+              },
             ),
           ],
         ),
@@ -64,14 +86,14 @@ class MyPage extends BaseView<MyPageController> {
   Widget calendar() {
     return Container(
       width: 320.w,
-      height: 265.h,
+      height: 320.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: AppColors.white,
       ),
       child: Padding(
         padding: EdgeInsets.all(8.h),
-        child: NewfitCalendar(
+        child: const NewfitCalendar(
             streakOnColor: AppColors.main, streakOffColor: AppColors.accent),
       ),
     );
@@ -87,27 +109,36 @@ class MyPage extends BaseView<MyPageController> {
       ),
       child: Column(
         children: [
-          Spacer(
+          const Spacer(
             flex: 2,
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
               children: [
-                NewfitTextMediumMd(text: '전체 크레딧', textColor: AppColors.black),
-                Spacer(),
-                NewfitTextMediumMd(text: '10000', textColor: AppColors.main),
+                const NewfitTextMediumMd(
+                    text: AppString.str_total_credit,
+                    textColor: AppColors.black),
+                const Spacer(),
+                NewfitTextMediumMd(
+                    text: '${controller.myPageInfo.value.total_credit}',
+                    textColor: AppColors.main),
               ],
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
               children: [
-                NewfitTextMediumMd(text: '일일 크레딧', textColor: AppColors.black),
-                Spacer(),
-                NewfitTextMediumMd(text: '75/100', textColor: AppColors.main),
+                const NewfitTextMediumMd(
+                    text: AppString.str_today_credit,
+                    textColor: AppColors.black),
+                const Spacer(),
+                NewfitTextMediumMd(
+                    text:
+                        '${controller.myPageInfo.value.this_month_credit ?? 0} / 100',
+                    textColor: AppColors.main),
               ],
             ),
           ),
@@ -115,10 +146,14 @@ class MyPage extends BaseView<MyPageController> {
             height: 10.h,
           ),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: NewfitProgressBar(
-                  progressBarValue: 0.75, progressBarHeight: 8.h)),
-          Spacer(
+            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            child: NewfitProgressBar(
+              progressBarValue:
+                  (controller.myPageInfo.value.this_month_credit ?? 0) / 100,
+              progressBarHeight: 8.h,
+            ),
+          ),
+          const Spacer(
             flex: 2,
           ),
         ],
@@ -128,6 +163,9 @@ class MyPage extends BaseView<MyPageController> {
 
   Widget routineButton() {
     return GestureDetector(
+      onTap: () {
+        Get.toNamed(AppPages.ROUTINE);
+      },
       child: Container(
         width: 320.w,
         height: 50.h,
@@ -139,9 +177,11 @@ class MyPage extends BaseView<MyPageController> {
           padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: Row(
             children: [
-              Icon(Icons.fitness_center),
+              const Icon(Icons.fitness_center),
               SizedBox(width: 10.w),
-              NewfitTextBold2Xl(text: '마이 루틴', textColor: AppColors.black),
+              const NewfitTextBold2Xl(
+                  text: AppString.button_my_routine,
+                  textColor: AppColors.black),
             ],
           ),
         ),
@@ -173,6 +213,8 @@ class MyPage extends BaseView<MyPageController> {
           alignment: Alignment.center,
           child: CircleAvatar(
             radius: 75.w,
+            foregroundImage: NetworkImage(
+                controller.myPageInfo.value.profile_file_path ?? ''),
           ),
         ),
         Positioned(
@@ -183,16 +225,16 @@ class MyPage extends BaseView<MyPageController> {
             child: GestureDetector(
               child: Row(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   NewfitTextBold2Xl(
-                    text: '고라니',
+                    text: controller.myPageInfo.value.nickname ?? '',
                     textColor: AppColors.black,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.edit,
                     color: Colors.grey,
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
               onTap: () {},
@@ -206,7 +248,7 @@ class MyPage extends BaseView<MyPageController> {
             child: GestureDetector(
               child: Row(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Container(
                     height: 30.h,
                     decoration: BoxDecoration(
@@ -217,14 +259,17 @@ class MyPage extends BaseView<MyPageController> {
                       padding: EdgeInsets.only(left: 5.w, right: 8.w),
                       child: Row(
                         children: [
-                          Icon(Icons.location_on_outlined),
+                          const Icon(Icons.location_on_outlined),
                           NewfitTextMediumMd(
-                              text: "고라니 헬스장", textColor: AppColors.black),
+                              text: controller
+                                      .myPageInfo.value.current?.gym_name ??
+                                  '',
+                              textColor: AppColors.black),
                         ],
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                 ],
               ),
             ),

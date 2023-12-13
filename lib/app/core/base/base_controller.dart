@@ -30,28 +30,37 @@ abstract class BaseController extends GetxController {
 
   //페이지 업데이트
   updatePageState(PageState state) => _pageStateController(state);
+
   //페이지 초기화
   resetPageState() => _pageStateController(PageState.DEFAULT);
+
   //로딩 보여주기
   showLoading() => updatePageState(PageState.LOADING);
+
   //로딩 끄기
   hideLoading() => resetPageState();
 
   //메세지 관리
   final _messageController = ''.obs;
+
   String get message => _messageController.value;
+
   showMessage(String msg) => _messageController(msg);
 
   //에러메세지 관리
   final _errorMessageController = ''.obs;
+
   String get errorMessage => _errorMessageController.value;
+
   showErrorMessage(String msg) {
     _errorMessageController(msg);
   }
 
   //성공메세지 관리
   final _successMessageController = ''.obs;
+
   String get successMessage => _messageController.value;
+
   showSuccessMessage(String msg) => _successMessageController(msg);
 
   // ignore: long-parameter-list
@@ -112,6 +121,16 @@ abstract class BaseController extends GetxController {
   void showToast(String message) {
     Fluttertoast.showToast(
         msg: message, toastLength: Toast.LENGTH_SHORT, timeInSecForIosWeb: 1);
+  }
+
+  //페이지 이동
+  void navigateTo(
+      {required String route, bool replace = false, dynamic args}) {
+    if (replace) {
+      Get.offNamed(route, arguments: args);
+    } else {
+      Get.toNamed(route, arguments: args);
+    }
   }
 
   //종료시 초기화
