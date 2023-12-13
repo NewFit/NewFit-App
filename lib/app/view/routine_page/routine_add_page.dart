@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_add_page_controller.dart';
+import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
-import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
@@ -16,10 +16,16 @@ import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
 class RoutineAddPage extends BaseView<RoutineAddPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
+  RoutinePageController routinePageController =
+      Get.find<RoutinePageController>();
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitRoutineAppBar(
       controller: controller,
+      goBackFunction: () {
+        routinePageController.updateMainFuture();
+        Get.back();
+      },
     );
   }
 
@@ -48,8 +54,11 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
         child: NewfitButton(
           buttonText: AppString.button_add_routine,
           buttonColor: AppColors.main,
-          onPressFuntion: () {
-            controller.addRoutine();
+          onPressFuntion: () async {
+            await controller.addRoutine();
+
+            routinePageController.updateMainFuture();
+            Get.back();
           },
         ),
       ),

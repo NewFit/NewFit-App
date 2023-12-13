@@ -27,7 +27,7 @@ class RoutineDropdownConstants {
   );
 
   static MenuList delete = MenuList(
-    menuText: '루틴 수정하기',
+    menuText: '루틴 삭제하기',
     menuIcon: Icon(
       Icons.delete,
       color: Colors.red,

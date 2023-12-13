@@ -56,8 +56,7 @@ class NewfitAppBar extends StatelessWidget
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
-            appBarHeight = 135.h + MediaQuery.of(context).padding.top;
-
+          appBarHeight = 135.h + MediaQuery.of(context).padding.top;
         }
         return Container(
           height: appBarHeight,
@@ -525,9 +524,11 @@ class NewfitRoutineAppBar extends StatelessWidget
   NewfitRoutineAppBar({
     super.key,
     required this.controller,
+    required this.goBackFunction,
   });
 
   RoutineAddPageController controller;
+  final void Function() goBackFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -561,9 +562,7 @@ class NewfitRoutineAppBar extends StatelessWidget
                     IconButton(
                       padding: EdgeInsets.zero,
                       icon: const Icon(Icons.arrow_back_ios),
-                      onPressed: () {
-                        Get.back();
-                      },
+                      onPressed: goBackFunction,
                     ),
                     const Spacer(),
                   ],

@@ -43,6 +43,5 @@ class RoutineAddPageController extends BaseController with StorageUtil {
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       postRoutine.value,
     );
-    Get.back();
   }
 }

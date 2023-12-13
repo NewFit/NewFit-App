@@ -8,11 +8,13 @@ class NewfitRoutineCard extends StatelessWidget {
   const NewfitRoutineCard({
     required this.routineName,
     required this.equipmentCount,
+    required this.routineDropdownChoiceAction,
     super.key,
   });
 
   final String routineName;
   final int equipmentCount;
+  final void Function(String) routineDropdownChoiceAction;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +46,9 @@ class NewfitRoutineCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const NewfitDropDownMenu(),
+                NewfitDropDownMenu(
+                  routineDropdownChoiceAction: routineDropdownChoiceAction,
+                ),
               ],
             ),
           ),

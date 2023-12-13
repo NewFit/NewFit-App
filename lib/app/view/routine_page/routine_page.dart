@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
@@ -16,7 +17,7 @@ import 'package:new_fit/app/view/theme/app_string.dart';
 
 class RoutinePage extends BaseView<RoutinePageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
-  RoutinePageController controller = Get.put(RoutinePageController());
+  //RoutinePageController controller = Get.put(RoutinePageController());
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarTranparent(
@@ -31,25 +32,27 @@ class RoutinePage extends BaseView<RoutinePageController> {
   Widget body(BuildContext context) {
     return BaseBody(
       widgetList: [
-        FutureBuilder(
-          future: controller.mainFuture.value,
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.active:
-              case ConnectionState.waiting:
-                return const Loading();
-              case ConnectionState.done:
-                if (snapshot.hasError) return Container();
-                controller.assignFutures((snapshot.data! as List));
+        Obx(() {
+          return FutureBuilder(
+            future: controller.mainFuture.value,
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              switch (snapshot.connectionState) {
+                case ConnectionState.active:
+                case ConnectionState.waiting:
+                  return const Loading();
+                case ConnectionState.done:
+                  if (snapshot.hasError) return Container();
+                  controller.assignFutures((snapshot.data! as List));
 
-                return Column(
-                  children: newfitRoutineCardList(),
-                );
-              case ConnectionState.none:
-                return const Loading();
-            }
-          },
-        )
+                  return Column(
+                    children: newfitRoutineCardList(),
+                  );
+                case ConnectionState.none:
+                  return const Loading();
+              }
+            },
+          );
+        })
       ],
       scrollController: scrollController,
     );
@@ -69,6 +72,20 @@ class RoutinePage extends BaseView<RoutinePageController> {
                   controller.myRoutineInfo.value.routines?[index].name ?? '',
               equipmentCount:
                   controller.myRoutineInfo.value.routines_count ?? 0,
+              routineDropdownChoiceAction: (menu) {
+                if (menu == RoutineDropdownConstants.favorite.menuText) {
+                  print(menu);
+                } else if (menu == RoutineDropdownConstants.edit.menuText) {
+                  print(menu);
+                } else if (menu == RoutineDropdownConstants.delete.menuText) {
+                  controller.deleteRoutine(
+                    controller
+                            .myRoutineInfo.value.routines?[index].routine_id ??
+                        0,
+                  );
+                  controller.myRoutineInfo.value.routines?.removeAt(index);
+                }
+              },
             ),
           );
         }
