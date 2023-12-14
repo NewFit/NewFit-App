@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
 class NewfitInfoInputTextField extends StatelessWidget {
   const NewfitInfoInputTextField({
@@ -51,18 +52,8 @@ class NewfitInfoInputTextField extends StatelessWidget {
           hintText: hintText,
         ),
         autofocus: false,
-        /*
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          return _validator(value!);
-        },
-        */
       ),
     );
-  }
-
-  String? _validator(String value) {
-    return null;
   }
 }
 
@@ -71,14 +62,6 @@ class NewfitIdInputTextField extends NewfitInfoInputTextField {
     required super.hintText,
     required super.controller,
   });
-
-  @override
-  String? _validator(String value) {
-    if (value.length < 10) {
-      return ('아이디에는 특수기호를 사용할 수 없습니다.');
-    }
-    return null;
-  }
 }
 
 class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
@@ -86,13 +69,45 @@ class NewfitPasswordInputTextField extends NewfitInfoInputTextField {
     required super.hintText,
     required super.controller,
   });
+}
+
+class NewfitRoutineAppbarTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String hintText;
+
+  const NewfitRoutineAppbarTextField({
+    required this.controller,
+    required this.hintText,
+    super.key,
+  });
 
   @override
-  String? _validator(String value) {
-    if (value.length <= 7) {
-      return ('비밀번호를 더 길게 설정해주세요.');
-    }
-    return null;
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: controller,
+      textAlign: TextAlign.center,
+      decoration: InputDecoration(
+        enabledBorder: UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Colors.grey[300]!,
+            width: 2,
+          ),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: AppColors.black,
+            width: 4,
+          ),
+        ),
+        hintText: hintText,
+        hintStyle: TextStyle(
+          fontSize: 18.sp,
+          fontWeight: AppFontWeights.bold,
+          color: Colors.grey,
+        ),
+      ),
+      style: TextStyle(fontSize: 18.sp, fontWeight: AppFontWeights.bold),
+    );
   }
 }
 
