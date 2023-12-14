@@ -86,6 +86,11 @@ class RoutinePage extends BaseView<RoutinePageController> {
                   controller.myRoutineInfo.value.routines?.removeAt(index);
                 }
               },
+              onTapFunc: () {
+                Get.toNamed(AppPages.ROUTINE_MORE_INFO,
+                    arguments: controller
+                        .myRoutineInfo.value.routines?[index].routine_id);
+              },
             ),
           );
         }
