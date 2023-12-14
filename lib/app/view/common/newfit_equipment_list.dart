@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
@@ -129,7 +130,9 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
     required this.equipmentTitle,
     this.imageRoute = AppString.defaultEquipment,
     super.key,
-    required this.equipmentGymId, required this.onTap, required this.checked,
+    required this.equipmentGymId,
+    required this.onTap,
+    required this.checked, required this.startTime, required this.endTime,
   });
 
   final int equipmentGymId;
@@ -137,10 +140,29 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
   final String imageRoute;
   final VoidCallback onTap;
   final bool checked;
+  final DateTime startTime;
+  final DateTime endTime;
+
+  String reservationTime() {
+    final now = DateTime.now();
+
+    bool sameDay = (now.year == startTime.year) &&
+        (now.month == startTime.month) &&
+        (now.day == startTime.day);
+
+    if(sameDay) {
+      return "${DateFormat('HH:mm').format(startTime)} ~ ${DateFormat('HH:mm').format(endTime)}";
+    } else {
+      return DateFormat('MM월 dd일').format(startTime);
+    }
+  }
+
+  bool isOverdue() {
+    return endTime.isBefore(DateTime.now());
+  }
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
       child: GestureDetector(
@@ -150,7 +172,9 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
           height: 60.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
-              border: Border.all(color: checked ? AppColors.main : Colors.transparent, width: 2.w),
+              border: Border.all(
+                  color: checked ? AppColors.main : Colors.transparent,
+                  width: 2.w),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
@@ -184,6 +208,25 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+              const Spacer(),
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8.h, 8.w, 0),
+                  child: Row(
+                    children: [
+                      Text(
+                        reservationTime(),
+                        style: TextStyle(
+                          color: isOverdue() ? AppColors.warningText : AppColors.main,
+                          fontWeight: AppFontWeights.extrabold,
+                          fontSize: 10.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

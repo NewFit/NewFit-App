@@ -6,7 +6,6 @@ import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
-import 'package:new_fit/app/view/theme/app_values.dart';
 
 import '../../common/newfit_equipment_list.dart';
 import '../../theme/app_string.dart';
@@ -39,6 +38,8 @@ class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
             controller.selectedIndex.value = index;
           },
           checked: index == controller.selectedIndex.value,
+          startTime: reservation.reservation.start_at,
+          endTime: reservation.reservation.end_at,
         );
       },
     );
