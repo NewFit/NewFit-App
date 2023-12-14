@@ -83,9 +83,8 @@ SpecificReservation _$SpecificReservationFromJson(Map<String, dynamic> json) =>
     SpecificReservation(
       gym_name: json['gym_name'] as String,
       equipment_gym_id: json['equipment_gym_id'] as int,
-      reservation: (json['reservation'] as List<dynamic>)
-          .map((e) => Reservation.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      reservation:
+          Reservation.fromJson(json['reservation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SpecificReservationToJson(

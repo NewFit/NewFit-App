@@ -127,7 +127,7 @@ class ReservationListWithId {
 class SpecificReservation {
   String gym_name;
   int equipment_gym_id;
-  List<Reservation> reservation;
+  Reservation reservation;
 
   SpecificReservation({
     required this.gym_name,

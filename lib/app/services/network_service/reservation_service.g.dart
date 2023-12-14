@@ -154,7 +154,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations/{reservation_id}',
+              '/reservations/${reservationId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -190,7 +190,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations/{reservation_id}',
+              '/reservations/${reservationId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -225,7 +225,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations/equipments/${equipmentId}',
+              '/reservations/equipments/{equipmentId}',
               queryParameters: queryParameters,
               data: _data,
             )
