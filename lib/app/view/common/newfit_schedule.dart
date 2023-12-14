@@ -1,8 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
@@ -11,15 +12,31 @@ class NewfitSchedule extends StatelessWidget {
   const NewfitSchedule({
     required this.scheduleList,
     super.key,
+    required this.startTime,
+    required this.endTime,
+    required this.selectedIndex,
   });
+
+  final DateTime startTime;
+  final DateTime endTime;
   final List<Reservation> scheduleList;
+  final int selectedIndex;
+
+  String timeToStr(DateTime time) {
+    if (time.hour == 0) return '자정';
+    if (time.hour == 12) return '정오';
+
+    if (time.hour > 0 && time.hour < 12) {
+      return '오전 ${time.hour}시';
+    } else if (time.hour > 12 && time.hour < 24) {
+      return '오후 ${time.hour - 12}시';
+    }
+
+    return '에러';
+  }
 
   @override
   Widget build(BuildContext context) {
-    DateTime currentTime = DateTime.now();
-    int todaysTotalMinute =
-        Duration(hours: currentTime.hour, minutes: currentTime.minute)
-            .inMinutes;
     List<Widget> activatedScheduleWidget = [
       Container(
         width: 300.w,
@@ -32,40 +49,45 @@ class NewfitSchedule extends StatelessWidget {
     ];
 
     for (final (index, element) in scheduleList.indexed) {
-      int startPosition = Duration(
-                  hours: element.start_at.hour,
-                  minutes: element.start_at.minute)
-              .inMinutes -
-          todaysTotalMinute;
+      if (element.end_at.isBefore(DateTime.now())) continue;
+      log('$index, $element');
 
-      element.end_at;
-      int scheduleDuration = element.totalMinute();
+      double startPosition = element.start_at.difference(startTime).inMinutes * 2.5.w;
+
+      log("$index : $startPosition");
+
+      double scheduleDuration = element.totalMinute() * 2.5.w;
+
+      log(element.totalMinute().toString());
 
       activatedScheduleWidget.add(
         _NewfitScheduleActivatedArea(
-          areaWidth: scheduleDuration.toDouble(),
-          startPosition: startPosition.toDouble(),
+          areaWidth: scheduleDuration,
+          startPosition: startPosition,
           appColor: index % 2 == 0 ? AppColors.blue200 : AppColors.blue400,
+          checked: selectedIndex == index,
         ),
       );
     }
 
-    return SizedBox(
-      width: 320.w,
-      child: Column(children: [
-        Row(children: [
-          NewfitTextRegularXs(
-            text: "${DateFormat('h:mm').format(DateTime.now())}",
-            textColor: AppColors.unabledGrey,
-          ),
-          const Spacer(),
-          const NewfitTextRegularXs(
-            text: "오후 4시",
-            textColor: AppColors.unabledGrey,
-          ),
+    return Center(
+      child: SizedBox(
+        width: 300.w,
+        child: Column(children: [
+          Row(children: [
+            NewfitTextRegularXs(
+              text: timeToStr(startTime),
+              textColor: AppColors.main,
+            ),
+            const Spacer(),
+            NewfitTextRegularXs(
+              text: timeToStr(endTime),
+              textColor: AppColors.main,
+            ),
+          ]),
+          Stack(children: activatedScheduleWidget),
         ]),
-        Stack(children: activatedScheduleWidget),
-      ]),
+      ),
     );
   }
 }
@@ -75,45 +97,55 @@ class _NewfitScheduleActivatedArea extends StatelessWidget {
     required this.areaWidth,
     required this.startPosition,
     required this.appColor,
-    super.key,
+    required this.checked,
   });
 
-  final double startPosition;
+  double startPosition;
   double areaWidth;
   final Color appColor;
+  final bool checked;
 
   @override
   Widget build(BuildContext context) {
     BorderRadius border = BorderRadius.only(
-      topLeft: Radius.circular(4.r),
-      bottomLeft: Radius.circular(4.r),
-      topRight: Radius.circular(4.r),
-      bottomRight: Radius.circular(4.r),
+      topLeft: Radius.circular(0.r),
+      bottomLeft: Radius.circular(0.r),
+      topRight: Radius.circular(0.r),
+      bottomRight: Radius.circular(0.r),
     );
 
-    if (startPosition <= 5) {
+    if (startPosition <= 0) {
+      areaWidth += startPosition;
+      startPosition = 0;
       border = BorderRadius.only(
         topLeft: Radius.circular(4.r),
         bottomLeft: Radius.circular(4.r),
+        topRight: Radius.circular(0.r),
+        bottomRight: Radius.circular(0.r),
       );
     }
 
-    if (startPosition + areaWidth * 2.5 >= 320) {
-      areaWidth -= (startPosition + areaWidth) - 320;
+    if (startPosition + areaWidth * 2.5.w >= 300.w) {
+      areaWidth -= (startPosition + areaWidth) - 300.w;
       border = BorderRadius.only(
+        topLeft: Radius.circular(0.r),
+        bottomLeft: Radius.circular(0.r),
         topRight: Radius.circular(4.r),
         bottomRight: Radius.circular(4.r),
       );
     }
     return Positioned(
-      left: startPosition.w,
+      left: startPosition,
       child: GestureDetector(
         onTap: () {},
         child: Container(
-          width: areaWidth.w * 2.5,
+          width: areaWidth,
           height: 15.h,
           decoration: BoxDecoration(
             borderRadius: border,
+            border: Border.all(
+                color: checked ? AppColors.main : Colors.transparent,
+                width: 2.w),
             color: appColor,
           ),
         ),

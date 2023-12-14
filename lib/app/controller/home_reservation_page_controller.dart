@@ -12,11 +12,15 @@ import 'package:new_fit/app/services/network_service/reservation_service.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../view/theme/app_string.dart';
+import 'home_my_reservation_page_controller.dart';
 
 class HomeReservationPageController extends BaseController with StorageUtil {
   final Dio dio = Dio();
   late final EquipmentService service;
   late final ReservationService reservationService;
+
+  final HomeMyReservationPageController _myReservationPageController =
+  Get.find();
 
   var equipmentList = Rx<EquipmentList?>(null);
   var isLoading = true.obs;
@@ -135,6 +139,8 @@ class HomeReservationPageController extends BaseController with StorageUtil {
             token,
             equipmentGymId.value,
             Reservation(start_at: startTime.value, end_at: endTime.value));
+
+        _myReservationPageController.loadMyReservationList();
       } else {
         log('ERROR : authority id is null!');
       }
