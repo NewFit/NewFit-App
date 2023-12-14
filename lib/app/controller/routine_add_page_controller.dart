@@ -36,6 +36,7 @@ class RoutineAddPageController extends BaseController with StorageUtil {
 
   deleteEquipment(int index) {
     postRoutine.value.routine_equipments?.removeAt(index);
+    resetSequence();
     reload.value = !reload.value;
   }
 
@@ -64,5 +65,6 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     for (final (index, item) in postRoutine.value.routine_equipments!.indexed) {
       item.sequence = index;
     }
+    sequence = postRoutine.value.routine_equipments!.length;
   }
 }
