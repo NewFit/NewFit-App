@@ -23,6 +23,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitRoutineAppBar(
+      hintText: '새로운 루틴',
       controller: controller,
       goBackFunction: () {
         routinePageController.updateMainFuture();
