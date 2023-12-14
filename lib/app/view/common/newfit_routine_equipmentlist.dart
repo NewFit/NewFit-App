@@ -7,11 +7,13 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
   const NewfitRoutineEquipmentListCell({
     required this.listTitle,
     required this.minute,
+    required this.onDeleteFunc,
     super.key,
   });
 
   final String listTitle;
   final int minute;
+  final void Function() onDeleteFunc;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,10 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Row(
                 children: [
-                  SizedBox(width: 10.w),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 10.w),
+                    child: const Icon(Icons.drag_handle),
+                  ),
                   SizedBox(
                     width: 50.w,
                     height: 50.w,
@@ -70,7 +75,7 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
             Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 30.w, 0),
+                padding: EdgeInsets.fromLTRB(0, 0, 20.w, 0),
                 child: Text(
                   '$minute분',
                   style: TextStyle(
@@ -79,6 +84,16 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
                     fontSize: 16.sp,
                   ),
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(right: 20.w),
+              child: GestureDetector(
+                child: const Icon(
+                  Icons.do_disturb_on,
+                  color: AppColors.warning,
+                ),
+                onTap: onDeleteFunc,
               ),
             ),
           ],
