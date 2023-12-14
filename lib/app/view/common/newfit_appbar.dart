@@ -521,14 +521,15 @@ class _UserCreditInfo extends StatelessWidget {
 
 class NewfitRoutineAppBar extends StatelessWidget
     implements PreferredSizeWidget {
-  NewfitRoutineAppBar({
-    super.key,
-    required this.controller,
-    required this.goBackFunction,
-  });
+  NewfitRoutineAppBar(
+      {super.key,
+      required this.controller,
+      required this.goBackFunction,
+      required this.hintText});
 
   RoutineAddPageController controller;
   final void Function() goBackFunction;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -547,9 +548,9 @@ class NewfitRoutineAppBar extends StatelessWidget
             Center(
                 child: SizedBox(
               width: 200.w,
-              child: NewfitInfoInputTextField(
+              child: NewfitRoutineAppbarTextField(
                 controller: controller.routineNameEditingController,
-                hintText: '',
+                hintText: hintText,
               ),
             )),
             Positioned(
