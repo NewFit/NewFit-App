@@ -6,10 +6,12 @@ import 'package:new_fit/app/view/theme/app_text_theme.dart';
 class NewfitCircleAvatar extends StatelessWidget {
   const NewfitCircleAvatar({
     required this.radius,
+    required this.nickname,
     super.key,
   });
 
   final double radius;
+  final String nickname;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class NewfitCircleAvatar extends StatelessWidget {
             children: [
               Icon(Icons.circle),
               SizedBox(width: 5.w),
-              NewfitTextBoldXl(text: 'gorani', textColor: AppColors.black),
+              NewfitTextBoldXl(text: nickname, textColor: AppColors.black),
             ],
           ),
         ],

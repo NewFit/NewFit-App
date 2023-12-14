@@ -89,6 +89,7 @@ class NewfitTextBold2Xl extends StatelessWidget {
         color: textColor,
         fontSize: 24,
         fontWeight: AppFontWeights.bold,
+        decoration: TextDecoration.none,
       ),
     );
   }

@@ -50,10 +50,9 @@ class MyPageController extends BaseController with StorageUtil {
         '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
         getInt(AppString.key_authority_id)!,
       );
-
-      //saveUserInfo();
     } finally {
       isLoading(false);
+      //saveUserInfo();
     }
   }
 

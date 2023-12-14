@@ -5,7 +5,16 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
 class NewfitRoutineCard extends StatelessWidget {
-  const NewfitRoutineCard({super.key});
+  const NewfitRoutineCard({
+    required this.routineName,
+    required this.equipmentCount,
+    required this.routineDropdownChoiceAction,
+    super.key,
+  });
+
+  final String routineName;
+  final int equipmentCount;
+  final void Function(String) routineDropdownChoiceAction;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +24,6 @@ class NewfitRoutineCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: AppColors.white,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.1),
-            offset: Offset(0, 0),
-            spreadRadius: 0.1,
-            blurRadius: 20,
-          ),
-        ],
       ),
       child: Column(
         children: [
@@ -31,7 +32,7 @@ class NewfitRoutineCard extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  '월요일 루틴',
+                  routineName,
                   style: TextStyle(
                     fontSize: 20.sp,
                     fontWeight: AppFontWeights.bold,
@@ -45,7 +46,9 @@ class NewfitRoutineCard extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                const NewfitDropDownMenu(),
+                NewfitDropDownMenu(
+                  routineDropdownChoiceAction: routineDropdownChoiceAction,
+                ),
               ],
             ),
           ),
@@ -69,7 +72,7 @@ class NewfitRoutineCard extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(0, 0, 10.w, 0),
                   child: newfitImage(),
                 ),
-                newfitMore(),
+                newfitMore(equipmentCount),
               ],
             ),
           ),
@@ -86,8 +89,8 @@ class NewfitRoutineCard extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(8.r)),
-            child: Image(
-              image: const AssetImage('images/gorani.png'),
+            child: const Image(
+              image: AssetImage('images/gorani.png'),
             ),
           ),
           Container(
@@ -105,7 +108,7 @@ class NewfitRoutineCard extends StatelessWidget {
     );
   }
 
-  Widget newfitMore() {
+  Widget newfitMore(int equipmentCount) {
     return SizedBox(
       width: 50.w,
       height: 50.w,
@@ -113,9 +116,9 @@ class NewfitRoutineCard extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.center,
-            child: const Text(
-              '2+',
-              style: TextStyle(
+            child: Text(
+              equipmentCount >= 4 ? '${equipmentCount - 3}+' : '',
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: AppFontWeights.bold,
                 color: AppColors.main,

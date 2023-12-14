@@ -7,11 +7,15 @@ class NewfitFAB extends StatelessWidget {
   const NewfitFAB({
     required this.fabTitleText,
     required this.onPressedFunction,
+    required this.backgroundColor,
+    required this.contentColor,
     super.key,
   });
 
   final String fabTitleText;
   final void Function()? onPressedFunction;
+  final Color backgroundColor;
+  final Color contentColor;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,7 +23,7 @@ class NewfitFAB extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: AppColors.black.withOpacity(0.1),
-            offset: Offset(0, 0),
+            offset: const Offset(0, 0),
             spreadRadius: 0.1,
             blurRadius: 20,
           )
@@ -27,14 +31,14 @@ class NewfitFAB extends StatelessWidget {
       ),
       child: FloatingActionButton.extended(
         onPressed: onPressedFunction,
-        backgroundColor: Colors.white,
+        backgroundColor: backgroundColor,
         elevation: 0,
         highlightElevation: 0.2,
         label: Row(
           children: [
             Icon(
               Icons.add,
-              color: Colors.black,
+              color: contentColor,
               fill: 1,
               weight: 900,
             ),
@@ -43,7 +47,7 @@ class NewfitFAB extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: AppFontWeights.bold,
-                color: Colors.black,
+                color: contentColor,
               ),
             ),
           ],
