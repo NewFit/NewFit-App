@@ -34,6 +34,12 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     reload.value = !reload.value;
   }
 
+  deleteEquipment(int index) {
+    postRoutine.value.routine_equipments?.removeAt(index);
+    resetSequence();
+    reload.value = !reload.value;
+  }
+
   addRoutine() async {
     dio.interceptors.add(prettyDioLogger);
 
@@ -43,5 +49,22 @@ class RoutineAddPageController extends BaseController with StorageUtil {
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       postRoutine.value,
     );
+  }
+
+  reorder(oldIndex, newIndex) {
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+    final items = postRoutine.value.routine_equipments?.removeAt(oldIndex);
+    postRoutine.value.routine_equipments?.insert(newIndex, items!);
+    resetSequence();
+    reload.value = !reload.value;
+  }
+
+  resetSequence() {
+    for (final (index, item) in postRoutine.value.routine_equipments!.indexed) {
+      item.sequence = index;
+    }
+    sequence = postRoutine.value.routine_equipments!.length;
   }
 }
