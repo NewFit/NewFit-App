@@ -59,11 +59,7 @@ class NewfitAppBar extends StatelessWidget
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
-          if (scrollPosition.value > 0.0) {
-            appBarHeight = 105.h + MediaQuery.of(context).padding.top;
-          } else {
-            appBarHeight = 155.h + MediaQuery.of(context).padding.top;
-          }
+          appBarHeight = 155.h + MediaQuery.of(context).padding.top;
         }
         return Container(
           height: appBarHeight,
@@ -133,31 +129,27 @@ class NewfitAppBar extends StatelessWidget
           userName: getString(AppString.key_nickname)!,
           onPressedFunction: () {},
         ),
-        if (scrollPosition.value <= 0.0)
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.h),
-            child: Obx(() {
-              if (myReservationPageController.isLoading.value) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (myReservationPageController.reservationList.value == null) {
-                return const Center(child: Text(AppString.str_no_data));
-              }
-              return NewfitSchedule(
-                scheduleList: List.generate(
-                    myReservationPageController
-                            .reservationList.value?.reservations.length ??
-                        0,
-                    (index) => Reservation(
-                        start_at: myReservationPageController.reservationList
-                            .value!.reservations[index].start_at,
-                        end_at: myReservationPageController.reservationList
-                            .value!.reservations[index].end_at)),
-                startTime: myReservationPageController.startTime.value,
-                endTime: myReservationPageController.endTime.value,
-              );
-            }),
-          ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.h),
+          child: Obx(() {
+            if (myReservationPageController.isLoading.value) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            return NewfitSchedule(
+              scheduleList: List.generate(
+                  myReservationPageController
+                      .reservationList.value.reservations.length,
+                  (index) => Reservation(
+                      start_at: myReservationPageController
+                          .reservationList.value.reservations[index].start_at,
+                      end_at: myReservationPageController
+                          .reservationList.value.reservations[index].end_at)),
+              startTime: myReservationPageController.startTime.value,
+              endTime: myReservationPageController.endTime.value,
+              selectedIndex: myReservationPageController.selectedIndex.value,
+            );
+          }),
+        ),
         SizedBox(height: 5.h),
         Align(
           alignment: Alignment.center,

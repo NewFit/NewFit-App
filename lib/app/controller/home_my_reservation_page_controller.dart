@@ -35,6 +35,8 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
           0)
       .obs;
 
+  final RxInt selectedIndex = (-1).obs;
+
   @override
   void onInit() async {
     super.onInit();

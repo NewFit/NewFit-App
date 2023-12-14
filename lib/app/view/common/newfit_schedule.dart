@@ -14,11 +14,13 @@ class NewfitSchedule extends StatelessWidget {
     super.key,
     required this.startTime,
     required this.endTime,
+    required this.selectedIndex,
   });
 
   final DateTime startTime;
   final DateTime endTime;
   final List<Reservation> scheduleList;
+  final int selectedIndex;
 
   String timeToStr(DateTime time) {
     if (time.hour == 0) return '자정';
@@ -35,10 +37,6 @@ class NewfitSchedule extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime currentTime = DateTime.now();
-    int todaysTotalMinute =
-        Duration(hours: currentTime.hour, minutes: currentTime.minute)
-            .inMinutes;
     List<Widget> activatedScheduleWidget = [
       Container(
         width: 300.w,
@@ -51,51 +49,45 @@ class NewfitSchedule extends StatelessWidget {
     ];
 
     for (final (index, element) in scheduleList.indexed) {
-    if(element.end_at.isBefore(DateTime.now())) continue;
+      if (element.end_at.isBefore(DateTime.now())) continue;
       log('$index, $element');
 
-      int startPosition = Duration(
-                  hours: element.start_at.hour,
-                  minutes: element.start_at.minute)
-              .inMinutes -
-          todaysTotalMinute;
+      double startPosition = element.start_at.difference(startTime).inMinutes * 2.5.w;
 
       log("$index : $startPosition");
 
-      element.end_at;
-      int scheduleDuration = element.totalMinute();
+      double scheduleDuration = element.totalMinute() * 2.5.w;
+
+      log(element.totalMinute().toString());
 
       activatedScheduleWidget.add(
         _NewfitScheduleActivatedArea(
-          areaWidth: scheduleDuration.toDouble(),
-          startPosition: startPosition.toDouble(),
+          areaWidth: scheduleDuration,
+          startPosition: startPosition,
           appColor: index % 2 == 0 ? AppColors.blue200 : AppColors.blue400,
+          checked: selectedIndex == index,
         ),
       );
     }
 
-    return SizedBox(
-      width: 320.w,
-      child: Column(children: [
-        Row(children: [
-          Padding(
-            padding: EdgeInsets.only(left: 5.w),
-            child: NewfitTextRegularXs(
+    return Center(
+      child: SizedBox(
+        width: 300.w,
+        child: Column(children: [
+          Row(children: [
+            NewfitTextRegularXs(
               text: timeToStr(startTime),
               textColor: AppColors.main,
             ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: EdgeInsets.only(right: 5.w),
-            child: NewfitTextRegularXs(
+            const Spacer(),
+            NewfitTextRegularXs(
               text: timeToStr(endTime),
               textColor: AppColors.main,
             ),
-          ),
+          ]),
+          Stack(children: activatedScheduleWidget),
         ]),
-        Stack(children: activatedScheduleWidget),
-      ]),
+      ),
     );
   }
 }
@@ -105,12 +97,13 @@ class _NewfitScheduleActivatedArea extends StatelessWidget {
     required this.areaWidth,
     required this.startPosition,
     required this.appColor,
-    super.key,
+    required this.checked,
   });
 
   double startPosition;
   double areaWidth;
   final Color appColor;
+  final bool checked;
 
   @override
   Widget build(BuildContext context) {
@@ -142,14 +135,17 @@ class _NewfitScheduleActivatedArea extends StatelessWidget {
       );
     }
     return Positioned(
-      left: startPosition.w,
+      left: startPosition,
       child: GestureDetector(
         onTap: () {},
         child: Container(
-          width: areaWidth.w * 2.5.w,
+          width: areaWidth,
           height: 15.h,
           decoration: BoxDecoration(
             borderRadius: border,
+            border: Border.all(
+                color: checked ? AppColors.main : Colors.transparent,
+                width: 2.w),
             color: appColor,
           ),
         ),

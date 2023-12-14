@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -128,12 +129,14 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
     required this.equipmentTitle,
     this.imageRoute = AppString.defaultEquipment,
     super.key,
-    required this.equipmentGymId,
+    required this.equipmentGymId, required this.onTap, required this.checked,
   });
 
   final int equipmentGymId;
   final String equipmentTitle;
   final String imageRoute;
+  final VoidCallback onTap;
+  final bool checked;
 
   @override
   Widget build(BuildContext context) {
@@ -141,13 +144,13 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
       child: GestureDetector(
-        onTap: () {
-        },
+        onTap: onTap,
         child: Container(
           width: 320.w,
           height: 60.h,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.r),
+              border: Border.all(color: checked ? AppColors.main : Colors.transparent, width: 2.w),
               color: Colors.white,
               boxShadow: [
                 BoxShadow(
