@@ -89,11 +89,11 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 20.w),
               child: GestureDetector(
+                onTap: onDeleteFunc,
                 child: const Icon(
                   Icons.do_disturb_on,
                   color: AppColors.warning,
                 ),
-                onTap: onDeleteFunc,
               ),
             ),
           ],

@@ -3,8 +3,6 @@
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../json_datetime_converter.dart';
-
 part 'reservation_models.g.dart';
 
 class DateTimeConverter implements JsonConverter<DateTime, String> {

@@ -102,7 +102,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
                       Padding(
                         padding: EdgeInsets.only(right: 5.w),
                         child: GestureDetector(
-                          child: Icon(Icons.remove),
+                          child: const Icon(Icons.remove),
                         ),
                       ),
                       Container(
@@ -171,7 +171,6 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
       animation: animation,
       builder: (BuildContext context, Widget? child) {
         final double animValue = Curves.easeInOut.transform(animation.value);
-        final double elevation = lerpDouble(1, 6, animValue)!;
         final double scale = lerpDouble(1, 1.02, animValue)!;
         return Transform.scale(
           scale: scale,
