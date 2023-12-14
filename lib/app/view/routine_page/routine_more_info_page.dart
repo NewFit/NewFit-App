@@ -55,14 +55,20 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
           if (!isEditMode.value) {
             return Padding(
               padding: EdgeInsets.only(bottom: 10.0.h),
-              child: const NewfitRoutineEquipmentListCell(
-                  listTitle: 'listTitle', minute: 10),
+              child: NewfitRoutineEquipmentListCell(
+                listTitle: 'listTitle',
+                minute: 10,
+                onDeleteFunc: () {},
+              ),
             );
           } else {
             return Padding(
               padding: EdgeInsets.only(bottom: 10.0.h),
-              child: const NewfitRoutineEquipmentListCell(
-                  listTitle: 'listTitle', minute: 10),
+              child: NewfitRoutineEquipmentListCell(
+                listTitle: 'listTitle',
+                minute: 10,
+                onDeleteFunc: () {},
+              ),
             );
           }
         },

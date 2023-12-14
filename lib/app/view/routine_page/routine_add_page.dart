@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -33,16 +35,19 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
 
   @override
   Widget body(BuildContext context) {
-    return SingleChildScrollView(
-      controller: scrollController,
-      child: Obx(() {
+    return Obx(
+      () {
         if (controller.reload.value) ;
-        return Center(
-          child: Column(
-            children: newfitRoutineCardList(),
-          ),
+
+        return ReorderableListView(
+          proxyDecorator: proxyDecorator,
+          scrollController: scrollController,
+          onReorder: (int oldIndex, int newIndex) {
+            controller.reorder(oldIndex, newIndex);
+          },
+          children: newfitRoutineCardList(),
         );
-      }),
+      },
     );
   }
 
@@ -145,16 +150,50 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
     return List.generate(
         controller.postRoutine.value.routine_equipments?.length ?? 0, (index) {
       return Padding(
-        padding: EdgeInsets.only(top: 10.h),
+        key: ValueKey(index),
+        padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
         child: NewfitRoutineEquipmentListCell(
           listTitle:
               '${controller.postRoutine.value.routine_equipments?[index].sequence ?? ''}',
           minute: controller
                   .postRoutine.value.routine_equipments?[index].duration ??
               0,
+          onDeleteFunc: () {
+            controller.deleteEquipment(index);
+          },
         ),
       );
     });
+  }
+
+  Widget proxyDecorator(Widget child, int index, Animation<double> animation) {
+    return AnimatedBuilder(
+      animation: animation,
+      builder: (BuildContext context, Widget? child) {
+        final double animValue = Curves.easeInOut.transform(animation.value);
+        final double elevation = lerpDouble(1, 6, animValue)!;
+        final double scale = lerpDouble(1, 1.02, animValue)!;
+        return Transform.scale(
+          scale: scale,
+          child: Padding(
+            key: ValueKey(index),
+            padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
+            child: NewfitRoutineEquipmentListCell(
+              key: ValueKey(index),
+              listTitle:
+                  '${controller.postRoutine.value.routine_equipments?[index].sequence ?? ''}',
+              minute: controller
+                      .postRoutine.value.routine_equipments?[index].duration ??
+                  0,
+              onDeleteFunc: () {
+                controller.deleteEquipment(index);
+              },
+            ),
+          ),
+        );
+      },
+      child: child,
+    );
   }
 }
 
