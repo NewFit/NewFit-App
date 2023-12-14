@@ -57,16 +57,16 @@ class RoutineEquipment {
 
 @JsonSerializable()
 class RoutineDetail {
-  int routine_id;
-  String routine_name;
-  int equipments_count;
-  List<AbbreviatedEquipment> routine_equipments;
+  int? routine_id;
+  String? routine_name;
+  int? equipments_count;
+  List<AbbreviatedEquipment>? equipments;
 
   RoutineDetail({
-    required this.routine_id,
-    required this.routine_name,
-    required this.equipments_count,
-    required this.routine_equipments,
+    this.routine_id,
+    this.routine_name,
+    this.equipments_count,
+    this.equipments,
   });
 
   factory RoutineDetail.fromJson(Map<String, dynamic> json) =>
