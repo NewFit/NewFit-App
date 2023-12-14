@@ -4,10 +4,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
-import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
@@ -55,6 +51,7 @@ class NewfitSchedule extends StatelessWidget {
     ];
 
     for (final (index, element) in scheduleList.indexed) {
+    if(element.end_at.isBefore(DateTime.now())) continue;
       log('$index, $element');
 
       int startPosition = Duration(
@@ -62,6 +59,8 @@ class NewfitSchedule extends StatelessWidget {
                   minutes: element.start_at.minute)
               .inMinutes -
           todaysTotalMinute;
+
+      log("$index : $startPosition");
 
       element.end_at;
       int scheduleDuration = element.totalMinute();
@@ -109,29 +108,35 @@ class _NewfitScheduleActivatedArea extends StatelessWidget {
     super.key,
   });
 
-  final double startPosition;
+  double startPosition;
   double areaWidth;
   final Color appColor;
 
   @override
   Widget build(BuildContext context) {
     BorderRadius border = BorderRadius.only(
-      topLeft: Radius.circular(4.r),
-      bottomLeft: Radius.circular(4.r),
-      topRight: Radius.circular(4.r),
-      bottomRight: Radius.circular(4.r),
+      topLeft: Radius.circular(0.r),
+      bottomLeft: Radius.circular(0.r),
+      topRight: Radius.circular(0.r),
+      bottomRight: Radius.circular(0.r),
     );
 
-    if (startPosition <= 5) {
+    if (startPosition <= 0) {
+      areaWidth += startPosition;
+      startPosition = 0;
       border = BorderRadius.only(
         topLeft: Radius.circular(4.r),
         bottomLeft: Radius.circular(4.r),
+        topRight: Radius.circular(0.r),
+        bottomRight: Radius.circular(0.r),
       );
     }
 
-    if (startPosition + areaWidth * 2.5 >= 320) {
-      areaWidth -= (startPosition + areaWidth) - 320;
+    if (startPosition + areaWidth * 2.5.w >= 300.w) {
+      areaWidth -= (startPosition + areaWidth) - 300.w;
       border = BorderRadius.only(
+        topLeft: Radius.circular(0.r),
+        bottomLeft: Radius.circular(0.r),
         topRight: Radius.circular(4.r),
         bottomRight: Radius.circular(4.r),
       );
@@ -141,7 +146,7 @@ class _NewfitScheduleActivatedArea extends StatelessWidget {
       child: GestureDetector(
         onTap: () {},
         child: Container(
-          width: areaWidth.w * 2.5,
+          width: areaWidth.w * 2.5.w,
           height: 15.h,
           decoration: BoxDecoration(
             borderRadius: border,

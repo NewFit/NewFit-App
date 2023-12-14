@@ -16,9 +16,11 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
   late final ReservationService service;
   late final AuthorityService authorityService;
 
-  var reservationList = Rx<ReservationListWithId?>(null);
+  final Rx<ReservationListWithId> reservationList = ReservationListWithId(
+      gym_name: '', reservation_count: 0, reservations: []).obs;
   var isLoading = true.obs;
-  var specificReservationList = RxList<SpecificReservation>();
+  final RxList<SpecificReservation> specificReservationList =
+      <SpecificReservation>[].obs;
   var isLoadingSpecs = true.obs;
 
   final Rx<DateTime> startTime = DateTime(DateTime.now().year,
@@ -71,8 +73,11 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        var reservation = await authorityService.getMyReservationList(authorityId, token);
-        reservationList(reservation);
+        var reservation =
+            await authorityService.getMyReservationList(authorityId, token);
+        reservationList.value = reservation;
+
+        loadMyReservationSpecList();
       } else {
         log('ERROR : authority id is null!');
       }
@@ -82,7 +87,7 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
   }
 
   void loadMyReservationSpecList() async {
-    isLoading(true);
+    isLoadingSpecs(true);
     try {
       var now = DateTime.now();
       startTime.value = DateTime(now.year, now.month, now.day, now.hour, 0, 0);
@@ -95,15 +100,23 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        for(var item in reservationList.value?.reservations ?? <ReservationWithId>[]) {
-          var reservation = await service.getSpecificReservation(authorityId, token, item.reservation_id);
-          specificReservationList.add(reservation);
+        for (var item
+            in reservationList.value.reservations) {
+          var reservation = await service.getSpecificReservation(
+              authorityId, token, item.reservation_id);
+
+          final List<SpecificReservation> newSpecificReservationList =
+              List.from(specificReservationList);
+          newSpecificReservationList.add(reservation);
+
+          specificReservationList.value = newSpecificReservationList;
+          update();
         }
       } else {
         log('ERROR : authority id is null!');
       }
     } finally {
-      isLoading(false);
+      isLoadingSpecs(false);
     }
   }
 }

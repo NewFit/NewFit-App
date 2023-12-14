@@ -47,7 +47,7 @@ class MainPage extends BaseView<MainController> {
       case MenuCode.HOME:
         return HomePage(scrollController: scrollController);
       case MenuCode.RESERVE:
-        return HomeMyReservationPage();
+        return HomeMyReservationPage(scrollController: scrollController);
       case MenuCode.QR:
         return SvgPicture.asset(
           AppString.newfit,

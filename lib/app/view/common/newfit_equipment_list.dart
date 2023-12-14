@@ -127,7 +127,6 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
   const NewfitEquipmentListWithoutAvailableCell({
     required this.equipmentTitle,
     this.imageRoute = AppString.defaultEquipment,
-    required this.currentStatus,
     super.key,
     required this.equipmentGymId,
   });
@@ -135,7 +134,6 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
   final int equipmentGymId;
   final String equipmentTitle;
   final String imageRoute;
-  final int currentStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -183,44 +181,6 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              ),
-              const Spacer(),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(0, 8.h, 8.w, 0),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 10.w,
-                        height: 10.w,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.w),
-                          color: AppColors.main,
-                        ),
-                      ),
-                      SizedBox(width: 3.w),
-                      if (currentStatus == 1)
-                        Text(
-                          AppString.str_reservation_available,
-                          style: TextStyle(
-                            color: AppColors.main,
-                            fontWeight: AppFontWeights.extrabold,
-                            fontSize: 10.sp,
-                          ),
-                        )
-                      else
-                        Text(
-                          AppString.str_reservation_unavailable,
-                          style: TextStyle(
-                            color: AppColors.warningText,
-                            fontWeight: AppFontWeights.extrabold,
-                            fontSize: 10.sp,
-                          ),
-                        ),
-                    ],
-                  ),
                 ),
               ),
             ],
