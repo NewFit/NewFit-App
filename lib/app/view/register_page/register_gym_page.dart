@@ -48,7 +48,7 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
           height: 420.h,
           child: Obx(
             () {
-              if (redraw.value) ;
+              if (redraw.value) {}
               return ListView.builder(
                 itemCount: controller.addressGymList.value.gym_count,
                 itemBuilder: (context, index) {
@@ -88,7 +88,7 @@ class RegisterGymPage extends BaseView<RegisterGymPageController> {
           () {
             Color buttonColor = Colors.grey;
 
-            if (redraw.value) ;
+            if (redraw.value) {}
             if (controller.selected.contains(true)) {
               buttonColor = AppColors.main;
             } else {

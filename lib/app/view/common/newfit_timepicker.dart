@@ -655,7 +655,7 @@ class TimeInputFormatter extends TextInputFormatter {
 
     // 콜론을 삽입하여 시간 형식을 만듭니다.
     if (newString.length > 2) {
-      newString = newString.substring(0, 2) + ':' + newString.substring(2);
+      newString = '${newString.substring(0, 2)} : ${newString.substring(2)}';
       // 커서 위치가 자동으로 조정되었는지 확인합니다. 만약 3번째 숫자를 입력한 경우, 커서는 콜론 뒤에 위치해야 합니다.
       if (cursorPosition == 3) {
         cursorPosition++;

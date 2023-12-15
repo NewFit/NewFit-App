@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/setting_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
@@ -70,7 +71,9 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
             ),
           );
 
-          print(response.response.headers['access-token']);
+          if (kDebugMode) {
+            print(response.response.headers['access-token']);
+          }
 
           saveString('user-email', 'nhg1113@naver.com');
           saveString('user-nickname', 'noguen');

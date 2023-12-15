@@ -33,7 +33,7 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
   Widget body(BuildContext context) {
     return Obx(
       () {
-        if (controller.reload.value) ;
+        if (controller.reload.value) {}
 
         return FutureBuilder(
           future: controller.mainFuture.value,

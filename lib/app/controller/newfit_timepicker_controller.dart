@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -27,7 +28,9 @@ class NewfitTimepickerController extends GetxController {
     super.onInit();
 
     ever(_selectedStartTimeController, (_) {
-      print("Selected start time has changed to $selectedStartTime");
+      if (kDebugMode) {
+        print("Selected start time has changed to $selectedStartTime");
+      }
     });
   }
 

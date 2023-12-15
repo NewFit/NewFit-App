@@ -20,7 +20,7 @@ class RoutineDropdownConstants {
   );
   static MenuList edit = MenuList(
     menuText: '루틴 수정하기',
-    menuIcon: Icon(
+    menuIcon: const Icon(
       Icons.edit,
       color: Colors.black,
     ),
@@ -28,21 +28,11 @@ class RoutineDropdownConstants {
 
   static MenuList delete = MenuList(
     menuText: '루틴 삭제하기',
-    menuIcon: Icon(
+    menuIcon: const Icon(
       Icons.delete,
       color: Colors.red,
     ),
   );
 
   static List<MenuList> choices = <MenuList>[favorite, edit, delete];
-}
-
-void routineDropdownChoiceAction(String menu) {
-  if (menu == RoutineDropdownConstants.favorite.menuText) {
-    print(menu);
-  } else if (menu == RoutineDropdownConstants.edit.menuText) {
-    print(menu);
-  } else if (menu == RoutineDropdownConstants.delete.menuText) {
-    print(menu);
-  }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -132,7 +131,9 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
     super.key,
     required this.equipmentGymId,
     required this.onTap,
-    required this.checked, required this.startTime, required this.endTime,
+    required this.checked,
+    required this.startTime,
+    required this.endTime,
   });
 
   final int equipmentGymId;
@@ -150,7 +151,7 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
         (now.month == startTime.month) &&
         (now.day == startTime.day);
 
-    if(sameDay) {
+    if (sameDay) {
       return "${DateFormat('HH:mm').format(startTime)} ~ ${DateFormat('HH:mm').format(endTime)}";
     } else {
       return DateFormat('MM월 dd일').format(startTime);
@@ -220,7 +221,9 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
                       Text(
                         reservationTime(),
                         style: TextStyle(
-                          color: isOverdue() ? AppColors.warningText : AppColors.main,
+                          color: isOverdue()
+                              ? AppColors.warningText
+                              : AppColors.main,
                           fontWeight: AppFontWeights.extrabold,
                           fontSize: 10.sp,
                         ),

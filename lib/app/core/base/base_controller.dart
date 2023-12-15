@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/page_state.dart';
@@ -124,8 +126,7 @@ abstract class BaseController extends GetxController {
   }
 
   //페이지 이동
-  void navigateTo(
-      {required String route, bool replace = false, dynamic args}) {
+  void navigateTo({required String route, bool replace = false, dynamic args}) {
     if (replace) {
       Get.offNamed(route, arguments: args);
     } else {

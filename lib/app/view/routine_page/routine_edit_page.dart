@@ -16,7 +16,7 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
-class RoutineAddPage extends BaseView<RoutineAddPageController> {
+class RoutineEditPage extends BaseView<RoutineAddPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   RoutinePageController routinePageController =
       Get.find<RoutinePageController>();
