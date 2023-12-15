@@ -44,6 +44,9 @@ class NewfitSchedule extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4.r),
           color: AppColors.unabledGrey,
+          border: Border.all(
+            color: AppColors.grayDisabled,
+          ),
         ),
       ),
     ];
@@ -52,7 +55,8 @@ class NewfitSchedule extends StatelessWidget {
       if (element.end_at.isBefore(DateTime.now())) continue;
       log('$index, $element');
 
-      double startPosition = element.start_at.difference(startTime).inMinutes * 2.5.w;
+      double startPosition =
+          element.start_at.difference(startTime).inMinutes * 2.5.w;
 
       log("$index : $startPosition");
 
@@ -72,19 +76,22 @@ class NewfitSchedule extends StatelessWidget {
 
     return Center(
       child: SizedBox(
-        width: 300.w,
+        width: 320.w,
         child: Column(children: [
           Row(children: [
             NewfitTextRegularXs(
               text: timeToStr(startTime),
-              textColor: AppColors.main,
+              textColor: AppColors.textUnabled,
             ),
             const Spacer(),
             NewfitTextRegularXs(
               text: timeToStr(endTime),
-              textColor: AppColors.main,
+              textColor: AppColors.textUnabled,
             ),
           ]),
+          SizedBox(
+            height: 3.h,
+          ),
           Stack(children: activatedScheduleWidget),
         ]),
       ),

@@ -46,7 +46,7 @@ class NewfitBottomNavigationBar extends StatelessWidget {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: AppColors.pageBackground,
+        backgroundColor: AppColors.white,
         selectedItemColor: selectedItemColor,
         unselectedItemColor: unselectedItemColor,
         currentIndex: navController.selectedIndex,

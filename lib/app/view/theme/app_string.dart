@@ -7,8 +7,10 @@ abstract class AppString {
   static const str_routine_spec_title = "루틴 상세 정보";
   static const str_routine_title = "루틴";
   static const str_settting_title = "설정";
+  static const str_scoreboard_title = "스코어보드";
   static const str_total_credit = "전체 크레딧";
   static const str_today_credit = "일일 크레딧";
+
   static const str_error_id_cannot_use_special_character =
       "아이디에는 특수기호를 사용할 수 없습니다.";
   static const str_error_need_long_password = "비밀번호를 더 길게 설정해주세요.";
@@ -32,6 +34,7 @@ abstract class AppString {
   static const button_kakao_login = "카카오 로그인";
   static const button_reservation = "예약";
   static const button_my_routine = "나의 루틴";
+  static const button_reservation_with_routine = "루틴으로 예약하기";
   static const button_aceept_all_terms = "약관 전체 동의하기";
   static const button_next = "다음";
   static const button_welcome = "환영합니다!";

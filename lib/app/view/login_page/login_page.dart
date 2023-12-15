@@ -25,32 +25,38 @@ class LoginPage extends BaseView<LoginPageController> {
           const Spacer(),
           SvgPicture.asset(AppString.newfit),
           const Spacer(),
-          NewfitLoginButton(
-            buttonText: AppString.button_google_login,
-            buttonColor: const Color(0xFFECECEC),
-            buttonTextColor: AppColors.black,
-            buttonLeadingIcon: SizedBox(
-              height: 19.h,
-              child: Image.asset(AppString.google),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            child: NewfitLoginButton(
+              buttonText: AppString.button_google_login,
+              buttonColor: const Color(0xFFECECEC),
+              buttonTextColor: AppColors.black,
+              buttonLeadingIcon: SizedBox(
+                height: 19.h,
+                child: Image.asset(AppString.google),
+              ),
+              onPressFuntion: () async {
+                controller.googleLogin();
+              },
             ),
-            onPressFuntion: () async {
-              controller.googleLogin();
-            },
           ),
           SizedBox(
             height: 8.h,
           ),
-          NewfitLoginButton(
-            buttonText: AppString.button_kakao_login,
-            buttonColor: const Color(0xFFFEE500),
-            buttonTextColor: AppColors.black,
-            buttonLeadingIcon: SizedBox(
-              height: 19.h,
-              child: Image.asset(AppString.kakao),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30.w),
+            child: NewfitLoginButton(
+              buttonText: AppString.button_kakao_login,
+              buttonColor: const Color(0xFFFEE500),
+              buttonTextColor: AppColors.black,
+              buttonLeadingIcon: SizedBox(
+                height: 19.h,
+                child: Image.asset(AppString.kakao),
+              ),
+              onPressFuntion: () async {
+                controller.kakaoLogin();
+              },
             ),
-            onPressFuntion: () async {
-              controller.kakaoLogin();
-            },
           ),
           SizedBox(
             height: 30.h,

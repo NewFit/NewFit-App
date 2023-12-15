@@ -28,6 +28,9 @@ class NewfitRoutineCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8.r),
           color: AppColors.white,
+          border: Border.all(
+            color: AppColors.grayDisabled,
+          ),
         ),
         child: Column(
           children: [
@@ -57,7 +60,7 @@ class NewfitRoutineCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15.w),
+              padding: EdgeInsets.symmetric(horizontal: 14.w),
               child: Row(
                 children: [
                   Padding(

@@ -24,6 +24,7 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: Colors.white,
+        border: Border.all(color: AppColors.grayDisabled),
       ),
       child: Row(
         children: [
@@ -123,6 +124,9 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: AppColors.white,
+        border: Border.all(
+          color: AppColors.grayDisabled,
+        ),
       ),
       duration: const Duration(milliseconds: 500),
       child: Row(
