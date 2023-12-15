@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: prefer_const_declarations
+
 part of 'authority_service.dart';
 
 // **************************************************************************
@@ -93,7 +95,7 @@ class _AuthorityService implements AuthorityService {
   }
 
   @override
-  Future<ReservationList> getMyReservationList(
+  Future<ReservationListWithId> getMyReservationList(
     int authorityId,
     String accessToken,
   ) async {
@@ -105,8 +107,8 @@ class _AuthorityService implements AuthorityService {
     };
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ReservationList>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ReservationListWithId>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -122,7 +124,7 @@ class _AuthorityService implements AuthorityService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ReservationList.fromJson(_result.data!);
+    final value = ReservationListWithId.fromJson(_result.data!);
     return value;
   }
 

@@ -17,6 +17,20 @@ Map<String, dynamic> _$ReservationToJson(Reservation instance) =>
       'end_at': const DateTimeConverter().toJson(instance.end_at),
     };
 
+ReservationWithId _$ReservationWithIdFromJson(Map<String, dynamic> json) =>
+    ReservationWithId(
+      reservation_id: json['reservation_id'] as int,
+      start_at: const DateTimeConverter().fromJson(json['start_at'] as String),
+      end_at: const DateTimeConverter().fromJson(json['end_at'] as String),
+    );
+
+Map<String, dynamic> _$ReservationWithIdToJson(ReservationWithId instance) =>
+    <String, dynamic>{
+      'reservation_id': instance.reservation_id,
+      'start_at': const DateTimeConverter().toJson(instance.start_at),
+      'end_at': const DateTimeConverter().toJson(instance.end_at),
+    };
+
 PatchReservation _$PatchReservationFromJson(Map<String, dynamic> json) =>
     PatchReservation(
       equipment_gym_id: json['equipment_gym_id'] as int,
@@ -47,13 +61,30 @@ Map<String, dynamic> _$ReservationListToJson(ReservationList instance) =>
       'reservations': instance.reservations,
     };
 
+ReservationListWithId _$ReservationListWithIdFromJson(
+        Map<String, dynamic> json) =>
+    ReservationListWithId(
+      gym_name: json['gym_name'] as String,
+      reservation_count: json['reservation_count'] as int,
+      reservations: (json['reservations'] as List<dynamic>)
+          .map((e) => ReservationWithId.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$ReservationListWithIdToJson(
+        ReservationListWithId instance) =>
+    <String, dynamic>{
+      'gym_name': instance.gym_name,
+      'reservation_count': instance.reservation_count,
+      'reservations': instance.reservations,
+    };
+
 SpecificReservation _$SpecificReservationFromJson(Map<String, dynamic> json) =>
     SpecificReservation(
       gym_name: json['gym_name'] as String,
       equipment_gym_id: json['equipment_gym_id'] as int,
-      reservation: (json['reservation'] as List<dynamic>)
-          .map((e) => Reservation.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      reservation:
+          Reservation.fromJson(json['reservation'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SpecificReservationToJson(

@@ -54,6 +54,7 @@ dependencies:
   webview_flutter: ^4.4.2
   logging: ^1.2.0
   animate_icons: ^2.0.0
+  qr_code_scanner: ^1.0.1
 
 dev_dependencies:
   flutter_test:

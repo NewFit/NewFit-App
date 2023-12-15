@@ -13,6 +13,8 @@ abstract class AppColors {
   static const Color warning = Color(0xFFEF6056);
   static const Color warningText = Color(0xE6EF6056);
   static const Color pageBackground = Color(0xFFF2F4F6);
+  static const Color grayDisabled = Color(0x55AAAAAA);
+  static const Color grayBackground = Color(0xFFE8E8E8);
 
   //blue
   static const Color blue50 = Color(0xFFEFF6FF);

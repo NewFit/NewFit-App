@@ -19,7 +19,7 @@ class NewfitProgressBar extends StatelessWidget {
       child: LinearProgressIndicator(
         borderRadius: BorderRadius.circular(8.r),
         minHeight: progressBarHeight,
-        backgroundColor: Colors.grey[400],
+        backgroundColor: AppColors.grayDisabled,
         color: AppColors.main,
         value: progressBarValue,
       ),

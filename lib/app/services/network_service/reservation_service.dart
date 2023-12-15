@@ -32,19 +32,19 @@ abstract class ReservationService {
   Future<HttpResponse> deleteReservation(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
-      @Path() int reservationId);
+      @Path('reservation_id') int reservationId);
 
   @GET('/reservations/{reservation_id}')
   Future<SpecificReservation> getSpecificReservation(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
-      @Path() int reservationId);
+      @Path('reservation_id') int reservationId);
 
   @GET('/reservations/equipments/{equipmentId}')
   Future<SpecificEquipmentsReservation> getSpecificEquipmentsReservation(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
-      @Path() int equipmentId);
+      @Path('reservation_id') int equipmentId);
 
   @PATCH('/reservations/start')
   Future<HttpResponse> startUsingEquipment(

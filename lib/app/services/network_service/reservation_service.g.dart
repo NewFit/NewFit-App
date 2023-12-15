@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: prefer_const_declarations
+
 part of 'reservation_service.dart';
 
 // **************************************************************************
@@ -154,7 +156,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations/{reservation_id}',
+              '/reservations/${reservationId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -190,7 +192,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations/{reservation_id}',
+              '/reservations/${reservationId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -225,7 +227,7 @@ class _ReservationService implements ReservationService {
     )
             .compose(
               _dio.options,
-              '/reservations/equipments/${equipmentId}',
+              '/reservations/equipments/{equipmentId}',
               queryParameters: queryParameters,
               data: _data,
             )

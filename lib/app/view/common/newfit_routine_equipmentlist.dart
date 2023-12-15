@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/routine_more_info_page_controller.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
@@ -25,6 +24,7 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: Colors.white,
+        border: Border.all(color: AppColors.grayDisabled),
       ),
       child: Row(
         children: [
@@ -124,6 +124,9 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
         color: AppColors.white,
+        border: Border.all(
+          color: AppColors.grayDisabled,
+        ),
       ),
       duration: const Duration(milliseconds: 500),
       child: Row(

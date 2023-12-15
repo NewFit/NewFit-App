@@ -43,6 +43,31 @@ class Reservation {
 }
 
 @JsonSerializable()
+class ReservationWithId {
+  int reservation_id;
+  @DateTimeConverter()
+  DateTime start_at;
+  @DateTimeConverter()
+  DateTime end_at;
+
+  ReservationWithId({
+    required this.reservation_id,
+    required this.start_at,
+    required this.end_at,
+  });
+
+  factory ReservationWithId.fromJson(Map<String, dynamic> json) =>
+      _$ReservationWithIdFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ReservationWithIdToJson(this);
+
+  int totalMinute() {
+    return Duration(hours: end_at.hour, minutes: end_at.minute).inMinutes -
+        Duration(hours: start_at.hour, minutes: start_at.minute).inMinutes;
+  }
+}
+
+@JsonSerializable()
 class PatchReservation {
   int equipment_gym_id;
   DateTime start_at;
@@ -79,10 +104,28 @@ class ReservationList {
 }
 
 @JsonSerializable()
+class ReservationListWithId {
+  String gym_name;
+  int reservation_count;
+  List<ReservationWithId> reservations;
+
+  ReservationListWithId({
+    required this.gym_name,
+    required this.reservation_count,
+    required this.reservations,
+  });
+
+  factory ReservationListWithId.fromJson(Map<String, dynamic> json) =>
+      _$ReservationListWithIdFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ReservationListWithIdToJson(this);
+}
+
+@JsonSerializable()
 class SpecificReservation {
   String gym_name;
   int equipment_gym_id;
-  List<Reservation> reservation;
+  Reservation reservation;
 
   SpecificReservation({
     required this.gym_name,

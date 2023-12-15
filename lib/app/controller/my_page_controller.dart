@@ -64,9 +64,4 @@ class MyPageController extends BaseController with StorageUtil {
     saveInt(
         AppString.key_this_month_credit, myPageInfo.value.this_month_credit!);
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -74,9 +75,13 @@ class RoutinePage extends BaseView<RoutinePageController> {
                   controller.myRoutineInfo.value.routines_count ?? 0,
               routineDropdownChoiceAction: (menu) {
                 if (menu == RoutineDropdownConstants.favorite.menuText) {
-                  print(menu);
+                  if (kDebugMode) {
+                    print(menu);
+                  }
                 } else if (menu == RoutineDropdownConstants.edit.menuText) {
-                  print(menu);
+                  if (kDebugMode) {
+                    print(menu);
+                  }
                 } else if (menu == RoutineDropdownConstants.delete.menuText) {
                   controller.deleteRoutine(
                     controller

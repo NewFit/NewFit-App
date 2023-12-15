@@ -85,6 +85,7 @@ class MyPage extends BaseView<MyPageController> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: AppColors.white,
+        border: Border.all(color: AppColors.grayDisabled),
       ),
       child: Padding(
         padding: EdgeInsets.all(8.h),
@@ -101,6 +102,7 @@ class MyPage extends BaseView<MyPageController> {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         color: AppColors.white,
+        border: Border.all(color: AppColors.grayDisabled),
       ),
       child: Column(
         children: [
@@ -145,7 +147,7 @@ class MyPage extends BaseView<MyPageController> {
             child: NewfitProgressBar(
               progressBarValue:
                   (controller.myPageInfo.value.this_month_credit ?? 0) / 100,
-              progressBarHeight: 8.h,
+              progressBarHeight: 6.h,
             ),
           ),
           const Spacer(
@@ -167,6 +169,7 @@ class MyPage extends BaseView<MyPageController> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
           color: AppColors.white,
+          border: Border.all(color: AppColors.grayDisabled),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -174,7 +177,7 @@ class MyPage extends BaseView<MyPageController> {
             children: [
               const Icon(Icons.fitness_center),
               SizedBox(width: 10.w),
-              const NewfitTextBold2Xl(
+              const NewfitTextBoldXl(
                   text: AppString.button_my_routine,
                   textColor: AppColors.black),
             ],
@@ -197,19 +200,23 @@ class MyPage extends BaseView<MyPageController> {
             height: 135.h,
             width: 320.w,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(16.r),
-              ),
-              color: AppColors.white,
-            ),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(16.r),
+                ),
+                color: AppColors.white,
+                border: Border.all(color: AppColors.grayDisabled)),
           ),
         ),
         Align(
           alignment: Alignment.center,
           child: CircleAvatar(
-            radius: 75.w,
-            foregroundImage: NetworkImage(
-                controller.myPageInfo.value.profile_file_path ?? ''),
+            radius: 76.w,
+            backgroundColor: AppColors.grayDisabled,
+            child: CircleAvatar(
+              radius: 75.w,
+              foregroundImage: NetworkImage(
+                  controller.myPageInfo.value.profile_file_path ?? ''),
+            ),
           ),
         ),
         Positioned(

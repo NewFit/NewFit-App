@@ -26,7 +26,7 @@ class NewfitCircleAvatar extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.circle),
+              const Icon(Icons.circle),
               SizedBox(width: 5.w),
               NewfitTextBoldXl(text: nickname, textColor: AppColors.black),
             ],

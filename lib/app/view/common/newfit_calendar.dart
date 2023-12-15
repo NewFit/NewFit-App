@@ -43,7 +43,7 @@ class NewfitCalendar extends StatelessWidget {
           return Center(
             child: Text(
               "${day.month}월",
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -51,7 +51,7 @@ class NewfitCalendar extends StatelessWidget {
           );
         },
         outsideBuilder: (context, day, focusedDay) {
-          return SizedBox();
+          return const SizedBox();
         },
         todayBuilder: (context, day, focusedDay) {
           Color? dotColor;
