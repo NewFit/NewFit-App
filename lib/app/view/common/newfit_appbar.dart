@@ -62,6 +62,8 @@ class NewfitAppBar extends StatelessWidget
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
           appBarHeight = 155.h + MediaQuery.of(context).padding.top;
+        } else if (mainController.selectedMenuCode == MenuCode.QR) {
+          return const SizedBox();
         }
         return Container(
           height: appBarHeight,
