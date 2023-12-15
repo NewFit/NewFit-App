@@ -106,6 +106,7 @@ class NewfitScoreboardListCell extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(8.h),
+          border: Border.all(color: AppColors.grayDisabled),
         ),
         child: Row(
           children: [

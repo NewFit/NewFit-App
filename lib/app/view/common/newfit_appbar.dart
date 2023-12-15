@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, unused_element
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,13 +46,13 @@ class NewfitAppBar extends StatelessWidget
           if (scrollPosition.value > 0.0) {
             appBarHeight = 105.h + MediaQuery.of(context).padding.top;
           } else {
-            appBarHeight = 175.h + MediaQuery.of(context).padding.top;
+            appBarHeight = 172.h + MediaQuery.of(context).padding.top;
           }
         } else if (mainController.selectedMenuCode == MenuCode.SCOREBOARD) {
           replaceWidget = const SafeArea(
             child: Center(
               child: NewfitTextBoldXl(
-                text: "스코어보드",
+                text: AppString.str_scoreboard_title,
                 textColor: AppColors.black,
               ),
             ),
@@ -60,7 +60,7 @@ class NewfitAppBar extends StatelessWidget
           appBarHeight = 50.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.RESERVE) {
           replaceWidget = myReservationAppBar();
-          appBarHeight = 155.h + MediaQuery.of(context).padding.top;
+          appBarHeight = 160.h + MediaQuery.of(context).padding.top;
         } else if (mainController.selectedMenuCode == MenuCode.QR) {
           return const SizedBox();
         }
@@ -71,15 +71,8 @@ class NewfitAppBar extends StatelessWidget
               bottomLeft: Radius.circular(16.r),
               bottomRight: Radius.circular(16.r),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                spreadRadius: 0,
-                blurRadius: 25.r,
-                offset: const Offset(0, 0),
-              ),
-            ],
-            color: Colors.white,
+            border: Border.all(color: AppColors.grayDisabled),
+            color: AppColors.white,
           ),
           child: SafeArea(
             child: Padding(
@@ -103,17 +96,17 @@ class NewfitAppBar extends StatelessWidget
             Get.toNamed(AppPages.SETTING);
           },
         ),
-        if (scrollPosition.value <= 0.0) SizedBox(height: 13.h),
+        if (scrollPosition.value <= 0.0) SizedBox(height: 10.h),
         if (scrollPosition.value <= 0.0)
           _UserCreditInfo(
             totalCredit: getInt(AppString.key_total_credit) ?? 0,
             todayCredit: getInt(AppString.key_this_month_credit) ?? 0,
           ),
-        SizedBox(height: 15.h),
+        SizedBox(height: 10.h),
         Align(
           alignment: Alignment.center,
           child: NewfitButton(
-              buttonText: "루틴으로 예약하기",
+              buttonText: AppString.button_reservation_with_routine,
               buttonColor: AppColors.main,
               onPressFuntion: () {}),
         ),
@@ -130,10 +123,12 @@ class NewfitAppBar extends StatelessWidget
         SizedBox(height: 13.h),
         _UserInfoAppBar(
           userName: getString(AppString.key_nickname)!,
-          onPressedFunction: () {},
+          onPressedFunction: () {
+            Get.toNamed(AppPages.SETTING);
+          },
         ),
         Padding(
-          padding: EdgeInsets.symmetric(vertical: 15.h),
+          padding: EdgeInsets.only(top: 10.h, bottom: 10.h),
           child: Obx(() {
             if (myReservationPageController.isLoading.value) {
               return const Center(child: CircularProgressIndicator());
@@ -157,7 +152,7 @@ class NewfitAppBar extends StatelessWidget
         Align(
           alignment: Alignment.center,
           child: NewfitButton(
-              buttonText: "루틴으로 예약하기",
+              buttonText: AppString.button_reservation_with_routine,
               buttonColor: AppColors.main,
               onPressFuntion: () {}),
         ),
@@ -257,64 +252,6 @@ class NewfitAppBarFlat extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight(50.h);
-}
-
-class NewfitAppBarWithSchedule extends StatelessWidget
-    implements PreferredSizeWidget {
-  NewfitAppBarWithSchedule({
-    super.key,
-  });
-
-  double appBarHeight = 183.h;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: appBarHeight,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(16.r),
-          bottomRight: Radius.circular(16.r),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            spreadRadius: 0,
-            blurRadius: 25.r,
-            offset: const Offset(0, 0),
-          ),
-        ],
-        color: Colors.white,
-      ),
-      child: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(20.w, 0, 20.w, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 13.h),
-              _UserInfoAppBar(
-                userName: "고라니",
-                onPressedFunction: () {},
-              ),
-              SizedBox(height: 13.h),
-              SizedBox(height: 15.h),
-              Align(
-                alignment: Alignment.center,
-                child: NewfitButton(
-                    buttonText: "루틴으로 예약하기",
-                    buttonColor: AppColors.main,
-                    onPressFuntion: () {}),
-              )
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  Size get preferredSize => Size.fromHeight(appBarHeight);
 }
 
 class NewfitAppBarTranparent extends StatelessWidget
@@ -471,14 +408,45 @@ class _UserInfoAppBar extends StatelessWidget with StorageUtil {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 15.h,
-          foregroundImage: getProfileImage(),
-        ),
-        SizedBox(width: 10.w),
         GestureDetector(
-            child: NewfitTextBoldLg(
-                text: "$userName님 >", textColor: AppColors.black),
+            child: Container(
+              height: 40.h,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.r),
+                  color: AppColors.white,
+                  border: Border.all(
+                    color: AppColors.grayDisabled,
+                  )),
+              child: Row(children: [
+                Padding(
+                  padding: EdgeInsets.only(left: 7.w),
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.main,
+                    radius: 15.5.h,
+                    child: CircleAvatar(
+                      radius: 14.h,
+                      foregroundImage: getProfileImage(),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 10.w),
+                Padding(
+                  padding: EdgeInsets.only(right: 7.w),
+                  child: Row(children: [
+                    NewfitTextBoldXl(
+                        text: "$userName님", textColor: AppColors.black),
+                    SizedBox(
+                      width: 3.w,
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.grayDisabled,
+                      size: 16.w,
+                    ),
+                  ]),
+                )
+              ]),
+            ),
             onTap: () {
               Get.toNamed(AppPages.MY);
             }),
@@ -520,7 +488,7 @@ class _UserCreditInfo extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 7.h),
+        SizedBox(height: 5.h),
         Row(
           children: [
             const NewfitTextMediumMd(
@@ -534,7 +502,7 @@ class _UserCreditInfo extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 15.h),
+        SizedBox(height: 10.h),
         Align(
           alignment: Alignment.center,
           child: NewfitProgressBar(

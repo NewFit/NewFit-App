@@ -42,16 +42,10 @@ class NewfitEquipmentListCell extends StatelessWidget {
           width: 320.w,
           height: 60.h,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.1),
-                  offset: const Offset(0, 0),
-                  spreadRadius: 0.1,
-                  blurRadius: 20,
-                ),
-              ]),
+            borderRadius: BorderRadius.circular(8.r),
+            color: Colors.white,
+            border: Border.all(color: AppColors.grayDisabled),
+          ),
           child: Row(
             children: [
               Align(
