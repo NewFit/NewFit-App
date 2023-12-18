@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/routine/routine_models.dart';
@@ -12,6 +11,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class RoutineAddPageController extends BaseController with StorageUtil {
   TextEditingController routineNameEditingController = TextEditingController();
   Rx<PostRoutine> postRoutine = PostRoutine().obs;
+  RoutineDetail? routineDetail = Get.arguments;
   Rx<bool> reload = false.obs;
   int sequence = 0;
   Dio dio = Dio();
