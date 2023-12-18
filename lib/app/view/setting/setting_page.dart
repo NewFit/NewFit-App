@@ -25,61 +25,65 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
   @override
   Widget body(BuildContext context) {
     return BaseBody(widgetList: [
-      NewfitSettingListCell(
-        onPressedFunction: () async {
-          Dio dio = Dio();
-          final logger = PrettyDioLogger(
-            requestHeader: true,
-            requestBody: true,
-            responseBody: true,
-            responseHeader: true,
-            error: true,
-            compact: true,
-            maxWidth: 80,
-          );
-          dio.interceptors.add(logger);
+      NewfitSettingList(
+        children: [
+          NewfitSettingListCell(
+            onPressedFunction: () async {
+              Dio dio = Dio();
+              final logger = PrettyDioLogger(
+                requestHeader: true,
+                requestBody: true,
+                responseBody: true,
+                responseHeader: true,
+                error: true,
+                compact: true,
+                maxWidth: 80,
+              );
+              dio.interceptors.add(logger);
 
-          await UserService(dio).deleteUser(
-              getInt('user-id')!,
-              "Bearer ${getString('access-token')!}",
-              UserEmail(email: getString('user-email')!));
-        },
-        settingTitle: '회원탈퇴',
-      ),
-      NewfitSettingListCell(
-        onPressedFunction: () async {
-          Dio dio = Dio();
-          final logger = PrettyDioLogger(
-            requestHeader: true,
-            requestBody: true,
-            responseBody: true,
-            responseHeader: true,
-            error: true,
-            compact: true,
-            maxWidth: 80,
-          );
-          dio.interceptors.add(logger);
+              await UserService(dio).deleteUser(
+                  getInt('user-id')!,
+                  "Bearer ${getString('access-token')!}",
+                  UserEmail(email: getString('user-email')!));
+            },
+            settingTitle: '회원탈퇴',
+          ),
+          NewfitSettingListCell(
+            onPressedFunction: () async {
+              Dio dio = Dio();
+              final logger = PrettyDioLogger(
+                requestHeader: true,
+                requestBody: true,
+                responseBody: true,
+                responseHeader: true,
+                error: true,
+                compact: true,
+                maxWidth: 80,
+              );
+              dio.interceptors.add(logger);
 
-          final response = await UserService(dio).modifyUserInfo(
-            'Bearer ${getString('access-token')!}',
-            getInt('user-id')!,
-            ModifyUser(
-              email: 'nhg1113@naver.com',
-              nickname: 'noguen3',
-              tel: '010-2057-3318',
-              image: 'Base64EncodedImageFile',
-            ),
-          );
+              final response = await UserService(dio).modifyUserInfo(
+                'Bearer ${getString('access-token')!}',
+                getInt('user-id')!,
+                ModifyUser(
+                  email: 'nhg1113@naver.com',
+                  nickname: 'noguen3',
+                  tel: '010-2057-3318',
+                  image: 'Base64EncodedImageFile',
+                ),
+              );
 
-          if (kDebugMode) {
-            print(response.response.headers['access-token']);
-          }
+              if (kDebugMode) {
+                print(response.response.headers['access-token']);
+              }
 
-          saveString('user-email', 'nhg1113@naver.com');
-          saveString('user-nickname', 'noguen');
-          saveString('user-tel', '010-2057-3318');
-        },
-        settingTitle: '유저 정보 변경 테스트(하드코딩으로 테스트)',
+              saveString('user-email', 'nhg1113@naver.com');
+              saveString('user-nickname', 'noguen');
+              saveString('user-tel', '010-2057-3318');
+            },
+            settingTitle: '유저 정보 변경 테스트(하드코딩으로 테스트)',
+          ),
+        ],
       ),
     ]);
   }
