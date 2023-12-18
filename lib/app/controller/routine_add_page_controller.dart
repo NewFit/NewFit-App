@@ -26,6 +26,16 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     maxWidth: 80,
   );
 
+  doneModify() {
+    if (routineDetail == null) {
+      addEquipment();
+    } else {
+      editEquipment();
+    }
+  }
+
+  editEquipment() {}
+
   addEquipment() {
     postRoutine.value.routine_equipments ??= List.empty(growable: true);
     postRoutine.value.routine_equipments?.add(
