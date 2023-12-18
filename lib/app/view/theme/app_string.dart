@@ -8,6 +8,7 @@ abstract class AppString {
   static const str_routine_title = "루틴";
   static const str_settting_title = "설정";
   static const str_scoreboard_title = "스코어보드";
+  static const str_new_routine_title = "새로운 루틴";
   static const str_total_credit = "전체 크레딧";
   static const str_today_credit = "일일 크레딧";
 
