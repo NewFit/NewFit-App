@@ -133,7 +133,7 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
         children: [
           controller.editMode.value
               ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  padding: EdgeInsets.only(left: 10.w),
                   child: const Icon(Icons.drag_handle),
                 )
               : const SizedBox(),
@@ -194,6 +194,19 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
               ),
             ),
           ),
+          controller.editMode.value
+              ? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: GestureDetector(
+                      onTap: () {}, child: const Icon(Icons.do_not_disturb_on)),
+                )
+              : const SizedBox(),
+          controller.editMode.value
+              ? Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: const Icon(Icons.edit),
+                )
+              : const SizedBox(),
         ],
       ),
     );
