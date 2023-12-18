@@ -118,7 +118,7 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
+    return Container(
       width: 320.w,
       height: 60.h,
       decoration: BoxDecoration(
@@ -128,15 +128,8 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
           color: AppColors.grayDisabled,
         ),
       ),
-      duration: const Duration(milliseconds: 500),
       child: Row(
         children: [
-          controller.editMode.value
-              ? Padding(
-                  padding: EdgeInsets.only(left: 10.w),
-                  child: const Icon(Icons.drag_handle),
-                )
-              : const SizedBox(),
           Align(
             alignment: Alignment.centerLeft,
             child: Row(
@@ -194,19 +187,6 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
               ),
             ),
           ),
-          controller.editMode.value
-              ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: GestureDetector(
-                      onTap: () {}, child: const Icon(Icons.do_not_disturb_on)),
-                )
-              : const SizedBox(),
-          controller.editMode.value
-              ? Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.w),
-                  child: const Icon(Icons.edit),
-                )
-              : const SizedBox(),
         ],
       ),
     );
