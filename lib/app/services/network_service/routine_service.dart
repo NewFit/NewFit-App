@@ -8,7 +8,7 @@ part 'routine_service.g.dart';
 
 @RestApi(
     baseUrl:
-        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1/users")
+        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1")
 abstract class RoutineService {
   factory RoutineService(Dio dio, {String baseUrl}) = _RoutineService;
 
