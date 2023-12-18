@@ -11,6 +11,7 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
+import 'package:new_fit/app/view/common/newfit_image.dart';
 import 'package:new_fit/app/view/common/newfit_routine_equipmentlist.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
@@ -93,7 +94,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
                       text: 'text', textColor: AppColors.black),
                 ),
                 GestureDetector(
-                  child: newfitImage(),
+                  child: const NewfitImage(),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -195,31 +196,4 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
       child: child,
     );
   }
-}
-
-Widget newfitImage() {
-  return SizedBox(
-    width: 125.w,
-    height: 125.w,
-    child: Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(8.r)),
-          child: const Image(
-            image: AssetImage('images/gorani.png'),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColors.main,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8.r),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
 }
