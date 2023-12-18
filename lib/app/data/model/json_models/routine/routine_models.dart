@@ -60,7 +60,7 @@ class RoutineDetail {
   int? routine_id;
   String? routine_name;
   int? equipments_count;
-  List<AbbreviatedEquipment>? equipments;
+  List<RoutineEquipmentWithPurpose>? equipments;
 
   RoutineDetail({
     this.routine_id,

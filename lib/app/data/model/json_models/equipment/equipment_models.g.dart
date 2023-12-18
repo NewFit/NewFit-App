@@ -58,18 +58,20 @@ Map<String, dynamic> _$EquipmentSpecToJson(EquipmentSpec instance) =>
       'occupied_times': instance.occupied_times,
     };
 
-AbbreviatedEquipment _$AbbreviatedEquipmentFromJson(
+RoutineEquipmentWithPurpose _$RoutineEquipmentWithPurposeFromJson(
         Map<String, dynamic> json) =>
-    AbbreviatedEquipment(
+    RoutineEquipmentWithPurpose(
       equipment_id: json['equipment_id'] as int,
       name: json['name'] as String,
       purpose: json['purpose'] as String,
+      duration: json['duration'] as int,
     );
 
-Map<String, dynamic> _$AbbreviatedEquipmentToJson(
-        AbbreviatedEquipment instance) =>
+Map<String, dynamic> _$RoutineEquipmentWithPurposeToJson(
+        RoutineEquipmentWithPurpose instance) =>
     <String, dynamic>{
       'equipment_id': instance.equipment_id,
       'name': instance.name,
       'purpose': instance.purpose,
+      'duration': instance.duration,
     };

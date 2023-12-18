@@ -48,7 +48,8 @@ RoutineDetail _$RoutineDetailFromJson(Map<String, dynamic> json) =>
       routine_name: json['routine_name'] as String?,
       equipments_count: json['equipments_count'] as int?,
       equipments: (json['equipments'] as List<dynamic>?)
-          ?.map((e) => AbbreviatedEquipment.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              RoutineEquipmentWithPurpose.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
