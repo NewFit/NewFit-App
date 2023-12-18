@@ -24,9 +24,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitRoutineAppBar(
-      hintText: controller.routineDetail == null
-          ? '새로운 루틴'
-          : controller.routineDetail!.routine_name!,
+      hintText: controller.routineDetail?.routine_name ?? '새로운 루틴',
       controller: controller,
       goBackFunction: () {
         routinePageController.updateMainFuture();
@@ -136,7 +134,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
                       buttonText: '추가',
                       buttonColor: AppColors.main,
                       onPressFuntion: () {
-                        controller.addEquipment();
+                        controller.doneModify();
                         Get.back();
                       },
                     ),
