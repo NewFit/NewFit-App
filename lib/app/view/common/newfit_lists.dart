@@ -193,7 +193,7 @@ class NewfitSettingList extends StatelessWidget {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: EdgeInsets.only(left: 10.w),
+            padding: EdgeInsets.only(left: 10.w, bottom: 5.h),
             child: NewfitTextRegularXl(
               text: categoryText,
               textColor: AppColors.black,
