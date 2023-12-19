@@ -3,6 +3,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/controller/setting_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
@@ -11,21 +12,30 @@ import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_lists.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class SettingPage extends BaseView<SettingPageController> with StorageUtil {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
-    return const NewfitAppBarElevated(
-      appBarTitleText: AppString.str_settting_title,
+    return const NewfitAppBarFlat(
+      appBarTitleText: NewfitTextBoldXl(
+        text: AppString.str_settting_title,
+        textColor: AppColors.black,
+      ),
     );
   }
 
   @override
   Widget body(BuildContext context) {
     return BaseBody(widgetList: [
+      SizedBox(
+        height: 10.h,
+      ),
       NewfitSettingList(
+        categoryText: '테스트',
         children: [
           NewfitSettingListCell(
             onPressedFunction: () async {
