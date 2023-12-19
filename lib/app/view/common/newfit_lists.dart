@@ -205,7 +205,7 @@ class NewfitSettingList extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8.r),
             border: Border.all(
-              color: Colors.grey,
+              color: AppColors.grayDisabled,
             ),
             color: AppColors.white,
           ),
@@ -219,7 +219,7 @@ class NewfitSettingList extends StatelessWidget {
                 } else {
                   return Divider(
                     thickness: 1.h,
-                    color: Colors.grey,
+                    color: AppColors.grayDisabled,
                     height: 0,
                   );
                 }
