@@ -18,19 +18,21 @@ abstract class Routes {
   static const ROUTINE_MORE_INFO = _Paths.ROUTINE_MORE_INFO;
   static const SCOREBOARD = _Paths.SCOREBOARD;
   static const HOME_RESERVATION = _Paths.HOME_RESERVATION;
+  static const FEATURE = _Paths.FEATURE;
 }
 
 abstract class _Paths {
-  static const TEST_PAGE = "/TEST_PAGE";
-  static const LOGIN = "/login";
-  static const REGISTER = "/register";
-  static const REGISTER_GYM = "/register/gym";
-  static const MAIN = "/main";
-  static const SETTING = "/setting";
-  static const MY = "/my";
-  static const ROUTINE = "/routine";
-  static const ROUTINE_ADD = "/routine/routine_add";
-  static const ROUTINE_MORE_INFO = "/routine_more_info";
+  static const TEST_PAGE = '/TEST_PAGE';
+  static const LOGIN = '/login';
+  static const REGISTER = '/register';
+  static const REGISTER_GYM = '/register/gym';
+  static const MAIN = '/main';
+  static const SETTING = '/setting';
+  static const FEATURE = 'feature';
+  static const MY = '/my';
+  static const ROUTINE = '/routine';
+  static const ROUTINE_ADD = '/routine/routine_add';
+  static const ROUTINE_MORE_INFO = '/routine_more_info';
   static const SCOREBOARD = '/scoreboard';
   static const HOME_RESERVATION = '/home_reservation';
 }

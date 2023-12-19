@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:get/get.dart';
+import 'package:new_fit/app/bindings/feature_suggest_page_binding.dart';
 import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
@@ -21,6 +22,7 @@ import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 import 'package:new_fit/app/view/setting/setting_page.dart';
+import 'package:new_fit/app/view/setting/setting_sub_pages.dart/feature_sueggest_page.dart';
 
 import '../bindings/main_binding.dart';
 
@@ -106,6 +108,12 @@ class AppPages {
       name: _Paths.SETTING,
       page: () => SettingPage(),
       binding: SettingPageBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: _Paths.FEATURE,
+      page: () => FeatureSuggestPage(),
+      binding: FeatureSuggestPageBinding(),
       transition: Transition.native,
     ),
   ];
