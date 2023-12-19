@@ -178,10 +178,12 @@ class NewfitSettingListCell extends StatelessWidget {
 
 class NewfitSettingList extends StatelessWidget {
   const NewfitSettingList({
+    required this.categoryText,
     required this.children,
     super.key,
   });
 
+  final String categoryText;
   final List<Widget> children;
 
   @override
@@ -192,8 +194,8 @@ class NewfitSettingList extends StatelessWidget {
           alignment: Alignment.centerLeft,
           child: Padding(
             padding: EdgeInsets.only(left: 10.w),
-            child: const NewfitTextRegularXl(
-              text: '테스트',
+            child: NewfitTextRegularXl(
+              text: categoryText,
               textColor: AppColors.black,
             ),
           ),
@@ -288,7 +290,6 @@ class NewfitReservationListCell extends StatelessWidget {
           controller.navigateTo(
             route: Routes.HOME_RESERVATION,
           );
-          //onPressFunc(context);
         },
         child: Container(
           width: 320.w,
