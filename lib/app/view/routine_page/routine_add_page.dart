@@ -62,7 +62,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
           buttonText: AppString.button_add_routine,
           buttonColor: AppColors.main,
           onPressFuntion: () async {
-            await controller.addRoutine();
+            await controller.doneModify();
 
             routinePageController.updateMainFuture();
             Get.back();
@@ -134,7 +134,7 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
                       buttonText: '추가',
                       buttonColor: AppColors.main,
                       onPressFuntion: () {
-                        controller.doneModify();
+                        controller.addEquipment();
                         Get.back();
                       },
                     ),
