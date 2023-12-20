@@ -92,29 +92,35 @@ class PostRoutine {
 }
 
 @JsonSerializable()
-class PatchRoutine {
-  String routine_name;
-  int add_equipments_count;
-  List<RoutineEquipment> add_equipments;
-  int update_equipments_count;
-  List<RoutineEquipment> update_equipments;
-  int remove_equipments_count;
-  List<RoutineEquipment> remove_equipments;
+class PatchRoutineEquipments {
+  int equipment_count;
+  List<SummarizedRoutineEquipment> equipments;
 
-  PatchRoutine({
-    required this.routine_name,
-    required this.add_equipments_count,
-    required this.add_equipments,
-    required this.update_equipments_count,
-    required this.update_equipments,
-    required this.remove_equipments_count,
-    required this.remove_equipments,
+  PatchRoutineEquipments({
+    required this.equipment_count,
+    required this.equipments,
   });
 
-  factory PatchRoutine.fromJson(Map<String, dynamic> json) =>
-      _$PatchRoutineFromJson(json);
+  factory PatchRoutineEquipments.fromJson(Map<String, dynamic> json) =>
+      _$PatchRoutineEquipmentsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PatchRoutineToJson(this);
+  Map<String, dynamic> toJson() => _$PatchRoutineEquipmentsToJson(this);
+}
+
+@JsonSerializable()
+class SummarizedRoutineEquipment {
+  int equipment_id;
+  int duration;
+
+  SummarizedRoutineEquipment({
+    required this.equipment_id,
+    required this.duration,
+  });
+
+  factory SummarizedRoutineEquipment.fromJson(Map<String, dynamic> json) =>
+      _$SummarizedRoutineEquipmentsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SummarizedRoutineEquipmentsToJson(this);
 }
 
 @JsonSerializable()
