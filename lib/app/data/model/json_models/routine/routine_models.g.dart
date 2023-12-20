@@ -77,7 +77,7 @@ Map<String, dynamic> _$PostRoutineToJson(PostRoutine instance) =>
 PatchRoutineEquipments _$PatchRoutineEquipmentsFromJson(
         Map<String, dynamic> json) =>
     PatchRoutineEquipments(
-      equipment_count: json['equipment_count'] as int,
+      equipments_count: json['equipments_count'] as int,
       equipments: (json['equipments'] as List<dynamic>)
           .map((e) =>
               SummarizedRoutineEquipment.fromJson(e as Map<String, dynamic>))
@@ -87,7 +87,7 @@ PatchRoutineEquipments _$PatchRoutineEquipmentsFromJson(
 Map<String, dynamic> _$PatchRoutineEquipmentsToJson(
         PatchRoutineEquipments instance) =>
     <String, dynamic>{
-      'equipment_count': instance.equipment_count,
+      'equipments_count': instance.equipments_count,
       'equipments': instance.equipments,
     };
 

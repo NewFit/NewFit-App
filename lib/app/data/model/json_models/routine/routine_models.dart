@@ -93,11 +93,11 @@ class PostRoutine {
 
 @JsonSerializable()
 class PatchRoutineEquipments {
-  int equipment_count;
+  int equipments_count;
   List<SummarizedRoutineEquipment> equipments;
 
   PatchRoutineEquipments({
-    required this.equipment_count,
+    required this.equipments_count,
     required this.equipments,
   });
 
@@ -132,7 +132,7 @@ class RoutineName {
   });
 
   factory RoutineName.fromJson(Map<String, dynamic> json) =>
-      _$MRoutineNameFromJson(json);
+      _$RoutineNameFromJson(json);
 
   Map<String, dynamic> toJson() => _$RoutineNameToJson(this);
 }
