@@ -29,21 +29,21 @@ class RoutineAddPageController extends BaseController with StorageUtil {
   @override
   onInit() {
     super.onInit();
+    dio.interceptors.add(prettyDioLogger);
     if (routineDetail != null) {
-      print('hello');
-      convertToRoutineEquipment();
+      routineDetailToPostRoutine();
     }
   }
 
   doneModify() {
     if (routineDetail == null) {
-      addEquipment();
+      addRoutine();
     } else {
-      editEquipment();
+      editRoutine();
     }
   }
 
-  convertToRoutineEquipment() {
+  routineDetailToPostRoutine() {
     List<RoutineEquipment> routineEquipments = List.empty(growable: true);
 
     for (final (index, routine) in (routineDetail?.equipments ?? []).indexed) {
@@ -58,7 +58,36 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     postRoutine.value.routine_equipments = routineEquipments;
   }
 
-  editEquipment() {}
+  PatchRoutineEquipments postRoutineToPatchRoutineEquipments() {
+    List<SummarizedRoutineEquipment> equipments = List.empty(growable: true);
+
+    for (final routine in postRoutine.value.routine_equipments!) {
+      equipments.add(
+        SummarizedRoutineEquipment(
+          equipment_id: routine.equipment_id,
+          duration: routine.duration,
+        ),
+      );
+    }
+
+    return PatchRoutineEquipments(
+        equipments_count: equipments.length, equipments: equipments);
+  }
+
+  editRoutine() {
+    RoutineService(dio).editRoutineName(
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${AppString.key_access_token}',
+      routineDetail?.routine_id ?? 0,
+      RoutineName(routin_name: routineNameEditingController.text),
+    );
+    RoutineService(dio).editRoutineEquipments(
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${AppString.key_access_token}',
+      routineDetail?.routine_id ?? 0,
+      postRoutineToPatchRoutineEquipments(),
+    );
+  }
 
   addEquipment() {
     postRoutine.value.routine_equipments ??= List.empty(growable: true);
