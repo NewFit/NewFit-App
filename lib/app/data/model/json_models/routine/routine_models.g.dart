@@ -106,12 +106,12 @@ Map<String, dynamic> _$SummarizedRoutineEquipmentToJson(
     };
 
 RoutineName _$RoutineNameFromJson(Map<String, dynamic> json) => RoutineName(
-      routin_name: json['routin_name'] as String,
+      routine_name: json['routine_name'] as String,
     );
 
 Map<String, dynamic> _$RoutineNameToJson(RoutineName instance) =>
     <String, dynamic>{
-      'routin_name': instance.routin_name,
+      'routine_name': instance.routine_name,
     };
 
 MyRoutine _$MyRoutineFromJson(Map<String, dynamic> json) => MyRoutine(

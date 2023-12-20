@@ -125,10 +125,10 @@ class SummarizedRoutineEquipment {
 
 @JsonSerializable()
 class RoutineName {
-  String routin_name;
+  String routine_name;
 
   RoutineName({
-    required this.routin_name,
+    required this.routine_name,
   });
 
   factory RoutineName.fromJson(Map<String, dynamic> json) =>
