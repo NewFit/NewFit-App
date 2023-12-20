@@ -27,6 +27,7 @@ class RoutinePageController extends BaseController with StorageUtil {
   @override
   onInit() {
     super.onInit();
+    dio.interceptors.add(prettyDioLogger);
     updateMainFuture();
   }
 
@@ -45,7 +46,6 @@ class RoutinePageController extends BaseController with StorageUtil {
   getMyRoutineInfo() {
     isLoading(true);
     try {
-      dio.interceptors.add(prettyDioLogger);
       myRoutineInfoFuture.value = RoutineService(dio).getMyRoutineList(
         getInt(AppString.key_authority_id)!,
         '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
@@ -53,6 +53,14 @@ class RoutinePageController extends BaseController with StorageUtil {
     } finally {
       isLoading(false);
     }
+  }
+
+  Future<RoutineDetail> getRoutineDetail(int routineId) async {
+    return RoutineService(dio).getMyRoutineDetails(
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+      routineId,
+    );
   }
 
   deleteRoutine(int routineId) {
