@@ -13,6 +13,8 @@ class FeatureSuggestPageController extends BaseController with StorageUtil {
   TextEditingController featureContentEditingController =
       TextEditingController();
   Dio dio = Dio();
+  String submitTitle = "";
+  String submitContent = "";
   Rx<bool> canSubmit = false.obs;
 
   final prettyDioLogger = PrettyDioLogger(
@@ -24,6 +26,14 @@ class FeatureSuggestPageController extends BaseController with StorageUtil {
     compact: true,
     maxWidth: 500,
   );
+
+  updateCanSubmit() {
+    if (submitTitle.isEmpty || submitContent.isEmpty) {
+      canSubmit.value = false;
+    } else {
+      canSubmit.value = true;
+    }
+  }
 
   submitFeatureSuggestion() {
     Feature feature = Feature(
