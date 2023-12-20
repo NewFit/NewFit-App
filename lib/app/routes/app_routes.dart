@@ -28,7 +28,7 @@ abstract class _Paths {
   static const REGISTER_GYM = '/register/gym';
   static const MAIN = '/main';
   static const SETTING = '/setting';
-  static const FEATURE = 'feature';
+  static const FEATURE = '/feature';
   static const MY = '/my';
   static const ROUTINE = '/routine';
   static const ROUTINE_ADD = '/routine/routine_add';
