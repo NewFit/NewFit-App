@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/json_models/routine/routine_models.dart';
 import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
@@ -73,15 +74,19 @@ class RoutinePage extends BaseView<RoutinePageController> {
                   controller.myRoutineInfo.value.routines?[index].name ?? '',
               equipmentCount:
                   controller.myRoutineInfo.value.routines_count ?? 0,
-              routineDropdownChoiceAction: (menu) {
+              routineDropdownChoiceAction: (menu) async {
                 if (menu == RoutineDropdownConstants.favorite.menuText) {
                   if (kDebugMode) {
                     print(menu);
                   }
                 } else if (menu == RoutineDropdownConstants.edit.menuText) {
-                  if (kDebugMode) {
-                    print(menu);
-                  }
+                  RoutineDetail routineDetail =
+                      await controller.getRoutineDetail(
+                    controller
+                            .myRoutineInfo.value.routines?[index].routine_id ??
+                        0,
+                  );
+                  Get.toNamed(AppPages.ROUTINE_ADD, arguments: routineDetail);
                 } else if (menu == RoutineDropdownConstants.delete.menuText) {
                   controller.deleteRoutine(
                     controller
