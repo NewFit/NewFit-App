@@ -124,6 +124,20 @@ class SummarizedRoutineEquipment {
 }
 
 @JsonSerializable()
+class RoutineName {
+  String routin_name;
+
+  RoutineName({
+    required this.routin_name,
+  });
+
+  factory RoutineName.fromJson(Map<String, dynamic> json) =>
+      _$MRoutineNameFromJson(json);
+
+  Map<String, dynamic> toJson() => _$RoutineNameToJson(this);
+}
+
+@JsonSerializable()
 class MyRoutine {
   int routine_id;
   String name;

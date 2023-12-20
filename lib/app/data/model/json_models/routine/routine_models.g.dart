@@ -105,6 +105,15 @@ Map<String, dynamic> _$SummarizedRoutineEquipmentToJson(
       'duration': instance.duration,
     };
 
+RoutineName _$RoutineNameFromJson(Map<String, dynamic> json) => RoutineName(
+      routin_name: json['routin_name'] as String,
+    );
+
+Map<String, dynamic> _$RoutineNameToJson(RoutineName instance) =>
+    <String, dynamic>{
+      'routin_name': instance.routin_name,
+    };
+
 MyRoutine _$MyRoutineFromJson(Map<String, dynamic> json) => MyRoutine(
       routine_id: json['routine_id'] as int,
       name: json['name'] as String,
