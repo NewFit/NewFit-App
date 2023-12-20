@@ -118,9 +118,9 @@ class SummarizedRoutineEquipment {
   });
 
   factory SummarizedRoutineEquipment.fromJson(Map<String, dynamic> json) =>
-      _$SummarizedRoutineEquipmentsFromJson(json);
+      _$SummarizedRoutineEquipmentFromJson(json);
 
-  Map<String, dynamic> toJson() => _$SummarizedRoutineEquipmentsToJson(this);
+  Map<String, dynamic> toJson() => _$SummarizedRoutineEquipmentToJson(this);
 }
 
 @JsonSerializable()
