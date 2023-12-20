@@ -43,6 +43,7 @@ class AppPages {
   static const SCOREBOARD = Routes.SCOREBOARD;
   static const TEST_PAGE = Routes.TEST_PAGE;
   static const SETTING = Routes.SETTING;
+  static const FEATURE = Routes.FEATURE;
 
   static final pages = [
     GetPage(
