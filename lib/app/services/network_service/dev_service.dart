@@ -12,7 +12,7 @@ abstract class DevService {
   factory DevService(Dio dio, {String baseUrl}) = _DevService;
 
   @POST('/feature')
-  Future<AddressGym> getMyGymList(
+  Future<HttpResponse> submitFeatureSuggestion(
     @Header('user-id') int userId,
     @Header('Authorization') String accessToken,
     @Body() Feature feature,

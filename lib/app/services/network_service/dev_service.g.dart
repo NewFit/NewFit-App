@@ -22,7 +22,7 @@ class _DevService implements DevService {
   String? baseUrl;
 
   @override
-  Future<AddressGym> getMyGymList(
+  Future<HttpResponse<dynamic>> submitFeatureSuggestion(
     int userId,
     String accessToken,
     Feature feature,
@@ -36,8 +36,8 @@ class _DevService implements DevService {
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
     _data.addAll(feature.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<AddressGym>(Options(
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -53,8 +53,9 @@ class _DevService implements DevService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AddressGym.fromJson(_result.data!);
-    return value;
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
