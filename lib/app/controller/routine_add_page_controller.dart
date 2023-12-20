@@ -26,12 +26,36 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     maxWidth: 80,
   );
 
+  @override
+  onInit() {
+    super.onInit();
+    if (routineDetail != null) {
+      print('hello');
+      convertToRoutineEquipment();
+    }
+  }
+
   doneModify() {
     if (routineDetail == null) {
       addEquipment();
     } else {
       editEquipment();
     }
+  }
+
+  convertToRoutineEquipment() {
+    List<RoutineEquipment> routineEquipments = List.empty(growable: true);
+
+    for (final (index, routine) in (routineDetail?.equipments ?? []).indexed) {
+      routineEquipments.add(
+        RoutineEquipment(
+          sequence: index,
+          equipment_id: routine.equipment_id,
+          duration: routine.duration,
+        ),
+      );
+    }
+    postRoutine.value.routine_equipments = routineEquipments;
   }
 
   editEquipment() {}
