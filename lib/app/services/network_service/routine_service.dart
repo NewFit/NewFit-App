@@ -29,7 +29,7 @@ abstract class RoutineService {
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
       @Path('routine_id') int routineId,
-      @Body() PatchRoutineEquipments patchRoutine);
+      @Body() RoutineName routineName);
 
   @PATCH('/equipments')
   Future<HttpResponse> editRoutineEquipments(

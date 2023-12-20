@@ -97,7 +97,7 @@ class _RoutineService implements RoutineService {
     int authorityId,
     String accessToken,
     int routineId,
-    PatchRoutineEquipments patchRoutine,
+    RoutineName routineName,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -107,7 +107,7 @@ class _RoutineService implements RoutineService {
     };
     _headers.removeWhere((k, v) => v == null);
     final _data = <String, dynamic>{};
-    _data.addAll(patchRoutine.toJson());
+    _data.addAll(routineName.toJson());
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'PATCH',
