@@ -74,16 +74,17 @@ class RoutineAddPageController extends BaseController with StorageUtil {
         equipments_count: equipments.length, equipments: equipments);
   }
 
-  editRoutine() {
+  editRoutine() async {
     RoutineService(dio).editRoutineName(
       getInt(AppString.key_authority_id)!,
-      '${AppString.jwt_prefix} ${AppString.key_access_token}',
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
       routineDetail?.routine_id ?? 0,
-      RoutineName(routin_name: routineNameEditingController.text),
+      RoutineName(routine_name: routineNameEditingController.text),
     );
+
     RoutineService(dio).editRoutineEquipments(
       getInt(AppString.key_authority_id)!,
-      '${AppString.jwt_prefix} ${AppString.key_access_token}',
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
       routineDetail?.routine_id ?? 0,
       postRoutineToPatchRoutineEquipments(),
     );
