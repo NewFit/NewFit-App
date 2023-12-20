@@ -4,10 +4,12 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:new_fit/app/controller/setting_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/user/user_model.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
@@ -93,6 +95,11 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
             },
             settingTitle: '유저 정보 변경 테스트(하드코딩으로 테스트)',
           ),
+          NewfitSettingListCell(
+              settingTitle: '기능 제안',
+              onPressedFunction: () {
+                Get.toNamed(AppPages.FEATURE);
+              })
         ],
       ),
     ]);
