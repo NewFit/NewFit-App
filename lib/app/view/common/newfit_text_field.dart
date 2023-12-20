@@ -52,8 +52,29 @@ class NewfitInfoInputTextField extends StatelessWidget {
           hintText: hintText,
         ),
         autofocus: false,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        validator: validateFunction,
       ),
     );
+  }
+
+  String? validateFunction(text) {
+    return null;
+  }
+}
+
+class NewfitFeatureContentInputTextField extends NewfitInfoInputTextField {
+  const NewfitFeatureContentInputTextField({
+    required super.hintText,
+    required super.controller,
+  });
+
+  @override
+  String? validateFunction(text) {
+    if (text == null || text.isEmpty) {
+      return '비어 있을 수 없습니다.';
+    }
+    return null;
   }
 }
 
