@@ -8,34 +8,41 @@ part 'routine_service.g.dart';
 
 @RestApi(
     baseUrl:
-        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1")
+        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1/routines")
 abstract class RoutineService {
   factory RoutineService(Dio dio, {String baseUrl}) = _RoutineService;
 
-  @GET('/routines')
+  @GET('')
   Future<MyRoutineList> getMyRoutineList(
     @Header('authority-id') int authorityId,
     @Header('Authorization') String accessToken,
   );
 
-  @POST('/routines')
+  @POST('')
   Future<HttpResponse> addRoutine(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
       @Body() PostRoutine postRoutine);
 
-  @PATCH('/routines/{routine_id}')
-  Future<HttpResponse> editRoutine(
+  @PATCH('/{routine_id}')
+  Future<HttpResponse> editRoutineName(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
-      @Path() int routine_id,
-      @Body() PatchRoutine patchRoutine);
+      @Path('routine_id') int routineId,
+      @Body() PatchRoutineEquipments patchRoutine);
 
-  @DELETE('/routines')
+  @PATCH('/equipments')
+  Future<HttpResponse> editRoutineEquipments(
+      @Header('authority-id') int authorityId,
+      @Header('Authorization') String accessToken,
+      @Query('routine-id') int routineId,
+      @Body() PatchRoutineEquipments patchRoutine);
+
+  @DELETE('')
   Future<HttpResponse> deleteRoutine(@Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken, @Body() RoutineId routineId);
 
-  @GET('/routines/{routine_id}')
+  @GET('/{routine_id}')
   Future<RoutineDetail> getMyRoutineDetails(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,

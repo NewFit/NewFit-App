@@ -14,7 +14,7 @@ class _RoutineService implements RoutineService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/api/v1/routines';
   }
 
   final Dio _dio;
@@ -42,7 +42,7 @@ class _RoutineService implements RoutineService {
     )
             .compose(
               _dio.options,
-              '/routines',
+              '',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -78,7 +78,7 @@ class _RoutineService implements RoutineService {
     )
             .compose(
               _dio.options,
-              '/routines',
+              '',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -93,11 +93,11 @@ class _RoutineService implements RoutineService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> editRoutine(
+  Future<HttpResponse<dynamic>> editRoutineName(
     int authorityId,
     String accessToken,
-    int routine_id,
-    PatchRoutine patchRoutine,
+    int routineId,
+    PatchRoutineEquipments patchRoutine,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -116,7 +116,45 @@ class _RoutineService implements RoutineService {
     )
             .compose(
               _dio.options,
-              '/routines/${routine_id}',
+              '/${routineId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> editRoutineEquipments(
+    int authorityId,
+    String accessToken,
+    int routineId,
+    PatchRoutineEquipments patchRoutine,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'routine-id': routineId};
+    final _headers = <String, dynamic>{
+      r'authority-id': authorityId,
+      r'Authorization': accessToken,
+    };
+    _headers.removeWhere((k, v) => v == null);
+    final _data = <String, dynamic>{};
+    _data.addAll(patchRoutine.toJson());
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/equipments',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -153,7 +191,7 @@ class _RoutineService implements RoutineService {
     )
             .compose(
               _dio.options,
-              '/routines',
+              '',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -189,7 +227,7 @@ class _RoutineService implements RoutineService {
     )
             .compose(
               _dio.options,
-              '/routines/${routine_id}',
+              '/${routine_id}',
               queryParameters: queryParameters,
               data: _data,
             )
