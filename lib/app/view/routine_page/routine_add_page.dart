@@ -27,7 +27,6 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
       hintText: controller.routineDetail?.routine_name ?? '새로운 루틴',
       controller: controller,
       goBackFunction: () {
-        routinePageController.updateMainFuture();
         Get.back();
       },
     );
@@ -63,8 +62,8 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
           buttonColor: AppColors.main,
           onPressFuntion: () async {
             await controller.doneModify();
-
-            routinePageController.updateMainFuture();
+            await Future.delayed(const Duration(milliseconds: 200));
+            await routinePageController.updateMainFuture();
             Get.back();
           },
         ),
