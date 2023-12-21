@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
@@ -26,7 +25,6 @@ class RoutineMoreInfoPageController extends BaseController with StorageUtil {
   final routineDetailFuture = Future.value(RoutineDetail()).obs;
   Rx<bool> reload = false.obs;
   Rx<bool> editMode = false.obs;
-  Rx<double> height = 60.h.obs;
 
   @override
   onInit() {
@@ -66,6 +64,11 @@ class RoutineMoreInfoPageController extends BaseController with StorageUtil {
     }
     final items = routineDetail.value.equipments?.removeAt(oldIndex);
     routineDetail.value.equipments?.insert(newIndex, items!);
+    reload.value = !reload.value;
+  }
+
+  deleteEquipment(int index) {
+    routineDetail.value.equipments?.removeAt(index);
     reload.value = !reload.value;
   }
 }

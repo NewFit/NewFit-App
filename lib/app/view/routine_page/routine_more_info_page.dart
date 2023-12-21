@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_more_info_page_controller.dart';
 import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
@@ -73,8 +74,8 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
           buttonText: AppString.button_edit_routine,
           buttonColor: AppColors.main,
           onPressFuntion: () async {
-            controller.editMode.value = !controller.editMode.value;
-            controller.reload.value = !controller.reload.value;
+            Get.toNamed(AppPages.ROUTINE_ADD,
+                arguments: controller.routineDetail.value);
           },
         ),
       ),
@@ -90,7 +91,8 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
         child: NewfitRoutineEquipmentDetailListCell(
           listTitle:
               controller.routineDetail.value.equipments?[index].name ?? '',
-          minute: 0,
+          minute:
+              controller.routineDetail.value.equipments?[index].duration ?? 0,
           onDeleteFunc: () {},
           controller: controller,
         ),
@@ -113,7 +115,9 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
               key: ValueKey(index),
               listTitle:
                   controller.routineDetail.value.equipments?[index].name ?? '',
-              minute: 0,
+              minute:
+                  controller.routineDetail.value.equipments?[index].duration ??
+                      0,
               onDeleteFunc: () {},
               controller: controller,
             ),
@@ -123,31 +127,4 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
       child: child,
     );
   }
-}
-
-Widget newfitImage() {
-  return SizedBox(
-    width: 125.w,
-    height: 125.w,
-    child: Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(8.r)),
-          child: const Image(
-            image: AssetImage('images/gorani.png'),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColors.main,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8.r),
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
 }

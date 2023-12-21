@@ -68,19 +68,21 @@ class EquipmentSpec {
 }
 
 @JsonSerializable()
-class AbbreviatedEquipment {
+class RoutineEquipmentWithPurpose {
   int equipment_id;
   String name;
   String purpose;
+  int duration;
 
-  AbbreviatedEquipment({
+  RoutineEquipmentWithPurpose({
     required this.equipment_id,
     required this.name,
     required this.purpose,
+    required this.duration,
   });
 
-  factory AbbreviatedEquipment.fromJson(Map<String, dynamic> json) =>
-      _$AbbreviatedEquipmentFromJson(json);
+  factory RoutineEquipmentWithPurpose.fromJson(Map<String, dynamic> json) =>
+      _$RoutineEquipmentWithPurposeFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AbbreviatedEquipmentToJson(this);
+  Map<String, dynamic> toJson() => _$RoutineEquipmentWithPurposeToJson(this);
 }

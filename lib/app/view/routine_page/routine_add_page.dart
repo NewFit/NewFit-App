@@ -11,6 +11,7 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
+import 'package:new_fit/app/view/common/newfit_image.dart';
 import 'package:new_fit/app/view/common/newfit_routine_equipmentlist.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
@@ -20,13 +21,13 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
   RoutinePageController routinePageController =
       Get.find<RoutinePageController>();
+
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitRoutineAppBar(
-      hintText: '새로운 루틴',
+      hintText: controller.routineDetail?.routine_name ?? '새로운 루틴',
       controller: controller,
       goBackFunction: () {
-        routinePageController.updateMainFuture();
         Get.back();
       },
     );
@@ -61,9 +62,9 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
           buttonText: AppString.button_add_routine,
           buttonColor: AppColors.main,
           onPressFuntion: () async {
-            await controller.addRoutine();
-
-            routinePageController.updateMainFuture();
+            await controller.doneModify();
+            await Future.delayed(const Duration(milliseconds: 200));
+            await routinePageController.updateMainFuture();
             Get.back();
           },
         ),
@@ -73,75 +74,115 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
 
   @override
   Widget? floatingActionButton() {
+    TextEditingController textEditingController = TextEditingController();
+
+    textEditingController.text = '15';
+
     return NewfitFAB(
       backgroundColor: AppColors.main,
       contentColor: AppColors.white,
       fabTitleText: AppString.button_add_equipment,
       onPressedFunction: () {
         Get.dialog(
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 150.h),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                color: AppColors.white,
-              ),
-              child: Column(children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
-                  child: const NewfitTextBold2Xl(
-                      text: 'text', textColor: AppColors.black),
-                ),
-                GestureDetector(
-                  child: newfitImage(),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10.h),
-                  child: Row(
-                    children: [
-                      const Spacer(),
-                      Padding(
-                        padding: EdgeInsets.only(right: 5.w),
-                        child: GestureDetector(
-                          child: const Icon(Icons.remove),
+          Builder(builder: (context) {
+            return GestureDetector(
+              onTap: () {
+                FocusScope.of(context).unfocus();
+              },
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40.w),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 280.h,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                        color: AppColors.white,
+                      ),
+                      child: Column(children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 20.h),
+                          child: const NewfitTextBold2Xl(
+                              text: '기구 추가', textColor: AppColors.black),
                         ),
-                      ),
-                      Container(
-                        width: 80.w,
-                        height: 30.h,
-                        decoration: BoxDecoration(
-                            border: Border.all(),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.r))),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 5.w),
-                        child: GestureDetector(
-                          child: const Icon(Icons.add),
+                        GestureDetector(
+                          child: const NewfitImage(),
                         ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
-                  child: SizedBox(
-                    height: 30.h,
-                    child: NewfitButton(
-                      buttonText: '추가',
-                      buttonColor: AppColors.main,
-                      onPressFuntion: () {
-                        controller.addEquipment();
-                        Get.back();
-                      },
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
+                          child: Row(
+                            children: [
+                              const Spacer(),
+                              Padding(
+                                padding: EdgeInsets.only(right: 5.w),
+                                child: GestureDetector(
+                                  child: const Icon(Icons.remove),
+                                  onTap: () {
+                                    int value =
+                                        int.parse(textEditingController.text) -
+                                            5;
+                                    if (value <= 5) {
+                                      value = 5;
+                                    }
+                                    textEditingController.text =
+                                        value.toString();
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: 100.w,
+                                child: Material(
+                                  child: _DurationInputTextField(
+                                      hintText: '',
+                                      controller: textEditingController),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 5.w),
+                                child: GestureDetector(
+                                  child: const Icon(Icons.add),
+                                  onTap: () {
+                                    int value =
+                                        int.parse(textEditingController.text) +
+                                            5;
+                                    if (value >= 30) {
+                                      value = 30;
+                                    }
+                                    textEditingController.text =
+                                        value.toString();
+                                  },
+                                ),
+                              ),
+                              const Spacer(),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 30.w, vertical: 10.h),
+                          child: SizedBox(
+                            height: 30.h,
+                            child: NewfitButton(
+                              buttonText: '추가',
+                              buttonColor: AppColors.main,
+                              onPressFuntion: () {
+                                controller.addEquipment(
+                                    int.parse(textEditingController.text));
+                                textEditingController.text = '15';
+                                Get.back();
+                              },
+                            ),
+                          ),
+                        )
+                      ]),
                     ),
-                  ),
-                )
-              ]),
-            ),
-          ),
+                  ],
+                ),
+              ),
+            );
+          }),
         );
       },
     );
@@ -197,29 +238,42 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
   }
 }
 
-Widget newfitImage() {
-  return SizedBox(
-    width: 125.w,
-    height: 125.w,
-    child: Stack(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(8.r)),
-          child: const Image(
-            image: AssetImage('images/gorani.png'),
+class _DurationInputTextField extends StatelessWidget {
+  const _DurationInputTextField({
+    required this.hintText,
+    required this.controller,
+    super.key,
+  });
+
+  final String hintText;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 320.w,
+      child: TextFormField(
+        controller: controller,
+        textAlignVertical: TextAlignVertical.center,
+        textAlign: TextAlign.center,
+        decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.only(left: 10.w, top: 10.h, bottom: 10.h, right: 0),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7.r),
+            borderSide: BorderSide(color: AppColors.main, width: 1.5.w),
           ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColors.main,
-            ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(8.r),
-            ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(7.r),
+            borderSide: BorderSide(color: AppColors.main, width: 1.5.w),
           ),
+          fillColor: AppColors.white,
+          filled: true,
+          hintText: hintText,
         ),
-      ],
-    ),
-  );
+        keyboardType: TextInputType.number,
+        autofocus: false,
+      ),
+    );
+  }
 }
