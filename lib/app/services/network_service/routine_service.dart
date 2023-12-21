@@ -35,7 +35,7 @@ abstract class RoutineService {
   Future<HttpResponse> editRoutineEquipments(
       @Header('authority-id') int authorityId,
       @Header('Authorization') String accessToken,
-      @Query('routineId') int routineId,
+      @Query('routine_id') int routineId,
       @Body() PatchRoutineEquipments patchRoutine);
 
   @DELETE('')

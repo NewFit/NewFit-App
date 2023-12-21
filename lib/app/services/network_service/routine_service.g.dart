@@ -138,7 +138,7 @@ class _RoutineService implements RoutineService {
     PatchRoutineEquipments patchRoutine,
   ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'routineId': routineId};
+    final queryParameters = <String, dynamic>{r'routine_id': routineId};
     final _headers = <String, dynamic>{
       r'authority-id': authorityId,
       r'Authorization': accessToken,
