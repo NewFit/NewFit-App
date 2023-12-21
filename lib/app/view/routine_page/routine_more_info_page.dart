@@ -91,7 +91,8 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
         child: NewfitRoutineEquipmentDetailListCell(
           listTitle:
               controller.routineDetail.value.equipments?[index].name ?? '',
-          minute: 0,
+          minute:
+              controller.routineDetail.value.equipments?[index].duration ?? 0,
           onDeleteFunc: () {},
           controller: controller,
         ),
@@ -114,7 +115,9 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
               key: ValueKey(index),
               listTitle:
                   controller.routineDetail.value.equipments?[index].name ?? '',
-              minute: 0,
+              minute:
+                  controller.routineDetail.value.equipments?[index].duration ??
+                      0,
               onDeleteFunc: () {},
               controller: controller,
             ),
