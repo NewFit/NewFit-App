@@ -242,7 +242,6 @@ class _DurationInputTextField extends StatelessWidget {
   const _DurationInputTextField({
     required this.hintText,
     required this.controller,
-    super.key,
   });
 
   final String hintText;
