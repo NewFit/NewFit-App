@@ -90,10 +90,10 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     );
   }
 
-  addEquipment() {
+  addEquipment(int duration) {
     postRoutine.value.routine_equipments ??= List.empty(growable: true);
-    postRoutine.value.routine_equipments?.add(
-        RoutineEquipment(sequence: sequence, equipment_id: 1, duration: 30));
+    postRoutine.value.routine_equipments?.add(RoutineEquipment(
+        sequence: sequence, equipment_id: 1, duration: duration));
     sequence += 1;
     reload.value = !reload.value;
   }
