@@ -151,8 +151,11 @@ class NewfitSettingListCell extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 40.h,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           color: AppColors.white,
+          borderRadius: BorderRadius.all(
+            Radius.circular(8.r),
+          ),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,12 +169,65 @@ class NewfitSettingListCell extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            const Divider(
-              height: 0,
-            ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class NewfitSettingList extends StatelessWidget {
+  const NewfitSettingList({
+    required this.categoryText,
+    required this.children,
+    super.key,
+  });
+
+  final String categoryText;
+  final List<Widget> children;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.w, bottom: 5.h),
+            child: NewfitTextRegularXl(
+              text: categoryText,
+              textColor: AppColors.black,
+            ),
+          ),
+        ),
+        Container(
+          height: children.length * 40.h + (children.length).h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8.r),
+            border: Border.all(
+              color: AppColors.grayDisabled,
+            ),
+            color: AppColors.white,
+          ),
+          child: ListView(
+            physics: const NeverScrollableScrollPhysics(),
+            children: List.generate(
+              children.length * 2 - 1,
+              (index) {
+                if (index % 2 == 0) {
+                  return children[index ~/ 2];
+                } else {
+                  return Divider(
+                    thickness: 1.h,
+                    color: AppColors.grayDisabled,
+                    height: 0,
+                  );
+                }
+              },
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -234,7 +290,6 @@ class NewfitReservationListCell extends StatelessWidget {
           controller.navigateTo(
             route: Routes.HOME_RESERVATION,
           );
-          //onPressFunc(context);
         },
         child: Container(
           width: 320.w,
