@@ -74,7 +74,7 @@ class RoutineAddPageController extends BaseController with StorageUtil {
         equipments_count: equipments.length, equipments: equipments);
   }
 
-  editRoutine() async {
+  editRoutine() {
     RoutineService(dio).editRoutineName(
       getInt(AppString.key_authority_id)!,
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
@@ -104,11 +104,11 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     reload.value = !reload.value;
   }
 
-  addRoutine() async {
+  addRoutine() {
     dio.interceptors.add(prettyDioLogger);
 
     postRoutine.value.routine_name = routineNameEditingController.text;
-    await RoutineService(dio).addRoutine(
+    RoutineService(dio).addRoutine(
       getInt(AppString.key_authority_id)!,
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       postRoutine.value,
