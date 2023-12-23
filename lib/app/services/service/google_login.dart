@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:get/utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/user/attribute_model.dart';
 import 'package:new_fit/app/data/model/json_models/user/token_model.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
@@ -11,7 +10,7 @@ import 'package:new_fit/app/services/service/social_login.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class GoogleLogin extends SocialLogin with StorageUtil {
+class GoogleLogin extends SocialLogin {
   Token? newfitToken;
   GetStorage storage = GetStorage();
   Dio dio = Dio();
@@ -37,22 +36,17 @@ class GoogleLogin extends SocialLogin with StorageUtil {
           attribute_name: idToken,
           provider_type: AppString.provier_type_google));
       saveString(AppString.key_access_token, newfitToken!.access_token);
-      checkIdTypeAndSave();
-      return newfitToken!.id_type;
+      for (final idInformation in newfitToken!.id_informations) {
+        checkIdTypeAndSave(idInformation);
+      }
+      if (newfitToken!.id_informations.length > 1) {
+        return AppString.key_authority_id;
+      }
+      return newfitToken!.id_informations[0].id_type;
     } catch (error) {
       printError();
       debugPrint(error.toString());
       return '';
-    }
-  }
-
-  void checkIdTypeAndSave() {
-    if (newfitToken!.id_type == AppString.key_user_id) {
-      saveInt(AppString.key_user_id, newfitToken!.id);
-    } else if (newfitToken!.id_type == AppString.key_oauth_history_id) {
-      saveInt(AppString.key_oauth_history_id, newfitToken!.id);
-    } else if (newfitToken!.id_type == AppString.key_authority_id) {
-      saveInt(AppString.key_authority_id, newfitToken!.id);
     }
   }
 
