@@ -8,7 +8,7 @@ part of 'token_model.dart';
 
 Token _$TokenFromJson(Map<String, dynamic> json) => Token(
       access_token: json['access_token'] as String,
-      refresh_token: json['refresh_token'] as String?,
+      refresh_token: json['refresh_token'] as String,
       id_informations: (json['id_informations'] as List<dynamic>)
           .map((e) => IdInformation.fromJson(e as Map<String, dynamic>))
           .toList(),
