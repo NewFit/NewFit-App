@@ -1,5 +1,4 @@
 import 'package:new_fit/app/data/local/db/db_models/token_model.dart';
-import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -36,8 +35,8 @@ class DBManager {
     }
 
     return DBToken(
-      access_token: map[0][AppString.key_access_token],
-      refresh_token: map[0][AppString.key_refresh_token],
+      access_token: map[0]['access_token'],
+      refresh_token: map[0]['refresh_token'],
     );
   }
 }

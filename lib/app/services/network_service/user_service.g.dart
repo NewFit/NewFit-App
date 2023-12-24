@@ -14,7 +14,7 @@ class _UserService implements UserService {
     this.baseUrl,
   }) {
     baseUrl ??=
-        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/';
+        'http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080';
   }
 
   final Dio _dio;
@@ -259,7 +259,7 @@ class _UserService implements UserService {
   Future<HttpResponse<dynamic>> renewAccessToken(String refreshToken) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{r'refresh-token': refreshToken};
+    final _headers = <String, dynamic>{r'Authorization': refreshToken};
     _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =

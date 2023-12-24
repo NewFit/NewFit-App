@@ -9,7 +9,7 @@ part 'user_service.g.dart';
 
 @RestApi(
     baseUrl:
-        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080/")
+        "http://ec2-13-209-25-150.ap-northeast-2.compute.amazonaws.com:8080")
 abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
@@ -47,6 +47,6 @@ abstract class UserService {
 
   @GET('/refresh')
   Future<HttpResponse> renewAccessToken(
-    @Header('refresh-token') String refreshToken,
+    @Header('Authorization') String refreshToken,
   );
 }
