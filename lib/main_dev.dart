@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
@@ -6,6 +7,9 @@ import 'package:new_fit/app/data/local/db/db_models/token_model.dart';
 import 'package:new_fit/app/data/network/kakao_key.dart';
 import 'package:new_fit/app/main.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
+import 'package:new_fit/app/services/network_service/user_service.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '/flavors/build_config.dart';
 import '/flavors/env_config.dart';
@@ -35,9 +39,34 @@ void main() async {
 
   DBManager dbManager = DBManager();
   DBToken? dbToken = await dbManager.getToken();
+
   if (dbToken == null) {
     runApp(App(initialRoute: AppPages.LOGIN));
   } else {
+    try {
+      Dio dio = Dio();
+      final prettyDioLogger = PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: true,
+        error: true,
+        compact: true,
+        maxWidth: 80,
+      );
+      dio.interceptors.add(prettyDioLogger);
+      var httpResponse = await UserService(dio)
+          .renewAccessToken('${AppString.jwt_prefix} ${dbToken.refresh_token}');
+      dbManager.saveToken(
+        DBToken(
+          access_token:
+              httpResponse.response.headers['access-token']?.first ?? '',
+          refresh_token: dbToken.refresh_token,
+        ),
+      );
+    } catch (e) {
+      runApp(App(initialRoute: AppPages.LOGIN));
+    }
     runApp(App(initialRoute: AppPages.INITIAL));
   }
 }
