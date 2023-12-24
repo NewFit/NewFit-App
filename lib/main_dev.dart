@@ -34,16 +34,10 @@ void main() async {
   );
 
   DBManager dbManager = DBManager();
-
-  dbManager.saveToken(
-    DBToken(access_token: 'access_token', refresh_token: 'refresh_token'),
-  );
-
-  dbManager.getToken().then((value) => value.forEach((element) {
-        print("id: ${element.access_token}\nname: ${element.refresh_token}\n");
-      }));
-
-  runApp(App(
-    initialRoute: AppPages.SETTING,
-  ));
+  DBToken? dbToken = await dbManager.getToken();
+  if (dbToken == null) {
+    runApp(App(initialRoute: AppPages.LOGIN));
+  } else {
+    runApp(App(initialRoute: AppPages.INITIAL));
+  }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -7,14 +9,13 @@ import 'package:new_fit/flavors/env_config.dart';
 import 'routes/app_pages.dart';
 import 'view/theme/app_theme.dart';
 
-class App extends StatefulWidget {
-  const App({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  String initialRoute;
 
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
+  App({
+    required this.initialRoute,
+    super.key,
+  });
   final EnvConfig _envConfig = BuildConfig.instance.config;
 
   @override
@@ -24,7 +25,7 @@ class _AppState extends State<App> {
       builder: (buildContext, widget) => GetMaterialApp(
         title: _envConfig.appName,
         debugShowCheckedModeBanner: false,
-        initialRoute: AppPages.LOGIN,
+        initialRoute: initialRoute,
         getPages: AppPages.pages,
         initialBinding: InitialBinding(),
         theme: appThemeData,
