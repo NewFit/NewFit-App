@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:new_fit/app/data/local/db/db_manager.dart';
-import 'package:new_fit/app/data/local/db/db_models/token_model.dart';
+import 'package:new_fit/app/data/local/db/db_models/user_info_model.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/network/kakao_key.dart';
 import 'package:new_fit/app/main.dart';
@@ -39,10 +39,11 @@ void main() async {
   );
 
   DBManager dbManager = DBManager();
-  DBToken? dbToken = await dbManager.getToken();
+  UserInfo? userInfo = await dbManager.getToken();
 
-  if (dbToken == null) {
+  if (userInfo == null) {
     runApp(App(initialRoute: AppPages.LOGIN));
+    print('hhh');
   } else {
     try {
       Dio dio = Dio();
@@ -56,19 +57,19 @@ void main() async {
         maxWidth: 80,
       );
       dio.interceptors.add(prettyDioLogger);
-      var httpResponse = await UserService(dio)
-          .renewAccessToken('${AppString.jwt_prefix} ${dbToken.refresh_token}');
+      var httpResponse = await UserService(dio).renewAccessToken(
+          '${AppString.jwt_prefix} ${userInfo.refresh_token}');
       dbManager.saveToken(
-        DBToken(
+        UserInfo(
           access_token:
               httpResponse.response.headers['access-token']?.first ?? '',
-          refresh_token: dbToken.refresh_token,
+          refresh_token: userInfo.refresh_token,
         ),
       );
       StorageUtil.saveString(AppString.key_access_token,
           httpResponse.response.headers['access-token']?.first ?? '');
       StorageUtil.saveString(
-          AppString.key_refresh_token, dbToken.refresh_token);
+          AppString.key_refresh_token, userInfo.refresh_token!);
     } catch (e) {
       runApp(App(initialRoute: AppPages.LOGIN));
     }
