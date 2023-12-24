@@ -11,7 +11,7 @@ import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class LoginPageController extends BaseController with StorageUtil {
+class LoginPageController extends BaseController {
   late String registerStatus;
 
   void kakaoLogin() async {
@@ -51,8 +51,8 @@ class LoginPageController extends BaseController with StorageUtil {
 
     dio.interceptors.add(logger);
     UserService(dio).deleteUser(
-        getInt(AppString.key_user_id)!,
-        getString(AppString.key_access_token)!,
+        StorageUtil.getInt(AppString.key_user_id)!,
+        StorageUtil.getString(AppString.key_access_token)!,
         UserEmail(email: AppString.key_email));
   }
 }

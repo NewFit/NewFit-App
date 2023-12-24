@@ -14,13 +14,13 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../view/theme/app_string.dart';
 import 'home_my_reservation_page_controller.dart';
 
-class HomeReservationPageController extends BaseController with StorageUtil {
+class HomeReservationPageController extends BaseController {
   final Dio dio = Dio();
   late final EquipmentService service;
   late final ReservationService reservationService;
 
   final HomeMyReservationPageController _myReservationPageController =
-  Get.find();
+      Get.find();
 
   var equipmentList = Rx<EquipmentList?>(null);
   var isLoading = true.obs;
@@ -71,8 +71,8 @@ class HomeReservationPageController extends BaseController with StorageUtil {
     isLoading(true);
     try {
       final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+      final authorityId = StorageUtil.getInt(AppString.key_authority_id);
 
       if (authorityId != null) {
         log('authority id is $authorityId');
@@ -100,8 +100,8 @@ class HomeReservationPageController extends BaseController with StorageUtil {
     isLoadingInSpec(true);
     try {
       final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+      final authorityId = StorageUtil.getInt(AppString.key_authority_id);
 
       if (authorityId != null) {
         log('authority id is $authorityId');
@@ -129,8 +129,8 @@ class HomeReservationPageController extends BaseController with StorageUtil {
 
     try {
       final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+      final authorityId = StorageUtil.getInt(AppString.key_authority_id);
 
       if (authorityId != null) {
         log('authority id is $authorityId');

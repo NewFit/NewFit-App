@@ -14,7 +14,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../data/model/json_models/equipment/equipment_models.dart';
 import '../services/network_service/equipment_service.dart';
 
-class HomePageController extends BaseController with StorageUtil {
+class HomePageController extends BaseController {
   final Dio dio = Dio();
   late final EquipmentService equipmentService;
   late final AuthorityService authorityService;
@@ -52,8 +52,8 @@ class HomePageController extends BaseController with StorageUtil {
     isLoading(true);
     try {
       final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+      final authorityId = StorageUtil.getInt(AppString.key_authority_id);
 
       if (authorityId != null) {
         log('authority id is $authorityId');
@@ -71,9 +71,9 @@ class HomePageController extends BaseController with StorageUtil {
   //TODO : 실제 GPS와 연동해야함? 일회성 or 필요할 때마다?
   void authorityEntry() async {
     final token =
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-    final authorityId = getInt(AppString.key_authority_id);
-    final gymId = getInt(AppString.key_gym_id)!;
+        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+    final authorityId = StorageUtil.getInt(AppString.key_authority_id);
+    final gymId = StorageUtil.getInt(AppString.key_gym_id)!;
 
     if (authorityId != null) {
       log('authority id is $authorityId');
@@ -104,15 +104,16 @@ class HomePageController extends BaseController with StorageUtil {
     try {
       dio.interceptors.add(prettyDioLogger);
       MyPageInfo getmyPageinfo = await UserService(dio).getMyPageInfo(
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
-        getInt(AppString.key_user_id)!,
+        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
+        StorageUtil.getInt(AppString.key_user_id)!,
       );
 
-      saveString(
+      StorageUtil.saveString(
           AppString.key_profile_file_path, getmyPageinfo.profile_file_path!);
-      saveString(AppString.key_nickname, getmyPageinfo.nickname!);
-      saveInt(AppString.key_total_credit, getmyPageinfo.total_credit!);
-      saveInt(
+      StorageUtil.saveString(AppString.key_nickname, getmyPageinfo.nickname!);
+      StorageUtil.saveInt(
+          AppString.key_total_credit, getmyPageinfo.total_credit!);
+      StorageUtil.saveInt(
           AppString.key_this_month_credit, getmyPageinfo.this_month_credit!);
     } finally {
       isLoading(false);

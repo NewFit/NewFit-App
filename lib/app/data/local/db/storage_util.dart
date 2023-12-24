@@ -1,21 +1,19 @@
 import 'package:get_storage/get_storage.dart';
 
-mixin StorageUtil {
-  final _storage = GetStorage();
-
-  Future<void> saveString(String key, String uid) async {
-    await _storage.write(key, uid);
+class StorageUtil {
+  static Future<void> saveString(String key, String uid) async {
+    await GetStorage().write(key, uid);
   }
 
-  Future<void> saveInt(String key, int uid) async {
-    await _storage.write(key, uid);
+  static Future<void> saveInt(String key, int uid) async {
+    await GetStorage().write(key, uid);
   }
 
-  String? getString(String key) {
-    return _storage.read(key);
+  static String? getString(String key) {
+    return GetStorage().read(key);
   }
 
-  int? getInt(String key) {
-    return _storage.read(key);
+  static int? getInt(String key) {
+    return GetStorage().read(key);
   }
 }

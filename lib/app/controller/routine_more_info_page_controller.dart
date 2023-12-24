@@ -7,7 +7,7 @@ import 'package:new_fit/app/services/network_service/routine_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class RoutineMoreInfoPageController extends BaseController with StorageUtil {
+class RoutineMoreInfoPageController extends BaseController {
   Dio dio = Dio();
   var isLoading = true.obs;
   final prettyDioLogger = PrettyDioLogger(
@@ -49,8 +49,8 @@ class RoutineMoreInfoPageController extends BaseController with StorageUtil {
     try {
       dio.interceptors.add(prettyDioLogger);
       routineDetailFuture.value = RoutineService(dio).getMyRoutineDetails(
-        getInt(AppString.key_authority_id)!,
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+        StorageUtil.getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
         Get.arguments,
       );
     } finally {

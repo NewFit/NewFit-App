@@ -19,7 +19,7 @@ import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class SettingPage extends BaseView<SettingPageController> with StorageUtil {
+class SettingPage extends BaseView<SettingPageController> {
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return const NewfitAppBarFlat(
@@ -54,9 +54,9 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
               dio.interceptors.add(logger);
 
               await UserService(dio).deleteUser(
-                  getInt('user-id')!,
-                  "Bearer ${getString('access-token')!}",
-                  UserEmail(email: getString('user-email')!));
+                  StorageUtil.getInt('user-id')!,
+                  "Bearer ${StorageUtil.getString('access-token')!}",
+                  UserEmail(email: StorageUtil.getString('user-email')!));
             },
             settingTitle: '회원탈퇴',
           ),
@@ -75,8 +75,8 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
               dio.interceptors.add(logger);
 
               final response = await UserService(dio).modifyUserInfo(
-                'Bearer ${getString('access-token')!}',
-                getInt('user-id')!,
+                'Bearer ${StorageUtil.getString('access-token')!}',
+                StorageUtil.getInt('user-id')!,
                 ModifyUser(
                   email: 'nhg1113@naver.com',
                   nickname: 'noguen3',
@@ -89,9 +89,9 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
                 print(response.response.headers['access-token']);
               }
 
-              saveString('user-email', 'nhg1113@naver.com');
-              saveString('user-nickname', 'noguen');
-              saveString('user-tel', '010-2057-3318');
+              StorageUtil.saveString('user-email', 'nhg1113@naver.com');
+              StorageUtil.saveString('user-nickname', 'noguen');
+              StorageUtil.saveString('user-tel', '010-2057-3318');
             },
             settingTitle: '유저 정보 변경 테스트(하드코딩으로 테스트)',
           ),

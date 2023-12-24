@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:kakao_flutter_sdk/kakao_flutter_sdk.dart';
 import 'package:new_fit/app/data/local/db/db_manager.dart';
 import 'package:new_fit/app/data/local/db/db_models/token_model.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/network/kakao_key.dart';
 import 'package:new_fit/app/main.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
@@ -64,6 +65,10 @@ void main() async {
           refresh_token: dbToken.refresh_token,
         ),
       );
+      StorageUtil.saveString(AppString.key_access_token,
+          httpResponse.response.headers['access-token']?.first ?? '');
+      StorageUtil.saveString(
+          AppString.key_refresh_token, dbToken.refresh_token);
     } catch (e) {
       runApp(App(initialRoute: AppPages.LOGIN));
     }

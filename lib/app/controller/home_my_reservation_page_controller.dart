@@ -11,7 +11,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../view/theme/app_string.dart';
 
-class HomeMyReservationPageController extends BaseController with StorageUtil {
+class HomeMyReservationPageController extends BaseController {
   final Dio dio = Dio();
   late final ReservationService service;
   late final AuthorityService authorityService;
@@ -70,8 +70,8 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
           DateTime(now.year, now.month, now.day, now.hour + 2, 1, 0);
 
       final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+      final authorityId = StorageUtil.getInt(AppString.key_authority_id);
 
       if (authorityId != null) {
         log('authority id is $authorityId');
@@ -97,13 +97,12 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
           DateTime(now.year, now.month, now.day, now.hour + 2, 1, 0);
 
       final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}';
+      final authorityId = StorageUtil.getInt(AppString.key_authority_id);
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        for (var item
-            in reservationList.value.reservations) {
+        for (var item in reservationList.value.reservations) {
           var reservation = await service.getSpecificReservation(
               authorityId, token, item.reservation_id);
 
