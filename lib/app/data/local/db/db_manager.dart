@@ -8,13 +8,13 @@ class DBManager {
   Future<Database> get database async {
     if (_db != null) return _db;
     _db = openDatabase(join(await getDatabasesPath(), 'newfit.db'),
-        onCreate: (db, version) => _createDb(db), version: 1);
+        onCreate: (db, version) => _createDb(db), version: 2);
     return _db;
   }
 
   static void _createDb(Database db) {
     db.execute(
-      "CREATE TABLE Token(access_token TEXT PRIMARY KEY, refresh_token TEXT)",
+      "CREATE TABLE Token(user TEXT PRIMARY KEY, access_token TEXT, refresh_token TEXT)",
     );
   }
 
