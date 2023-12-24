@@ -24,10 +24,10 @@ Map<String, dynamic> _$EquipmentToJson(Equipment instance) => <String, dynamic>{
 
 EquipmentList _$EquipmentListFromJson(Map<String, dynamic> json) =>
     EquipmentList(
-      gym_name: json['gym_name'] as String,
-      equipments_count: json['equipments_count'] as int,
-      equipments: (json['equipments'] as List<dynamic>)
-          .map((e) => Equipment.fromJson(e as Map<String, dynamic>))
+      gym_name: json['gym_name'] as String?,
+      equipments_count: json['equipments_count'] as int?,
+      equipments: (json['equipments'] as List<dynamic>?)
+          ?.map((e) => Equipment.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

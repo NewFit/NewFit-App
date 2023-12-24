@@ -20,7 +20,7 @@ class HomeReservationPageController extends BaseController with StorageUtil {
   late final ReservationService reservationService;
 
   final HomeMyReservationPageController _myReservationPageController =
-  Get.find();
+      Get.find();
 
   var equipmentList = Rx<EquipmentList?>(null);
   var isLoading = true.obs;
@@ -79,9 +79,9 @@ class HomeReservationPageController extends BaseController with StorageUtil {
         var equipments = await service.getIdenticalEquipments(
             authorityId, token, equipmentId);
 
-        for (int i = 0; i < equipments.equipments_count; i++) {
-          indexMap.add(equipments.equipments[i].equipment_gym_id);
-          if (equipments.equipments[i].equipment_gym_id ==
+        for (int i = 0; i < equipments.equipments_count!; i++) {
+          indexMap.add(equipments.equipments![i].equipment_gym_id);
+          if (equipments.equipments![i].equipment_gym_id ==
               equipmentGymId.value) {
             selectedIndex.value = i;
           }

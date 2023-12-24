@@ -102,8 +102,7 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        for (var item
-            in reservationList.value.reservations) {
+        for (var item in reservationList.value.reservations) {
           var reservation = await service.getSpecificReservation(
               authorityId, token, item.reservation_id);
 

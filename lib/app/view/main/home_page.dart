@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
-import 'package:get/get.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
+import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 
@@ -20,9 +20,9 @@ class HomePage extends BaseView<HomePageController> {
     }
 
     return List<Widget>.generate(
-      equipmentList.equipments.length,
+      equipmentList.equipments!.length,
       (index) {
-        final equipment = equipmentList.equipments[index];
+        final equipment = equipmentList.equipments![index];
         return NewfitEquipmentListCell(
           equipmentTitle: equipment.equipment_gym_name,
           currentStatus:
@@ -41,6 +41,7 @@ class HomePage extends BaseView<HomePageController> {
     return null;
   }
 
+  /*
   @override
   Widget body(BuildContext context) {
     return Obx(() {
@@ -55,5 +56,38 @@ class HomePage extends BaseView<HomePageController> {
           scrollController: scrollController,
           widgetList: buildEquipmentList(equipments));
     });
+  } */
+
+  @override
+  Widget body(BuildContext context) {
+    return BaseBody(
+      scrollController: scrollController,
+      widgetList: [
+        Stack(
+          children: [
+            FutureBuilder(
+              future: controller.mainFuture.value,
+              builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.active:
+                  case ConnectionState.waiting:
+                    return const Loading();
+                  case ConnectionState.done:
+                    if (snapshot.hasError) return Container();
+                    controller.assignFutures((snapshot.data! as List));
+
+                    return Column(
+                      children:
+                          buildEquipmentList(controller.equipmentList.value),
+                    );
+                  case ConnectionState.none:
+                    return const Loading();
+                }
+              },
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }

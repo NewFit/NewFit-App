@@ -52,7 +52,6 @@ class MyPageController extends BaseController with StorageUtil {
       );
     } finally {
       isLoading(false);
-      //saveUserInfo();
     }
   }
 

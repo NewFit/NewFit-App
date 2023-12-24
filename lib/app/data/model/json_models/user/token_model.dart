@@ -7,15 +7,13 @@ part 'token_model.g.dart';
 @JsonSerializable()
 class Token {
   String access_token;
-  String? refresh_token;
-  int id;
-  String id_type;
+  String refresh_token;
+  List<IdInformation> id_informations;
 
   Token({
     required this.access_token,
     required this.refresh_token,
-    required this.id,
-    required this.id_type,
+    required this.id_informations,
   });
 
   factory Token.fromJson(Map<String, dynamic> json) => _$TokenFromJson(json);
@@ -35,4 +33,20 @@ class AccessToken {
       _$AccessTokenFromJson(json);
 
   Map<String, dynamic> toJson() => _$AccessTokenToJson(this);
+}
+
+@JsonSerializable()
+class IdInformation {
+  int id;
+  String id_type;
+
+  IdInformation({
+    required this.id,
+    required this.id_type,
+  });
+
+  factory IdInformation.fromJson(Map<String, dynamic> json) =>
+      _$IdInformationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$IdInformationToJson(this);
 }

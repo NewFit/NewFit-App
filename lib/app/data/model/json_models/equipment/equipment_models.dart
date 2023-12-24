@@ -29,14 +29,14 @@ class Equipment {
 
 @JsonSerializable()
 class EquipmentList {
-  String gym_name;
-  int equipments_count;
-  List<Equipment> equipments;
+  String? gym_name;
+  int? equipments_count;
+  List<Equipment>? equipments;
 
   EquipmentList({
-    required this.gym_name,
-    required this.equipments_count,
-    required this.equipments,
+    this.gym_name,
+    this.equipments_count,
+    this.equipments,
   });
 
   factory EquipmentList.fromJson(Map<String, dynamic> json) =>

@@ -18,51 +18,77 @@ class HomePageController extends BaseController with StorageUtil {
   final Dio dio = Dio();
   late final EquipmentService equipmentService;
   late final AuthorityService authorityService;
-
-  var equipmentList = Rx<EquipmentList?>(null);
+  late final UserService userService;
   var isLoading = true.obs;
+  final prettyDioLogger = PrettyDioLogger(
+    requestHeader: true,
+    requestBody: true,
+    responseBody: true,
+    responseHeader: true,
+    error: true,
+    compact: true,
+    maxWidth: 80,
+  );
+
+  final mainFuture = Future.wait([]).obs;
+  final myPageInfo = MyPageInfo().obs;
+  final myPageInfoFuture = Future.value(MyPageInfo()).obs;
+  final equipmentList = EquipmentList().obs;
+  final equipmentListFuture = Future.value(EquipmentList()).obs;
 
   @override
   void onInit() async {
     super.onInit();
 
     initService();
-    loadEquipments();
-    loadMyPageInfo();
+    updateMainFuture();
     authorityEntry();
   }
 
   void initService() {
-    final logger = PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: true,
-      error: true,
-      compact: true,
-      maxWidth: 80,
-    );
-
-    dio.interceptors.add(logger);
+    dio.interceptors.add(prettyDioLogger);
     equipmentService = EquipmentService(dio);
     authorityService = AuthorityService(dio);
+    userService = UserService(dio);
   }
 
-  void loadEquipments() async {
+  updateMainFuture() {
+    getMyPageInfo();
+    getEquipmentList();
+    mainFuture.value = Future.wait([
+      myPageInfoFuture.value,
+      equipmentListFuture.value,
+    ]);
+  }
+
+  assignFutures(List data) {
+    final datas = [myPageInfo, equipmentList];
+    for (var element in data) {
+      datas[data.indexOf(element)].value = element;
+    }
+  }
+
+  void getMyPageInfo() {
     isLoading(true);
     try {
-      final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+      myPageInfoFuture.value = UserService(dio).getMyPageInfo(
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token) ?? 'hello'}',
+        getInt(AppString.key_authority_id) ?? 0,
+      );
+    } finally {
+      isLoading(false);
+    }
+  }
 
-      if (authorityId != null) {
-        log('authority id is $authorityId');
-        var equipments =
-            await equipmentService.getAllEquipmentsInGym(authorityId, token);
-        equipmentList(equipments);
-      } else {
-        log('ERROR : authority id is null!');
-      }
+  void getEquipmentList() {
+    isLoading(true);
+    try {
+      equipmentListFuture.value = EquipmentService(dio).getAllEquipmentsInGym(
+        getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+      );
+    } catch (e) {
+      print('getEquipmentlist error occurred');
     } finally {
       isLoading(false);
     }
@@ -70,17 +96,21 @@ class HomePageController extends BaseController with StorageUtil {
 
   //TODO : 실제 GPS와 연동해야함? 일회성 or 필요할 때마다?
   void authorityEntry() async {
-    final token =
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-    final authorityId = getInt(AppString.key_authority_id);
-    final gymId = getInt(AppString.key_gym_id)!;
+    try {
+      final token =
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
+      final authorityId = getInt(AppString.key_authority_id);
+      final gymId = getInt(AppString.key_gym_id)!;
 
-    if (authorityId != null) {
-      log('authority id is $authorityId');
-      await authorityService.enterGym(authorityId, token,
-          EntranceTag(gym_id: gymId, tag_at: DateTime.now()));
-    } else {
-      log('ERROR : authority id is null!');
+      if (authorityId != null) {
+        log('authority id is $authorityId');
+        await authorityService.enterGym(authorityId, token,
+            EntranceTag(gym_id: gymId, tag_at: DateTime.now()));
+      } else {
+        log('ERROR : authority id is null!');
+      }
+    } catch (e) {
+      print('authorityentry error occured');
     }
   }
 
@@ -88,34 +118,5 @@ class HomePageController extends BaseController with StorageUtil {
   void onClose() {
     dio.close();
     super.onClose();
-  }
-
-  void loadMyPageInfo() async {
-    final prettyDioLogger = PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: true,
-      error: true,
-      compact: true,
-      maxWidth: 80,
-    );
-    isLoading(true);
-    try {
-      dio.interceptors.add(prettyDioLogger);
-      MyPageInfo getmyPageinfo = await UserService(dio).getMyPageInfo(
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
-        getInt(AppString.key_user_id)!,
-      );
-
-      saveString(
-          AppString.key_profile_file_path, getmyPageinfo.profile_file_path!);
-      saveString(AppString.key_nickname, getmyPageinfo.nickname!);
-      saveInt(AppString.key_total_credit, getmyPageinfo.total_credit!);
-      saveInt(
-          AppString.key_this_month_credit, getmyPageinfo.this_month_credit!);
-    } finally {
-      isLoading(false);
-    }
   }
 }

@@ -27,8 +27,8 @@ class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
       (index) {
         final reservation = reservationList[index];
         final String reservationEquipmentName = homePageController
-                .equipmentList.value?.equipments
-                .firstWhere((element) =>
+                .equipmentList.value.equipments
+                ?.firstWhere((element) =>
                     element.equipment_gym_id == reservation.equipment_gym_id)
                 .equipment_gym_name ??
             AppString.str_no_data;

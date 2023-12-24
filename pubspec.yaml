@@ -55,6 +55,9 @@ dependencies:
   logging: ^1.2.0
   animate_icons: ^2.0.0
   qr_code_scanner: ^1.0.1
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:
