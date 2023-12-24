@@ -25,7 +25,7 @@ class DBManager {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<UserInfo?> getToken() async {
+  Future<UserInfo?> getUserInfo() async {
     final db = await database;
 
     final List<Map<String, dynamic>> map = await db.query('UserInfo');
