@@ -20,7 +20,9 @@ import 'package:new_fit/app/view/theme/app_values.dart';
 
 import 'newfit_schedule.dart';
 
-class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
+class NewfitAppBar extends StatelessWidget
+    with StorageUtil
+    implements PreferredSizeWidget {
   NewfitAppBar({
     required this.mainController,
     required this.scrollController,
@@ -89,7 +91,7 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         SizedBox(height: 13.h),
         _UserInfoAppBar(
-          userName: StorageUtil.getString(AppString.key_nickname) ?? 'NULL',
+          userName: getString(AppString.key_nickname) ?? 'NULL',
           onPressedFunction: () {
             Get.toNamed(AppPages.SETTING);
           },
@@ -97,9 +99,8 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
         if (scrollPosition.value <= 0.0) SizedBox(height: 10.h),
         if (scrollPosition.value <= 0.0)
           _UserCreditInfo(
-            totalCredit: StorageUtil.getInt(AppString.key_total_credit) ?? 0,
-            todayCredit:
-                StorageUtil.getInt(AppString.key_this_month_credit) ?? 0,
+            totalCredit: getInt(AppString.key_total_credit) ?? 0,
+            todayCredit: getInt(AppString.key_this_month_credit) ?? 0,
           ),
         SizedBox(height: 10.h),
         Align(
@@ -121,7 +122,7 @@ class NewfitAppBar extends StatelessWidget implements PreferredSizeWidget {
       children: [
         SizedBox(height: 13.h),
         _UserInfoAppBar(
-          userName: StorageUtil.getString(AppString.key_nickname)!,
+          userName: getString(AppString.key_nickname)!,
           onPressedFunction: () {
             Get.toNamed(AppPages.SETTING);
           },
@@ -365,8 +366,8 @@ class _HomeAppBar extends StatelessWidget {
   }
 }
 
-class _UserInfoAppBar extends StatelessWidget {
-  const _UserInfoAppBar({
+class _UserInfoAppBar extends StatelessWidget with StorageUtil {
+  _UserInfoAppBar({
     required this.userName,
     required this.onPressedFunction,
     super.key,
@@ -376,7 +377,7 @@ class _UserInfoAppBar extends StatelessWidget {
   final Function()? onPressedFunction;
 
   ImageProvider<Object>? getProfileImage() {
-    String? imageUrl = StorageUtil.getString(AppString.key_profile_file_path);
+    String? imageUrl = getString(AppString.key_profile_file_path);
 
     if (imageUrl != null && isValidUrl(imageUrl)) {
       try {
