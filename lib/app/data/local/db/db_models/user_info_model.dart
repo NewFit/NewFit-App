@@ -22,8 +22,8 @@ class UserInfo {
       'access_token': access_token,
       'refresh_token': refresh_token,
       'user_id': user_id,
-      'authority_id': user_id,
-      'oauth_history_id': user_id,
+      'authority_id': authority_id,
+      'oauth_history_id': oauth_history_id,
     };
   }
 

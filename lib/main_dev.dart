@@ -43,7 +43,6 @@ void main() async {
 
   if (userInfo == null) {
     runApp(App(initialRoute: AppPages.LOGIN));
-    print('hhh');
   } else {
     try {
       Dio dio = Dio();
@@ -64,15 +63,23 @@ void main() async {
           access_token:
               httpResponse.response.headers['access-token']?.first ?? '',
           refresh_token: userInfo.refresh_token,
+          user_id: userInfo.user_id,
+          authority_id: userInfo.authority_id,
+          oauth_history_id: userInfo.oauth_history_id,
         ),
       );
       StorageUtil.saveString(AppString.key_access_token,
           httpResponse.response.headers['access-token']?.first ?? '');
       StorageUtil.saveString(
           AppString.key_refresh_token, userInfo.refresh_token!);
+      StorageUtil.saveInt(
+          AppString.key_authority_id, userInfo.authority_id ?? 0);
+      StorageUtil.saveInt(AppString.key_user_id, userInfo.user_id ?? 0);
+      StorageUtil.saveInt(
+          AppString.key_oauth_history_id, userInfo.oauth_history_id ?? 0);
     } catch (e) {
       runApp(App(initialRoute: AppPages.LOGIN));
     }
-    runApp(App(initialRoute: AppPages.INITIAL));
+    runApp(App(initialRoute: AppPages.LOGIN));
   }
 }

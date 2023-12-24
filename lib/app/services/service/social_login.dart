@@ -37,6 +37,7 @@ abstract class SocialLogin {
   }
 
   void saveTokenInfo(Token newfitToken) {
+    print('hhhh');
     StorageUtil.saveString(
         AppString.key_access_token, newfitToken.access_token);
     checkListIdTypeAndSave(newfitToken.id_informations);
@@ -62,10 +63,16 @@ abstract class SocialLogin {
     }
   }
 
-  void saveTokenToDB(Token newfitToken) {
+  Future<void> saveTokenToDB(Token newfitToken) async {
     userInfo.access_token = newfitToken.access_token;
     userInfo.refresh_token = newfitToken.refresh_token;
 
+    print(userInfo.authority_id ?? 'NULL');
+    print(userInfo.user_id ?? 'NULL');
+    print(userInfo.oauth_history_id ?? 'NULL');
     dbManager.saveToken(userInfo);
+    UserInfo? test = await dbManager.getToken();
+
+    print(test?.authority_id);
   }
 }
