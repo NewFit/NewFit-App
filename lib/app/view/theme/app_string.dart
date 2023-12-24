@@ -54,6 +54,7 @@ abstract class AppString {
   static const key_user_id = 'user-id';
   static const key_authority_id = 'authority-id';
   static const key_access_token = 'access-token';
+  static const key_refresh_token = 'refresh-token';
   static const key_email = 'user-email';
   static const key_name = 'user-name';
   static const key_nickname = 'user-nickname';
