@@ -44,4 +44,9 @@ abstract class UserService {
 
   @POST('/login')
   Future<Token> login(@Body() Attribute attribute);
+
+  @GET('/refresh')
+  Future<HttpResponse> renewAccessToken(
+    @Header('refresh-token') String refreshToken,
+  );
 }
