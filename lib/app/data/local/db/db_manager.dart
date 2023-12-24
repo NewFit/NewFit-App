@@ -1,4 +1,5 @@
 import 'package:new_fit/app/data/local/db/db_models/token_model.dart';
+import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -25,16 +26,18 @@ class DBManager {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
-  Future<List<DBToken>> getToken() async {
+  Future<DBToken?> getToken() async {
     final db = await database;
 
     final List<Map<String, dynamic>> map = await db.query('Token');
 
-    return List.generate(map.length, (i) {
-      return DBToken(
-        access_token: map[0]['access_token'],
-        refresh_token: map[0]['refresh_token'],
-      );
-    });
+    if (map.isEmpty) {
+      return null;
+    }
+
+    return DBToken(
+      access_token: map[0][AppString.key_access_token],
+      refresh_token: map[0][AppString.key_refresh_token],
+    );
   }
 }
