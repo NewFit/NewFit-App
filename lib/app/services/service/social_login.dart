@@ -8,7 +8,7 @@ import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-abstract class SocialLogin {
+abstract class SocialLogin with StorageUtil {
   Future<String> login();
   Future<bool> logout();
 
@@ -37,9 +37,7 @@ abstract class SocialLogin {
   }
 
   void saveTokenInfo(Token newfitToken) {
-    print('hhhh');
-    StorageUtil.saveString(
-        AppString.key_access_token, newfitToken.access_token);
+    saveString(AppString.key_access_token, newfitToken.access_token);
     checkListIdTypeAndSave(newfitToken.id_informations);
     saveTokenToDB(newfitToken);
   }
@@ -52,13 +50,13 @@ abstract class SocialLogin {
 
   void checkIdTypeAndSave(IdInformation idInformation) {
     if (idInformation.id_type == AppString.key_user_id) {
-      StorageUtil.saveInt(AppString.key_user_id, idInformation.id);
+      saveInt(AppString.key_user_id, idInformation.id);
       userInfo.user_id = idInformation.id;
     } else if (idInformation.id_type == AppString.key_oauth_history_id) {
-      StorageUtil.saveInt(AppString.key_oauth_history_id, idInformation.id);
+      saveInt(AppString.key_oauth_history_id, idInformation.id);
       userInfo.oauth_history_id = idInformation.id;
     } else if (idInformation.id_type == AppString.key_authority_id) {
-      StorageUtil.saveInt(AppString.key_authority_id, idInformation.id);
+      saveInt(AppString.key_authority_id, idInformation.id);
       userInfo.authority_id = idInformation.id;
     }
   }
@@ -71,7 +69,7 @@ abstract class SocialLogin {
     print(userInfo.user_id ?? 'NULL');
     print(userInfo.oauth_history_id ?? 'NULL');
     dbManager.saveToken(userInfo);
-    UserInfo? test = await dbManager.getToken();
+    UserInfo? test = await dbManager.getUserInfo();
 
     print(test?.authority_id);
   }

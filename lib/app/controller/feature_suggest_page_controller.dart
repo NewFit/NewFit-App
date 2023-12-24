@@ -8,7 +8,7 @@ import 'package:new_fit/app/services/network_service/dev_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class FeatureSuggestPageController extends BaseController {
+class FeatureSuggestPageController extends BaseController with StorageUtil {
   TextEditingController featureNameEditingController = TextEditingController();
   TextEditingController featureContentEditingController =
       TextEditingController();
@@ -42,8 +42,8 @@ class FeatureSuggestPageController extends BaseController {
 
     dio.interceptors.add(prettyDioLogger);
     DevService(dio).submitFeatureSuggestion(
-      StorageUtil.getInt(AppString.key_user_id) ?? 0,
-      '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}',
+      getInt(AppString.key_user_id) ?? 0,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
       feature,
     );
   }

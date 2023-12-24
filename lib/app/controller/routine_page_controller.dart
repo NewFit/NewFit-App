@@ -7,7 +7,7 @@ import 'package:new_fit/app/services/network_service/routine_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class RoutinePageController extends BaseController {
+class RoutinePageController extends BaseController with StorageUtil {
   Dio dio = Dio();
   var isLoading = true.obs;
   final prettyDioLogger = PrettyDioLogger(
@@ -47,8 +47,8 @@ class RoutinePageController extends BaseController {
     isLoading(true);
     try {
       myRoutineInfoFuture.value = RoutineService(dio).getMyRoutineList(
-        StorageUtil.getInt(AppString.key_authority_id)!,
-        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
+        getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       );
     } finally {
       isLoading(false);
@@ -57,8 +57,8 @@ class RoutinePageController extends BaseController {
 
   Future<RoutineDetail> getRoutineDetail(int routineId) async {
     return RoutineService(dio).getMyRoutineDetails(
-      StorageUtil.getInt(AppString.key_authority_id)!,
-      '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       routineId,
     );
   }
@@ -68,8 +68,8 @@ class RoutinePageController extends BaseController {
     try {
       dio.interceptors.add(prettyDioLogger);
       RoutineService(dio).deleteRoutine(
-        StorageUtil.getInt(AppString.key_authority_id)!,
-        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
+        getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
         RoutineId(routine_id: routineId),
       );
     } finally {

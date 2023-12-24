@@ -8,7 +8,7 @@ import 'package:new_fit/app/services/network_service/routine_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class RoutineAddPageController extends BaseController {
+class RoutineAddPageController extends BaseController with StorageUtil {
   TextEditingController routineNameEditingController = TextEditingController();
   Rx<PostRoutine> postRoutine = PostRoutine().obs;
   RoutineDetail? routineDetail = Get.arguments;
@@ -76,15 +76,15 @@ class RoutineAddPageController extends BaseController {
 
   editRoutine() {
     RoutineService(dio).editRoutineName(
-      StorageUtil.getInt(AppString.key_authority_id)!,
-      '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}',
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
       routineDetail?.routine_id ?? 0,
       RoutineName(routine_name: routineNameEditingController.text),
     );
 
     RoutineService(dio).editRoutineEquipments(
-      StorageUtil.getInt(AppString.key_authority_id)!,
-      '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)}',
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
       routineDetail?.routine_id ?? 0,
       postRoutineToPatchRoutineEquipments(),
     );
@@ -109,8 +109,8 @@ class RoutineAddPageController extends BaseController {
 
     postRoutine.value.routine_name = routineNameEditingController.text;
     RoutineService(dio).addRoutine(
-      StorageUtil.getInt(AppString.key_authority_id)!,
-      '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       postRoutine.value,
     );
   }

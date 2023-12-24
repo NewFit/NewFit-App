@@ -7,7 +7,7 @@ import 'package:new_fit/app/services/network_service/credit_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class ScoreboardPageController extends BaseController {
+class ScoreboardPageController extends BaseController with StorageUtil {
   Dio dio = Dio();
   var isLoading = true.obs;
   final prettyDioLogger = PrettyDioLogger(
@@ -47,8 +47,8 @@ class ScoreboardPageController extends BaseController {
     try {
       dio.interceptors.add(prettyDioLogger);
       scoreBoardFuture.value = CreditService(dio).getScoreBoardList(
-        StorageUtil.getInt(AppString.key_authority_id)!,
-        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
+        getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       );
     } finally {
       isLoading(false);

@@ -7,7 +7,7 @@ import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class MyPageController extends BaseController {
+class MyPageController extends BaseController with StorageUtil {
   Dio dio = Dio();
   var isLoading = true.obs;
   final prettyDioLogger = PrettyDioLogger(
@@ -47,22 +47,20 @@ class MyPageController extends BaseController {
     try {
       dio.interceptors.add(prettyDioLogger);
       myPageInfoFuture.value = UserService(dio).getMyPageInfo(
-        '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
-        StorageUtil.getInt(AppString.key_authority_id)!,
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+        getInt(AppString.key_authority_id)!,
       );
     } finally {
       isLoading(false);
-      //saveUserInfo();
     }
   }
 
   void saveUserInfo() {
-    StorageUtil.saveString(
+    saveString(
         AppString.key_profile_file_path, myPageInfo.value.profile_file_path!);
-    StorageUtil.saveString(AppString.key_nickname, myPageInfo.value.nickname!);
-    StorageUtil.saveInt(
-        AppString.key_total_credit, myPageInfo.value.total_credit!);
-    StorageUtil.saveInt(
+    saveString(AppString.key_nickname, myPageInfo.value.nickname!);
+    saveInt(AppString.key_total_credit, myPageInfo.value.total_credit!);
+    saveInt(
         AppString.key_this_month_credit, myPageInfo.value.this_month_credit!);
   }
 }

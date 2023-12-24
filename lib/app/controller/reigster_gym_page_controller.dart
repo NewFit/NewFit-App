@@ -11,7 +11,7 @@ import 'package:new_fit/app/services/network_service/gym_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class RegisterGymPageController extends BaseController {
+class RegisterGymPageController extends BaseController with StorageUtil {
   TextEditingController textEditingController = TextEditingController();
 
   Rx<AddressGymList> addressGymList =
@@ -36,8 +36,8 @@ class RegisterGymPageController extends BaseController {
 
     try {
       addressGymList.value = await GymService(dio).getGymList(
-          '${AppString.jwt_prefix} ${StorageUtil.getString(AppString.key_access_token)!}',
-          StorageUtil.getInt(AppString.key_user_id)!,
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+          getInt(AppString.key_user_id)!,
           gymName);
 
       selected =
@@ -49,18 +49,18 @@ class RegisterGymPageController extends BaseController {
 
   Future<void> registerGym() async {
     dio.interceptors.add(prettyDioLogger);
-    StorageUtil.saveInt(AppString.key_gym_id, gymId);
+    saveInt(AppString.key_gym_id, gymId);
     try {
-      final accessToken = StorageUtil.getString(AppString.key_access_token)!;
+      final accessToken = getString(AppString.key_access_token)!;
       final response = await AuthorityService(dio).registerMyGym(
-        StorageUtil.getInt(AppString.key_user_id)!,
+        getInt(AppString.key_user_id)!,
         '${AppString.jwt_prefix} $accessToken',
         RegisterAuthorityGym(gym_id: gymId),
       );
       int authorityId = int.parse(
           response.response.headers.value(AppString.key_authority_id)!);
       log(authorityId.toString());
-      StorageUtil.saveInt(AppString.key_authority_id, authorityId);
+      saveInt(AppString.key_authority_id, authorityId);
     } catch (error) {
       error.printError();
     }

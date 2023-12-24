@@ -14,7 +14,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../routes/app_pages.dart';
 
 class RegisterPageController extends BaseController
-    with GetTickerProviderStateMixin {
+    with GetTickerProviderStateMixin, StorageUtil {
   final nameEditingController = TextEditingController();
   final nicknameEditingController = TextEditingController();
   final phonenumberEditingController = TextEditingController();
@@ -83,10 +83,10 @@ class RegisterPageController extends BaseController
     );
 
     dio.interceptors.add(logger);
-    final accessToken = StorageUtil.getString(AppString.key_access_token)!;
+    final accessToken = getString(AppString.key_access_token)!;
     var newfitToken = await UserService(dio).signUp(
       '${AppString.jwt_prefix} $accessToken',
-      StorageUtil.getInt(AppString.key_oauth_history_id)!,
+      getInt(AppString.key_oauth_history_id)!,
       User(
         username: nameEditingController.text,
         email: emailEditingController.text,
@@ -102,20 +102,17 @@ class RegisterPageController extends BaseController
       log('TOKEN 일치');
     } else {
       log('TOKEN 불일치, access_token 새로 저장');
-      StorageUtil.saveString(
-          AppString.key_access_token, newfitToken.access_token);
+      saveString(AppString.key_access_token, newfitToken.access_token);
     }
     saveUserInfo();
     Get.toNamed(AppPages.REGISTER_GYM);
   }
 
   void saveUserInfo() {
-    StorageUtil.saveString(AppString.key_email, emailEditingController.text);
-    StorageUtil.saveString(AppString.key_name, nameEditingController.text);
-    StorageUtil.saveString(
-        AppString.key_nickname, nicknameEditingController.text);
-    StorageUtil.saveString(
-        AppString.key_tel, phonenumberEditingController.text);
+    saveString(AppString.key_email, emailEditingController.text);
+    saveString(AppString.key_name, nameEditingController.text);
+    saveString(AppString.key_nickname, nicknameEditingController.text);
+    saveString(AppString.key_tel, phonenumberEditingController.text);
   }
 
   @override
