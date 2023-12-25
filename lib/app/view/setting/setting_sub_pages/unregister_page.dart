@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:new_fit/app/controller/unregister_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
