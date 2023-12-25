@@ -120,7 +120,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.UNSIGN,
-      page: () => UnsignPage(),
+      page: () => UnregisterPage(),
       binding: FeatureSuggestPageBinding(),
       transition: Transition.native,
     ),
