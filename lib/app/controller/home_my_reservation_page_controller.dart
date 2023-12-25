@@ -15,6 +15,7 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
   final Dio dio = Dio();
   late final ReservationService service;
   late final AuthorityService authorityService;
+  Rx<bool> isRefresh = false.obs;
 
   final Rx<ReservationListWithId> reservationList = ReservationListWithId(
       gym_name: '', reservation_count: 0, reservations: []).obs;
@@ -61,6 +62,14 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
     authorityService = AuthorityService(dio);
   }
 
+  void deleteReservation(int reservationId) {
+    ReservationService(dio).deleteReservation(
+      getInt(AppString.key_authority_id)!,
+      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
+      reservationId,
+    );
+  }
+
   void loadMyReservationList() async {
     isLoading(true);
     try {
@@ -75,14 +84,12 @@ class HomeMyReservationPageController extends BaseController with StorageUtil {
 
       if (authorityId != null) {
         log('authority id is $authorityId');
-        var reservation =
-            await authorityService.getMyReservationList(authorityId, token);
-        reservationList.value = reservation;
-
-        loadMyReservationSpecList();
+        reservationList.value = await AuthorityService(dio)
+            .getMyReservationList(authorityId, token);
       } else {
         log('ERROR : authority id is null!');
       }
+      loadMyReservationSpecList();
     } finally {
       isLoading(false);
     }

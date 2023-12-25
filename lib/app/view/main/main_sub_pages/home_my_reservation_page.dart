@@ -24,6 +24,8 @@ class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
     return List<Widget>.generate(
       reservationList.length,
       (index) {
+        final currentReservation =
+            controller.reservationList.value.reservations[index];
         final reservation = reservationList[index];
         final String reservationEquipmentName = homePageController
                 .equipmentList.value.equipments
@@ -40,6 +42,12 @@ class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
           checked: index == controller.selectedIndex.value,
           startTime: reservation.reservation.start_at,
           endTime: reservation.reservation.end_at,
+          deleteFunc: () async {
+            controller.deleteReservation(currentReservation.reservation_id);
+            await Future.delayed(const Duration(milliseconds: 200));
+            controller.specificReservationList.clear();
+            controller.loadMyReservationList();
+          },
         );
       },
     );

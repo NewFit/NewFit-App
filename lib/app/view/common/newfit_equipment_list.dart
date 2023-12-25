@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
+
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_dropdown_menu.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
@@ -131,9 +132,11 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
     required this.checked,
     required this.startTime,
     required this.endTime,
+    required this.deleteFunc,
   });
 
   final int equipmentGymId;
+  final VoidCallback deleteFunc;
   final String equipmentTitle;
   final String imageRoute;
   final VoidCallback onTap;
@@ -227,7 +230,7 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
                           if (menu ==
                               ReservationDropdownConstants.cancel.menuText) {
                             if (kDebugMode) {
-                              print(menu);
+                              deleteFunc();
                             }
                           }
                         },

@@ -19,6 +19,7 @@ Map<String, dynamic> _$ReservationToJson(Reservation instance) =>
 
 ReservationWithId _$ReservationWithIdFromJson(Map<String, dynamic> json) =>
     ReservationWithId(
+      equipment_id: json['equipment_id'] as int,
       reservation_id: json['reservation_id'] as int,
       start_at: const DateTimeConverter().fromJson(json['start_at'] as String),
       end_at: const DateTimeConverter().fromJson(json['end_at'] as String),
@@ -27,6 +28,7 @@ ReservationWithId _$ReservationWithIdFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ReservationWithIdToJson(ReservationWithId instance) =>
     <String, dynamic>{
       'reservation_id': instance.reservation_id,
+      'equipment_id': instance.equipment_id,
       'start_at': const DateTimeConverter().toJson(instance.start_at),
       'end_at': const DateTimeConverter().toJson(instance.end_at),
     };
