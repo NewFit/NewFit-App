@@ -138,11 +138,13 @@ class NewfitSettingListCell extends StatelessWidget {
   const NewfitSettingListCell({
     required this.settingTitle,
     required this.onPressedFunction,
+    required this.textColor,
     super.key,
   });
 
   final String settingTitle;
   final Function()? onPressedFunction;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +167,7 @@ class NewfitSettingListCell extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(20.w, 0, 0, 0),
               child: NewfitTextRegularLg(
                 text: settingTitle,
-                textColor: AppColors.black,
+                textColor: textColor,
               ),
             ),
             const Spacer(),

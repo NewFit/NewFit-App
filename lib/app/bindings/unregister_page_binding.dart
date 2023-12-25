@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:new_fit/app/controller/unsign_page_controller.dart';
+import 'package:new_fit/app/controller/unregister_page_controller.dart';
 
-class UnsignPageBinding implements Bindings {
+class UnregisterPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<UnregisterPageController>(() {

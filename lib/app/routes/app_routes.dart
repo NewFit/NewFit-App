@@ -19,7 +19,7 @@ abstract class Routes {
   static const SCOREBOARD = _Paths.SCOREBOARD;
   static const HOME_RESERVATION = _Paths.HOME_RESERVATION;
   static const FEATURE = _Paths.FEATURE;
-  static const UNSIGN = _Paths.UNSIGN;
+  static const UNREGISTER = _Paths.UNREGISTER;
 }
 
 abstract class _Paths {
@@ -36,5 +36,5 @@ abstract class _Paths {
   static const ROUTINE_MORE_INFO = '/routine_more_info';
   static const SCOREBOARD = '/scoreboard';
   static const HOME_RESERVATION = '/home_reservation';
-  static const UNSIGN = 'unsign';
+  static const UNREGISTER = '/unregister';
 }
