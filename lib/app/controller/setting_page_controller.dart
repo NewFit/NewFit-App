@@ -22,9 +22,10 @@ class SettingPageController extends BaseController with StorageUtil {
   );
 
   logout() {
+    dio.interceptors.add(prettyDioLogger);
     UserService(dio).logout(
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
-      getInt(AppString.key_user_id)!,
+      getInt(AppString.key_authority_id)!,
     );
     dbManager.delete();
     Get.toNamed(AppPages.LOGIN);
