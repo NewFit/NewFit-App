@@ -56,6 +56,13 @@ class SettingPage extends BaseView<SettingPageController> with StorageUtil {
               Get.toNamed(AppPages.UNREGISTER);
             },
           ),
+          NewfitSettingListCell(
+            settingTitle: '🚪 로그아웃',
+            textColor: AppColors.black,
+            onPressedFunction: () {
+              controller.logout();
+            },
+          ),
         ],
       ),
     ]);
