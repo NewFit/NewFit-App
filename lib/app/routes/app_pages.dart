@@ -23,6 +23,7 @@ import 'package:new_fit/app/view/routine_page/routine_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 import 'package:new_fit/app/view/setting/setting_page.dart';
 import 'package:new_fit/app/view/setting/setting_sub_pages/feature_sueggest_page.dart';
+import 'package:new_fit/app/view/setting/setting_sub_pages/unsign_page.dart';
 
 import '../bindings/main_binding.dart';
 
@@ -114,6 +115,12 @@ class AppPages {
     GetPage(
       name: _Paths.FEATURE,
       page: () => FeatureSuggestPage(),
+      binding: FeatureSuggestPageBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: _Paths.UNSIGN,
+      page: () => UnsignPage(),
       binding: FeatureSuggestPageBinding(),
       transition: Transition.native,
     ),
