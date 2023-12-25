@@ -159,26 +159,21 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
+      padding: EdgeInsets.fromLTRB(2.w, 8.h, 2.w, 0),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           width: 320.w,
           height: 60.h,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-              border: Border.all(
-                  color: checked ? AppColors.main : Colors.transparent,
-                  width: 2.w),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.1),
-                  offset: const Offset(0, 0),
-                  spreadRadius: 0.1,
-                  blurRadius: 20,
-                ),
-              ]),
+            borderRadius: BorderRadius.circular(8.r),
+            border: Border.all(
+              strokeAlign: BorderSide.strokeAlignOutside,
+              color: checked ? AppColors.main : AppColors.unabledGrey,
+              width: checked ? 2.w : 1.w,
+            ),
+            color: Colors.white,
+          ),
           child: Row(
             children: [
               Align(
