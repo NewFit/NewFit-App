@@ -65,12 +65,6 @@ abstract class SocialLogin with StorageUtil {
     userInfo.access_token = newfitToken.access_token;
     userInfo.refresh_token = newfitToken.refresh_token;
 
-    print(userInfo.authority_id ?? 'NULL');
-    print(userInfo.user_id ?? 'NULL');
-    print(userInfo.oauth_history_id ?? 'NULL');
     dbManager.saveToken(userInfo);
-    UserInfo? test = await dbManager.getUserInfo();
-
-    print(test?.authority_id);
   }
 }
