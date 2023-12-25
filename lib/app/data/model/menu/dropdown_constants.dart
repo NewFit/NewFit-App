@@ -10,6 +10,18 @@ class MenuList {
   Icon menuIcon;
 }
 
+class ReservationDropdownConstants {
+  static MenuList cancel = MenuList(
+    menuText: '취소',
+    menuIcon: const Icon(
+      Icons.delete,
+      color: Colors.red,
+    ),
+  );
+
+  static List<MenuList> choices = <MenuList>[cancel];
+}
+
 class RoutineDropdownConstants {
   static MenuList favorite = MenuList(
     menuText: '즐겨찾기',

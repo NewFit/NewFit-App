@@ -140,7 +140,10 @@ class HomeReservationPageController extends BaseController with StorageUtil {
             equipmentGymId.value,
             Reservation(start_at: startTime.value, end_at: endTime.value));
 
+        await Future.delayed(const Duration(milliseconds: 300));
+        _myReservationPageController.specificReservationList.clear();
         _myReservationPageController.loadMyReservationList();
+        update();
       } else {
         log('ERROR : authority id is null!');
       }

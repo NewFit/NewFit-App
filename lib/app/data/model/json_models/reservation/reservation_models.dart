@@ -45,12 +45,14 @@ class Reservation {
 @JsonSerializable()
 class ReservationWithId {
   int reservation_id;
+  int equipment_id;
   @DateTimeConverter()
   DateTime start_at;
   @DateTimeConverter()
   DateTime end_at;
 
   ReservationWithId({
+    required this.equipment_id,
     required this.reservation_id,
     required this.start_at,
     required this.end_at,

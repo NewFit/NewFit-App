@@ -12,10 +12,9 @@ import '../../common/newfit_equipment_list.dart';
 import '../../theme/app_string.dart';
 
 class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
-  final ScrollController scrollController;
+  final ScrollController scrollController =
+      ScrollController(initialScrollOffset: 0);
   final HomePageController homePageController = Get.find();
-
-  HomeMyReservationPage({required this.scrollController});
 
   List<Widget> buildEquipmentList(List<SpecificReservation>? reservationList) {
     if (reservationList == null) {
@@ -25,6 +24,8 @@ class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
     return List<Widget>.generate(
       reservationList.length,
       (index) {
+        final currentReservation =
+            controller.reservationList.value.reservations[index];
         final reservation = reservationList[index];
         final String reservationEquipmentName = homePageController
                 .equipmentList.value.equipments
@@ -41,6 +42,12 @@ class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
           checked: index == controller.selectedIndex.value,
           startTime: reservation.reservation.start_at,
           endTime: reservation.reservation.end_at,
+          deleteFunc: () async {
+            controller.deleteReservation(currentReservation.reservation_id);
+            await Future.delayed(const Duration(milliseconds: 200));
+            controller.specificReservationList.clear();
+            controller.loadMyReservationList();
+          },
         );
       },
     );

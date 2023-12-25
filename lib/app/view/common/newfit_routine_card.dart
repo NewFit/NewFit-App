@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 import 'package:new_fit/app/view/common/newfit_dropdown_menu.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
@@ -54,6 +55,7 @@ class NewfitRoutineCard extends StatelessWidget {
                   ),
                   const Spacer(),
                   NewfitDropDownMenu(
+                    choices: RoutineDropdownConstants.choices,
                     routineDropdownChoiceAction: routineDropdownChoiceAction,
                   ),
                 ],

@@ -1,9 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
+import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
+
 import 'package:new_fit/app/view/common/newfit_button.dart';
+import 'package:new_fit/app/view/common/newfit_dropdown_menu.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
@@ -128,9 +132,11 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
     required this.checked,
     required this.startTime,
     required this.endTime,
+    required this.deleteFunc,
   });
 
   final int equipmentGymId;
+  final VoidCallback deleteFunc;
   final String equipmentTitle;
   final String imageRoute;
   final VoidCallback onTap;
@@ -159,26 +165,21 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
+      padding: EdgeInsets.fromLTRB(2.w, 8.h, 2.w, 0),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           width: 320.w,
           height: 60.h,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.r),
-              border: Border.all(
-                  color: checked ? AppColors.main : Colors.transparent,
-                  width: 2.w),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.black.withOpacity(0.1),
-                  offset: const Offset(0, 0),
-                  spreadRadius: 0.1,
-                  blurRadius: 20,
-                ),
-              ]),
+            borderRadius: BorderRadius.circular(8.r),
+            border: Border.all(
+              strokeAlign: BorderSide.strokeAlignOutside,
+              color: checked ? AppColors.main : AppColors.unabledGrey,
+              width: checked ? 2.w : 1.w,
+            ),
+            color: Colors.white,
+          ),
           child: Row(
             children: [
               Align(
@@ -207,10 +208,10 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
               ),
               const Spacer(),
               Align(
-                alignment: Alignment.topLeft,
+                alignment: Alignment.topRight,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(0, 8.h, 8.w, 0),
-                  child: Row(
+                  child: Column(
                     children: [
                       Text(
                         reservationTime(),
@@ -222,6 +223,19 @@ class NewfitEquipmentListWithoutAvailableCell extends StatelessWidget {
                           fontSize: 10.sp,
                         ),
                       ),
+                      const Spacer(),
+                      NewfitDropDownMenu(
+                        choices: ReservationDropdownConstants.choices,
+                        routineDropdownChoiceAction: (menu) async {
+                          if (menu ==
+                              ReservationDropdownConstants.cancel.menuText) {
+                            if (kDebugMode) {
+                              deleteFunc();
+                            }
+                          }
+                        },
+                      ),
+                      const Spacer(),
                     ],
                   ),
                 ),

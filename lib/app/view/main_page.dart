@@ -47,7 +47,7 @@ class MainPage extends BaseView<MainController> {
       case MenuCode.HOME:
         return HomePage(scrollController: scrollController);
       case MenuCode.RESERVE:
-        return HomeMyReservationPage(scrollController: scrollController);
+        return HomeMyReservationPage();
       case MenuCode.QR:
         return const HomeQRScanPage();
       case MenuCode.SCOREBOARD:

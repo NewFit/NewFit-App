@@ -42,7 +42,7 @@ class NewfitAppBar extends StatelessWidget
     return Obx(
       () {
         if (mainController.selectedMenuCode == MenuCode.HOME) {
-          replaceWidget = homeAppBar();
+          replaceWidget = HomeAppBar(scrollPosition: scrollPosition.value);
           if (scrollPosition.value > 0.0) {
             appBarHeight = 105.h + MediaQuery.of(context).padding.top;
           } else {
@@ -166,6 +166,45 @@ class NewfitAppBar extends StatelessWidget
 
   @override
   Size get preferredSize => Size.fromHeight(appBarHeight);
+}
+
+class HomeAppBar extends StatelessWidget with StorageUtil {
+  HomeAppBar({
+    required this.scrollPosition,
+    super.key,
+  });
+
+  final double scrollPosition;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(height: 13.h),
+        _UserInfoAppBar(
+          userName: getString(AppString.key_nickname) ?? 'NULL',
+          onPressedFunction: () {
+            Get.toNamed(AppPages.SETTING);
+          },
+        ),
+        if (scrollPosition <= 0.0) SizedBox(height: 10.h),
+        if (scrollPosition <= 0.0)
+          _UserCreditInfo(
+            totalCredit: getInt(AppString.key_total_credit) ?? 0,
+            todayCredit: getInt(AppString.key_this_month_credit) ?? 0,
+          ),
+        SizedBox(height: 10.h),
+        Align(
+          alignment: Alignment.center,
+          child: NewfitButton(
+              buttonText: AppString.button_reservation_with_routine,
+              buttonColor: AppColors.main,
+              onPressFuntion: () {}),
+        ),
+      ],
+    );
+  }
 }
 
 class NewfitAppBarElevated extends StatelessWidget
