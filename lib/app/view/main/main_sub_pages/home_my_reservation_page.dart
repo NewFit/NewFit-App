@@ -12,10 +12,9 @@ import '../../common/newfit_equipment_list.dart';
 import '../../theme/app_string.dart';
 
 class HomeMyReservationPage extends BaseView<HomeMyReservationPageController> {
-  final ScrollController scrollController;
+  final ScrollController scrollController =
+      ScrollController(initialScrollOffset: 0);
   final HomePageController homePageController = Get.find();
-
-  HomeMyReservationPage({required this.scrollController});
 
   List<Widget> buildEquipmentList(List<SpecificReservation>? reservationList) {
     if (reservationList == null) {
