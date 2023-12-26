@@ -124,7 +124,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HOME_QR_SCAN,
-      page: () => HomeQrScanPagetmp(),
+      page: () => HomeQrScanPage(),
       binding: HomeQrScanPageBinding(),
       transition: Transition.native,
     ),
