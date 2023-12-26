@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
+import 'package:new_fit/app/controller/routine_add_page_controller.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
+import 'package:new_fit/app/view/common/newfit_image.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
@@ -470,6 +472,50 @@ class TmpNewFitButton extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class NewfitModalEquipmentList extends StatelessWidget {
+  final void Function(int) onTapFunction;
+  final String titleText;
+  final Color textColor;
+  final int equipmentId;
+  final RoutineAddPageController routineAddPageController =
+      Get.find<RoutineAddPageController>();
+
+  NewfitModalEquipmentList({
+    super.key,
+    required this.onTapFunction,
+    required this.titleText,
+    required this.textColor,
+    required this.equipmentId,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        onTapFunction(equipmentId);
+        routineAddPageController.equipmentId.value = equipmentId;
+        Get.back();
+      },
+      child: SizedBox(
+        width: 320.w,
+        height: 60.h,
+        child: Row(children: [
+          NewfitImage(
+            width: 60.w,
+            height: 60.w,
+            imagePath: 'images/image_equipment_$equipmentId.png',
+          ),
+          SizedBox(
+            width: 15.w,
+          ),
+          NewfitTextBoldXl(text: titleText, textColor: textColor),
+          const Spacer(),
+        ]),
       ),
     );
   }

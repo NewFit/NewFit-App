@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/routine/routine_models.dart';
@@ -9,10 +10,12 @@ import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class RoutineAddPageController extends BaseController with StorageUtil {
+  HomePageController homePageController = Get.find<HomePageController>();
   TextEditingController routineNameEditingController = TextEditingController();
   Rx<PostRoutine> postRoutine = PostRoutine().obs;
   RoutineDetail? routineDetail = Get.arguments;
   Rx<bool> reload = false.obs;
+  Rx<int> equipmentId = 0.obs;
   int sequence = 0;
   Dio dio = Dio();
   var isLoading = true.obs;
@@ -90,10 +93,10 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     );
   }
 
-  addEquipment(int duration) {
+  addEquipment(int duration, int equipmentId) {
     postRoutine.value.routine_equipments ??= List.empty(growable: true);
     postRoutine.value.routine_equipments?.add(RoutineEquipment(
-        sequence: sequence, equipment_id: 1, duration: duration));
+        sequence: sequence, equipment_id: equipmentId, duration: duration));
     sequence += 1;
     reload.value = !reload.value;
   }
@@ -104,7 +107,7 @@ class RoutineAddPageController extends BaseController with StorageUtil {
     reload.value = !reload.value;
   }
 
-  addRoutine() {
+  addRoutine() async {
     dio.interceptors.add(prettyDioLogger);
 
     postRoutine.value.routine_name = routineNameEditingController.text;
@@ -113,6 +116,7 @@ class RoutineAddPageController extends BaseController with StorageUtil {
       '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
       postRoutine.value,
     );
+    await Future.delayed(const Duration(milliseconds: 200));
   }
 
   reorder(oldIndex, newIndex) {

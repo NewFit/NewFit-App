@@ -5,16 +5,18 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
 class NewfitRoutineEquipmentListCell extends StatelessWidget {
+  final String listTitle;
+  final int minute;
+  final void Function() onDeleteFunc;
+  final int equipmentId;
+
   const NewfitRoutineEquipmentListCell({
+    required this.equipmentId,
     required this.listTitle,
     required this.minute,
     required this.onDeleteFunc,
     super.key,
   });
-
-  final String listTitle;
-  final int minute;
-  final void Function() onDeleteFunc;
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +45,9 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                        child: const Image(
-                          image: AssetImage('images/gorani.png'),
+                        child: Image(
+                          image: AssetImage(
+                              'images/image_equipment_$equipmentId.png'),
                         ),
                       ),
                       Container(
@@ -103,18 +106,20 @@ class NewfitRoutineEquipmentListCell extends StatelessWidget {
 }
 
 class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
+  final String listTitle;
+  final int minute;
+  final void Function() onDeleteFunc;
+  final RoutineMoreInfoPageController controller;
+  final String imagePath;
+
   const NewfitRoutineEquipmentDetailListCell({
     required this.listTitle,
     required this.minute,
     required this.onDeleteFunc,
     required this.controller,
     super.key,
+    required this.imagePath,
   });
-
-  final String listTitle;
-  final int minute;
-  final void Function() onDeleteFunc;
-  final RoutineMoreInfoPageController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +148,8 @@ class NewfitRoutineEquipmentDetailListCell extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
-                          child: const Image(
-                            image: AssetImage('images/gorani.png'),
+                          child: Image(
+                            image: AssetImage(imagePath),
                           ),
                         ),
                         Container(
