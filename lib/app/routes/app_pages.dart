@@ -11,6 +11,7 @@ import 'package:new_fit/app/bindings/routine_more_info_page_binding.dart';
 import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
 import 'package:new_fit/app/bindings/setting_page_binding.dart';
+import 'package:new_fit/app/bindings/unregister_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/main_page.dart';
@@ -23,6 +24,7 @@ import 'package:new_fit/app/view/routine_page/routine_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 import 'package:new_fit/app/view/setting/setting_page.dart';
 import 'package:new_fit/app/view/setting/setting_sub_pages/feature_sueggest_page.dart';
+import 'package:new_fit/app/view/setting/setting_sub_pages/unregister_page.dart';
 
 import '../bindings/main_binding.dart';
 
@@ -44,6 +46,7 @@ class AppPages {
   static const TEST_PAGE = Routes.TEST_PAGE;
   static const SETTING = Routes.SETTING;
   static const FEATURE = Routes.FEATURE;
+  static const UNREGISTER = Routes.UNREGISTER;
 
   static final pages = [
     GetPage(
@@ -115,6 +118,12 @@ class AppPages {
       name: _Paths.FEATURE,
       page: () => FeatureSuggestPage(),
       binding: FeatureSuggestPageBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: _Paths.UNREGISTER,
+      page: () => UnregisterPage(),
+      binding: UnregisterPageBinding(),
       transition: Transition.native,
     ),
   ];
