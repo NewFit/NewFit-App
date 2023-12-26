@@ -8,7 +8,7 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
-import 'package:new_fit/app/view/main/home_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_my_reservation_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_qr_scan_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
@@ -49,7 +49,7 @@ class MainPage extends BaseView<MainController> {
       case MenuCode.RESERVE:
         return HomeMyReservationPage();
       case MenuCode.QR:
-        return const HomeQRScanPage();
+        return HomeQrScanPagetmp();
       case MenuCode.SCOREBOARD:
         return ScoreboardPage();
 

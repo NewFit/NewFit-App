@@ -1,29 +1,27 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:new_fit/app/controller/home_qr_scan_page_controller.dart';
+import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class HomeQRScanPage extends StatefulWidget {
-  const HomeQRScanPage({Key? key}) : super(key: key);
+class HomeQrScanPagetmp extends BaseView<HomeQrScanPageController> {
+  @override
+  PreferredSizeWidget? appBar(BuildContext context) {
+    return null;
+  }
 
   @override
-  State<StatefulWidget> createState() => _HomeQRScanPageState();
-}
-
-class _HomeQRScanPageState extends State<HomeQRScanPage> {
-  Barcode? result;
-  QRViewController? controller;
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: <Widget>[
-          Expanded(flex: 4, child: _buildQrView(context)),
-        ],
+  Widget body(BuildContext context) {
+    return BaseBodyWithoutPadding(widgetList: [
+      SizedBox(
+        height: 600.h,
+        child: _buildQrView(context),
       ),
-    );
+    ]);
   }
 
   Widget _buildQrView(BuildContext context) {
@@ -32,7 +30,7 @@ class _HomeQRScanPageState extends State<HomeQRScanPage> {
         ? 200.w
         : 300.w;
     return QRView(
-      key: qrKey,
+      key: controller.qrKey,
       onQRViewCreated: _onQRViewCreated,
       overlay: QrScannerOverlayShape(
           borderColor: Colors.red,
@@ -44,14 +42,11 @@ class _HomeQRScanPageState extends State<HomeQRScanPage> {
     );
   }
 
-  void _onQRViewCreated(QRViewController controller) {
-    setState(() {
-      this.controller = controller;
-    });
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+  void _onQRViewCreated(QRViewController qrViewController) {
+    controller.qrViewController = qrViewController;
+
+    controller.qrViewController!.scannedDataStream.listen((scanData) {
+      controller.result = scanData;
     });
   }
 
@@ -62,11 +57,5 @@ class _HomeQRScanPageState extends State<HomeQRScanPage> {
         const SnackBar(content: Text('no Permission')),
       );
     }
-  }
-
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
   }
 }
