@@ -16,6 +16,9 @@ class GoogleLogin extends SocialLogin {
 
     try {
       idToken = await getGoogleUserIdToken();
+      if (idToken == '') {
+        return '';
+      }
       newfitToken = await getToken(idToken, AppString.provier_type_google);
       saveTokenInfo(newfitToken!);
       if (newfitToken!.id_informations.length > 1) {
@@ -35,7 +38,10 @@ class GoogleLogin extends SocialLogin {
 
     try {
       googleUser = await googleSignIn.signIn();
-      return googleUser!.id;
+      if (googleUser == null) {
+        return '';
+      }
+      return googleUser.id;
     } catch (error) {
       return '';
     }
