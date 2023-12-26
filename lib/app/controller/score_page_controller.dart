@@ -27,7 +27,8 @@ class ScoreboardPageController extends BaseController with StorageUtil {
   @override
   onInit() {
     super.onInit();
-    updateMainFuture();
+    if (getInt(AppString.key_authority_id) != 0 &&
+        getInt(AppString.key_authority_id) != null) updateMainFuture();
   }
 
   updateMainFuture() {
