@@ -6,4 +6,5 @@ class HomeQrScanPageController extends BaseController {
   QRViewController? qrViewController;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
+  bool messageOn = false;
 }
