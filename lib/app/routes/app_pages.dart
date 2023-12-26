@@ -2,6 +2,7 @@
 
 import 'package:get/get.dart';
 import 'package:new_fit/app/bindings/feature_suggest_page_binding.dart';
+import 'package:new_fit/app/bindings/home_qr_scan_page_binding.dart';
 import 'package:new_fit/app/bindings/my_page_binding.dart';
 import 'package:new_fit/app/bindings/register_binding.dart';
 import 'package:new_fit/app/bindings/login_binding.dart';
@@ -12,6 +13,7 @@ import 'package:new_fit/app/bindings/routine_page_binding.dart';
 import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
 import 'package:new_fit/app/bindings/setting_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_qr_scan_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/main/main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
@@ -115,6 +117,12 @@ class AppPages {
       name: _Paths.FEATURE,
       page: () => FeatureSuggestPage(),
       binding: FeatureSuggestPageBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: _Paths.HOME_QR_SCAN,
+      page: () => HomeQrScanPagetmp(),
+      binding: HomeQrScanPageBinding(),
       transition: Transition.native,
     ),
   ];

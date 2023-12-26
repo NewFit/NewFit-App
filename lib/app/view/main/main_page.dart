@@ -49,7 +49,7 @@ class MainPage extends BaseView<MainController> {
       case MenuCode.RESERVE:
         return HomeMyReservationPage();
       case MenuCode.QR:
-        return const HomeQRScanPage();
+        return HomeQrScanPagetmp();
       case MenuCode.SCOREBOARD:
         return ScoreboardPage();
 
