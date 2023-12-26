@@ -42,4 +42,13 @@ class DBManager {
       oauth_history_id: map[0]['oauth_history_id'],
     );
   }
+
+  Future<void> delete() async {
+    final db = await database;
+    await db.delete(
+      'UserInfo',
+      where: "user = ?",
+      whereArgs: ["user"],
+    );
+  }
 }

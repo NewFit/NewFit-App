@@ -95,10 +95,17 @@ class _UserService implements UserService {
   }
 
   @override
-  Future<HttpResponse<dynamic>> logout() async {
+  Future<HttpResponse<dynamic>> logout(
+    String accessToken,
+    int userId,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': accessToken,
+      r'user-id': userId,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(

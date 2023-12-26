@@ -20,6 +20,7 @@ abstract class Routes {
   static const HOME_RESERVATION = _Paths.HOME_RESERVATION;
   static const FEATURE = _Paths.FEATURE;
   static const HOME_QR_SCAN = _Paths.HOME_QR_SCAN;
+  static const UNREGISTER = _Paths.UNREGISTER;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const SCOREBOARD = '/scoreboard';
   static const HOME_RESERVATION = '/home_reservation';
   static const HOME_QR_SCAN = '/home_qr_scan';
+  static const UNREGISTER = '/unregister';
 }

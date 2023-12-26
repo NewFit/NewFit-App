@@ -22,7 +22,10 @@ abstract class UserService {
       @Header('Authorization') String accessToken, @Body() UserEmail userEmail);
 
   @POST('/api/v1/logout')
-  Future<HttpResponse> logout();
+  Future<HttpResponse> logout(
+    @Header('Authorization') String accessToken,
+    @Header('user-id') int userId,
+  );
 
   @PATCH('/api/v1/users')
   Future<HttpResponse> modifyUserInfo(
