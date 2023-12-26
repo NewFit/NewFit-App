@@ -8,10 +8,12 @@ import 'package:get/get.dart';
 import 'package:new_fit/app/controller/routine_add_page_controller.dart';
 import 'package:new_fit/app/controller/routine_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_fab.dart';
 import 'package:new_fit/app/view/common/newfit_image.dart';
+import 'package:new_fit/app/view/common/newfit_lists.dart';
 import 'package:new_fit/app/view/common/newfit_routine_equipmentlist.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
@@ -103,12 +105,16 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
                       ),
                       child: Column(children: [
                         Padding(
-                          padding: EdgeInsets.symmetric(vertical: 20.h),
+                          padding: EdgeInsets.symmetric(vertical: 10.h),
                           child: const NewfitTextBold2Xl(
                               text: '기구 추가', textColor: AppColors.black),
                         ),
                         GestureDetector(
-                          child: const NewfitImage(),
+                          child: EditEquipmentButton(
+                            onTapFunction: (p0) {},
+                            equipmentList: controller
+                                .homePageController.equipmentList.value,
+                          ),
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(vertical: 10.h),
@@ -169,7 +175,9 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
                               buttonColor: AppColors.main,
                               onPressFuntion: () {
                                 controller.addEquipment(
-                                    int.parse(textEditingController.text));
+                                  int.parse(textEditingController.text),
+                                  controller.equipmentId.value,
+                                );
                                 textEditingController.text = '15';
                                 Get.back();
                               },
@@ -195,8 +203,16 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
         key: ValueKey(index),
         padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
         child: NewfitRoutineEquipmentListCell(
+          equipmentId: controller
+                  .postRoutine.value.routine_equipments?[index].equipment_id ??
+              0,
           listTitle:
-              '${controller.postRoutine.value.routine_equipments?[index].sequence ?? ''}',
+              '${controller.homePageController.equipmentList.value.equipments?.firstWhere(
+                    (element) =>
+                        element.equipment_id ==
+                        controller.postRoutine.value.routine_equipments?[index]
+                            .equipment_id,
+                  ).equipment_gym_name}',
           minute: controller
                   .postRoutine.value.routine_equipments?[index].duration ??
               0,
@@ -221,8 +237,16 @@ class RoutineAddPage extends BaseView<RoutineAddPageController> {
             padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
             child: NewfitRoutineEquipmentListCell(
               key: ValueKey(index),
+              equipmentId: controller.postRoutine.value
+                      .routine_equipments?[index].equipment_id ??
+                  0,
               listTitle:
-                  '${controller.postRoutine.value.routine_equipments?[index].sequence ?? ''}',
+                  '${controller.homePageController.equipmentList.value.equipments?.firstWhere(
+                        (element) =>
+                            element.equipment_id ==
+                            controller.postRoutine.value
+                                .routine_equipments?[index].equipment_id,
+                      ).equipment_gym_name}',
               minute: controller
                       .postRoutine.value.routine_equipments?[index].duration ??
                   0,
@@ -274,5 +298,130 @@ class _DurationInputTextField extends StatelessWidget {
         autofocus: false,
       ),
     );
+  }
+}
+
+class EditEquipmentButton extends StatelessWidget {
+  final EquipmentList equipmentList;
+  final void Function(int) onTapFunction;
+  final RoutineAddPageController routineAddPageController =
+      Get.find<RoutineAddPageController>();
+
+  EditEquipmentButton({
+    super.key,
+    required this.equipmentList,
+    required this.onTapFunction,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Stack(
+        children: [
+          SizedBox(
+            height: 150.w,
+            width: 150.w,
+          ),
+          Positioned(
+            left: 12.5.w,
+            top: 12.5.w,
+            child: Obx(() {
+              return NewfitImage(
+                width: 125.w,
+                height: 125.w,
+                imagePath:
+                    'images/image_equipment_${routineAddPageController.equipmentId.value}.png',
+              );
+            }),
+          ),
+          Positioned(
+            left: 125.w,
+            top: 125.w,
+            child: Stack(
+              children: [
+                Container(
+                  width: 24.w,
+                  height: 24.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24.w),
+                    color: AppColors.white,
+                  ),
+                ),
+                Icon(
+                  Icons.add_circle,
+                  color: AppColors.main,
+                  size: 24.w,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.r),
+          ),
+          builder: (context) {
+            return SingleChildScrollView(
+              child: SizedBox(
+                height: 500.h,
+                child: Column(
+                  children: equipmentListBuilder(equipmentList),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  List<Widget> equipmentListBuilder(EquipmentList equipmentList) {
+    List<Widget> widgetList = List.generate(
+      equipmentList.equipments?.length ?? 0,
+      (index) => Padding(
+        padding: EdgeInsets.only(top: 10.h),
+        child: NewfitModalEquipmentList(
+          onTapFunction: onTapFunction,
+          titleText:
+              equipmentList.equipments?[index].equipment_gym_name ?? '운동 기구',
+          textColor: AppColors.black,
+          equipmentId: equipmentList.equipments![index].equipment_id,
+        ),
+      ),
+    );
+
+    widgetList.insert(
+      0,
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: EdgeInsets.only(top: 15.h, left: 20.w),
+          child: const NewfitTextBold2Xl(
+            text: '기구 목록',
+            textColor: AppColors.black,
+          ),
+        ),
+      ),
+    );
+    widgetList.insert(
+      0,
+      Padding(
+        padding: EdgeInsets.only(top: 5.h),
+        child: Container(
+          width: 30.w,
+          height: 4.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(8.r),
+            ),
+            color: AppColors.grayDisabled,
+          ),
+        ),
+      ),
+    );
+    return widgetList;
   }
 }

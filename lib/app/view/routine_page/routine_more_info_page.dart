@@ -89,6 +89,8 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
         key: ValueKey(index),
         padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
         child: NewfitRoutineEquipmentDetailListCell(
+          imagePath:
+              'images/image_equipment_${controller.routineDetail.value.equipments?[index].equipment_id}.png',
           listTitle:
               controller.routineDetail.value.equipments?[index].name ?? '',
           minute:
@@ -113,6 +115,8 @@ class RoutineMoreInfoPage extends BaseView<RoutineMoreInfoPageController> {
             padding: EdgeInsets.only(top: 10.h, left: 20.w, right: 20.w),
             child: NewfitRoutineEquipmentDetailListCell(
               key: ValueKey(index),
+              imagePath:
+                  'images/image_equipment_${controller.routineDetail.value.equipments?[index].equipment_id}.png',
               listTitle:
                   controller.routineDetail.value.equipments?[index].name ?? '',
               minute:

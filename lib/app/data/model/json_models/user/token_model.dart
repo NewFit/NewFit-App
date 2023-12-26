@@ -7,7 +7,7 @@ part 'token_model.g.dart';
 @JsonSerializable()
 class Token {
   String access_token;
-  String refresh_token;
+  String? refresh_token;
   List<IdInformation> id_informations;
 
   Token({

@@ -91,8 +91,8 @@ class HomeReservationPage extends StatelessWidget {
                                               : Colors.transparent,
                                           width: 2.w)),
                                   child: const Image(
-                                    image:
-                                        AssetImage(AppString.defaultEquipment),
+                                    image: AssetImage(
+                                        'images/image_equipment_1.png'),
                                   ),
                                 ),
                               ),

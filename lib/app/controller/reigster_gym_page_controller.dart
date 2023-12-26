@@ -31,7 +31,7 @@ class RegisterGymPageController extends BaseController with StorageUtil {
   int gymId = 0;
   RxList<bool> selected = RxList.empty();
 
-  Future<void> getAddressGymList(String gymName) async {
+  getAddressGymList(String gymName) async {
     dio.interceptors.add(prettyDioLogger);
 
     try {
@@ -47,7 +47,7 @@ class RegisterGymPageController extends BaseController with StorageUtil {
     }
   }
 
-  Future<void> registerGym() async {
+  registerGym() async {
     dio.interceptors.add(prettyDioLogger);
     saveInt(AppString.key_gym_id, gymId);
     try {

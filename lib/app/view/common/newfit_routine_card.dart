@@ -100,7 +100,7 @@ class NewfitRoutineCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(8.r)),
             child: const Image(
-              image: AssetImage('images/gorani.png'),
+              image: AssetImage('images/image_equipment_1.png'),
             ),
           ),
           Container(
@@ -127,7 +127,7 @@ class NewfitRoutineCard extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Text(
-              equipmentCount >= 4 ? '${equipmentCount - 3}+' : '',
+              equipmentCount >= 4 ? '${equipmentCount - 3}+' : '+',
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: AppFontWeights.bold,
