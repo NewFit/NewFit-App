@@ -13,7 +13,7 @@ import 'package:new_fit/app/bindings/scoreboard_page_binding.dart';
 import 'package:new_fit/app/bindings/setting_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
-import 'package:new_fit/app/view/main_page.dart';
+import 'package:new_fit/app/view/main/main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
 import 'package:new_fit/app/view/register_page/register_gym_page.dart';
 import 'package:new_fit/app/view/register_page/register_page.dart';
