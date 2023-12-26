@@ -17,7 +17,7 @@ import '../theme/app_string.dart';
 class NewfitEquipmentListCell extends StatelessWidget {
   const NewfitEquipmentListCell({
     required this.equipmentTitle,
-    this.imageRoute = AppString.defaultEquipment,
+    this.imageRoute = 'images/image_equipment_1.png',
     required this.currentStatus,
     super.key,
     required this.equipmentId,
