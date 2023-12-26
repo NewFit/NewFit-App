@@ -42,7 +42,13 @@ abstract class UserService {
   @GET('/api/v1/users')
   Future<MyPageInfo> getMyPageInfo(
     @Header('Authorization') String accessToken,
-    @Header('authority-id') int userId,
+    @Header('authority-id') int authorityId,
+  );
+
+  @GET('/api/v1/users')
+  Future<MyPageInfo> getMyPageInfoUserId(
+    @Header('Authorization') String accessToken,
+    @Header('user-id') int userId,
   );
 
   @POST('/login')

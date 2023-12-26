@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/controller/my_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/routes/app_pages.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
@@ -15,7 +16,7 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
-class MyPage extends BaseView<MyPageController> {
+class MyPage extends BaseView<MyPageController> with StorageUtil {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
 
   @override
@@ -60,11 +61,16 @@ class MyPage extends BaseView<MyPageController> {
                       children: [
                         userInfoTab(),
                         SizedBox(height: 10.h),
-                        routineButton(),
-                        SizedBox(height: 10.h),
-                        creditInfo(),
-                        SizedBox(height: 10.h),
-                        calendar(),
+                        (getInt(AppString.key_authority_id) != 0 &&
+                                getInt(AppString.key_authority_id) != null)
+                            ? Column(children: [
+                                routineButton(),
+                                SizedBox(height: 10.h),
+                                creditInfo(),
+                                SizedBox(height: 10.h),
+                                calendar(),
+                              ])
+                            : Container(),
                       ],
                     );
                   case ConnectionState.none:

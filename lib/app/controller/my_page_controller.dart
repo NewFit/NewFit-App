@@ -46,10 +46,18 @@ class MyPageController extends BaseController with StorageUtil {
     isLoading(true);
     try {
       dio.interceptors.add(prettyDioLogger);
-      myPageInfoFuture.value = UserService(dio).getMyPageInfo(
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
-        getInt(AppString.key_authority_id)!,
-      );
+      if (getInt(AppString.key_authority_id) != 0 &&
+          getInt(AppString.key_authority_id) != null) {
+        myPageInfoFuture.value = UserService(dio).getMyPageInfo(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token) ?? 'hello'}',
+          getInt(AppString.key_authority_id)!,
+        );
+      } else {
+        myPageInfoFuture.value = UserService(dio).getMyPageInfoUserId(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token) ?? 'hello'}',
+          getInt(AppString.key_user_id)!,
+        );
+      }
     } finally {
       isLoading(false);
     }
