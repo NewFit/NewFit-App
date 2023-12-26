@@ -1,15 +1,18 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/core/base/base_view.dart';
+import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
+import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
-class HomePage extends BaseView<HomePageController> {
+class HomePage extends BaseView<HomePageController> with StorageUtil {
   final ScrollController scrollController;
 
   HomePage({required this.scrollController});
@@ -77,8 +80,18 @@ class HomePage extends BaseView<HomePageController> {
                     controller.assignFutures((snapshot.data! as List));
 
                     return Column(
-                      children:
-                          buildEquipmentList(controller.equipmentList.value),
+                      children: (getInt(AppString.key_authority_id) != 0 &&
+                              getInt(AppString.key_authority_id) != null)
+                          ? buildEquipmentList(controller.equipmentList.value)
+                          : [
+                              SizedBox(
+                                height: 100.h,
+                              ),
+                              const NewfitTextRegularXl(
+                                text: '헬스장 등록이 수락되지 않았어요.',
+                                textColor: Colors.grey,
+                              )
+                            ],
                     );
                   case ConnectionState.none:
                     return const Loading();

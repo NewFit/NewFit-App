@@ -95,6 +95,7 @@ class Initializer with StorageUtil {
     saveInt(AppString.key_authority_id, userInfo!.authority_id ?? 0);
     saveInt(AppString.key_user_id, userInfo!.user_id ?? 0);
     saveInt(AppString.key_oauth_history_id, userInfo!.oauth_history_id ?? 0);
+
     //mypage
     saveString(AppString.key_nickname, myPageInfo.nickname ?? '');
     saveInt(AppString.key_total_credit, myPageInfo.total_credit ?? 0);
@@ -104,10 +105,17 @@ class Initializer with StorageUtil {
 
   Future<void> getMyPageInfo() async {
     try {
-      myPageInfo = await UserService(dio).getMyPageInfo(
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
-        getInt(AppString.key_authority_id)!,
-      );
+      if (getInt(AppString.key_authority_id) != null) {
+        myPageInfo = await UserService(dio).getMyPageInfo(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+          getInt(AppString.key_authority_id)!,
+        );
+      } else if (getInt(AppString.key_user_id) != null) {
+        myPageInfo = await UserService(dio).getMyPageInfoUserId(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
+          getInt(AppString.key_user_id)!,
+        );
+      }
     } catch (e) {
       e.printError();
     }

@@ -54,7 +54,11 @@ class HomePageController extends BaseController with StorageUtil {
 
   updateMainFuture() {
     getMyPageInfo();
-    getEquipmentList();
+    if (getInt(AppString.key_authority_id) != 0 &&
+        getInt(AppString.key_authority_id) != null) {
+      getEquipmentList();
+    }
+
     mainFuture.value = Future.wait([
       myPageInfoFuture.value,
       equipmentListFuture.value,
@@ -66,15 +70,32 @@ class HomePageController extends BaseController with StorageUtil {
     for (var element in data) {
       datas[data.indexOf(element)].value = element;
     }
+    saveUserInfo();
+  }
+
+  saveUserInfo() {
+    saveString(AppString.key_nickname, myPageInfo.value.nickname ?? "hello");
+    saveInt(AppString.key_total_credit, myPageInfo.value.total_credit ?? 0);
+    saveInt(AppString.key_this_month_credit,
+        myPageInfo.value.this_month_credit ?? 0);
+    saveInt(AppString.key_gym_id, myPageInfo.value.current?.authority_id ?? 0);
   }
 
   void getMyPageInfo() {
     isLoading(true);
     try {
-      myPageInfoFuture.value = UserService(dio).getMyPageInfo(
-        '${AppString.jwt_prefix} ${getString(AppString.key_access_token) ?? 'hello'}',
-        getInt(AppString.key_authority_id) ?? 0,
-      );
+      if (getInt(AppString.key_authority_id) != 0 &&
+          getInt(AppString.key_authority_id) != null) {
+        myPageInfoFuture.value = UserService(dio).getMyPageInfo(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token) ?? 'hello'}',
+          getInt(AppString.key_authority_id)!,
+        );
+      } else {
+        myPageInfoFuture.value = UserService(dio).getMyPageInfoUserId(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token) ?? 'hello'}',
+          getInt(AppString.key_user_id)!,
+        );
+      }
     } finally {
       isLoading(false);
     }
