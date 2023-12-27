@@ -21,7 +21,7 @@ abstract class UserService {
   Future<HttpResponse> deleteUser(@Header('user-id') int userId,
       @Header('Authorization') String accessToken, @Body() UserEmail userEmail);
 
-  @POST('/api/v1/logout')
+  @POST('/logout')
   Future<HttpResponse> logout(
     @Header('Authorization') String accessToken,
     @Header('user-id') int userId,

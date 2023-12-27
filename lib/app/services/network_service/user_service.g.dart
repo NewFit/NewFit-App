@@ -115,7 +115,7 @@ class _UserService implements UserService {
     )
             .compose(
               _dio.options,
-              '/api/v1/logout',
+              '/logout',
               queryParameters: queryParameters,
               data: _data,
             )
