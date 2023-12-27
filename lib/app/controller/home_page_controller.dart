@@ -9,6 +9,7 @@ import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/data/model/json_models/tag/entrance_tag_model.dart';
 import 'package:new_fit/app/services/network_service/authority_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
+import 'package:nfc_manager/nfc_manager.dart';
 
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../data/model/json_models/equipment/equipment_models.dart';
@@ -39,6 +40,14 @@ class HomePageController extends BaseController with StorageUtil {
   @override
   void onInit() async {
     super.onInit();
+    bool isAvailable = await NfcManager.instance.isAvailable();
+
+    Get.snackbar('title', '$isAvailable');
+    NfcManager.instance.startSession(
+      onDiscovered: (NfcTag tag) async {
+        //NfcManager.instance.stopSession();
+      },
+    );
 
     initService();
     updateMainFuture();

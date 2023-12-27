@@ -7,4 +7,10 @@ class HomeQrScanPageController extends BaseController {
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   bool messageOn = false;
+  bool isAvailable = false;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+  }
 }
