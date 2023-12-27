@@ -52,7 +52,7 @@ class HomeQrScanPage extends BaseView<HomeQrScanPageController> {
 
     controller.qrViewController!.scannedDataStream.listen((scanData) async {
       controller.result = scanData;
-      if ((controller.result?.code ?? '') == 'https://1') {
+      if ((controller.result?.code ?? '') == '1') {
         if (controller.messageOn == false) {
           Get.snackbar(
             '운동 시작',
