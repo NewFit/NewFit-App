@@ -21,13 +21,26 @@ class SettingPageController extends BaseController with StorageUtil {
     maxWidth: 500,
   );
 
-  logout() {
-    dio.interceptors.add(prettyDioLogger);
-    UserService(dio).logout(
-      '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
-      getInt(AppString.key_authority_id)!,
-    );
-    dbManager.delete();
-    Get.toNamed(AppPages.LOGIN);
+  logout() async {
+    try {
+      dio.interceptors.add(prettyDioLogger);
+      if (getInt(AppString.key_authority_id) != 0 &&
+          getInt(AppString.key_authority_id) == 0) {
+        await UserService(dio).logout(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
+          getInt(AppString.key_authority_id)!,
+        );
+      } else {
+        await UserService(dio).logout(
+          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}',
+          getInt(AppString.key_user_id)!,
+        );
+      }
+    } catch (e) {
+      print('error occurred');
+    } finally {
+      dbManager.delete();
+      Get.offAndToNamed(AppPages.LOGIN);
+    }
   }
 }

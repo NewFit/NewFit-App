@@ -30,10 +30,10 @@ class LoginPageController extends BaseController with StorageUtil {
       Get.toNamed(AppPages.REGISTER);
     } else if (registerStatus == AppString.key_authority_id) {
       debugPrint(AppString.debug_registered);
-      Get.toNamed(AppPages.INITIAL);
+      Get.offAndToNamed(AppPages.INITIAL);
     } else if (registerStatus == AppString.key_user_id) {
       debugPrint(AppString.debug_gym_not_registered);
-      Get.toNamed(AppPages.REGISTER_GYM);
+      Get.offAndToNamed(AppPages.REGISTER_GYM);
     }
   }
 
@@ -51,8 +51,9 @@ class LoginPageController extends BaseController with StorageUtil {
 
     dio.interceptors.add(logger);
     UserService(dio).deleteUser(
-        getInt(AppString.key_user_id)!,
-        getString(AppString.key_access_token)!,
-        UserEmail(email: AppString.key_email));
+      getInt(AppString.key_user_id)!,
+      getString(AppString.key_access_token)!,
+      UserEmail(email: AppString.key_email),
+    );
   }
 }
