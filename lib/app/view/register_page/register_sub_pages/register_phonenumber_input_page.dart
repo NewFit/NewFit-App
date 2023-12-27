@@ -38,7 +38,7 @@ class RegisterPhonenumberInputPage extends BaseView<RegisterPageController> {
           ),
           NewfitTextfieldWithTitle(
             titleText: AppString.textfield_tel,
-            hintText: AppString.textfield_tel,
+            hintText: AppString.textfield_tel_hint,
             controller: controller.phonenumberEditingController,
           ),
           const Spacer(),
