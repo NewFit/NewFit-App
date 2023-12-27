@@ -146,6 +146,7 @@ class HomeReservationPage extends StatelessWidget {
       appBar: appBar(context, reservationController),
       body: body(context, reservationController),
       backgroundColor: pageBackgroundColor(),
+      resizeToAvoidBottomInset: false,
     );
   }
 }

@@ -74,7 +74,6 @@ class _NewfitFeatureInputTextField extends StatelessWidget {
     required this.textEditingController,
     required this.unregisterPageController,
     this.textFieldHeight,
-    this.keyboardType,
     this.minLines,
     required this.onChangeFunction,
     required this.validateFunction,
@@ -84,7 +83,6 @@ class _NewfitFeatureInputTextField extends StatelessWidget {
   final TextEditingController textEditingController;
   final UnregisterPageController unregisterPageController;
   final double? textFieldHeight;
-  final TextInputType? keyboardType;
   final int? minLines;
   final void Function(String) onChangeFunction;
   final String? Function(String?) validateFunction;
@@ -121,9 +119,6 @@ class _NewfitFeatureInputTextField extends StatelessWidget {
           filled: true,
           hintText: hintText,
         ),
-        keyboardType: keyboardType,
-        minLines: minLines,
-        maxLines: null,
         autofocus: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         validator: validateFunction,
