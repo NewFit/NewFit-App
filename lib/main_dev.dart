@@ -105,7 +105,8 @@ class Initializer with StorageUtil {
 
   Future<void> getMyPageInfo() async {
     try {
-      if (getInt(AppString.key_authority_id) != null) {
+      if (getInt(AppString.key_authority_id) != null &&
+          getInt(AppString.key_authority_id) != 0) {
         myPageInfo = await UserService(dio).getMyPageInfo(
           '${AppString.jwt_prefix} ${getString(AppString.key_access_token)!}',
           getInt(AppString.key_authority_id)!,
