@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/newfit_tab_bar_controller.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/mypage/mypage_model.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
@@ -13,12 +14,11 @@ import '/app/core/base/base_controller.dart';
 class MainController extends BaseController
     with StorageUtil, GetSingleTickerProviderStateMixin {
   final _selectedMenuCodeController = MenuCode.HOME.obs;
+  final TabBarController tabBarController = TabBarController();
 
   MenuCode get selectedMenuCode => _selectedMenuCodeController.value;
 
   late TabController tabController;
-
-  final lifeCardUpdateController = false.obs;
 
   var isLoading = true.obs;
   final Dio dio = Dio();
@@ -37,6 +37,11 @@ class MainController extends BaseController
   @override
   onInit() {
     tabController = TabController(length: 4, vsync: this);
+    tabController.addListener(
+      () {
+        tabBarController.updateSelectedIndex(tabController.index);
+      },
+    );
     getMyPageInfo();
     super.onInit();
   }

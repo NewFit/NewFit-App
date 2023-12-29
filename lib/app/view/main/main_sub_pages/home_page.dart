@@ -9,6 +9,8 @@ import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.da
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/loading.dart';
 import 'package:new_fit/app/view/common/newfit_equipment_list.dart';
+import 'package:new_fit/app/view/theme/app_colors.dart';
+import 'package:new_fit/app/view/theme/app_fontweight.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
@@ -18,11 +20,13 @@ class HomePage extends BaseView<HomePageController> with StorageUtil {
   HomePage({required this.scrollController});
 
   List<Widget> buildEquipmentList(EquipmentList? equipmentList) {
+    List<Widget> list = <Widget>[];
+
     if (equipmentList == null) {
-      return <Widget>[];
+      return list;
     }
 
-    return List<Widget>.generate(
+    list = List<Widget>.generate(
       equipmentList.equipments!.length,
       (index) {
         final equipment = equipmentList.equipments![index];
@@ -37,29 +41,75 @@ class HomePage extends BaseView<HomePageController> with StorageUtil {
         );
       },
     );
+
+    list.insert(0, SizedBox(height: 5.h));
+    list.insert(
+      0,
+      Row(
+        children: [
+          Container(
+            height: 20.h,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.r),
+              color: AppColors.grayDisabled,
+            ),
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15.w,
+              ),
+              child: Column(children: [
+                const Spacer(),
+                Text(
+                  '헬스장',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: AppFontWeights.medium,
+                  ),
+                ),
+                const Spacer(),
+              ]),
+            ),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              height: 25.h,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.r),
+                color: AppColors.main,
+              ),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.w,
+                ),
+                child: Column(children: [
+                  const Spacer(),
+                  Text(
+                    '루틴으로 예약하기',
+                    style: TextStyle(
+                      fontSize: 16.sp,
+                      fontWeight: AppFontWeights.bold,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  const Spacer(),
+                ]),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    list.insert(0, SizedBox(height: 15.h));
+
+    return list;
   }
 
   @override
   PreferredSizeWidget? appBar(BuildContext context) {
     return null;
   }
-
-  /*
-  @override
-  Widget body(BuildContext context) {
-    return Obx(() {
-      if (controller.isLoading.value) {
-        return const CircularProgressIndicator();
-      }
-      if (controller.equipmentList.value == null) {
-        return const Center(child: Text(AppString.str_no_data));
-      }
-      final equipments = controller.equipmentList.value;
-      return BaseBody(
-          scrollController: scrollController,
-          widgetList: buildEquipmentList(equipments));
-    });
-  } */
 
   @override
   Widget body(BuildContext context) {
@@ -90,7 +140,7 @@ class HomePage extends BaseView<HomePageController> with StorageUtil {
                               const NewfitTextRegularXl(
                                 text: '헬스장 등록이 수락되지 않았어요.',
                                 textColor: Colors.grey,
-                              )
+                              ),
                             ],
                     );
                   case ConnectionState.none:

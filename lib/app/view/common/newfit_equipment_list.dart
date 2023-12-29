@@ -35,7 +35,7 @@ class NewfitEquipmentListCell extends StatelessWidget {
     final HomePageController controller = Get.find();
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, 10.h, 0, 0),
       child: GestureDetector(
         onTap: () {
           controller.navigateTo(
@@ -46,9 +46,8 @@ class NewfitEquipmentListCell extends StatelessWidget {
           width: 320.w,
           height: 60.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(4.r),
             color: Colors.white,
-            border: Border.all(color: AppColors.grayDisabled),
           ),
           child: Row(
             children: [

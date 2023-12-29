@@ -23,7 +23,7 @@ class HomeQrScanPage extends BaseView<HomeQrScanPageController> {
   Widget body(BuildContext context) {
     return BaseBodyWithoutPadding(widgetList: [
       SizedBox(
-        height: 600.h,
+        height: 400.h,
         child: _buildQrView(context),
       ),
     ]);

@@ -40,6 +40,7 @@ class RenewalMainPage extends BaseView<MainController> {
   PreferredSizeWidget? appBar(BuildContext context) {
     return NewfitAppBarElevated(
       tabController: controller.tabController,
+      tabBarController: controller.tabBarController,
     );
   }
 
@@ -62,10 +63,11 @@ class NewfitAppBarElevated extends StatelessWidget
   NewfitAppBarElevated({
     super.key,
     required this.tabController,
+    required this.tabBarController,
   });
 
   final TabController tabController;
-  final TabBarController tabBarController = TabBarController();
+  final TabBarController tabBarController;
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +75,7 @@ class NewfitAppBarElevated extends StatelessWidget
 
     return Obx(
       () => Container(
-        height: 100.h + MediaQuery.of(context).padding.top,
+        height: 90.h + MediaQuery.of(context).padding.top,
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.only(
