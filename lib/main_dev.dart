@@ -63,7 +63,7 @@ class Initializer with StorageUtil {
     userInfo = await dbManager.getUserInfo();
 
     if (userInfo == null) {
-      runApp(App(initialRoute: AppPages.LOGIN));
+      runApp(App(initialRoute: AppPages.INITIAL));
     } else {
       try {
         httpResponse = await UserService(dio).renewAccessToken(
@@ -71,7 +71,7 @@ class Initializer with StorageUtil {
         await getMyPageInfo();
         saveUserInfo();
       } catch (e) {
-        runApp(App(initialRoute: AppPages.LOGIN));
+        runApp(App(initialRoute: AppPages.INITIAL));
       }
       runApp(App(initialRoute: AppPages.INITIAL));
     }

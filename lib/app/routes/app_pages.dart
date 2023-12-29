@@ -16,7 +16,7 @@ import 'package:new_fit/app/bindings/unregister_page_binding.dart';
 import 'package:new_fit/app/view/login_page/login_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_qr_scan_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
-import 'package:new_fit/app/view/main/main_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/renewal_main_page.dart';
 import 'package:new_fit/app/view/my_page/my_page.dart';
 import 'package:new_fit/app/view/register_page/register_gym_page.dart';
 import 'package:new_fit/app/view/register_page/register_page.dart';
@@ -53,7 +53,7 @@ class AppPages {
   static final pages = [
     GetPage(
       name: _Paths.MAIN,
-      page: () => MainPage(),
+      page: () => RenewalMainPage(),
       binding: MainBinding(),
       transition: Transition.native,
     ),

@@ -8,9 +8,9 @@ import 'package:new_fit/app/core/base/base_view.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/data/model/enum/menu_code.dart';
 import 'package:new_fit/app/view/common/newfit_bottom_nav_bar.dart';
-import 'package:new_fit/app/view/main/main_sub_pages/home_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_my_reservation_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_qr_scan_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/renewal_main_page.dart';
 import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
 
 class MainPage extends BaseView<MainController> {
@@ -45,7 +45,7 @@ class MainPage extends BaseView<MainController> {
   Widget getPageOnSelectedMenu(MenuCode menuCode) {
     switch (menuCode) {
       case MenuCode.HOME:
-        return HomePage(scrollController: scrollController);
+        return RenewalMainPage();
       case MenuCode.RESERVE:
         return HomeMyReservationPage();
       case MenuCode.QR:

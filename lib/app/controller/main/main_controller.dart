@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/mypage/mypage_model.dart';
@@ -9,10 +10,13 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../../data/model/enum/menu_code.dart';
 import '/app/core/base/base_controller.dart';
 
-class MainController extends BaseController with StorageUtil {
+class MainController extends BaseController
+    with StorageUtil, GetSingleTickerProviderStateMixin {
   final _selectedMenuCodeController = MenuCode.HOME.obs;
 
   MenuCode get selectedMenuCode => _selectedMenuCodeController.value;
+
+  late TabController tabController;
 
   final lifeCardUpdateController = false.obs;
 
@@ -32,6 +36,7 @@ class MainController extends BaseController with StorageUtil {
 
   @override
   onInit() {
+    tabController = TabController(length: 4, vsync: this);
     getMyPageInfo();
     super.onInit();
   }
