@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
+import 'package:new_fit/app/controller/home_reservation_page_controller.dart';
 import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 
 import 'package:new_fit/app/view/common/newfit_button.dart';
@@ -11,8 +12,6 @@ import 'package:new_fit/app/view/common/newfit_dropdown_menu.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
-
-import '../../routes/app_pages.dart';
 import '../theme/app_string.dart';
 
 class NewfitEquipmentListCell extends StatelessWidget {
@@ -41,8 +40,13 @@ class NewfitEquipmentListCell extends StatelessWidget {
         onTap: () {
           showModalBottomSheet(
             context: context,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
             builder: (context) {
-              return ReservationModalBuilder();
+              return ReservationModalBuilder(
+                reservationController: HomeReservationPageController(),
+              );
             },
           );
         },

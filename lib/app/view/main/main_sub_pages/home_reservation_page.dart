@@ -152,10 +152,59 @@ class HomeReservationPage extends StatelessWidget {
 }
 
 class ReservationModalBuilder extends StatelessWidget {
-  const ReservationModalBuilder({super.key});
+  const ReservationModalBuilder(
+      {super.key, required this.reservationController});
+
+  final HomeReservationPageController reservationController;
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return Column(
+      children: [
+        NewfitTextBoldXl(
+          text: 'tmp',
+          textColor: AppColors.black,
+        ),
+        ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount:
+              reservationController.equipmentList.value?.equipments_count ?? 0,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                reservationController.selectNewSpec(index);
+              },
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(20.w, 8.h, 0, 0),
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Obx(
+                      () => Container(
+                        height: 50.h,
+                        width: 50.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            border: Border.all(
+                                color:
+                                    reservationController.selectedIndex.value ==
+                                            index
+                                        ? AppColors.main.withOpacity(0.5)
+                                        : Colors.transparent,
+                                width: 2.w)),
+                        child: const Image(
+                          image: AssetImage('images/image_equipment_1.png'),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ],
+    );
   }
 }
