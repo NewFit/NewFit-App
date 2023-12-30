@@ -8,6 +8,7 @@ import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_dropdown_menu.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
@@ -38,9 +39,12 @@ class NewfitEquipmentListCell extends StatelessWidget {
       padding: EdgeInsets.fromLTRB(0, 10.h, 0, 0),
       child: GestureDetector(
         onTap: () {
-          controller.navigateTo(
-              route: Routes.HOME_RESERVATION,
-              args: [equipmentId, equipmentGymId]);
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return ReservationModalBuilder();
+            },
+          );
         },
         child: Container(
           width: 320.w,

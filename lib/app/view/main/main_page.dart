@@ -7,7 +7,7 @@ import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_my_reservation_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_page.dart';
 import 'package:new_fit/app/view/main/main_sub_pages/home_qr_scan_page.dart';
-import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_scoreboard_page.dart';
 
 class MainPage extends BaseView<MainController> {
   @override
@@ -44,7 +44,7 @@ class MainPage extends BaseView<MainController> {
         HomePage(scrollController: ScrollController()),
         HomeMyReservationPage(),
         HomeQrScanPage(),
-        ScoreboardPage(),
+        HomeScoreboardPage(),
       ],
     );
   }

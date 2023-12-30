@@ -23,7 +23,7 @@ import 'package:new_fit/app/view/register_page/register_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_add_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_more_info_page.dart';
 import 'package:new_fit/app/view/routine_page/routine_page.dart';
-import 'package:new_fit/app/view/scoreboard_page/scoreboard_page.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_scoreboard_page.dart';
 import 'package:new_fit/app/view/setting/setting_page.dart';
 import 'package:new_fit/app/view/setting/setting_sub_pages/feature_sueggest_page.dart';
 import 'package:new_fit/app/view/setting/setting_sub_pages/unregister_page.dart';
@@ -101,7 +101,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SCOREBOARD,
-      page: () => ScoreboardPage(),
+      page: () => HomeScoreboardPage(),
       binding: ScoreboardPageBinding(),
       transition: Transition.native,
     ),

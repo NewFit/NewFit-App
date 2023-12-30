@@ -150,3 +150,12 @@ class HomeReservationPage extends StatelessWidget {
     );
   }
 }
+
+class ReservationModalBuilder extends StatelessWidget {
+  const ReservationModalBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column();
+  }
+}
