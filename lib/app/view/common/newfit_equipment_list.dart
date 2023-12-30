@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/controller/home_reservation_page_controller.dart';
+import 'package:new_fit/app/controller/reservation_modal_controller.dart';
 import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
 
 import 'package:new_fit/app/view/common/newfit_button.dart';
@@ -45,7 +46,8 @@ class NewfitEquipmentListCell extends StatelessWidget {
             ),
             builder: (context) {
               return ReservationModalBuilder(
-                reservationController: HomeReservationPageController(),
+                reservationController: ReservationModalController(
+                    equipmentId: equipmentId, equipmentGymId: equipmentGymId),
               );
             },
           );

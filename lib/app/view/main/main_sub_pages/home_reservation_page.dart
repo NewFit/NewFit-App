@@ -5,6 +5,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:new_fit/app/controller/reservation_modal_controller.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
 import 'package:new_fit/app/view/common/newfit_timepicker.dart';
@@ -155,56 +156,62 @@ class ReservationModalBuilder extends StatelessWidget {
   const ReservationModalBuilder(
       {super.key, required this.reservationController});
 
-  final HomeReservationPageController reservationController;
+  final ReservationModalController reservationController;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        NewfitTextBoldXl(
-          text: 'tmp',
-          textColor: AppColors.black,
-        ),
-        ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount:
-              reservationController.equipmentList.value?.equipments_count ?? 0,
-          itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () {
-                reservationController.selectNewSpec(index);
-              },
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20.w, 8.h, 0, 0),
-                child: FittedBox(
-                  fit: BoxFit.contain,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.r),
-                    child: Obx(
-                      () => Container(
-                        height: 50.h,
-                        width: 50.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            border: Border.all(
-                                color:
-                                    reservationController.selectedIndex.value ==
+    return Obx(
+      () => Column(
+        children: [
+          NewfitTextBoldXl(
+            text: 'tmp',
+            textColor: AppColors.black,
+          ),
+          SizedBox(
+            height: 60.h,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount:
+                  reservationController.equipmentList.value?.equipments_count ??
+                      00,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    reservationController.selectNewSpec(index);
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20.w, 8.h, 0, 0),
+                    child: FittedBox(
+                      fit: BoxFit.contain,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.r),
+                        child: Obx(
+                          () => Container(
+                            height: 50.h,
+                            width: 50.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.r),
+                                border: Border.all(
+                                    color: reservationController
+                                                .selectedIndex.value ==
                                             index
                                         ? AppColors.main.withOpacity(0.5)
                                         : Colors.transparent,
-                                width: 2.w)),
-                        child: const Image(
-                          image: AssetImage('images/image_equipment_1.png'),
+                                    width: 2.w)),
+                            child: const Image(
+                              image: AssetImage('images/image_equipment_1.png'),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
-            );
-          },
-        ),
-      ],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
