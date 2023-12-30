@@ -1,7 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 abstract class AppString {
-  static const str_app_title = "NewFit";
+  static const str_app_title_eng = "NewFit";
+  static const str_app_title_kor = "뉴핏";
   static const str_mypage_title = "마이 페이지";
   static const str_register_title = "회원가입";
   static const str_routine_spec_title = "루틴 상세 정보";
@@ -45,6 +46,12 @@ abstract class AppString {
   static const button_edit_routine = "루틴 수정하기";
   static const button_add_routine = "루틴 추가";
   static const button_add_equipment = "기구 추가";
+
+  // TabBar Text
+  static const tabbar_home = "기구 예약";
+  static const tabbar_reserve = "내 예약";
+  static const tabbar_qr = "QR/NFC";
+  static const tabbar_scoreboard = "랭킹";
 
   // SnackBar Text
   static const snackbar_check_reservation = "예약 확인";
