@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -46,66 +45,73 @@ class HomeReservationPage extends StatelessWidget {
       screenPadding: AppValues.screenPadding,
       widgetList: [
         DecoratedBox(
-            decoration: BoxDecoration(
-                color: Colors.transparent,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(16.r),
-                )),
-            child: Column(children: [
-              Obx(() {
-                if (reservationController.isLoading.value) {
-                  return const CircularProgressIndicator();
-                }
-                if (reservationController.equipmentList.value == null) {
-                  return const Center(child: Text(AppString.str_no_data));
-                }
-                return Container(
-                  height: 60.h,
-                  color: Colors.transparent,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: reservationController
-                            .equipmentList.value?.equipments_count ??
-                        0,
-                    itemBuilder: (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          reservationController.selectNewSpec(index);
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(20.w, 8.h, 0, 0),
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8.r),
-                              child: Obx(
-                                () => Container(
-                                  height: 50.h,
-                                  width: 50.h,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8.r),
-                                      border: Border.all(
-                                          color: reservationController
-                                                      .selectedIndex.value ==
-                                                  index
-                                              ? AppColors.main.withOpacity(0.5)
-                                              : Colors.transparent,
-                                          width: 2.w)),
-                                  child: const Image(
-                                    image: AssetImage(
-                                        'images/image_equipment_1.png'),
+          decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.all(
+                Radius.circular(16.r),
+              )),
+          child: Column(
+            children: [
+              Obx(
+                () {
+                  if (reservationController.isLoading.value) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (reservationController.equipmentList.value == null) {
+                    return const Center(child: Text(AppString.str_no_data));
+                  }
+                  return Container(
+                    height: 60.h,
+                    color: Colors.transparent,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: reservationController
+                              .equipmentList.value?.equipments_count ??
+                          0,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            reservationController.selectNewSpec(index);
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(20.w, 8.h, 0, 0),
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8.r),
+                                child: Obx(
+                                  () => Container(
+                                    height: 50.h,
+                                    width: 50.h,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(8.r),
+                                        border: Border.all(
+                                            color: reservationController
+                                                        .selectedIndex.value ==
+                                                    index
+                                                ? AppColors.main
+                                                    .withOpacity(0.5)
+                                                : Colors.transparent,
+                                            width: 2.w)),
+                                    child: const Image(
+                                      image: AssetImage(
+                                          'images/image_equipment_1.png'),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              }),
-            ])),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+        ),
         const Spacer(),
         Obx(() {
           if (reservationController.isLoadingInSpec.value) {
@@ -153,8 +159,9 @@ class HomeReservationPage extends StatelessWidget {
 }
 
 class ReservationModalBuilder extends StatelessWidget {
-  const ReservationModalBuilder(
-      {super.key, required this.reservationController});
+  const ReservationModalBuilder({
+    required this.reservationController,
+  });
 
   final ReservationModalController reservationController;
 
@@ -163,9 +170,17 @@ class ReservationModalBuilder extends StatelessWidget {
     return Obx(
       () => Column(
         children: [
-          NewfitTextBoldXl(
-            text: 'tmp',
-            textColor: AppColors.black,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.h, 15.h),
+              child: NewfitTextBoldXl(
+                text: reservationController
+                        .equipmentSpec.value?.equipment_gym_name ??
+                    '',
+                textColor: AppColors.black,
+              ),
+            ),
           ),
           SizedBox(
             height: 60.h,
@@ -173,7 +188,7 @@ class ReservationModalBuilder extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               itemCount:
                   reservationController.equipmentList.value?.equipments_count ??
-                      00,
+                      0,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   onTap: () {
@@ -209,6 +224,63 @@ class ReservationModalBuilder extends StatelessWidget {
                 );
               },
             ),
+          ),
+          TimeInfo(),
+        ],
+      ),
+    );
+  }
+}
+
+class TimeInfo extends StatelessWidget {
+  const TimeInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 60.h,
+      width: 320.w,
+      child: Column(
+        children: [
+          Row(
+            children: [
+              NewfitTextMediumMd(text: '시작 시간', textColor: AppColors.black),
+              const Spacer(),
+              Container(
+                width: 90.w,
+                height: 27.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  color: AppColors.secondary,
+                ),
+                child: Center(
+                  child: NewfitTextMediumMd(
+                    text: "12:00",
+                    textColor: AppColors.black,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              NewfitTextMediumMd(text: '종료 시간', textColor: AppColors.black),
+              const Spacer(),
+              Container(
+                width: 90.w,
+                height: 27.h,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4.r),
+                  color: AppColors.unabledGrey,
+                ),
+                child: Center(
+                  child: NewfitTextMediumMd(
+                    text: "12:30",
+                    textColor: AppColors.black,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

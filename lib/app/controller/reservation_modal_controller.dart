@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
@@ -26,6 +27,8 @@ class ReservationModalController with StorageUtil {
     compact: true,
     maxWidth: 80,
   );
+
+  TextEditingController textEditingController = TextEditingController();
 
   var equipmentList = Rx<EquipmentList?>(null);
   var equipmentSpec = Rx<EquipmentSpec?>(null);
