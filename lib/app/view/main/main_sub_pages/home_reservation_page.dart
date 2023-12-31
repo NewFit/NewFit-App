@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
 import 'dart:developer';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -127,7 +128,6 @@ class HomeReservationPage extends StatelessWidget {
               onTimeChanged: (DateTime start, DateTime end) {
                 reservationController.startTime.value = start;
                 reservationController.endTime.value = end;
-                log("$start ~ $end");
               });
         }),
         const Spacer(),
@@ -234,13 +234,12 @@ class ReservationModalBuilder extends StatelessWidget {
           ),
           SizedBox(height: 10.h),
           TimeInfo(),
-          MyDraggableWidget(
+          Timepicker(
             reservationModalController: reservationController,
           ),
+          SizedBox(height: 10.h),
           TimeButtons(),
-          SizedBox(
-            height: 10.h,
-          ),
+          SizedBox(height: 10.h),
           NewfitButton(
               buttonText: '예약',
               buttonColor: AppColors.main,
@@ -257,7 +256,7 @@ class TimeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 100.h,
+      height: 75.h,
       width: 320.w,
       child: Column(
         children: [
@@ -304,17 +303,6 @@ class TimeInfo extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class TimeIndicator extends StatelessWidget {
-  const TimeIndicator({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 15.h,
     );
   }
 }
@@ -394,8 +382,8 @@ class ReservationButtonInfo {
   late String buttonText;
 }
 
-class MyDraggableWidget extends StatelessWidget {
-  MyDraggableWidget({required this.reservationModalController});
+class Timepicker extends StatelessWidget {
+  const Timepicker({required this.reservationModalController});
 
   final ReservationModalController reservationModalController;
 
@@ -404,26 +392,94 @@ class MyDraggableWidget extends StatelessWidget {
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
         double delta = details.primaryDelta!;
-        double deltaInPixels = delta.abs();
 
-        if (reservationModalController.positionX.value >= 0) {
+        if (reservationModalController.positionX.value >= 0 &&
+            reservationModalController.positionX.value <= 310) {
           reservationModalController.positionX.value += delta;
-        } else {
+        } else if (reservationModalController.positionX.value < 0) {
           reservationModalController.positionX.value = 0;
+        } else if (reservationModalController.positionX.value >= 310) {
+          reservationModalController.positionX.value = 310;
         }
-        print(reservationModalController.positionX);
+        print(reservationModalController.positionX.value);
       },
-      child: Obx(() {
-        return Container(
-          width: 10.w,
-          height: 10.w,
-          color: Colors.blue,
-          margin: EdgeInsets.only(
-              left: reservationModalController.positionX.value >= 0
-                  ? reservationModalController.positionX.value
-                  : 0),
-        );
-      }),
+      child: Obx(
+        () {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  left: reservationModalController.positionX.value >= 0
+                      ? reservationModalController.positionX.value + 30
+                      : 0,
+                ),
+                child: TriangleWidget(),
+              ),
+              SizedBox(
+                width: 360.w,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.w),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                    width: 300.w,
+                    height: 15.h,
+                    decoration: const BoxDecoration(color: AppColors.unabled),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
+  }
+}
+
+class TriangleWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 20.w,
+      height: 20.w,
+      child: CustomPaint(
+        painter: TrianglePainter(),
+      ),
+    );
+  }
+}
+
+class TrianglePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AppColors.main
+      ..style = PaintingStyle.fill
+      ..strokeCap = StrokeCap.round;
+
+    final double length = size.height;
+    final double radius = length / 10;
+
+    final path = Path()
+      ..moveTo(radius * sqrt(3), 0)
+      ..lineTo(length - radius * sqrt(3), 0)
+      ..arcToPoint(Offset(length - radius, radius * sqrt(3)),
+          radius: Radius.circular(radius))
+      ..lineTo(length / 2 + radius * sqrt(3) / 2,
+          length * sqrt(3) / 2 - 3 / 2 * radius)
+      ..arcToPoint(
+          Offset(length / 2 - radius * sqrt(3) / 2,
+              length * sqrt(3) / 2 - 3 / 2 * radius),
+          radius: Radius.circular(radius))
+      ..lineTo(radius, radius * sqrt(3))
+      ..arcToPoint(Offset(radius * sqrt(3), 0), radius: Radius.circular(radius))
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
