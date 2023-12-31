@@ -159,21 +159,28 @@ class HomeReservationPage extends StatelessWidget {
 }
 
 class ReservationModalBuilder extends StatelessWidget {
-  const ReservationModalBuilder({
-    required this.reservationController,
-  });
+  ReservationModalBuilder({
+    required this.equipmentId,
+    required this.equipmentGymId,
+  }) {
+    reservationController = ReservationModalController(
+        equipmentId: equipmentId, equipmentGymId: equipmentGymId);
+  }
 
-  final ReservationModalController reservationController;
+  final int equipmentId;
+  final int equipmentGymId;
+  late final ReservationModalController reservationController;
 
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Column(
         children: [
+          SizedBox(height: 10.h),
           Align(
             alignment: Alignment.centerLeft,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.h, 15.h),
+              padding: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 15.h),
               child: NewfitTextBoldXl(
                 text: reservationController
                         .equipmentSpec.value?.equipment_gym_name ??
@@ -225,7 +232,19 @@ class ReservationModalBuilder extends StatelessWidget {
               },
             ),
           ),
+          SizedBox(height: 10.h),
           TimeInfo(),
+          MyDraggableWidget(
+            reservationModalController: reservationController,
+          ),
+          TimeButtons(),
+          SizedBox(
+            height: 10.h,
+          ),
+          NewfitButton(
+              buttonText: '예약',
+              buttonColor: AppColors.main,
+              onPressFuntion: () {})
         ],
       ),
     );
@@ -238,7 +257,7 @@ class TimeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 60.h,
+      height: 100.h,
       width: 320.w,
       child: Column(
         children: [
@@ -262,6 +281,7 @@ class TimeInfo extends StatelessWidget {
               ),
             ],
           ),
+          SizedBox(height: 10.h),
           Row(
             children: [
               NewfitTextMediumMd(text: '종료 시간', textColor: AppColors.black),
@@ -273,7 +293,7 @@ class TimeInfo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4.r),
                   color: AppColors.unabledGrey,
                 ),
-                child: Center(
+                child: const Center(
                   child: NewfitTextMediumMd(
                     text: "12:30",
                     textColor: AppColors.black,
@@ -284,6 +304,126 @@ class TimeInfo extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class TimeIndicator extends StatelessWidget {
+  const TimeIndicator({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 15.h,
+    );
+  }
+}
+
+class TimeButtons extends StatelessWidget {
+  TimeButtons({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 30.h,
+      width: 325.w,
+      child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+        itemCount: buttonInfo.length,
+        itemBuilder: (context, index) {
+          return _TimeButton(
+            buttonText: buttonInfo[index].buttonText,
+            duration: buttonInfo[index].duration,
+          );
+        },
+      ),
+    );
+  }
+
+  List<ReservationButtonInfo> buttonInfo = [
+    ReservationButtonInfo(duration: 5),
+    ReservationButtonInfo(duration: 10),
+    ReservationButtonInfo(duration: 15),
+    ReservationButtonInfo(duration: 20),
+    ReservationButtonInfo(duration: 25),
+    ReservationButtonInfo(duration: 30),
+  ];
+}
+
+class _TimeButton extends StatelessWidget {
+  const _TimeButton({
+    required this.buttonText,
+    required this.duration,
+  });
+
+  final String buttonText;
+  final int duration;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Padding(
+        padding: EdgeInsets.only(right: 5.w),
+        child: Container(
+          width: 50.w,
+          height: 30.h,
+          decoration: BoxDecoration(
+              color: AppColors.unabled,
+              borderRadius: BorderRadius.all(Radius.circular(30.h))),
+          child: Center(
+            child: NewfitTextMediumMd(
+              text: buttonText,
+              textColor: AppColors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ReservationButtonInfo {
+  ReservationButtonInfo({
+    required this.duration,
+  }) {
+    buttonText = '$duration분';
+  }
+
+  final int duration;
+  late String buttonText;
+}
+
+class MyDraggableWidget extends StatelessWidget {
+  MyDraggableWidget({required this.reservationModalController});
+
+  final ReservationModalController reservationModalController;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onHorizontalDragUpdate: (details) {
+        double delta = details.primaryDelta!;
+        double deltaInPixels = delta.abs();
+
+        if (reservationModalController.positionX.value >= 0) {
+          reservationModalController.positionX.value += delta;
+        } else {
+          reservationModalController.positionX.value = 0;
+        }
+        print(reservationModalController.positionX);
+      },
+      child: Obx(() {
+        return Container(
+          width: 10.w,
+          height: 10.w,
+          color: Colors.blue,
+          margin: EdgeInsets.only(
+              left: reservationModalController.positionX.value >= 0
+                  ? reservationModalController.positionX.value
+                  : 0),
+        );
+      }),
     );
   }
 }

@@ -30,6 +30,7 @@ class ReservationModalController with StorageUtil {
 
   TextEditingController textEditingController = TextEditingController();
 
+  Rx<double> positionX = 0.0.obs;
   var equipmentList = Rx<EquipmentList?>(null);
   var equipmentSpec = Rx<EquipmentSpec?>(null);
   int equipmentGymId;

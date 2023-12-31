@@ -4,6 +4,7 @@ abstract class AppColors {
   //newfit
   static const Color main = Color(0xFF3956BD);
   static const Color textUnabled = Color(0xFF929292);
+  static const Color unabled = Color(0xFFD4DDFF);
 
   static const Color secondary = Color(0xFFBFDBFE);
   static const Color accent = Color(0x2F5FC0FF);
