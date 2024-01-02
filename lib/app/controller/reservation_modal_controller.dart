@@ -36,7 +36,15 @@ class ReservationModalController with StorageUtil {
   int equipmentGymId;
   final Rx<int> selectedIndex = 0.obs;
   final int equipmentId;
+  final RxInt duration = 0.obs;
   final List<int> indexMap = [];
+  final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
+
+  void updateButtonPressed(int index) {
+    buttonPressed.value = List.generate(6, (index) => false);
+    buttonPressed[index] = true;
+    duration.value = (index + 1) * 5;
+  }
 
   void loadIdenticalEquipments() async {
     try {

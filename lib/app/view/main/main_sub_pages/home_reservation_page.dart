@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable, use_key_in_widget_constructors
 
-import 'dart:developer';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -233,12 +232,14 @@ class ReservationModalBuilder extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10.h),
-          TimeInfo(),
+          const TimeInfo(),
           Timepicker(
             reservationModalController: reservationController,
           ),
           SizedBox(height: 10.h),
-          TimeButtons(),
+          TimeButtons(
+            reservationModalController: reservationController,
+          ),
           SizedBox(height: 10.h),
           NewfitButton(
               buttonText: '예약',
@@ -262,7 +263,8 @@ class TimeInfo extends StatelessWidget {
         children: [
           Row(
             children: [
-              NewfitTextMediumMd(text: '시작 시간', textColor: AppColors.black),
+              const NewfitTextMediumMd(
+                  text: '시작 시간', textColor: AppColors.black),
               const Spacer(),
               Container(
                 width: 90.w,
@@ -271,7 +273,7 @@ class TimeInfo extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4.r),
                   color: AppColors.secondary,
                 ),
-                child: Center(
+                child: const Center(
                   child: NewfitTextMediumMd(
                     text: "12:00",
                     textColor: AppColors.black,
@@ -283,7 +285,8 @@ class TimeInfo extends StatelessWidget {
           SizedBox(height: 10.h),
           Row(
             children: [
-              NewfitTextMediumMd(text: '종료 시간', textColor: AppColors.black),
+              const NewfitTextMediumMd(
+                  text: '종료 시간', textColor: AppColors.black),
               const Spacer(),
               Container(
                 width: 90.w,
@@ -308,8 +311,9 @@ class TimeInfo extends StatelessWidget {
 }
 
 class TimeButtons extends StatelessWidget {
-  TimeButtons({super.key});
+  TimeButtons({super.key, required this.reservationModalController});
 
+  final ReservationModalController reservationModalController;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -320,10 +324,17 @@ class TimeButtons extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: buttonInfo.length,
         itemBuilder: (context, index) {
-          return _TimeButton(
-            buttonText: buttonInfo[index].buttonText,
-            duration: buttonInfo[index].duration,
-          );
+          return Obx(() {
+            return _TimeButton(
+              index: index,
+              onTapFunc: reservationModalController.updateButtonPressed,
+              buttonText: buttonInfo[index].buttonText,
+              duration: buttonInfo[index].duration,
+              buttonColor: reservationModalController.buttonPressed[index]
+                  ? AppColors.main
+                  : AppColors.unabled,
+            );
+          });
         },
       ),
     );
@@ -343,21 +354,30 @@ class _TimeButton extends StatelessWidget {
   const _TimeButton({
     required this.buttonText,
     required this.duration,
+    required this.buttonColor,
+    required this.index,
+    required this.onTapFunc,
   });
 
   final String buttonText;
   final int duration;
+  final Color buttonColor;
+  final int index;
+  final void Function(int) onTapFunc;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: () {
+        onTapFunc(index);
+      },
       child: Padding(
         padding: EdgeInsets.only(right: 5.w),
         child: Container(
           width: 50.w,
           height: 30.h,
           decoration: BoxDecoration(
-              color: AppColors.unabled,
+              color: buttonColor,
               borderRadius: BorderRadius.all(Radius.circular(30.h))),
           child: Center(
             child: NewfitTextMediumMd(
@@ -401,7 +421,6 @@ class Timepicker extends StatelessWidget {
         } else if (reservationModalController.positionX.value >= 310) {
           reservationModalController.positionX.value = 310;
         }
-        print(reservationModalController.positionX.value);
       },
       child: Obx(
         () {
@@ -412,9 +431,12 @@ class Timepicker extends StatelessWidget {
                 padding: EdgeInsets.only(
                   left: reservationModalController.positionX.value >= 0
                       ? reservationModalController.positionX.value + 30
-                      : 0,
+                      : 30.w,
+                  right: reservationModalController.positionX.value <= 310
+                      ? 0
+                      : 20.w,
                 ),
-                child: TriangleWidget(),
+                child: IndicatorContainer(),
               ),
               SizedBox(
                 width: 360.w,
@@ -428,6 +450,27 @@ class Timepicker extends StatelessWidget {
                   ),
                 ),
               ),
+              Row(
+                children: [
+                  SizedBox(width: 15.w),
+                  Text(
+                    "현재시간",
+                    style: TextStyle(
+                      color: AppColors.textUnabled,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                  Spacer(),
+                  Text(
+                    "현재시간",
+                    style: TextStyle(
+                      color: AppColors.textUnabled,
+                      fontSize: 12.sp,
+                    ),
+                  ),
+                  SizedBox(width: 15.w),
+                ],
+              )
             ],
           );
         },
@@ -436,7 +479,7 @@ class Timepicker extends StatelessWidget {
   }
 }
 
-class TriangleWidget extends StatelessWidget {
+class IndicatorContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
