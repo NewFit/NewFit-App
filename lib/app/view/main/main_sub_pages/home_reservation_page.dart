@@ -409,18 +409,35 @@ class Timepicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double indicatorMaximumPadding =
+        MediaQuery.of(context).size.width - 60.w;
+    final double indicatorUnit = indicatorMaximumPadding / 24.0;
+
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
         double delta = details.primaryDelta!;
 
         if (reservationModalController.positionX.value >= 0 &&
-            reservationModalController.positionX.value <= 310) {
+            reservationModalController.positionX.value <=
+                indicatorMaximumPadding) {
           reservationModalController.positionX.value += delta;
         } else if (reservationModalController.positionX.value < 0) {
           reservationModalController.positionX.value = 0;
-        } else if (reservationModalController.positionX.value >= 310) {
-          reservationModalController.positionX.value = 310;
+        } else if (reservationModalController.positionX.value >=
+            indicatorMaximumPadding) {
+          reservationModalController.positionX.value = indicatorMaximumPadding;
         }
+        int currentIndicatorIndex =
+            reservationModalController.positionX.value ~/ indicatorUnit;
+
+        if (currentIndicatorIndex !=
+            reservationModalController.indicatorIndex) {
+          reservationModalController.indicatorIndex = currentIndicatorIndex;
+        }
+      },
+      onHorizontalDragEnd: (details) {
+        reservationModalController.positionX.value =
+            reservationModalController.indicatorIndex * indicatorUnit;
       },
       child: Obx(
         () {
@@ -430,8 +447,10 @@ class Timepicker extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(
                   left: reservationModalController.positionX.value >= 0
-                      ? reservationModalController.positionX.value + 30
-                      : 30.w,
+                      ? reservationModalController.indicatorIndex *
+                              indicatorUnit +
+                          20.w
+                      : 20.w,
                   right: reservationModalController.positionX.value <= 310
                       ? 0
                       : 20.w,
@@ -443,7 +462,7 @@ class Timepicker extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
                   child: Container(
-                    padding: EdgeInsets.only(left: 30.w, right: 30.w),
+                    padding: EdgeInsets.only(left: 30.w),
                     width: 300.w,
                     height: 15.h,
                     decoration: const BoxDecoration(color: AppColors.unabled),
@@ -460,7 +479,7 @@ class Timepicker extends StatelessWidget {
                       fontSize: 12.sp,
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Text(
                     "현재시간",
                     style: TextStyle(

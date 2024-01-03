@@ -39,6 +39,7 @@ class ReservationModalController with StorageUtil {
   final RxInt duration = 0.obs;
   final List<int> indexMap = [];
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
+  int indicatorIndex = 0;
 
   void updateButtonPressed(int index) {
     buttonPressed.value = List.generate(6, (index) => false);
