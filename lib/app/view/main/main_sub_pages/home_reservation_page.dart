@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:new_fit/app/controller/reservation_modal_controller.dart';
 import 'package:new_fit/app/view/common/base_body.dart';
 import 'package:new_fit/app/view/common/newfit_appbar.dart';
@@ -410,8 +411,11 @@ class Timepicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double indicatorMaximumPadding =
-        MediaQuery.of(context).size.width - 60.w;
+        (MediaQuery.of(context).size.width - 60.w) * 24 / 30;
     final double indicatorUnit = indicatorMaximumPadding / 24.0;
+    final double additionalSpaceUnit = indicatorMaximumPadding / 5;
+    final double additionalSpace = additionalSpaceUnit *
+        (reservationModalController.startTime.value.minute % 5);
 
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
@@ -473,7 +477,7 @@ class Timepicker extends StatelessWidget {
                 children: [
                   SizedBox(width: 15.w),
                   Text(
-                    "현재시간",
+                    "${DateFormat.Hm().format(reservationModalController.startTime.value)}",
                     style: TextStyle(
                       color: AppColors.textUnabled,
                       fontSize: 12.sp,
@@ -481,7 +485,7 @@ class Timepicker extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "현재시간",
+                    "${DateFormat.Hm().format(reservationModalController.endTime.value)}",
                     style: TextStyle(
                       color: AppColors.textUnabled,
                       fontSize: 12.sp,

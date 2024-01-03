@@ -15,6 +15,7 @@ class ReservationModalController with StorageUtil {
     dio.interceptors.add(prettyDioLogger);
     loadIdenticalEquipments();
     loadEquipmentSpecification();
+    endTime.value = startTime.value.add(const Duration(hours: 2, minutes: 30));
   }
 
   final Dio dio = Dio();
@@ -30,16 +31,20 @@ class ReservationModalController with StorageUtil {
 
   TextEditingController textEditingController = TextEditingController();
 
-  Rx<double> positionX = 0.0.obs;
   var equipmentList = Rx<EquipmentList?>(null);
   var equipmentSpec = Rx<EquipmentSpec?>(null);
-  int equipmentGymId;
+
   final Rx<int> selectedIndex = 0.obs;
-  final int equipmentId;
-  final RxInt duration = 0.obs;
-  final List<int> indexMap = [];
+  final Rx<int> duration = 0.obs;
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
+  final Rx<DateTime> startTime = DateTime.now().obs;
+  final Rx<DateTime> endTime = DateTime.now().obs;
+  Rx<double> positionX = 0.0.obs;
+
+  final List<int> indexMap = [];
   int indicatorIndex = 0;
+  final int equipmentId;
+  int equipmentGymId;
 
   void updateButtonPressed(int index) {
     buttonPressed.value = List.generate(6, (index) => false);
