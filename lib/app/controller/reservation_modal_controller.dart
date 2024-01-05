@@ -6,8 +6,10 @@ import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart'
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
+import 'package:new_fit/app/services/network_service/authority_service.dart';
 import 'package:new_fit/app/services/network_service/equipment_service.dart';
 import 'package:new_fit/app/services/network_service/reservation_service.dart';
+import 'package:new_fit/app/services/network_service/user_service.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -89,9 +91,7 @@ class ReservationModalController with StorageUtil {
             selectedIndex.value = i;
           }
         }
-
         equipmentList.value = equipments;
-        print(equipments.equipments_count);
       }
     } catch (error) {
       print('loadIdentical error');
@@ -99,18 +99,26 @@ class ReservationModalController with StorageUtil {
   }
 
   void loadEquipmentSpecification() async {
-    try {
-      final token =
-          '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
-      final authorityId = getInt(AppString.key_authority_id);
+    final token =
+        '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
+    final authorityId = getInt(AppString.key_authority_id);
 
+    try {
       if (authorityId != null) {
         var equipment = await EquipmentService(dio)
             .getEquipmentSpecification(authorityId, token, equipmentGymId);
         equipmentSpec.value = equipment;
       }
     } catch (e) {
-      print('error');
+      if (e is DioException) {
+        if (e.response?.statusCode == 500) {
+          UserService(dio)
+              .renewAccessToken(getString(AppString.key_refresh_token) ?? '');
+          var equipment = await EquipmentService(dio)
+              .getEquipmentSpecification(authorityId!, token, equipmentGymId);
+          equipmentSpec.value = equipment;
+        }
+      }
     }
   }
 
@@ -174,10 +182,14 @@ class ReservationModalController with StorageUtil {
 
       if (authorityId != null) {
         ReservationService(dio).reserveEquipment(
-            authorityId,
-            token,
-            equipmentGymId,
-            Reservation(start_at: startTime.value, end_at: endTime.value));
+          authorityId,
+          token,
+          equipmentGymId,
+          Reservation(
+            start_at: startTime.value,
+            end_at: endTime.value,
+          ),
+        );
 
         await Future.delayed(const Duration(milliseconds: 300));
         _myReservationPageController.specificReservationList.clear();
