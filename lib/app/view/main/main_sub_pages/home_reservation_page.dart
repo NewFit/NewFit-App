@@ -421,7 +421,7 @@ class Timepicker extends StatelessWidget {
     final double indicatorUnit = 10.w;
     final double additionalSpaceUnit = 2.w;
     final double additionalSpace = additionalSpaceUnit *
-        (reservationModalController.startTime.value.minute % 5);
+        (reservationModalController.initialStartTime.value.minute % 5);
     final double indicatorSpace = 240.w + additionalSpace;
 
     return GestureDetector(
@@ -523,8 +523,10 @@ class Timepicker extends StatelessWidget {
                                   reservationModalController.indicatorIndex *
                                       10.w),
                           Container(
-                            width: reservationModalController.indicatorIndex ==
-                                    23
+                            width: (reservationModalController.indicatorIndex ==
+                                        24 &&
+                                    reservationModalController.duration.value !=
+                                        0)
                                 ? reservationModalController.duration.value *
                                         2.w -
                                     additionalSpace
@@ -544,8 +546,8 @@ class Timepicker extends StatelessWidget {
                 children: [
                   SizedBox(width: 15.w),
                   Text(
-                    DateFormat.Hm()
-                        .format(reservationModalController.startTime.value),
+                    DateFormat.Hm().format(
+                        reservationModalController.initialStartTime.value),
                     style: TextStyle(
                       color: AppColors.textUnabled,
                       fontSize: 12.sp,
@@ -553,8 +555,8 @@ class Timepicker extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    DateFormat.Hm()
-                        .format(reservationModalController.endTime.value),
+                    DateFormat.Hm().format(
+                        reservationModalController.initialEndTime.value),
                     style: TextStyle(
                       color: AppColors.textUnabled,
                       fontSize: 12.sp,

@@ -15,7 +15,14 @@ class ReservationModalController with StorageUtil {
     dio.interceptors.add(prettyDioLogger);
     loadIdenticalEquipments();
     loadEquipmentSpecification();
+
+    if (startTime.value.minute % 5 != 0) {
+      startTime.value = startTime.value
+          .add(Duration(minutes: 5 - startTime.value.minute % 5));
+    }
     endTime.value = startTime.value.add(const Duration(hours: 2, minutes: 30));
+    chosenStartTime.value = startTime.value;
+    chosenEndTime.value = startTime.value;
   }
 
   final Dio dio = Dio();
@@ -37,6 +44,9 @@ class ReservationModalController with StorageUtil {
   final Rx<int> selectedIndex = 0.obs;
   final Rx<int> duration = 0.obs;
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
+  final Rx<DateTime> initialStartTime = DateTime.now().obs;
+  final Rx<DateTime> initialEndTime =
+      DateTime.now().add(const Duration(hours: 2, minutes: 30)).obs;
   final Rx<DateTime> startTime = DateTime.now().obs;
   final Rx<DateTime> endTime = DateTime.now().obs;
   final Rx<DateTime> chosenStartTime = DateTime.now().obs;
