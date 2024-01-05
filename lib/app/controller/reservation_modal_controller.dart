@@ -50,6 +50,7 @@ class ReservationModalController with StorageUtil {
   final Rx<int> selectedIndex = 0.obs;
   final Rx<int> duration = 0.obs;
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
+  final RxList<dynamic> occupiedTimes = List.empty(growable: true).obs;
   final Rx<DateTime> initialStartTime = DateTime.now().obs;
   final Rx<DateTime> initialEndTime =
       DateTime.now().add(const Duration(hours: 2, minutes: 30)).obs;
@@ -113,6 +114,47 @@ class ReservationModalController with StorageUtil {
     }
   }
 
+  void reservationInfo() {
+    DateTime endTime = initialStartTime.value;
+
+    for (final Reservation reservation
+        in equipmentSpec.value?.occupied_times ?? []) {
+      Duration reservationDuration =
+          reservation.end_at.difference(reservation.start_at);
+      Duration durationAboutInitialStart =
+          initialStartTime.value.difference(reservation.start_at);
+      Duration durationAboutInitialEnd =
+          initialEndTime.value.difference(reservation.start_at);
+
+      if (initialStartTime.value.isAfter(reservation.start_at) &&
+          durationAboutInitialStart < reservationDuration) {
+        occupiedTimes.add(DurationSet(
+            duration: reservationDuration -
+                initialStartTime.value.difference(reservation.start_at),
+            gap: false));
+        endTime = reservation.end_at;
+      }
+      if (initialStartTime.value.isBefore(reservation.start_at) &&
+          initialEndTime.value.isAfter(reservation.start_at)) {
+        occupiedTimes.add(DurationSet(
+          duration: endTime.difference(reservation.start_at),
+          gap: true,
+        ));
+        if (durationAboutInitialEnd < reservationDuration) {
+          occupiedTimes.add(DurationSet(
+            duration: durationAboutInitialEnd,
+            gap: false,
+          ));
+        } else {
+          occupiedTimes.add(DurationSet(
+            duration: reservationDuration,
+            gap: false,
+          ));
+        }
+      }
+    }
+  }
+
   void selectNewSpec(int index) async {
     selectedIndex(index);
     equipmentGymId = indexMap[index];
@@ -146,4 +188,14 @@ class ReservationModalController with StorageUtil {
     Get.back();
     Get.snackbar(AppString.snackbar_check_reservation, '$start ~ $end');
   }
+}
+
+class DurationSet {
+  DurationSet({
+    required this.duration,
+    required this.gap,
+  });
+
+  Duration duration;
+  bool gap;
 }

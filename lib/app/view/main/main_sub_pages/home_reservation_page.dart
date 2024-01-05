@@ -512,21 +512,13 @@ class Timepicker extends StatelessWidget {
                           Container(
                             width: 60.w - additionalSpace,
                             height: 15.h,
-                            decoration:
-                                const BoxDecoration(color: AppColors.warning),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          SizedBox(width: 240.w + additionalSpace),
-                          Container(
-                            width: 60.w - additionalSpace,
-                            height: 15.h,
                             decoration: const BoxDecoration(
                                 color: AppColors.unabledGrey),
                           ),
                         ],
+                      ),
+                      Row(
+                        children: [],
                       ),
                       Row(
                         children: [
