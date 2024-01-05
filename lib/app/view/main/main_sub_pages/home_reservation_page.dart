@@ -294,6 +294,16 @@ class TimeInfo extends StatelessWidget {
               children: [
                 const NewfitTextMediumMd(
                     text: '종료 시간', textColor: AppColors.black),
+                Padding(
+                  padding: EdgeInsets.only(top: 5.h, left: 3.w),
+                  child: Text(
+                    '종료 시간은 자동으로 정해져요.',
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      color: AppColors.textUnabled,
+                    ),
+                  ),
+                ),
                 const Spacer(),
                 Container(
                   width: 90.w,
