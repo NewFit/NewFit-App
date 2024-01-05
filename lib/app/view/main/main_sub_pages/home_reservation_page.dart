@@ -245,7 +245,9 @@ class ReservationModalBuilder extends StatelessWidget {
           NewfitButton(
               buttonText: '예약',
               buttonColor: AppColors.main,
-              onPressFuntion: () {})
+              onPressFuntion: () {
+                reservationController.equipmentReservation();
+              })
         ],
       ),
     );
