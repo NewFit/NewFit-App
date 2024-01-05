@@ -281,8 +281,8 @@ class TimeInfo extends StatelessWidget {
                   ),
                   child: Center(
                     child: NewfitTextMediumMd(
-                      text:
-                          "${DateFormat.Hm().format(reservationModalController.chosenStartTime.value)}",
+                      text: DateFormat.Hm().format(
+                          reservationModalController.chosenStartTime.value),
                       textColor: AppColors.black,
                     ),
                   ),
@@ -304,8 +304,8 @@ class TimeInfo extends StatelessWidget {
                   ),
                   child: Center(
                     child: NewfitTextMediumMd(
-                      text:
-                          "${DateFormat.Hm().format(reservationModalController.chosenEndTime.value)}",
+                      text: DateFormat.Hm().format(
+                          reservationModalController.chosenEndTime.value),
                       textColor: AppColors.black,
                     ),
                   ),
@@ -481,47 +481,71 @@ class Timepicker extends StatelessWidget {
                 width: 360.w,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
-                  child: Stack(children: [
-                    Container(
-                      width: 300.w,
-                      height: 15.h,
-                      decoration: const BoxDecoration(color: AppColors.unabled),
-                    ),
-                    Container(
-                      width: additionalSpace,
-                      height: 15.h,
-                      decoration: const BoxDecoration(color: AppColors.main),
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 240.w + additionalSpace),
-                        Container(
-                          width: 60.w - additionalSpace,
-                          height: 15.h,
-                          decoration:
-                              const BoxDecoration(color: AppColors.warning),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(width: 240.w + additionalSpace),
-                        Container(
-                          width: 60.w - additionalSpace,
-                          height: 15.h,
-                          decoration:
-                              const BoxDecoration(color: AppColors.warning),
-                        ),
-                      ],
-                    )
-                  ]),
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 300.w,
+                        height: 15.h,
+                        decoration:
+                            const BoxDecoration(color: AppColors.unabled),
+                      ),
+                      Container(
+                        width: additionalSpace,
+                        height: 15.h,
+                        decoration: const BoxDecoration(color: AppColors.main),
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 240.w + additionalSpace),
+                          Container(
+                            width: 60.w - additionalSpace,
+                            height: 15.h,
+                            decoration:
+                                const BoxDecoration(color: AppColors.warning),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(width: 240.w + additionalSpace),
+                          Container(
+                            width: 60.w - additionalSpace,
+                            height: 15.h,
+                            decoration: const BoxDecoration(
+                                color: AppColors.unabledGrey),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          SizedBox(
+                              width: additionalSpace +
+                                  reservationModalController.indicatorIndex *
+                                      10.w),
+                          Container(
+                            width: reservationModalController.indicatorIndex ==
+                                    23
+                                ? reservationModalController.duration.value *
+                                        2.w -
+                                    additionalSpace
+                                : reservationModalController.duration.value *
+                                    2.w,
+                            height: 15.h,
+                            decoration:
+                                const BoxDecoration(color: AppColors.main),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               Row(
                 children: [
                   SizedBox(width: 15.w),
                   Text(
-                    "${DateFormat.Hm().format(reservationModalController.startTime.value)}",
+                    DateFormat.Hm()
+                        .format(reservationModalController.startTime.value),
                     style: TextStyle(
                       color: AppColors.textUnabled,
                       fontSize: 12.sp,
@@ -529,7 +553,8 @@ class Timepicker extends StatelessWidget {
                   ),
                   const Spacer(),
                   Text(
-                    "${DateFormat.Hm().format(reservationModalController.endTime.value)}",
+                    DateFormat.Hm()
+                        .format(reservationModalController.endTime.value),
                     style: TextStyle(
                       color: AppColors.textUnabled,
                       fontSize: 12.sp,
@@ -537,7 +562,7 @@ class Timepicker extends StatelessWidget {
                   ),
                   SizedBox(width: 15.w),
                 ],
-              )
+              ),
             ],
           );
         },
