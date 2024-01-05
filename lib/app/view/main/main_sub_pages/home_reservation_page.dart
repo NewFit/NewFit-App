@@ -233,7 +233,7 @@ class ReservationModalBuilder extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10.h),
-          const TimeInfo(),
+          TimeInfo(reservationModalController: reservationController),
           Timepicker(
             reservationModalController: reservationController,
           ),
@@ -253,59 +253,67 @@ class ReservationModalBuilder extends StatelessWidget {
 }
 
 class TimeInfo extends StatelessWidget {
-  const TimeInfo({super.key});
+  const TimeInfo({
+    required this.reservationModalController,
+  });
+
+  final ReservationModalController reservationModalController;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 75.h,
       width: 320.w,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              const NewfitTextMediumMd(
-                  text: '시작 시간', textColor: AppColors.black),
-              const Spacer(),
-              Container(
-                width: 90.w,
-                height: 27.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.r),
-                  color: AppColors.secondary,
-                ),
-                child: const Center(
-                  child: NewfitTextMediumMd(
-                    text: "12:00",
-                    textColor: AppColors.black,
+      child: Obx(
+        () => Column(
+          children: [
+            Row(
+              children: [
+                const NewfitTextMediumMd(
+                    text: '시작 시간', textColor: AppColors.black),
+                const Spacer(),
+                Container(
+                  width: 90.w,
+                  height: 27.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.r),
+                    color: AppColors.secondary,
+                  ),
+                  child: Center(
+                    child: NewfitTextMediumMd(
+                      text:
+                          "${DateFormat.Hm().format(reservationModalController.chosenStartTime.value)}",
+                      textColor: AppColors.black,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          SizedBox(height: 10.h),
-          Row(
-            children: [
-              const NewfitTextMediumMd(
-                  text: '종료 시간', textColor: AppColors.black),
-              const Spacer(),
-              Container(
-                width: 90.w,
-                height: 27.h,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.r),
-                  color: AppColors.unabledGrey,
-                ),
-                child: const Center(
-                  child: NewfitTextMediumMd(
-                    text: "12:30",
-                    textColor: AppColors.black,
+              ],
+            ),
+            SizedBox(height: 10.h),
+            Row(
+              children: [
+                const NewfitTextMediumMd(
+                    text: '종료 시간', textColor: AppColors.black),
+                const Spacer(),
+                Container(
+                  width: 90.w,
+                  height: 27.h,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4.r),
+                    color: AppColors.unabledGrey,
+                  ),
+                  child: Center(
+                    child: NewfitTextMediumMd(
+                      text:
+                          "${DateFormat.Hm().format(reservationModalController.chosenEndTime.value)}",
+                      textColor: AppColors.black,
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -410,33 +418,40 @@ class Timepicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double indicatorMaximumPadding =
-        (MediaQuery.of(context).size.width - 60.w) * 24 / 30;
-    final double indicatorUnit = indicatorMaximumPadding / 24.0;
-    final double additionalSpaceUnit = indicatorMaximumPadding / 5;
+    final double indicatorUnit = 10.w;
+    final double additionalSpaceUnit = 2.w;
     final double additionalSpace = additionalSpaceUnit *
         (reservationModalController.startTime.value.minute % 5);
+    final double indicatorSpace = 240.w + additionalSpace;
 
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
         double delta = details.primaryDelta!;
 
         if (reservationModalController.positionX.value >= 0 &&
-            reservationModalController.positionX.value <=
-                indicatorMaximumPadding) {
+            reservationModalController.positionX.value <= indicatorSpace) {
           reservationModalController.positionX.value += delta;
-        } else if (reservationModalController.positionX.value < 0) {
-          reservationModalController.positionX.value = 0;
+          if (reservationModalController.positionX.value >= indicatorSpace) {
+            reservationModalController.positionX.value = indicatorSpace;
+          }
+        } else if (reservationModalController.positionX.value <
+            additionalSpace) {
+          reservationModalController.positionX.value = additionalSpace;
         } else if (reservationModalController.positionX.value >=
-            indicatorMaximumPadding) {
-          reservationModalController.positionX.value = indicatorMaximumPadding;
+            indicatorSpace) {
+          reservationModalController.positionX.value = indicatorSpace;
         }
         int currentIndicatorIndex =
             reservationModalController.positionX.value ~/ indicatorUnit;
 
         if (currentIndicatorIndex !=
             reservationModalController.indicatorIndex) {
+          int change =
+              currentIndicatorIndex - reservationModalController.indicatorIndex;
           reservationModalController.indicatorIndex = currentIndicatorIndex;
+          reservationModalController.chosenStartTime.value =
+              reservationModalController.chosenStartTime.value
+                  .add(Duration(minutes: change * 5));
         }
       },
       onHorizontalDragEnd: (details) {
@@ -453,11 +468,9 @@ class Timepicker extends StatelessWidget {
                   left: reservationModalController.positionX.value >= 0
                       ? reservationModalController.indicatorIndex *
                               indicatorUnit +
-                          20.w
-                      : 20.w,
-                  right: reservationModalController.positionX.value <= 310
-                      ? 0
-                      : 20.w,
+                          20.w +
+                          additionalSpace
+                      : 20.w + additionalSpace,
                 ),
                 child: IndicatorContainer(),
               ),
@@ -465,12 +478,40 @@ class Timepicker extends StatelessWidget {
                 width: 360.w,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.w),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 30.w),
-                    width: 300.w,
-                    height: 15.h,
-                    decoration: const BoxDecoration(color: AppColors.unabled),
-                  ),
+                  child: Stack(children: [
+                    Container(
+                      width: 300.w,
+                      height: 15.h,
+                      decoration: const BoxDecoration(color: AppColors.unabled),
+                    ),
+                    Container(
+                      width: additionalSpace,
+                      height: 15.h,
+                      decoration: const BoxDecoration(color: AppColors.main),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 240.w + additionalSpace),
+                        Container(
+                          width: 60.w - additionalSpace,
+                          height: 15.h,
+                          decoration:
+                              const BoxDecoration(color: AppColors.warning),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(width: 240.w + additionalSpace),
+                        Container(
+                          width: 60.w - additionalSpace,
+                          height: 15.h,
+                          decoration:
+                              const BoxDecoration(color: AppColors.warning),
+                        ),
+                      ],
+                    )
+                  ]),
                 ),
               ),
               Row(

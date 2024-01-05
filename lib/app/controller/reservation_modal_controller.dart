@@ -39,6 +39,8 @@ class ReservationModalController with StorageUtil {
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
   final Rx<DateTime> startTime = DateTime.now().obs;
   final Rx<DateTime> endTime = DateTime.now().obs;
+  final Rx<DateTime> chosenStartTime = DateTime.now().obs;
+  final Rx<DateTime> chosenEndTime = DateTime.now().obs;
   Rx<double> positionX = 0.0.obs;
 
   final List<int> indexMap = [];
@@ -50,6 +52,8 @@ class ReservationModalController with StorageUtil {
     buttonPressed.value = List.generate(6, (index) => false);
     buttonPressed[index] = true;
     duration.value = (index + 1) * 5;
+    chosenEndTime.value =
+        chosenStartTime.value.add(Duration(minutes: duration.value));
   }
 
   void loadIdenticalEquipments() async {
