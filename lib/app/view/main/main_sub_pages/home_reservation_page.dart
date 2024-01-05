@@ -452,6 +452,9 @@ class Timepicker extends StatelessWidget {
           reservationModalController.chosenStartTime.value =
               reservationModalController.chosenStartTime.value
                   .add(Duration(minutes: change * 5));
+          reservationModalController.chosenEndTime.value =
+              reservationModalController.chosenEndTime.value
+                  .add(Duration(minutes: change * 5));
         }
       },
       onHorizontalDragEnd: (details) {
