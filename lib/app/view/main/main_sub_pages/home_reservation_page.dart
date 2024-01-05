@@ -433,7 +433,7 @@ class Timepicker extends StatelessWidget {
     final double indicatorUnit = 10.w;
     final double additionalSpaceUnit = 2.w;
     final double additionalSpace = additionalSpaceUnit *
-        (reservationModalController.initialStartTime.value.minute % 5);
+        (5 - reservationModalController.initialStartTime.value.minute % 5);
     final double indicatorSpace = 240.w + additionalSpace;
 
     return GestureDetector(
@@ -475,6 +475,17 @@ class Timepicker extends StatelessWidget {
       },
       child: Obx(
         () {
+          List<Widget> containers = [];
+
+          for (final item in reservationModalController.occupiedTimes) {
+            containers.add(
+              Container(
+                height: 15.h,
+                width: item.duration.minutes,
+                color: item.gap ? Colors.white : AppColors.warning,
+              ),
+            );
+          }
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -518,7 +529,7 @@ class Timepicker extends StatelessWidget {
                         ],
                       ),
                       Row(
-                        children: [],
+                        children: containers,
                       ),
                       Row(
                         children: [

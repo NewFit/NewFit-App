@@ -6,7 +6,6 @@ import 'package:new_fit/app/controller/home_my_reservation_page_controller.dart'
 import 'package:new_fit/app/data/local/db/storage_util.dart';
 import 'package:new_fit/app/data/model/json_models/equipment/equipment_models.dart';
 import 'package:new_fit/app/data/model/json_models/reservation/reservation_models.dart';
-import 'package:new_fit/app/services/network_service/authority_service.dart';
 import 'package:new_fit/app/services/network_service/equipment_service.dart';
 import 'package:new_fit/app/services/network_service/reservation_service.dart';
 import 'package:new_fit/app/services/network_service/user_service.dart';
@@ -21,6 +20,7 @@ class ReservationModalController with StorageUtil {
     dio.interceptors.add(prettyDioLogger);
     loadIdenticalEquipments();
     loadEquipmentSpecification();
+    reservationInfo();
 
     if (startTime.value.minute % 5 != 0) {
       startTime.value = startTime.value
