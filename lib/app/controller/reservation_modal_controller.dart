@@ -30,6 +30,7 @@ class ReservationModalController with StorageUtil {
     chosenEndTime.value = startTime.value;
   }
 
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd HH:mm");
   final Dio dio = Dio();
   final prettyDioLogger = PrettyDioLogger(
     requestHeader: true,
@@ -53,6 +54,8 @@ class ReservationModalController with StorageUtil {
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
   final RxList<DurationSet> occupiedTimes =
       List<DurationSet>.empty(growable: true).obs;
+  final RxList<bool> occupiedTimes2 =
+      List<bool>.generate(30, (index) => false).obs;
   final Rx<DateTime> initialStartTime = DateTime.now().obs;
   final Rx<DateTime> initialEndTime =
       DateTime.now().add(const Duration(hours: 2, minutes: 30)).obs;
@@ -146,6 +149,9 @@ class ReservationModalController with StorageUtil {
       }
       if (initialStartTime.value.isBefore(reservation.start_at) &&
           initialEndTime.value.isAfter(reservation.start_at)) {
+        int indexOffset = durationAboutInitialStart.inMinutes ~/ 5;
+        int durations = reservationDuration.inMinutes ~/ 5;
+
         occupiedTimes.add(DurationSet(
           duration: reservation.start_at.difference(endTime),
           gap: true,
@@ -156,11 +162,18 @@ class ReservationModalController with StorageUtil {
             duration: durationAboutInitialEnd,
             gap: false,
           ));
+          for (int i = indexOffset; i < indexOffset + durations; i++) {
+            occupiedTimes2[i] = true;
+          }
         } else {
           occupiedTimes.add(DurationSet(
             duration: reservationDuration,
             gap: false,
           ));
+          for (int i = indexOffset; i < indexOffset + durations; i++) {
+            if (i >= 30) break;
+            occupiedTimes2[i] = true;
+          }
         }
       }
     }
@@ -189,8 +202,8 @@ class ReservationModalController with StorageUtil {
           token,
           equipmentGymId,
           Reservation(
-            start_at: chosenStartTime.value,
-            end_at: chosenEndTime.value,
+            start_at: DateTime.parse(start),
+            end_at: DateTime.parse(end),
           ),
         );
 

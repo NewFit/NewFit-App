@@ -244,9 +244,13 @@ class ReservationModalBuilder extends StatelessWidget {
           SizedBox(height: 10.h),
           NewfitButton(
               buttonText: '예약',
-              buttonColor: AppColors.main,
+              buttonColor: reservationController.buttonPressed.contains(true)
+                  ? AppColors.main
+                  : AppColors.unabled,
               onPressFuntion: () {
-                reservationController.equipmentReservation();
+                if (reservationController.buttonPressed.contains(true)) {
+                  reservationController.equipmentReservation();
+                }
               })
         ],
       ),
@@ -433,7 +437,8 @@ class Timepicker extends StatelessWidget {
     final double indicatorUnit = 10.w;
     final double additionalSpaceUnit = 2.w;
     final double additionalSpace = additionalSpaceUnit *
-        (5 - reservationModalController.initialStartTime.value.minute % 5);
+        ((5 - reservationModalController.initialStartTime.value.minute % 5) %
+            5);
     final double indicatorSpace = 240.w + additionalSpace;
 
     return GestureDetector(
@@ -486,6 +491,7 @@ class Timepicker extends StatelessWidget {
               ),
             );
           }
+          print(reservationModalController.occupiedTimes2);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

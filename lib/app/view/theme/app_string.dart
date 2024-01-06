@@ -74,7 +74,7 @@ abstract class AppString {
   static const provier_type_google = 'GOOGLE';
   static const provier_type_kakao = 'KAKAO';
   static const provier_type_apple = 'APPLE';
-  static const date_format_hh_mm = 'HH:mm';
+  static const date_format_hh_mm = 'yyyy-mm-dd HH:mm';
   static const equipment_condition_available = 'AVAILABLE';
 
   static const debug_kakao_login_success = '카카오계정으로 로그인 성공';
