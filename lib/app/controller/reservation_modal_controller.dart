@@ -20,7 +20,6 @@ class ReservationModalController with StorageUtil {
     dio.interceptors.add(prettyDioLogger);
     loadIdenticalEquipments();
     loadEquipmentSpecification();
-    reservationInfo();
 
     if (startTime.value.minute % 5 != 0) {
       startTime.value = startTime.value
@@ -52,7 +51,8 @@ class ReservationModalController with StorageUtil {
   final Rx<int> selectedIndex = 0.obs;
   final Rx<int> duration = 0.obs;
   final RxList<bool> buttonPressed = List.generate(6, (index) => false).obs;
-  final RxList<dynamic> occupiedTimes = List.empty(growable: true).obs;
+  final RxList<DurationSet> occupiedTimes =
+      List<DurationSet>.empty(growable: true).obs;
   final Rx<DateTime> initialStartTime = DateTime.now().obs;
   final Rx<DateTime> initialEndTime =
       DateTime.now().add(const Duration(hours: 2, minutes: 30)).obs;
@@ -98,7 +98,7 @@ class ReservationModalController with StorageUtil {
     }
   }
 
-  void loadEquipmentSpecification() async {
+  Future<void> loadEquipmentSpecification() async {
     final token =
         '${AppString.jwt_prefix} ${getString(AppString.key_access_token)}';
     final authorityId = getInt(AppString.key_authority_id);
@@ -108,6 +108,7 @@ class ReservationModalController with StorageUtil {
         var equipment = await EquipmentService(dio)
             .getEquipmentSpecification(authorityId, token, equipmentGymId);
         equipmentSpec.value = equipment;
+        reservationInfo();
       }
     } catch (e) {
       if (e is DioException) {
@@ -117,6 +118,7 @@ class ReservationModalController with StorageUtil {
           var equipment = await EquipmentService(dio)
               .getEquipmentSpecification(authorityId!, token, equipmentGymId);
           equipmentSpec.value = equipment;
+          reservationInfo();
         }
       }
     }
@@ -145,9 +147,10 @@ class ReservationModalController with StorageUtil {
       if (initialStartTime.value.isBefore(reservation.start_at) &&
           initialEndTime.value.isAfter(reservation.start_at)) {
         occupiedTimes.add(DurationSet(
-          duration: endTime.difference(reservation.start_at),
+          duration: reservation.start_at.difference(endTime),
           gap: true,
         ));
+
         if (durationAboutInitialEnd < reservationDuration) {
           occupiedTimes.add(DurationSet(
             duration: durationAboutInitialEnd,
@@ -186,8 +189,8 @@ class ReservationModalController with StorageUtil {
           token,
           equipmentGymId,
           Reservation(
-            start_at: startTime.value,
-            end_at: endTime.value,
+            start_at: chosenStartTime.value,
+            end_at: chosenEndTime.value,
           ),
         );
 

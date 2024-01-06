@@ -481,8 +481,8 @@ class Timepicker extends StatelessWidget {
             containers.add(
               Container(
                 height: 15.h,
-                width: item.duration.minutes,
-                color: item.gap ? Colors.white : AppColors.warning,
+                width: item.duration.inMinutes.toDouble() * 2.w,
+                color: item.gap ? Colors.transparent : AppColors.warning,
               ),
             );
           }
