@@ -9,3 +9,13 @@ class BottomNavItem {
     required this.menuCode,
   });
 }
+
+class TabBarItem {
+  final String tabBarTitle;
+  final MenuCode menuCode;
+
+  const TabBarItem({
+    required this.tabBarTitle,
+    required this.menuCode,
+  });
+}

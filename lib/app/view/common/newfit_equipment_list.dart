@@ -1,17 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:new_fit/app/controller/home_page_controller.dart';
 import 'package:new_fit/app/data/model/menu/dropdown_constants.dart';
-
 import 'package:new_fit/app/view/common/newfit_button.dart';
 import 'package:new_fit/app/view/common/newfit_dropdown_menu.dart';
+import 'package:new_fit/app/view/main/main_sub_pages/home_reservation_page.dart';
 import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
-
-import '../../routes/app_pages.dart';
 import '../theme/app_string.dart';
 
 class NewfitEquipmentListCell extends StatelessWidget {
@@ -32,23 +28,30 @@ class NewfitEquipmentListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final HomePageController controller = Get.find();
-
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 8.h, 0, 0),
+      padding: EdgeInsets.fromLTRB(0, 10.h, 0, 0),
       child: GestureDetector(
         onTap: () {
-          controller.navigateTo(
-              route: Routes.HOME_RESERVATION,
-              args: [equipmentId, equipmentGymId]);
+          showModalBottomSheet(
+            enableDrag: false,
+            context: context,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.r),
+            ),
+            builder: (context) {
+              return ReservationModalBuilder(
+                equipmentId: equipmentId,
+                equipmentGymId: equipmentGymId,
+              );
+            },
+          );
         },
         child: Container(
           width: 320.w,
           height: 60.h,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.r),
+            borderRadius: BorderRadius.circular(4.r),
             color: Colors.white,
-            border: Border.all(color: AppColors.grayDisabled),
           ),
           child: Row(
             children: [

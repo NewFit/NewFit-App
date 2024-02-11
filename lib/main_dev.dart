@@ -92,7 +92,7 @@ class Initializer with StorageUtil {
     saveString(AppString.key_access_token,
         httpResponse.response.headers['access-token']!.first);
     saveString(AppString.key_refresh_token, userInfo!.refresh_token!);
-    saveInt(AppString.key_authority_id, userInfo!.authority_id ?? 0);
+    saveInt(AppString.key_authority_id, userInfo!.authority_id ?? 1);
     saveInt(AppString.key_user_id, userInfo!.user_id ?? 0);
     saveInt(AppString.key_oauth_history_id, userInfo!.oauth_history_id ?? 0);
 

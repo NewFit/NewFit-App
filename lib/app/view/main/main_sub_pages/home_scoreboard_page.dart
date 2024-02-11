@@ -14,7 +14,7 @@ import 'package:new_fit/app/view/theme/app_colors.dart';
 import 'package:new_fit/app/view/theme/app_string.dart';
 import 'package:new_fit/app/view/theme/app_text_theme.dart';
 
-class ScoreboardPage extends BaseView<ScoreboardPageController>
+class HomeScoreboardPage extends BaseView<ScoreboardPageController>
     with StorageUtil {
   ScrollController scrollController = ScrollController(initialScrollOffset: 0);
 

@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:new_fit/app/view/theme/app_fontweight.dart';
 
 //app_theme이외의 텍스트 스타일이 필요할 때 여기 정의해주세요
@@ -21,7 +22,7 @@ class NewfitTextBoldMd extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -43,7 +44,7 @@ class NewfitTextBoldLg extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: AppFontWeights.bold,
       ),
     );
@@ -65,7 +66,7 @@ class NewfitTextBoldXl extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 20,
+        fontSize: 20.sp,
         fontWeight: AppFontWeights.bold,
       ),
     );
@@ -87,7 +88,7 @@ class NewfitTextBold2Xl extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 24,
+        fontSize: 24.sp,
         fontWeight: AppFontWeights.bold,
         decoration: TextDecoration.none,
       ),
@@ -110,7 +111,7 @@ class NewfitTextBold3Xl extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 30,
+        fontSize: 30.sp,
         fontWeight: AppFontWeights.bold,
       ),
     );
@@ -132,7 +133,7 @@ class NewfitTextMediumMd extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: AppFontWeights.medium,
       ),
     );
@@ -154,7 +155,7 @@ class NewfitTextRegularXs extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 12,
+        fontSize: 12.sp,
         fontWeight: AppFontWeights.regular,
       ),
     );
@@ -176,7 +177,7 @@ class NewfitTextRegularMd extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 14,
+        fontSize: 14.sp,
         fontWeight: AppFontWeights.regular,
       ),
     );
@@ -198,7 +199,7 @@ class NewfitTextRegularLg extends StatelessWidget {
       text,
       style: TextStyle(
         color: textColor,
-        fontSize: 16,
+        fontSize: 16.sp,
         fontWeight: AppFontWeights.regular,
       ),
     );
